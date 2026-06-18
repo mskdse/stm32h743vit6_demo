@@ -4,6 +4,7 @@
 int main(void)
 {
 	Driver_Init();
+	
 	for(;;)
 	{
 	}
