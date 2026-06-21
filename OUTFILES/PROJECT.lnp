@@ -126,6 +126,10 @@
 ".\outfiles\driver_enter.o"
 ".\outfiles\main.o"
 ".\outfiles\stm32h7xx_it.o"
+".\outfiles\segger_rtt.o"
+".\outfiles\segger_rtt_printf.o"
+".\outfiles\hardfaulthandler.o"
+".\outfiles\segger_hardfaulthandler.o"
 --library_type=microlib --strict --scatter ".\OUTFILES\PROJECT.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

@@ -9,7 +9,7 @@
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\CMSIS\Include\mpu_armv7.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include\system_stm32h7xx.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal.h
-.\outfiles\main.o: .\USER\stm32h7xx_hal_conf.h
+.\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_conf.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_rcc.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_def.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h7xx.h
@@ -25,7 +25,9 @@
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_hash.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_dcmi.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_dma2d.h
+.\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_dsi.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_dfsdm.h
+.\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_dts.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_eth.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_eth_ex.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_exti.h
@@ -36,6 +38,7 @@
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_fdcan.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_cec.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_comp.h
+.\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_cordic.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_crc.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_crc_ex.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_cryp.h
@@ -43,6 +46,8 @@
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_dac_ex.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_flash.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_flash_ex.h
+.\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_gfxmmu.h
+.\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_fmac.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_hrtim.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_hsem.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_sram.h
@@ -63,6 +68,9 @@
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_ltdc_ex.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_opamp.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_opamp_ex.h
+.\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_ospi.h
+.\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_otfdec.h
+.\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_pssi.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_pwr.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_pwr_ex.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_qspi.h
@@ -75,6 +83,7 @@
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_sai_ex.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_sd.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_sd_ex.h
+.\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_sdio.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_sdram.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_spi.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_spi_ex.h
@@ -98,3 +107,8 @@
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_pcd_ex.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_hcd.h
 .\outfiles\main.o: .\DRIVER\Driver_Enter.h
+.\outfiles\main.o: .\SEGGER_RTT\RTT\SEGGER_RTT.h
+.\outfiles\main.o: .\SEGGER_RTT\RTT\SEGGER_RTT_ConfDefaults.h
+.\outfiles\main.o: .\SEGGER_RTT\Config\SEGGER_RTT_Conf.h
+.\outfiles\main.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\main.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdarg.h

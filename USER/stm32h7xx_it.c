@@ -20,6 +20,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7xx_it.h"
+#include "stm32h7xx_hal.h"
 
 
 /** @addtogroup STM32H7xx_HAL_Examples
@@ -48,19 +49,6 @@
   */
 void NMI_Handler(void)
 {
-}
-
-/**
-  * @brief  This function handles Hard Fault exception.
-  * @param  None
-  * @retval None
-  */
-void HardFault_Handler(void)
-{
-  /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
-  {
-  }
 }
 
 /**
@@ -136,7 +124,7 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
-	
+	HAL_IncTick();
 }
   
 
