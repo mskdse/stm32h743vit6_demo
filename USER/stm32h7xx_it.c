@@ -21,6 +21,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7xx_it.h"
 #include "stm32h7xx_hal.h"
+#include "drvp_led.h"
 
 
 /** @addtogroup STM32H7xx_HAL_Examples
@@ -125,6 +126,7 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
 	HAL_IncTick();
+  drvp_led_prc_1ms();
 }
   
 

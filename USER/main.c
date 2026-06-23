@@ -1,6 +1,7 @@
 #include "stm32h7xx.h"
-#include "Driver_Enter.h"
 #include "SEGGER_RTT.h"
+#include "drvp_led.h"
+#include "axi_mem_malloc.h"
 
 static void SystemClock_Config(void);
 static void Error_Handler(void);
@@ -12,18 +13,11 @@ int main(void)
 	HAL_Init();//HAL库的初始化
 	SystemClock_Config();//配置系统时钟为400MHZ
 	
-	Driver_Init();//初始化好驱动层代码
+	axi_mem_init();//初始化内存管理
+	
+	drvp_led_init();//初始化led
 	for(;;)
 	{
-		SEGGER_RTT_SetTerminal(0);						// 选择终端(输入0-15)
-    SEGGER_RTT_printf(0,"Terminal(0) text \r\n");	// 输出日志
-		HAL_Delay(1000);
-		SEGGER_RTT_SetTerminal(1);						// 选择终端(输入0-15)
-    SEGGER_RTT_printf(0,"Terminal(1) text \r\n");	// 输出日志
-		HAL_Delay(1000);
-		SEGGER_RTT_SetTerminal(2);						// 选择终端(输入0-15)
-    SEGGER_RTT_printf(0,"Terminal(2) text \r\n");	// 输出日志
-		HAL_Delay(1000);
 	}
 }
 
@@ -148,24 +142,3 @@ static void CPU_CACHE_Enable(void)
   /* Enable D-Cache */
   SCB_EnableDCache();
 }
-
-#ifdef  USE_FULL_ASSERT
-
-/**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
-void assert_failed(uint8_t* file, uint32_t line)
-{ 
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-
-  /* Infinite loop */
-  while (1)
-  {
-  }
-}
-#endif

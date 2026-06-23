@@ -106,9 +106,13 @@
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_ll_usb.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_pcd_ex.h
 .\outfiles\main.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_hcd.h
-.\outfiles\main.o: .\DRIVER\Driver_Enter.h
 .\outfiles\main.o: .\SEGGER_RTT\RTT\SEGGER_RTT.h
 .\outfiles\main.o: .\SEGGER_RTT\RTT\SEGGER_RTT_ConfDefaults.h
 .\outfiles\main.o: .\SEGGER_RTT\Config\SEGGER_RTT_Conf.h
 .\outfiles\main.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\outfiles\main.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\outfiles\main.o: .\DRIVER\DRIVER_LED\drvp_led.h
+.\outfiles\main.o: .\DRIVER\DRIVER_LED\drv_led.h
+.\outfiles\main.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\outfiles\main.o: .\MEM_MANGE\axi_mem_malloc.h
+.\outfiles\main.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h

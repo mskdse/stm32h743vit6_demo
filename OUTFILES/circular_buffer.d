@@ -1,0 +1,11 @@
+.\outfiles\circular_buffer.o: CIRCULAR_BUFFER\src\circular_buffer.c
+.\outfiles\circular_buffer.o: CIRCULAR_BUFFER\src\circular_buffer.h
+.\outfiles\circular_buffer.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\outfiles\circular_buffer.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\circular_buffer.o: .\CIRCULAR_BUFFER\port\port.h
+.\outfiles\circular_buffer.o: .\CIRCULAR_BUFFER\port\config.h
+.\outfiles\circular_buffer.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\circular_buffer.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\circular_buffer.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\circular_buffer.o: .\MEM_MANGE\axi_mem_malloc.h
+.\outfiles\circular_buffer.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h

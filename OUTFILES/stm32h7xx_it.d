@@ -107,3 +107,6 @@
 .\outfiles\stm32h7xx_it.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_ll_usb.h
 .\outfiles\stm32h7xx_it.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_pcd_ex.h
 .\outfiles\stm32h7xx_it.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_hcd.h
+.\outfiles\stm32h7xx_it.o: .\DRIVER\DRIVER_LED\drvp_led.h
+.\outfiles\stm32h7xx_it.o: .\DRIVER\DRIVER_LED\drv_led.h
+.\outfiles\stm32h7xx_it.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
