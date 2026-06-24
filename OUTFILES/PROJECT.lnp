@@ -125,6 +125,8 @@
 ".\outfiles\stm32h7xx_ll_utils.o"
 ".\outfiles\drv_led.o"
 ".\outfiles\drvp_led.o"
+".\outfiles\drv_key.o"
+".\outfiles\drvp_key.o"
 ".\outfiles\port.o"
 ".\outfiles\circular_buffer.o"
 ".\outfiles\axi_mem_malloc.o"

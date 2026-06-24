@@ -116,3 +116,8 @@
 .\outfiles\main.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\outfiles\main.o: .\MEM_MANGE\axi_mem_malloc.h
 .\outfiles\main.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\main.o: .\DRIVER\DRIVER_KEY\drvp_key.h
+.\outfiles\main.o: .\DRIVER\DRIVER_KEY\drv_key.h
+.\outfiles\main.o: .\CIRCULAR_BUFFER\src\circular_buffer.h
+.\outfiles\main.o: .\CIRCULAR_BUFFER\port\port.h
+.\outfiles\main.o: .\CIRCULAR_BUFFER\port\config.h

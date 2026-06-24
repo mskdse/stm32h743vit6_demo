@@ -2,6 +2,7 @@
 #include "SEGGER_RTT.h"
 #include "drvp_led.h"
 #include "axi_mem_malloc.h"
+#include "drvp_key.h"
 
 static void SystemClock_Config(void);
 static void Error_Handler(void);
@@ -13,9 +14,9 @@ int main(void)
 	HAL_Init();//HAL库的初始化
 	SystemClock_Config();//配置系统时钟为400MHZ
 	
-	axi_mem_init();//初始化内存管理
-	
+	axi_mem_init();//初始化内存管理	
 	drvp_led_init();//初始化led
+  drvp_key_init();//初始化key
 	for(;;)
 	{
 	}

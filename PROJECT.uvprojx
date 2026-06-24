@@ -1196,6 +1196,16 @@
               <FileType>1</FileType>
               <FilePath>.\DRIVER\DRIVER_LED\drvp_led.c</FilePath>
             </File>
+            <File>
+              <FileName>drv_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\DRIVER\DRIVER_KEY\drv_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>drvp_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\DRIVER\DRIVER_KEY\drvp_key.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -22,6 +22,7 @@
 #include "stm32h7xx_it.h"
 #include "stm32h7xx_hal.h"
 #include "drvp_led.h"
+#include "drvp_key.h"
 
 
 /** @addtogroup STM32H7xx_HAL_Examples
@@ -125,8 +126,15 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
+  static uint8_t prc_key_t=0;
+  prc_key_t++;  
 	HAL_IncTick();
   drvp_led_prc_1ms();
+  if(prc_key_t>=10)
+  {
+    prc_key_t=0;
+    drvp_key_prc_10ms();
+  }
 }
   
 

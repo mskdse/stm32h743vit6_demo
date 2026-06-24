@@ -110,3 +110,8 @@
 .\outfiles\stm32h7xx_it.o: .\DRIVER\DRIVER_LED\drvp_led.h
 .\outfiles\stm32h7xx_it.o: .\DRIVER\DRIVER_LED\drv_led.h
 .\outfiles\stm32h7xx_it.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\outfiles\stm32h7xx_it.o: .\DRIVER\DRIVER_KEY\drvp_key.h
+.\outfiles\stm32h7xx_it.o: .\DRIVER\DRIVER_KEY\drv_key.h
+.\outfiles\stm32h7xx_it.o: .\CIRCULAR_BUFFER\src\circular_buffer.h
+.\outfiles\stm32h7xx_it.o: .\CIRCULAR_BUFFER\port\port.h
+.\outfiles\stm32h7xx_it.o: .\CIRCULAR_BUFFER\port\config.h

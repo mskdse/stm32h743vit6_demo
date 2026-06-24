@@ -3060,6 +3060,25 @@ Section Cross References
     drvp_led.o(.constdata) refers to drv_led.o(i.drv_led_init) for drv_led_init
     drvp_led.o(.constdata) refers to drv_led.o(i.drv_led_on) for drv_led_on
     drvp_led.o(.constdata) refers to drv_led.o(i.drv_led_off) for drv_led_off
+    drv_key.o(i.drv_key_init) refers to stm32h7xx_hal_gpio.o(i.HAL_GPIO_Init) for HAL_GPIO_Init
+    drv_key.o(i.drv_key_init) refers to stm32h7xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
+    drv_key.o(i.drv_key_init) refers to drv_key.o(.constdata) for drv_key
+    drv_key.o(i.drv_key_readmask) refers to stm32h7xx_hal_gpio.o(i.HAL_GPIO_ReadPin) for HAL_GPIO_ReadPin
+    drv_key.o(i.drv_key_readmask) refers to drv_key.o(.constdata) for drv_key
+    drvp_key.o(i.drvp_key_init) refers to memseta.o(.text) for __aeabi_memclr4
+    drvp_key.o(i.drvp_key_init) refers to circular_buffer.o(i.circular_buffer_init) for circular_buffer_init
+    drvp_key.o(i.drvp_key_init) refers to drvp_key.o(.constdata) for drv_key
+    drvp_key.o(i.drvp_key_init) refers to drvp_key.o(.bss) for drvp_key
+    drvp_key.o(i.drvp_key_prc_10ms) refers to drvp_key.o(i.drvp_key_wfifo) for drvp_key_wfifo
+    drvp_key.o(i.drvp_key_prc_10ms) refers to drvp_key.o(.constdata) for drv_key
+    drvp_key.o(i.drvp_key_prc_10ms) refers to drvp_key.o(.bss) for drvp_key
+    drvp_key.o(i.drvp_key_prc_10ms) refers to drvp_key.o(.data) for ks
+    drvp_key.o(i.drvp_key_rfifo) refers to circular_buffer.o(i.circular_buffer_read) for circular_buffer_read
+    drvp_key.o(i.drvp_key_rfifo) refers to drvp_key.o(.bss) for drvp_key
+    drvp_key.o(i.drvp_key_wfifo) refers to circular_buffer.o(i.circular_buffer_write) for circular_buffer_write
+    drvp_key.o(i.drvp_key_wfifo) refers to drvp_key.o(.bss) for drvp_key
+    drvp_key.o(.constdata) refers to drv_key.o(i.drv_key_init) for drv_key_init
+    drvp_key.o(.constdata) refers to drv_key.o(i.drv_key_readmask) for drv_key_readmask
     circular_buffer.o(i.circular_buffer_free) refers to axi_mem_malloc.o(i.axi_sram_free) for axi_sram_free
     circular_buffer.o(i.circular_buffer_free) refers to port.o(i.mutex_destroy) for mutex_destroy
     circular_buffer.o(i.circular_buffer_init) refers to circular_buffer.o(i.is_power_of_two) for is_power_of_two
@@ -3100,8 +3119,11 @@ Section Cross References
     main.o(i.main) refers to main.o(i.SystemClock_Config) for SystemClock_Config
     main.o(i.main) refers to axi_mem_malloc.o(i.axi_mem_init) for axi_mem_init
     main.o(i.main) refers to drvp_led.o(i.drvp_led_init) for drvp_led_init
+    main.o(i.main) refers to drvp_key.o(i.drvp_key_init) for drvp_key_init
     stm32h7xx_it.o(i.SysTick_Handler) refers to stm32h7xx_hal.o(i.HAL_IncTick) for HAL_IncTick
     stm32h7xx_it.o(i.SysTick_Handler) refers to drvp_led.o(i.drvp_led_prc_1ms) for drvp_led_prc_1ms
+    stm32h7xx_it.o(i.SysTick_Handler) refers to drvp_key.o(i.drvp_key_prc_10ms) for drvp_key_prc_10ms
+    stm32h7xx_it.o(i.SysTick_Handler) refers to stm32h7xx_it.o(.data) for prc_key_t
     segger_rtt.o(i.SEGGER_RTT_AllocDownBuffer) refers to segger_rtt.o(i._DoInit) for _DoInit
     segger_rtt.o(i.SEGGER_RTT_AllocDownBuffer) refers to segger_rtt.o(.bss) for _SEGGER_RTT
     segger_rtt.o(i.SEGGER_RTT_AllocUpBuffer) refers to segger_rtt.o(i._DoInit) for _DoInit
@@ -3923,7 +3945,6 @@ Removing Unused input sections from the image.
     Removing stm32h7xx_hal_gpio.o(i.HAL_GPIO_EXTI_Callback), (2 bytes).
     Removing stm32h7xx_hal_gpio.o(i.HAL_GPIO_EXTI_IRQHandler), (28 bytes).
     Removing stm32h7xx_hal_gpio.o(i.HAL_GPIO_LockPin), (46 bytes).
-    Removing stm32h7xx_hal_gpio.o(i.HAL_GPIO_ReadPin), (16 bytes).
     Removing stm32h7xx_hal_gpio.o(i.HAL_GPIO_TogglePin), (20 bytes).
     Removing stm32h7xx_hal_hash.o(.rev16_text), (4 bytes).
     Removing stm32h7xx_hal_hash.o(.revsh_text), (4 bytes).
@@ -6198,27 +6219,25 @@ Removing Unused input sections from the image.
     Removing drvp_led.o(i.drvp_led_tooge_start), (44 bytes).
     Removing drvp_led.o(i.drvp_led_tooge_start_for), (44 bytes).
     Removing drvp_led.o(i.drvp_led_tooge_stop), (72 bytes).
+    Removing drv_key.o(.rev16_text), (4 bytes).
+    Removing drv_key.o(.revsh_text), (4 bytes).
+    Removing drv_key.o(.rrx_text), (6 bytes).
+    Removing drvp_key.o(.rev16_text), (4 bytes).
+    Removing drvp_key.o(.revsh_text), (4 bytes).
+    Removing drvp_key.o(.rrx_text), (6 bytes).
+    Removing drvp_key.o(i.drvp_key_rfifo), (32 bytes).
     Removing port.o(i.mutex_destroy), (2 bytes).
-    Removing port.o(i.mutex_init), (6 bytes).
-    Removing port.o(i.mutex_lock), (2 bytes).
-    Removing port.o(i.mutex_unlock), (2 bytes).
     Removing circular_buffer.o(i.circular_buffer_free), (36 bytes).
-    Removing circular_buffer.o(i.circular_buffer_init), (76 bytes).
     Removing circular_buffer.o(i.circular_buffer_is_empty), (40 bytes).
     Removing circular_buffer.o(i.circular_buffer_is_full), (48 bytes).
     Removing circular_buffer.o(i.circular_buffer_length), (38 bytes).
     Removing circular_buffer.o(i.circular_buffer_read), (98 bytes).
-    Removing circular_buffer.o(i.circular_buffer_write), (106 bytes).
-    Removing circular_buffer.o(i.is_power_of_two), (18 bytes).
     Removing axi_mem_malloc.o(i.axi_mem_get_alloc_count), (12 bytes).
     Removing axi_mem_malloc.o(i.axi_mem_get_free_size), (12 bytes).
-    Removing axi_mem_malloc.o(i.axi_sram_free), (220 bytes).
-    Removing axi_mem_malloc.o(i.axi_sram_malloc), (232 bytes).
-    Removing axi_mem_malloc.o(i.blk_raw_size), (10 bytes).
-    Removing axi_mem_malloc.o(i.free_get_next), (6 bytes).
     Removing main.o(.rev16_text), (4 bytes).
     Removing main.o(.revsh_text), (4 bytes).
     Removing main.o(.rrx_text), (6 bytes).
+    Removing main.o(.data), (2 bytes).
     Removing stm32h7xx_it.o(.rev16_text), (4 bytes).
     Removing stm32h7xx_it.o(.revsh_text), (4 bytes).
     Removing stm32h7xx_it.o(.rrx_text), (6 bytes).
@@ -6258,7 +6277,7 @@ Removing Unused input sections from the image.
     Removing segger_hardfaulthandler.o(.revsh_text), (4 bytes).
     Removing segger_hardfaulthandler.o(.rrx_text), (6 bytes).
 
-3037 unused section(s) (total 337033 bytes) removed from the image.
+3034 unused section(s) (total 336401 bytes) removed from the image.
 
 ==============================================================================
 
@@ -6270,31 +6289,35 @@ Image Symbol Table
 
     ../clib/../cmprslib/zerorunl2.c          0x00000000   Number         0  __dczerorl2.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry12a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry12a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry12b.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
     ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
     ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpyb.o ABSOLUTE
     ../clib/microlib/string/memset.c         0x00000000   Number         0  memseta.o ABSOLUTE
     ../clib/microlib/string/strlen.c         0x00000000   Number         0  strlen.o ABSOLUTE
     CIRCULAR_BUFFER\port\port.c              0x00000000   Number         0  port.o ABSOLUTE
     CIRCULAR_BUFFER\src\circular_buffer.c    0x00000000   Number         0  circular_buffer.o ABSOLUTE
+    DRIVER\DRIVER_KEY\drv_key.c              0x00000000   Number         0  drv_key.o ABSOLUTE
+    DRIVER\DRIVER_KEY\drvp_key.c             0x00000000   Number         0  drvp_key.o ABSOLUTE
     DRIVER\DRIVER_LED\drv_led.c              0x00000000   Number         0  drv_led.o ABSOLUTE
     DRIVER\DRIVER_LED\drvp_led.c             0x00000000   Number         0  drvp_led.o ABSOLUTE
+    DRIVER\\DRIVER_KEY\\drv_key.c            0x00000000   Number         0  drv_key.o ABSOLUTE
+    DRIVER\\DRIVER_KEY\\drvp_key.c           0x00000000   Number         0  drvp_key.o ABSOLUTE
     DRIVER\\DRIVER_LED\\drv_led.c            0x00000000   Number         0  drv_led.o ABSOLUTE
     DRIVER\\DRIVER_LED\\drvp_led.c           0x00000000   Number         0  drvp_led.o ABSOLUTE
     HardFaultHandler\HardFaultHandler.s      0x00000000   Number         0  hardfaulthandler.o ABSOLUTE
@@ -6585,87 +6608,117 @@ Image Symbol Table
     i.ExitRun0Mode                           0x080004ee   Section        0  system_stm32h7xx.o(i.ExitRun0Mode)
     i.HAL_EnableCompensationCell             0x080004f0   Section        0  stm32h7xx_hal.o(i.HAL_EnableCompensationCell)
     i.HAL_GPIO_Init                          0x08000504   Section        0  stm32h7xx_hal_gpio.o(i.HAL_GPIO_Init)
-    i.HAL_GPIO_WritePin                      0x08000700   Section        0  stm32h7xx_hal_gpio.o(i.HAL_GPIO_WritePin)
-    i.HAL_GetREVID                           0x0800070c   Section        0  stm32h7xx_hal.o(i.HAL_GetREVID)
-    i.HAL_GetTick                            0x08000718   Section        0  stm32h7xx_hal.o(i.HAL_GetTick)
-    i.HAL_IncTick                            0x08000724   Section        0  stm32h7xx_hal.o(i.HAL_IncTick)
-    i.HAL_Init                               0x0800073c   Section        0  stm32h7xx_hal.o(i.HAL_Init)
-    i.HAL_InitTick                           0x0800079c   Section        0  stm32h7xx_hal.o(i.HAL_InitTick)
-    i.HAL_MspInit                            0x080007f4   Section        0  stm32h7xx_hal_msp_template.o(i.HAL_MspInit)
-    i.HAL_NVIC_SetPriority                   0x080007f6   Section        0  stm32h7xx_hal_cortex.o(i.HAL_NVIC_SetPriority)
-    i.HAL_NVIC_SetPriorityGrouping           0x08000870   Section        0  stm32h7xx_hal_cortex.o(i.HAL_NVIC_SetPriorityGrouping)
-    i.HAL_RCC_ClockConfig                    0x08000898   Section        0  stm32h7xx_hal_rcc.o(i.HAL_RCC_ClockConfig)
-    i.HAL_RCC_GetSysClockFreq                0x08000bb8   Section        0  stm32h7xx_hal_rcc.o(i.HAL_RCC_GetSysClockFreq)
-    i.HAL_RCC_OscConfig                      0x08000de4   Section        0  stm32h7xx_hal_rcc.o(i.HAL_RCC_OscConfig)
-    i.HAL_SYSTICK_Config                     0x0800163c   Section        0  stm32h7xx_hal_cortex.o(i.HAL_SYSTICK_Config)
-    i.HardFaultHandler                       0x08001670   Section        0  segger_hardfaulthandler.o(i.HardFaultHandler)
-    i.MemManage_Handler                      0x080017d0   Section        0  stm32h7xx_it.o(i.MemManage_Handler)
-    i.NMI_Handler                            0x080017d4   Section        0  stm32h7xx_it.o(i.NMI_Handler)
-    i.PendSV_Handler                         0x080017d6   Section        0  stm32h7xx_it.o(i.PendSV_Handler)
-    i.SEGGER_RTT_Write                       0x080017d8   Section        0  segger_rtt.o(i.SEGGER_RTT_Write)
-    i.SEGGER_RTT_WriteNoLock                 0x08001824   Section        0  segger_rtt.o(i.SEGGER_RTT_WriteNoLock)
-    i.SEGGER_RTT_printf                      0x080018a8   Section        0  segger_rtt_printf.o(i.SEGGER_RTT_printf)
-    i.SEGGER_RTT_vprintf                     0x080018cc   Section        0  segger_rtt_printf.o(i.SEGGER_RTT_vprintf)
-    i.SVC_Handler                            0x08001b1c   Section        0  stm32h7xx_it.o(i.SVC_Handler)
-    i.SysTick_Handler                        0x08001b1e   Section        0  stm32h7xx_it.o(i.SysTick_Handler)
-    i.SystemClock_Config                     0x08001b2c   Section        0  main.o(i.SystemClock_Config)
-    SystemClock_Config                       0x08001b2d   Thumb Code   258  main.o(i.SystemClock_Config)
-    i.SystemInit                             0x08001c3c   Section        0  system_stm32h7xx.o(i.SystemInit)
-    i.UsageFault_Handler                     0x08001d38   Section        0  stm32h7xx_it.o(i.UsageFault_Handler)
-    i._DoInit                                0x08001d3c   Section        0  segger_rtt.o(i._DoInit)
-    _DoInit                                  0x08001d3d   Thumb Code    82  segger_rtt.o(i._DoInit)
-    i._GetAvailWriteSpace                    0x08001dac   Section        0  segger_rtt.o(i._GetAvailWriteSpace)
-    _GetAvailWriteSpace                      0x08001dad   Thumb Code    28  segger_rtt.o(i._GetAvailWriteSpace)
-    i._PrintInt                              0x08001dc8   Section        0  segger_rtt_printf.o(i._PrintInt)
-    _PrintInt                                0x08001dc9   Thumb Code   236  segger_rtt_printf.o(i._PrintInt)
-    i._PrintUnsigned                         0x08001eb4   Section        0  segger_rtt_printf.o(i._PrintUnsigned)
-    _PrintUnsigned                           0x08001eb5   Thumb Code   230  segger_rtt_printf.o(i._PrintUnsigned)
-    i._StoreChar                             0x08001fa0   Section        0  segger_rtt_printf.o(i._StoreChar)
-    _StoreChar                               0x08001fa1   Thumb Code    68  segger_rtt_printf.o(i._StoreChar)
-    i._WriteBlocking                         0x08001fe4   Section        0  segger_rtt.o(i._WriteBlocking)
-    _WriteBlocking                           0x08001fe5   Thumb Code   118  segger_rtt.o(i._WriteBlocking)
-    i._WriteNoCheck                          0x0800205a   Section        0  segger_rtt.o(i._WriteNoCheck)
-    _WriteNoCheck                            0x0800205b   Thumb Code    88  segger_rtt.o(i._WriteNoCheck)
-    i.__NVIC_GetPriorityGrouping             0x080020b4   Section        0  stm32h7xx_hal_cortex.o(i.__NVIC_GetPriorityGrouping)
-    __NVIC_GetPriorityGrouping               0x080020b5   Thumb Code    10  stm32h7xx_hal_cortex.o(i.__NVIC_GetPriorityGrouping)
-    i.__NVIC_SetPriority                     0x080020c4   Section        0  stm32h7xx_hal_cortex.o(i.__NVIC_SetPriority)
-    __NVIC_SetPriority                       0x080020c5   Thumb Code    32  stm32h7xx_hal_cortex.o(i.__NVIC_SetPriority)
-    i.__scatterload_copy                     0x080020ec   Section       14  handlers.o(i.__scatterload_copy)
-    i.__scatterload_null                     0x080020fa   Section        2  handlers.o(i.__scatterload_null)
-    i.__scatterload_zeroinit                 0x080020fc   Section       14  handlers.o(i.__scatterload_zeroinit)
-    i.axi_mem_init                           0x0800210c   Section        0  axi_mem_malloc.o(i.axi_mem_init)
-    i.drv_led_init                           0x0800214c   Section        0  drv_led.o(i.drv_led_init)
-    i.drv_led_off                            0x080021e4   Section        0  drv_led.o(i.drv_led_off)
-    i.drv_led_on                             0x0800220c   Section        0  drv_led.o(i.drv_led_on)
-    i.drvp_led_init                          0x08002234   Section        0  drvp_led.o(i.drvp_led_init)
-    i.drvp_led_prc_1ms                       0x08002244   Section        0  drvp_led.o(i.drvp_led_prc_1ms)
-    i.free_set_next                          0x08002358   Section        0  axi_mem_malloc.o(i.free_set_next)
-    free_set_next                            0x08002359   Thumb Code     4  axi_mem_malloc.o(i.free_set_next)
-    i.main                                   0x0800235c   Section        0  main.o(i.main)
-    .constdata                               0x08002374   Section       16  system_stm32h7xx.o(.constdata)
-    .constdata                               0x08002384   Section       20  drv_led.o(.constdata)
-    drv_led                                  0x08002384   Data          20  drv_led.o(.constdata)
-    .constdata                               0x08002398   Section       12  drvp_led.o(.constdata)
-    drv_led                                  0x08002398   Data          12  drvp_led.o(.constdata)
-    .constdata                               0x080023a4   Section       33  segger_rtt.o(.constdata)
-    _aTerminalId                             0x080023a4   Data          16  segger_rtt.o(.constdata)
-    _aInitStr                                0x080023b4   Data          17  segger_rtt.o(.constdata)
-    .constdata                               0x080023c5   Section       16  segger_rtt_printf.o(.constdata)
-    _aV2C                                    0x080023c5   Data          16  segger_rtt_printf.o(.constdata)
+    i.HAL_GPIO_ReadPin                       0x08000700   Section        0  stm32h7xx_hal_gpio.o(i.HAL_GPIO_ReadPin)
+    i.HAL_GPIO_WritePin                      0x08000710   Section        0  stm32h7xx_hal_gpio.o(i.HAL_GPIO_WritePin)
+    i.HAL_GetREVID                           0x0800071c   Section        0  stm32h7xx_hal.o(i.HAL_GetREVID)
+    i.HAL_GetTick                            0x08000728   Section        0  stm32h7xx_hal.o(i.HAL_GetTick)
+    i.HAL_IncTick                            0x08000734   Section        0  stm32h7xx_hal.o(i.HAL_IncTick)
+    i.HAL_Init                               0x0800074c   Section        0  stm32h7xx_hal.o(i.HAL_Init)
+    i.HAL_InitTick                           0x080007ac   Section        0  stm32h7xx_hal.o(i.HAL_InitTick)
+    i.HAL_MspInit                            0x08000804   Section        0  stm32h7xx_hal_msp_template.o(i.HAL_MspInit)
+    i.HAL_NVIC_SetPriority                   0x08000806   Section        0  stm32h7xx_hal_cortex.o(i.HAL_NVIC_SetPriority)
+    i.HAL_NVIC_SetPriorityGrouping           0x08000880   Section        0  stm32h7xx_hal_cortex.o(i.HAL_NVIC_SetPriorityGrouping)
+    i.HAL_RCC_ClockConfig                    0x080008a8   Section        0  stm32h7xx_hal_rcc.o(i.HAL_RCC_ClockConfig)
+    i.HAL_RCC_GetSysClockFreq                0x08000bc8   Section        0  stm32h7xx_hal_rcc.o(i.HAL_RCC_GetSysClockFreq)
+    i.HAL_RCC_OscConfig                      0x08000df4   Section        0  stm32h7xx_hal_rcc.o(i.HAL_RCC_OscConfig)
+    i.HAL_SYSTICK_Config                     0x0800164c   Section        0  stm32h7xx_hal_cortex.o(i.HAL_SYSTICK_Config)
+    i.HardFaultHandler                       0x08001680   Section        0  segger_hardfaulthandler.o(i.HardFaultHandler)
+    i.MemManage_Handler                      0x080017e0   Section        0  stm32h7xx_it.o(i.MemManage_Handler)
+    i.NMI_Handler                            0x080017e4   Section        0  stm32h7xx_it.o(i.NMI_Handler)
+    i.PendSV_Handler                         0x080017e6   Section        0  stm32h7xx_it.o(i.PendSV_Handler)
+    i.SEGGER_RTT_Write                       0x080017e8   Section        0  segger_rtt.o(i.SEGGER_RTT_Write)
+    i.SEGGER_RTT_WriteNoLock                 0x08001834   Section        0  segger_rtt.o(i.SEGGER_RTT_WriteNoLock)
+    i.SEGGER_RTT_printf                      0x080018b8   Section        0  segger_rtt_printf.o(i.SEGGER_RTT_printf)
+    i.SEGGER_RTT_vprintf                     0x080018dc   Section        0  segger_rtt_printf.o(i.SEGGER_RTT_vprintf)
+    i.SVC_Handler                            0x08001b2c   Section        0  stm32h7xx_it.o(i.SVC_Handler)
+    i.SysTick_Handler                        0x08001b30   Section        0  stm32h7xx_it.o(i.SysTick_Handler)
+    i.SystemClock_Config                     0x08001b5c   Section        0  main.o(i.SystemClock_Config)
+    SystemClock_Config                       0x08001b5d   Thumb Code   258  main.o(i.SystemClock_Config)
+    i.SystemInit                             0x08001c6c   Section        0  system_stm32h7xx.o(i.SystemInit)
+    i.UsageFault_Handler                     0x08001d68   Section        0  stm32h7xx_it.o(i.UsageFault_Handler)
+    i._DoInit                                0x08001d6c   Section        0  segger_rtt.o(i._DoInit)
+    _DoInit                                  0x08001d6d   Thumb Code    82  segger_rtt.o(i._DoInit)
+    i._GetAvailWriteSpace                    0x08001ddc   Section        0  segger_rtt.o(i._GetAvailWriteSpace)
+    _GetAvailWriteSpace                      0x08001ddd   Thumb Code    28  segger_rtt.o(i._GetAvailWriteSpace)
+    i._PrintInt                              0x08001df8   Section        0  segger_rtt_printf.o(i._PrintInt)
+    _PrintInt                                0x08001df9   Thumb Code   236  segger_rtt_printf.o(i._PrintInt)
+    i._PrintUnsigned                         0x08001ee4   Section        0  segger_rtt_printf.o(i._PrintUnsigned)
+    _PrintUnsigned                           0x08001ee5   Thumb Code   230  segger_rtt_printf.o(i._PrintUnsigned)
+    i._StoreChar                             0x08001fd0   Section        0  segger_rtt_printf.o(i._StoreChar)
+    _StoreChar                               0x08001fd1   Thumb Code    68  segger_rtt_printf.o(i._StoreChar)
+    i._WriteBlocking                         0x08002014   Section        0  segger_rtt.o(i._WriteBlocking)
+    _WriteBlocking                           0x08002015   Thumb Code   118  segger_rtt.o(i._WriteBlocking)
+    i._WriteNoCheck                          0x0800208a   Section        0  segger_rtt.o(i._WriteNoCheck)
+    _WriteNoCheck                            0x0800208b   Thumb Code    88  segger_rtt.o(i._WriteNoCheck)
+    i.__NVIC_GetPriorityGrouping             0x080020e4   Section        0  stm32h7xx_hal_cortex.o(i.__NVIC_GetPriorityGrouping)
+    __NVIC_GetPriorityGrouping               0x080020e5   Thumb Code    10  stm32h7xx_hal_cortex.o(i.__NVIC_GetPriorityGrouping)
+    i.__NVIC_SetPriority                     0x080020f4   Section        0  stm32h7xx_hal_cortex.o(i.__NVIC_SetPriority)
+    __NVIC_SetPriority                       0x080020f5   Thumb Code    32  stm32h7xx_hal_cortex.o(i.__NVIC_SetPriority)
+    i.__scatterload_copy                     0x0800211c   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x0800212a   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x0800212c   Section       14  handlers.o(i.__scatterload_zeroinit)
+    i.axi_mem_init                           0x0800213c   Section        0  axi_mem_malloc.o(i.axi_mem_init)
+    i.axi_sram_free                          0x0800217c   Section        0  axi_mem_malloc.o(i.axi_sram_free)
+    i.axi_sram_malloc                        0x08002258   Section        0  axi_mem_malloc.o(i.axi_sram_malloc)
+    i.blk_raw_size                           0x08002340   Section        0  axi_mem_malloc.o(i.blk_raw_size)
+    blk_raw_size                             0x08002341   Thumb Code    10  axi_mem_malloc.o(i.blk_raw_size)
+    i.circular_buffer_init                   0x0800234a   Section        0  circular_buffer.o(i.circular_buffer_init)
+    i.circular_buffer_write                  0x08002396   Section        0  circular_buffer.o(i.circular_buffer_write)
+    i.drv_key_init                           0x08002400   Section        0  drv_key.o(i.drv_key_init)
+    i.drv_key_readmask                       0x080024b0   Section        0  drv_key.o(i.drv_key_readmask)
+    i.drv_led_init                           0x08002500   Section        0  drv_led.o(i.drv_led_init)
+    i.drv_led_off                            0x08002598   Section        0  drv_led.o(i.drv_led_off)
+    i.drv_led_on                             0x080025c0   Section        0  drv_led.o(i.drv_led_on)
+    i.drvp_key_init                          0x080025e8   Section        0  drvp_key.o(i.drvp_key_init)
+    i.drvp_key_prc_10ms                      0x0800260c   Section        0  drvp_key.o(i.drvp_key_prc_10ms)
+    i.drvp_key_wfifo                         0x080027c0   Section        0  drvp_key.o(i.drvp_key_wfifo)
+    drvp_key_wfifo                           0x080027c1   Thumb Code    24  drvp_key.o(i.drvp_key_wfifo)
+    i.drvp_led_init                          0x080027dc   Section        0  drvp_led.o(i.drvp_led_init)
+    i.drvp_led_prc_1ms                       0x080027ec   Section        0  drvp_led.o(i.drvp_led_prc_1ms)
+    i.free_get_next                          0x08002900   Section        0  axi_mem_malloc.o(i.free_get_next)
+    free_get_next                            0x08002901   Thumb Code     6  axi_mem_malloc.o(i.free_get_next)
+    i.free_set_next                          0x08002906   Section        0  axi_mem_malloc.o(i.free_set_next)
+    free_set_next                            0x08002907   Thumb Code     4  axi_mem_malloc.o(i.free_set_next)
+    i.is_power_of_two                        0x0800290a   Section        0  circular_buffer.o(i.is_power_of_two)
+    is_power_of_two                          0x0800290b   Thumb Code    18  circular_buffer.o(i.is_power_of_two)
+    i.main                                   0x0800291c   Section        0  main.o(i.main)
+    i.mutex_init                             0x08002938   Section        0  port.o(i.mutex_init)
+    i.mutex_lock                             0x0800293e   Section        0  port.o(i.mutex_lock)
+    i.mutex_unlock                           0x08002940   Section        0  port.o(i.mutex_unlock)
+    .constdata                               0x08002942   Section       16  system_stm32h7xx.o(.constdata)
+    .constdata                               0x08002954   Section       20  drv_led.o(.constdata)
+    drv_led                                  0x08002954   Data          20  drv_led.o(.constdata)
+    .constdata                               0x08002968   Section       12  drvp_led.o(.constdata)
+    drv_led                                  0x08002968   Data          12  drvp_led.o(.constdata)
+    .constdata                               0x08002974   Section       96  drv_key.o(.constdata)
+    drv_key                                  0x08002974   Data          96  drv_key.o(.constdata)
+    .constdata                               0x080029d4   Section        8  drvp_key.o(.constdata)
+    drv_key                                  0x080029d4   Data           8  drvp_key.o(.constdata)
+    .constdata                               0x080029dc   Section       33  segger_rtt.o(.constdata)
+    _aTerminalId                             0x080029dc   Data          16  segger_rtt.o(.constdata)
+    _aInitStr                                0x080029ec   Data          17  segger_rtt.o(.constdata)
+    .constdata                               0x080029fd   Section       16  segger_rtt_printf.o(.constdata)
+    _aV2C                                    0x080029fd   Data          16  segger_rtt_printf.o(.constdata)
     .data                                    0x24000000   Section        8  system_stm32h7xx.o(.data)
     .data                                    0x24000008   Section        9  stm32h7xx_hal.o(.data)
-    .data                                    0x24000014   Section        4  segger_hardfaulthandler.o(.data)
-    _Continue                                0x24000014   Data           4  segger_hardfaulthandler.o(.data)
-    .bss                                     0x24000018   Section       16  drvp_led.o(.bss)
-    drvp_led                                 0x24000018   Data          16  drvp_led.o(.bss)
-    .bss                                     0x24000028   Section       16  axi_mem_malloc.o(.bss)
-    mem_ctl                                  0x24000028   Data          16  axi_mem_malloc.o(.bss)
-    .bss                                     0x24000038   Section     1208  segger_rtt.o(.bss)
-    _acUpBuffer                              0x240000e0   Data        1024  segger_rtt.o(.bss)
-    _acDownBuffer                            0x240004e0   Data          16  segger_rtt.o(.bss)
-    .bss                                     0x240004f0   Section       64  segger_hardfaulthandler.o(.bss)
-    HardFaultRegs                            0x240004f0   Data          64  segger_hardfaulthandler.o(.bss)
-    STACK                                    0x24000530   Section     1024  startup_stm32h743xx.o(STACK)
+    .data                                    0x24000014   Section        4  drvp_key.o(.data)
+    ks                                       0x24000014   Data           4  drvp_key.o(.data)
+    .data                                    0x24000018   Section        1  stm32h7xx_it.o(.data)
+    prc_key_t                                0x24000018   Data           1  stm32h7xx_it.o(.data)
+    .data                                    0x2400001c   Section        4  segger_hardfaulthandler.o(.data)
+    _Continue                                0x2400001c   Data           4  segger_hardfaulthandler.o(.data)
+    .bss                                     0x24000020   Section       16  drvp_led.o(.bss)
+    drvp_led                                 0x24000020   Data          16  drvp_led.o(.bss)
+    .bss                                     0x24000030   Section       60  drvp_key.o(.bss)
+    drvp_key                                 0x24000030   Data          60  drvp_key.o(.bss)
+    .bss                                     0x2400006c   Section       16  axi_mem_malloc.o(.bss)
+    mem_ctl                                  0x2400006c   Data          16  axi_mem_malloc.o(.bss)
+    .bss                                     0x2400007c   Section     1208  segger_rtt.o(.bss)
+    _acUpBuffer                              0x24000124   Data        1024  segger_rtt.o(.bss)
+    _acDownBuffer                            0x24000524   Data          16  segger_rtt.o(.bss)
+    .bss                                     0x24000534   Section       64  segger_hardfaulthandler.o(.bss)
+    HardFaultRegs                            0x24000534   Data          64  segger_hardfaulthandler.o(.bss)
+    STACK                                    0x24000578   Section     1024  startup_stm32h743xx.o(STACK)
     .bss.AXI_LAST                            0x2407b000   Section    20480  axi_mem_malloc.o(.bss.AXI_LAST)
     AXI_SRAM                                 0x2407b000   Data       20480  axi_mem_malloc.o(.bss.AXI_LAST)
     __tagsym$$used                           0x2407b000   Number         0  axi_mem_malloc.o(.bss.AXI_LAST)
@@ -6854,51 +6907,63 @@ Image Symbol Table
     ExitRun0Mode                             0x080004ef   Thumb Code     2  system_stm32h7xx.o(i.ExitRun0Mode)
     HAL_EnableCompensationCell               0x080004f1   Thumb Code    14  stm32h7xx_hal.o(i.HAL_EnableCompensationCell)
     HAL_GPIO_Init                            0x08000505   Thumb Code   456  stm32h7xx_hal_gpio.o(i.HAL_GPIO_Init)
-    HAL_GPIO_WritePin                        0x08000701   Thumb Code    12  stm32h7xx_hal_gpio.o(i.HAL_GPIO_WritePin)
-    HAL_GetREVID                             0x0800070d   Thumb Code     8  stm32h7xx_hal.o(i.HAL_GetREVID)
-    HAL_GetTick                              0x08000719   Thumb Code     6  stm32h7xx_hal.o(i.HAL_GetTick)
-    HAL_IncTick                              0x08000725   Thumb Code    16  stm32h7xx_hal.o(i.HAL_IncTick)
-    HAL_Init                                 0x0800073d   Thumb Code    80  stm32h7xx_hal.o(i.HAL_Init)
-    HAL_InitTick                             0x0800079d   Thumb Code    74  stm32h7xx_hal.o(i.HAL_InitTick)
-    HAL_MspInit                              0x080007f5   Thumb Code     2  stm32h7xx_hal_msp_template.o(i.HAL_MspInit)
-    HAL_NVIC_SetPriority                     0x080007f7   Thumb Code   122  stm32h7xx_hal_cortex.o(i.HAL_NVIC_SetPriority)
-    HAL_NVIC_SetPriorityGrouping             0x08000871   Thumb Code    32  stm32h7xx_hal_cortex.o(i.HAL_NVIC_SetPriorityGrouping)
-    HAL_RCC_ClockConfig                      0x08000899   Thumb Code   774  stm32h7xx_hal_rcc.o(i.HAL_RCC_ClockConfig)
-    HAL_RCC_GetSysClockFreq                  0x08000bb9   Thumb Code   524  stm32h7xx_hal_rcc.o(i.HAL_RCC_GetSysClockFreq)
-    HAL_RCC_OscConfig                        0x08000de5   Thumb Code  2130  stm32h7xx_hal_rcc.o(i.HAL_RCC_OscConfig)
-    HAL_SYSTICK_Config                       0x0800163d   Thumb Code    52  stm32h7xx_hal_cortex.o(i.HAL_SYSTICK_Config)
-    HardFaultHandler                         0x08001671   Thumb Code   242  segger_hardfaulthandler.o(i.HardFaultHandler)
-    MemManage_Handler                        0x080017d1   Thumb Code     4  stm32h7xx_it.o(i.MemManage_Handler)
-    NMI_Handler                              0x080017d5   Thumb Code     2  stm32h7xx_it.o(i.NMI_Handler)
-    PendSV_Handler                           0x080017d7   Thumb Code     2  stm32h7xx_it.o(i.PendSV_Handler)
-    SEGGER_RTT_Write                         0x080017d9   Thumb Code    70  segger_rtt.o(i.SEGGER_RTT_Write)
-    SEGGER_RTT_WriteNoLock                   0x08001825   Thumb Code   126  segger_rtt.o(i.SEGGER_RTT_WriteNoLock)
-    SEGGER_RTT_printf                        0x080018a9   Thumb Code    34  segger_rtt_printf.o(i.SEGGER_RTT_printf)
-    SEGGER_RTT_vprintf                       0x080018cd   Thumb Code   582  segger_rtt_printf.o(i.SEGGER_RTT_vprintf)
-    SVC_Handler                              0x08001b1d   Thumb Code     2  stm32h7xx_it.o(i.SVC_Handler)
-    SysTick_Handler                          0x08001b1f   Thumb Code    12  stm32h7xx_it.o(i.SysTick_Handler)
-    SystemInit                               0x08001c3d   Thumb Code   212  system_stm32h7xx.o(i.SystemInit)
-    UsageFault_Handler                       0x08001d39   Thumb Code     4  stm32h7xx_it.o(i.UsageFault_Handler)
-    __scatterload_copy                       0x080020ed   Thumb Code    14  handlers.o(i.__scatterload_copy)
-    __scatterload_null                       0x080020fb   Thumb Code     2  handlers.o(i.__scatterload_null)
-    __scatterload_zeroinit                   0x080020fd   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
-    axi_mem_init                             0x0800210d   Thumb Code    54  axi_mem_malloc.o(i.axi_mem_init)
-    drv_led_init                             0x0800214d   Thumb Code   142  drv_led.o(i.drv_led_init)
-    drv_led_off                              0x080021e5   Thumb Code    34  drv_led.o(i.drv_led_off)
-    drv_led_on                               0x0800220d   Thumb Code    34  drv_led.o(i.drv_led_on)
-    drvp_led_init                            0x08002235   Thumb Code    10  drvp_led.o(i.drvp_led_init)
-    drvp_led_prc_1ms                         0x08002245   Thumb Code   266  drvp_led.o(i.drvp_led_prc_1ms)
-    main                                     0x0800235d   Thumb Code    24  main.o(i.main)
-    D1CorePrescTable                         0x08002374   Data          16  system_stm32h7xx.o(.constdata)
-    Region$$Table$$Base                      0x080023d8   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08002408   Number         0  anon$$obj.o(Region$$Table)
+    HAL_GPIO_ReadPin                         0x08000701   Thumb Code    16  stm32h7xx_hal_gpio.o(i.HAL_GPIO_ReadPin)
+    HAL_GPIO_WritePin                        0x08000711   Thumb Code    12  stm32h7xx_hal_gpio.o(i.HAL_GPIO_WritePin)
+    HAL_GetREVID                             0x0800071d   Thumb Code     8  stm32h7xx_hal.o(i.HAL_GetREVID)
+    HAL_GetTick                              0x08000729   Thumb Code     6  stm32h7xx_hal.o(i.HAL_GetTick)
+    HAL_IncTick                              0x08000735   Thumb Code    16  stm32h7xx_hal.o(i.HAL_IncTick)
+    HAL_Init                                 0x0800074d   Thumb Code    80  stm32h7xx_hal.o(i.HAL_Init)
+    HAL_InitTick                             0x080007ad   Thumb Code    74  stm32h7xx_hal.o(i.HAL_InitTick)
+    HAL_MspInit                              0x08000805   Thumb Code     2  stm32h7xx_hal_msp_template.o(i.HAL_MspInit)
+    HAL_NVIC_SetPriority                     0x08000807   Thumb Code   122  stm32h7xx_hal_cortex.o(i.HAL_NVIC_SetPriority)
+    HAL_NVIC_SetPriorityGrouping             0x08000881   Thumb Code    32  stm32h7xx_hal_cortex.o(i.HAL_NVIC_SetPriorityGrouping)
+    HAL_RCC_ClockConfig                      0x080008a9   Thumb Code   774  stm32h7xx_hal_rcc.o(i.HAL_RCC_ClockConfig)
+    HAL_RCC_GetSysClockFreq                  0x08000bc9   Thumb Code   524  stm32h7xx_hal_rcc.o(i.HAL_RCC_GetSysClockFreq)
+    HAL_RCC_OscConfig                        0x08000df5   Thumb Code  2130  stm32h7xx_hal_rcc.o(i.HAL_RCC_OscConfig)
+    HAL_SYSTICK_Config                       0x0800164d   Thumb Code    52  stm32h7xx_hal_cortex.o(i.HAL_SYSTICK_Config)
+    HardFaultHandler                         0x08001681   Thumb Code   242  segger_hardfaulthandler.o(i.HardFaultHandler)
+    MemManage_Handler                        0x080017e1   Thumb Code     4  stm32h7xx_it.o(i.MemManage_Handler)
+    NMI_Handler                              0x080017e5   Thumb Code     2  stm32h7xx_it.o(i.NMI_Handler)
+    PendSV_Handler                           0x080017e7   Thumb Code     2  stm32h7xx_it.o(i.PendSV_Handler)
+    SEGGER_RTT_Write                         0x080017e9   Thumb Code    70  segger_rtt.o(i.SEGGER_RTT_Write)
+    SEGGER_RTT_WriteNoLock                   0x08001835   Thumb Code   126  segger_rtt.o(i.SEGGER_RTT_WriteNoLock)
+    SEGGER_RTT_printf                        0x080018b9   Thumb Code    34  segger_rtt_printf.o(i.SEGGER_RTT_printf)
+    SEGGER_RTT_vprintf                       0x080018dd   Thumb Code   582  segger_rtt_printf.o(i.SEGGER_RTT_vprintf)
+    SVC_Handler                              0x08001b2d   Thumb Code     2  stm32h7xx_it.o(i.SVC_Handler)
+    SysTick_Handler                          0x08001b31   Thumb Code    40  stm32h7xx_it.o(i.SysTick_Handler)
+    SystemInit                               0x08001c6d   Thumb Code   212  system_stm32h7xx.o(i.SystemInit)
+    UsageFault_Handler                       0x08001d69   Thumb Code     4  stm32h7xx_it.o(i.UsageFault_Handler)
+    __scatterload_copy                       0x0800211d   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x0800212b   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x0800212d   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    axi_mem_init                             0x0800213d   Thumb Code    54  axi_mem_malloc.o(i.axi_mem_init)
+    axi_sram_free                            0x0800217d   Thumb Code   214  axi_mem_malloc.o(i.axi_sram_free)
+    axi_sram_malloc                          0x08002259   Thumb Code   228  axi_mem_malloc.o(i.axi_sram_malloc)
+    circular_buffer_init                     0x0800234b   Thumb Code    76  circular_buffer.o(i.circular_buffer_init)
+    circular_buffer_write                    0x08002397   Thumb Code   106  circular_buffer.o(i.circular_buffer_write)
+    drv_key_init                             0x08002401   Thumb Code   168  drv_key.o(i.drv_key_init)
+    drv_key_readmask                         0x080024b1   Thumb Code    74  drv_key.o(i.drv_key_readmask)
+    drv_led_init                             0x08002501   Thumb Code   142  drv_led.o(i.drv_led_init)
+    drv_led_off                              0x08002599   Thumb Code    34  drv_led.o(i.drv_led_off)
+    drv_led_on                               0x080025c1   Thumb Code    34  drv_led.o(i.drv_led_on)
+    drvp_key_init                            0x080025e9   Thumb Code    28  drvp_key.o(i.drvp_key_init)
+    drvp_key_prc_10ms                        0x0800260d   Thumb Code   424  drvp_key.o(i.drvp_key_prc_10ms)
+    drvp_led_init                            0x080027dd   Thumb Code    10  drvp_led.o(i.drvp_led_init)
+    drvp_led_prc_1ms                         0x080027ed   Thumb Code   266  drvp_led.o(i.drvp_led_prc_1ms)
+    main                                     0x0800291d   Thumb Code    28  main.o(i.main)
+    mutex_init                               0x08002939   Thumb Code     6  port.o(i.mutex_init)
+    mutex_lock                               0x0800293f   Thumb Code     2  port.o(i.mutex_lock)
+    mutex_unlock                             0x08002941   Thumb Code     2  port.o(i.mutex_unlock)
+    D1CorePrescTable                         0x08002942   Data          16  system_stm32h7xx.o(.constdata)
+    Region$$Table$$Base                      0x08002a10   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08002a40   Number         0  anon$$obj.o(Region$$Table)
     SystemCoreClock                          0x24000000   Data           4  system_stm32h7xx.o(.data)
     SystemD2Clock                            0x24000004   Data           4  system_stm32h7xx.o(.data)
     uwTick                                   0x24000008   Data           4  stm32h7xx_hal.o(.data)
     uwTickPrio                               0x2400000c   Data           4  stm32h7xx_hal.o(.data)
     uwTickFreq                               0x24000010   Data           1  stm32h7xx_hal.o(.data)
-    _SEGGER_RTT                              0x24000038   Data         168  segger_rtt.o(.bss)
-    __initial_sp                             0x24000930   Data           0  startup_stm32h743xx.o(STACK)
+    _SEGGER_RTT                              0x2400007c   Data         168  segger_rtt.o(.bss)
+    __initial_sp                             0x24000978   Data           0  startup_stm32h743xx.o(STACK)
 
 
 
@@ -6908,116 +6973,140 @@ Memory Map of the image
 
   Image Entry point : 0x08000299
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00007420, Max: 0x00200000, ABSOLUTE, COMPRESSED[0x000024c4])
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00007a60, Max: 0x00200000, ABSOLUTE, COMPRESSED[0x00002b04])
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00002408, Max: 0x00200000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00002a40, Max: 0x00200000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x08000000   0x08000000   0x00000298   Data   RO            3    RESET               startup_stm32h743xx.o
-    0x08000298   0x08000298   0x00000000   Code   RO        18570  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x08000298   0x08000298   0x00000004   Code   RO        18583    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x0800029c   0x0800029c   0x00000004   Code   RO        18586    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x080002a0   0x080002a0   0x00000000   Code   RO        18588    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x080002a0   0x080002a0   0x00000000   Code   RO        18590    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x080002a0   0x080002a0   0x00000008   Code   RO        18591    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x080002a8   0x080002a8   0x00000004   Code   RO        18598    .ARM.Collect$$$$0000000E  mc_w.l(entry12b.o)
-    0x080002ac   0x080002ac   0x00000000   Code   RO        18593    .ARM.Collect$$$$0000000F  mc_w.l(entry10a.o)
-    0x080002ac   0x080002ac   0x00000000   Code   RO        18595    .ARM.Collect$$$$00000011  mc_w.l(entry11a.o)
-    0x080002ac   0x080002ac   0x00000004   Code   RO        18584    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x08000298   0x08000298   0x00000000   Code   RO        18666  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x08000298   0x08000298   0x00000004   Code   RO        18679    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x0800029c   0x0800029c   0x00000004   Code   RO        18682    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x080002a0   0x080002a0   0x00000000   Code   RO        18684    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x080002a0   0x080002a0   0x00000000   Code   RO        18686    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x080002a0   0x080002a0   0x00000008   Code   RO        18687    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x080002a8   0x080002a8   0x00000004   Code   RO        18694    .ARM.Collect$$$$0000000E  mc_w.l(entry12b.o)
+    0x080002ac   0x080002ac   0x00000000   Code   RO        18689    .ARM.Collect$$$$0000000F  mc_w.l(entry10a.o)
+    0x080002ac   0x080002ac   0x00000000   Code   RO        18691    .ARM.Collect$$$$00000011  mc_w.l(entry11a.o)
+    0x080002ac   0x080002ac   0x00000004   Code   RO        18680    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
     0x080002b0   0x080002b0   0x0000002c   Code   RO            4    .text               startup_stm32h743xx.o
-    0x080002dc   0x080002dc   0x00000014   Code   RO        18540    .text               hardfaulthandler.o
-    0x080002f0   0x080002f0   0x00000024   Code   RO        18575    .text               mc_w.l(memcpya.o)
-    0x08000314   0x08000314   0x00000024   Code   RO        18577    .text               mc_w.l(memseta.o)
-    0x08000338   0x08000338   0x00000024   Code   RO        18603    .text               mc_w.l(init.o)
-    0x0800035c   0x0800035c   0x00000056   Code   RO        18613    .text               mc_w.l(__dczerorl2.o)
-    0x080003b2   0x080003b2   0x00000004   Code   RO        18196    i.BusFault_Handler  stm32h7xx_it.o
+    0x080002dc   0x080002dc   0x00000014   Code   RO        18636    .text               hardfaulthandler.o
+    0x080002f0   0x080002f0   0x00000024   Code   RO        18671    .text               mc_w.l(memcpya.o)
+    0x08000314   0x08000314   0x00000024   Code   RO        18673    .text               mc_w.l(memseta.o)
+    0x08000338   0x08000338   0x00000024   Code   RO        18699    .text               mc_w.l(init.o)
+    0x0800035c   0x0800035c   0x00000056   Code   RO        18709    .text               mc_w.l(__dczerorl2.o)
+    0x080003b2   0x080003b2   0x00000004   Code   RO        18291    i.BusFault_Handler  stm32h7xx_it.o
     0x080003b6   0x080003b6   0x00000002   PAD
-    0x080003b8   0x080003b8   0x00000130   Code   RO        18134    i.CPU_CACHE_Enable  main.o
-    0x080004e8   0x080004e8   0x00000002   Code   RO        18197    i.DebugMon_Handler  stm32h7xx_it.o
-    0x080004ea   0x080004ea   0x00000004   Code   RO        18135    i.Error_Handler     main.o
+    0x080003b8   0x080003b8   0x00000130   Code   RO        18220    i.CPU_CACHE_Enable  main.o
+    0x080004e8   0x080004e8   0x00000002   Code   RO        18292    i.DebugMon_Handler  stm32h7xx_it.o
+    0x080004ea   0x080004ea   0x00000004   Code   RO        18221    i.Error_Handler     main.o
     0x080004ee   0x080004ee   0x00000002   Code   RO           13    i.ExitRun0Mode      system_stm32h7xx.o
     0x080004f0   0x080004f0   0x00000014   Code   RO          391    i.HAL_EnableCompensationCell  stm32h7xx_hal.o
     0x08000504   0x08000504   0x000001fc   Code   RO         4522    i.HAL_GPIO_Init     stm32h7xx_hal_gpio.o
-    0x08000700   0x08000700   0x0000000c   Code   RO         4526    i.HAL_GPIO_WritePin  stm32h7xx_hal_gpio.o
-    0x0800070c   0x0800070c   0x0000000c   Code   RO          395    i.HAL_GetREVID      stm32h7xx_hal.o
-    0x08000718   0x08000718   0x0000000c   Code   RO          396    i.HAL_GetTick       stm32h7xx_hal.o
-    0x08000724   0x08000724   0x00000018   Code   RO          402    i.HAL_IncTick       stm32h7xx_hal.o
-    0x0800073c   0x0800073c   0x00000060   Code   RO          403    i.HAL_Init          stm32h7xx_hal.o
-    0x0800079c   0x0800079c   0x00000058   Code   RO          404    i.HAL_InitTick      stm32h7xx_hal.o
-    0x080007f4   0x080007f4   0x00000002   Code   RO         8222    i.HAL_MspInit       stm32h7xx_hal_msp_template.o
-    0x080007f6   0x080007f6   0x0000007a   Code   RO         1445    i.HAL_NVIC_SetPriority  stm32h7xx_hal_cortex.o
-    0x08000870   0x08000870   0x00000028   Code   RO         1446    i.HAL_NVIC_SetPriorityGrouping  stm32h7xx_hal_cortex.o
-    0x08000898   0x08000898   0x00000320   Code   RO         9763    i.HAL_RCC_ClockConfig  stm32h7xx_hal_rcc.o
-    0x08000bb8   0x08000bb8   0x0000022c   Code   RO         9772    i.HAL_RCC_GetSysClockFreq  stm32h7xx_hal_rcc.o
-    0x08000de4   0x08000de4   0x00000858   Code   RO         9775    i.HAL_RCC_OscConfig  stm32h7xx_hal_rcc.o
-    0x0800163c   0x0800163c   0x00000034   Code   RO         1450    i.HAL_SYSTICK_Config  stm32h7xx_hal_cortex.o
-    0x08001670   0x08001670   0x00000160   Code   RO        18546    i.HardFaultHandler  segger_hardfaulthandler.o
-    0x080017d0   0x080017d0   0x00000004   Code   RO        18198    i.MemManage_Handler  stm32h7xx_it.o
-    0x080017d4   0x080017d4   0x00000002   Code   RO        18199    i.NMI_Handler       stm32h7xx_it.o
-    0x080017d6   0x080017d6   0x00000002   Code   RO        18200    i.PendSV_Handler    stm32h7xx_it.o
-    0x080017d8   0x080017d8   0x0000004c   Code   RO        18287    i.SEGGER_RTT_Write  segger_rtt.o
-    0x08001824   0x08001824   0x00000084   Code   RO        18290    i.SEGGER_RTT_WriteNoLock  segger_rtt.o
-    0x080018a8   0x080018a8   0x00000022   Code   RO        18502    i.SEGGER_RTT_printf  segger_rtt_printf.o
-    0x080018ca   0x080018ca   0x00000002   PAD
-    0x080018cc   0x080018cc   0x00000250   Code   RO        18503    i.SEGGER_RTT_vprintf  segger_rtt_printf.o
-    0x08001b1c   0x08001b1c   0x00000002   Code   RO        18201    i.SVC_Handler       stm32h7xx_it.o
-    0x08001b1e   0x08001b1e   0x0000000c   Code   RO        18202    i.SysTick_Handler   stm32h7xx_it.o
-    0x08001b2a   0x08001b2a   0x00000002   PAD
-    0x08001b2c   0x08001b2c   0x00000110   Code   RO        18136    i.SystemClock_Config  main.o
-    0x08001c3c   0x08001c3c   0x000000fc   Code   RO           15    i.SystemInit        system_stm32h7xx.o
-    0x08001d38   0x08001d38   0x00000004   Code   RO        18203    i.UsageFault_Handler  stm32h7xx_it.o
-    0x08001d3c   0x08001d3c   0x00000070   Code   RO        18294    i._DoInit           segger_rtt.o
-    0x08001dac   0x08001dac   0x0000001c   Code   RO        18295    i._GetAvailWriteSpace  segger_rtt.o
-    0x08001dc8   0x08001dc8   0x000000ec   Code   RO        18504    i._PrintInt         segger_rtt_printf.o
-    0x08001eb4   0x08001eb4   0x000000ec   Code   RO        18505    i._PrintUnsigned    segger_rtt_printf.o
-    0x08001fa0   0x08001fa0   0x00000044   Code   RO        18506    i._StoreChar        segger_rtt_printf.o
-    0x08001fe4   0x08001fe4   0x00000076   Code   RO        18297    i._WriteBlocking    segger_rtt.o
-    0x0800205a   0x0800205a   0x00000058   Code   RO        18298    i._WriteNoCheck     segger_rtt.o
-    0x080020b2   0x080020b2   0x00000002   PAD
-    0x080020b4   0x080020b4   0x00000010   Code   RO         1452    i.__NVIC_GetPriorityGrouping  stm32h7xx_hal_cortex.o
-    0x080020c4   0x080020c4   0x00000028   Code   RO         1453    i.__NVIC_SetPriority  stm32h7xx_hal_cortex.o
-    0x080020ec   0x080020ec   0x0000000e   Code   RO        18607    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x080020fa   0x080020fa   0x00000002   Code   RO        18608    i.__scatterload_null  mc_w.l(handlers.o)
-    0x080020fc   0x080020fc   0x0000000e   Code   RO        18609    i.__scatterload_zeroinit  mc_w.l(handlers.o)
-    0x0800210a   0x0800210a   0x00000002   PAD
-    0x0800210c   0x0800210c   0x00000040   Code   RO        18070    i.axi_mem_init      axi_mem_malloc.o
-    0x0800214c   0x0800214c   0x00000098   Code   RO        17846    i.drv_led_init      drv_led.o
-    0x080021e4   0x080021e4   0x00000028   Code   RO        17847    i.drv_led_off       drv_led.o
-    0x0800220c   0x0800220c   0x00000028   Code   RO        17848    i.drv_led_on        drv_led.o
-    0x08002234   0x08002234   0x00000010   Code   RO        17887    i.drvp_led_init     drvp_led.o
-    0x08002244   0x08002244   0x00000114   Code   RO        17890    i.drvp_led_prc_1ms  drvp_led.o
-    0x08002358   0x08002358   0x00000004   Code   RO        18075    i.free_set_next     axi_mem_malloc.o
-    0x0800235c   0x0800235c   0x00000018   Code   RO        18137    i.main              main.o
-    0x08002374   0x08002374   0x00000010   Data   RO           16    .constdata          system_stm32h7xx.o
-    0x08002384   0x08002384   0x00000014   Data   RO        17849    .constdata          drv_led.o
-    0x08002398   0x08002398   0x0000000c   Data   RO        17895    .constdata          drvp_led.o
-    0x080023a4   0x080023a4   0x00000021   Data   RO        18300    .constdata          segger_rtt.o
-    0x080023c5   0x080023c5   0x00000010   Data   RO        18507    .constdata          segger_rtt_printf.o
-    0x080023d5   0x080023d5   0x00000003   PAD
-    0x080023d8   0x080023d8   0x00000030   Data   RO        18605    Region$$Table       anon$$obj.o
+    0x08000700   0x08000700   0x00000010   Code   RO         4524    i.HAL_GPIO_ReadPin  stm32h7xx_hal_gpio.o
+    0x08000710   0x08000710   0x0000000c   Code   RO         4526    i.HAL_GPIO_WritePin  stm32h7xx_hal_gpio.o
+    0x0800071c   0x0800071c   0x0000000c   Code   RO          395    i.HAL_GetREVID      stm32h7xx_hal.o
+    0x08000728   0x08000728   0x0000000c   Code   RO          396    i.HAL_GetTick       stm32h7xx_hal.o
+    0x08000734   0x08000734   0x00000018   Code   RO          402    i.HAL_IncTick       stm32h7xx_hal.o
+    0x0800074c   0x0800074c   0x00000060   Code   RO          403    i.HAL_Init          stm32h7xx_hal.o
+    0x080007ac   0x080007ac   0x00000058   Code   RO          404    i.HAL_InitTick      stm32h7xx_hal.o
+    0x08000804   0x08000804   0x00000002   Code   RO         8222    i.HAL_MspInit       stm32h7xx_hal_msp_template.o
+    0x08000806   0x08000806   0x0000007a   Code   RO         1445    i.HAL_NVIC_SetPriority  stm32h7xx_hal_cortex.o
+    0x08000880   0x08000880   0x00000028   Code   RO         1446    i.HAL_NVIC_SetPriorityGrouping  stm32h7xx_hal_cortex.o
+    0x080008a8   0x080008a8   0x00000320   Code   RO         9763    i.HAL_RCC_ClockConfig  stm32h7xx_hal_rcc.o
+    0x08000bc8   0x08000bc8   0x0000022c   Code   RO         9772    i.HAL_RCC_GetSysClockFreq  stm32h7xx_hal_rcc.o
+    0x08000df4   0x08000df4   0x00000858   Code   RO         9775    i.HAL_RCC_OscConfig  stm32h7xx_hal_rcc.o
+    0x0800164c   0x0800164c   0x00000034   Code   RO         1450    i.HAL_SYSTICK_Config  stm32h7xx_hal_cortex.o
+    0x08001680   0x08001680   0x00000160   Code   RO        18642    i.HardFaultHandler  segger_hardfaulthandler.o
+    0x080017e0   0x080017e0   0x00000004   Code   RO        18293    i.MemManage_Handler  stm32h7xx_it.o
+    0x080017e4   0x080017e4   0x00000002   Code   RO        18294    i.NMI_Handler       stm32h7xx_it.o
+    0x080017e6   0x080017e6   0x00000002   Code   RO        18295    i.PendSV_Handler    stm32h7xx_it.o
+    0x080017e8   0x080017e8   0x0000004c   Code   RO        18383    i.SEGGER_RTT_Write  segger_rtt.o
+    0x08001834   0x08001834   0x00000084   Code   RO        18386    i.SEGGER_RTT_WriteNoLock  segger_rtt.o
+    0x080018b8   0x080018b8   0x00000022   Code   RO        18598    i.SEGGER_RTT_printf  segger_rtt_printf.o
+    0x080018da   0x080018da   0x00000002   PAD
+    0x080018dc   0x080018dc   0x00000250   Code   RO        18599    i.SEGGER_RTT_vprintf  segger_rtt_printf.o
+    0x08001b2c   0x08001b2c   0x00000002   Code   RO        18296    i.SVC_Handler       stm32h7xx_it.o
+    0x08001b2e   0x08001b2e   0x00000002   PAD
+    0x08001b30   0x08001b30   0x0000002c   Code   RO        18297    i.SysTick_Handler   stm32h7xx_it.o
+    0x08001b5c   0x08001b5c   0x00000110   Code   RO        18222    i.SystemClock_Config  main.o
+    0x08001c6c   0x08001c6c   0x000000fc   Code   RO           15    i.SystemInit        system_stm32h7xx.o
+    0x08001d68   0x08001d68   0x00000004   Code   RO        18298    i.UsageFault_Handler  stm32h7xx_it.o
+    0x08001d6c   0x08001d6c   0x00000070   Code   RO        18390    i._DoInit           segger_rtt.o
+    0x08001ddc   0x08001ddc   0x0000001c   Code   RO        18391    i._GetAvailWriteSpace  segger_rtt.o
+    0x08001df8   0x08001df8   0x000000ec   Code   RO        18600    i._PrintInt         segger_rtt_printf.o
+    0x08001ee4   0x08001ee4   0x000000ec   Code   RO        18601    i._PrintUnsigned    segger_rtt_printf.o
+    0x08001fd0   0x08001fd0   0x00000044   Code   RO        18602    i._StoreChar        segger_rtt_printf.o
+    0x08002014   0x08002014   0x00000076   Code   RO        18393    i._WriteBlocking    segger_rtt.o
+    0x0800208a   0x0800208a   0x00000058   Code   RO        18394    i._WriteNoCheck     segger_rtt.o
+    0x080020e2   0x080020e2   0x00000002   PAD
+    0x080020e4   0x080020e4   0x00000010   Code   RO         1452    i.__NVIC_GetPriorityGrouping  stm32h7xx_hal_cortex.o
+    0x080020f4   0x080020f4   0x00000028   Code   RO         1453    i.__NVIC_SetPriority  stm32h7xx_hal_cortex.o
+    0x0800211c   0x0800211c   0x0000000e   Code   RO        18703    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x0800212a   0x0800212a   0x00000002   Code   RO        18704    i.__scatterload_null  mc_w.l(handlers.o)
+    0x0800212c   0x0800212c   0x0000000e   Code   RO        18705    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x0800213a   0x0800213a   0x00000002   PAD
+    0x0800213c   0x0800213c   0x00000040   Code   RO        18156    i.axi_mem_init      axi_mem_malloc.o
+    0x0800217c   0x0800217c   0x000000dc   Code   RO        18157    i.axi_sram_free     axi_mem_malloc.o
+    0x08002258   0x08002258   0x000000e8   Code   RO        18158    i.axi_sram_malloc   axi_mem_malloc.o
+    0x08002340   0x08002340   0x0000000a   Code   RO        18159    i.blk_raw_size      axi_mem_malloc.o
+    0x0800234a   0x0800234a   0x0000004c   Code   RO        18089    i.circular_buffer_init  circular_buffer.o
+    0x08002396   0x08002396   0x0000006a   Code   RO        18094    i.circular_buffer_write  circular_buffer.o
+    0x08002400   0x08002400   0x000000b0   Code   RO        17956    i.drv_key_init      drv_key.o
+    0x080024b0   0x080024b0   0x00000050   Code   RO        17957    i.drv_key_readmask  drv_key.o
+    0x08002500   0x08002500   0x00000098   Code   RO        17846    i.drv_led_init      drv_led.o
+    0x08002598   0x08002598   0x00000028   Code   RO        17847    i.drv_led_off       drv_led.o
+    0x080025c0   0x080025c0   0x00000028   Code   RO        17848    i.drv_led_on        drv_led.o
+    0x080025e8   0x080025e8   0x00000024   Code   RO        17991    i.drvp_key_init     drvp_key.o
+    0x0800260c   0x0800260c   0x000001b4   Code   RO        17992    i.drvp_key_prc_10ms  drvp_key.o
+    0x080027c0   0x080027c0   0x0000001c   Code   RO        17994    i.drvp_key_wfifo    drvp_key.o
+    0x080027dc   0x080027dc   0x00000010   Code   RO        17887    i.drvp_led_init     drvp_led.o
+    0x080027ec   0x080027ec   0x00000114   Code   RO        17890    i.drvp_led_prc_1ms  drvp_led.o
+    0x08002900   0x08002900   0x00000006   Code   RO        18160    i.free_get_next     axi_mem_malloc.o
+    0x08002906   0x08002906   0x00000004   Code   RO        18161    i.free_set_next     axi_mem_malloc.o
+    0x0800290a   0x0800290a   0x00000012   Code   RO        18095    i.is_power_of_two   circular_buffer.o
+    0x0800291c   0x0800291c   0x0000001c   Code   RO        18223    i.main              main.o
+    0x08002938   0x08002938   0x00000006   Code   RO        18049    i.mutex_init        port.o
+    0x0800293e   0x0800293e   0x00000002   Code   RO        18050    i.mutex_lock        port.o
+    0x08002940   0x08002940   0x00000002   Code   RO        18051    i.mutex_unlock      port.o
+    0x08002942   0x08002942   0x00000010   Data   RO           16    .constdata          system_stm32h7xx.o
+    0x08002952   0x08002952   0x00000002   PAD
+    0x08002954   0x08002954   0x00000014   Data   RO        17849    .constdata          drv_led.o
+    0x08002968   0x08002968   0x0000000c   Data   RO        17895    .constdata          drvp_led.o
+    0x08002974   0x08002974   0x00000060   Data   RO        17958    .constdata          drv_key.o
+    0x080029d4   0x080029d4   0x00000008   Data   RO        17996    .constdata          drvp_key.o
+    0x080029dc   0x080029dc   0x00000021   Data   RO        18396    .constdata          segger_rtt.o
+    0x080029fd   0x080029fd   0x00000010   Data   RO        18603    .constdata          segger_rtt_printf.o
+    0x08002a0d   0x08002a0d   0x00000003   PAD
+    0x08002a10   0x08002a10   0x00000030   Data   RO        18701    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM2 (Exec base: 0x24000000, Load base: 0x08002408, Size: 0x00000930, Max: 0x0007b000, ABSOLUTE)
+    Execution Region RW_IRAM2 (Exec base: 0x24000000, Load base: 0x08002a40, Size: 0x00000978, Max: 0x0007b000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x24000000   0x08002408   0x00000008   Data   RW           17    .data               system_stm32h7xx.o
-    0x24000008   0x08002410   0x00000009   Data   RW          425    .data               stm32h7xx_hal.o
-    0x24000011   0x08002419   0x00000003   PAD
-    0x24000014   0x0800241c   0x00000004   Data   RW        18548    .data               segger_hardfaulthandler.o
-    0x24000018        -       0x00000010   Zero   RW        17894    .bss                drvp_led.o
-    0x24000028        -       0x00000010   Zero   RW        18076    .bss                axi_mem_malloc.o
-    0x24000038        -       0x000004b8   Zero   RW        18299    .bss                segger_rtt.o
-    0x240004f0        -       0x00000040   Zero   RW        18547    .bss                segger_hardfaulthandler.o
-    0x24000530        -       0x00000400   Zero   RW            1    STACK               startup_stm32h743xx.o
+    0x24000000   0x08002a40   0x00000008   Data   RW           17    .data               system_stm32h7xx.o
+    0x24000008   0x08002a48   0x00000009   Data   RW          425    .data               stm32h7xx_hal.o
+    0x24000011   0x08002a51   0x00000003   PAD
+    0x24000014   0x08002a54   0x00000004   Data   RW        17997    .data               drvp_key.o
+    0x24000018   0x08002a58   0x00000001   Data   RW        18299    .data               stm32h7xx_it.o
+    0x24000019   0x08002a59   0x00000003   PAD
+    0x2400001c   0x08002a5c   0x00000004   Data   RW        18644    .data               segger_hardfaulthandler.o
+    0x24000020        -       0x00000010   Zero   RW        17894    .bss                drvp_led.o
+    0x24000030        -       0x0000003c   Zero   RW        17995    .bss                drvp_key.o
+    0x2400006c        -       0x00000010   Zero   RW        18162    .bss                axi_mem_malloc.o
+    0x2400007c        -       0x000004b8   Zero   RW        18395    .bss                segger_rtt.o
+    0x24000534        -       0x00000040   Zero   RW        18643    .bss                segger_hardfaulthandler.o
+    0x24000574   0x08002a60   0x00000004   PAD
+    0x24000578        -       0x00000400   Zero   RW            1    STACK               startup_stm32h743xx.o
 
 
-    Execution Region RW_AXI_LAST (Exec base: 0x2407b000, Load base: 0x08002420, Size: 0x00005000, Max: 0x00005000, ABSOLUTE, COMPRESSED[0x000000a4])
+    Execution Region RW_AXI_LAST (Exec base: 0x2407b000, Load base: 0x08002a60, Size: 0x00005000, Max: 0x00005000, ABSOLUTE, COMPRESSED[0x000000a4])
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x2407b000   COMPRESSED   0x00005000   Data   RW        18077    .bss.AXI_LAST       axi_mem_malloc.o
+    0x2407b000   COMPRESSED   0x00005000   Data   RW        18163    .bss.AXI_LAST       axi_mem_malloc.o
 
 
 ==============================================================================
@@ -7027,27 +7116,31 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-        68         10          0      20480         16       2027   axi_mem_malloc.o
+       536         20          0      20480         16       4885   axi_mem_malloc.o
+       200          0          0          0          0       3283   circular_buffer.o
+       256         14         96          0          0       2058   drv_key.o
        232         22         20          0          0       2422   drv_led.o
+       500         30          8          4         60       4448   drvp_key.o
        292         16         12          0         16       2339   drvp_led.o
         20          2          0          0          0        252   hardfaulthandler.o
-       604         24          0          0          0      39270   main.o
+       608         24          0          0          0      39314   main.o
+        10          0          0          0          0       2317   port.o
        352        110          0          4         64       3339   segger_hardfaulthandler.o
        554         42         33          0       1208       9386   segger_rtt.o
       1166         16         16          0          0       5813   segger_rtt_printf.o
         44         12        664          0       1024        984   startup_stm32h743xx.o
        252         54          0          9          0      23593   stm32h7xx_hal.o
        270         22          0          0          0      39574   stm32h7xx_hal_cortex.o
-       520         52          0          0          0       2348   stm32h7xx_hal_gpio.o
+       536         52          0          0          0       3047   stm32h7xx_hal_gpio.o
          2          0          0          0          0        554   stm32h7xx_hal_msp_template.o
       3492         78          0          0          0       5372   stm32h7xx_hal_rcc.o
-        32          0          0          0          0       3506   stm32h7xx_it.o
-       254         40         16          8          0    1130476   system_stm32h7xx.o
+        64          4          0          1          0       3546   stm32h7xx_it.o
+       254         40         16          8          0    1130992   system_stm32h7xx.o
 
     ----------------------------------------------------------------------
-      8162        500        812      20504       2328    1271255   Object Totals
+      9648        558        918      20512       2392    1287518   Object Totals
          0          0         48          0          0          0   (incl. Generated)
-         8          0          3          3          0          0   (incl. Padding)
+         8          0          5          6          4          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -7088,15 +7181,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      8412        516        812      20504       2328    1267331   Grand Totals
-      8412        516        812        188       2328    1267331   ELF Image Totals (compressed)
-      8412        516        812        188          0          0   ROM Totals
+      9898        574        918      20512       2392    1281994   Grand Totals
+      9898        574        918        196       2392    1281994   ELF Image Totals (compressed)
+      9898        574        918        196          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 9224 (   9.01kB)
-    Total RW  Size (RW Data + ZI Data)             22832 (  22.30kB)
-    Total ROM Size (Code + RO Data + RW Data)       9412 (   9.19kB)
+    Total RO  Size (Code + RO Data)                10816 (  10.56kB)
+    Total RW  Size (RW Data + ZI Data)             22904 (  22.37kB)
+    Total ROM Size (Code + RO Data + RW Data)      11012 (  10.75kB)
 
 ==============================================================================
 
