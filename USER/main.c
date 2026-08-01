@@ -3,6 +3,10 @@
 #include "drvp_led.h"
 #include "axi_mem_malloc.h"
 #include "drvp_key.h"
+#include "base_timer6.h"
+#include "pwm_timer2.h"
+#include "pwm_in_timer5.h"
+#include "drvp_eeprom.h"
 
 static void SystemClock_Config(void);
 static void Error_Handler(void);
@@ -14,9 +18,11 @@ int main(void)
 	HAL_Init();//HAL库的初始化
 	SystemClock_Config();//配置系统时钟为400MHZ
 	
+	SEGGER_RTT_Init();//初始化RTT调试
 	axi_mem_init();//初始化内存管理	
 	drvp_led_init();//初始化led
   drvp_key_init();//初始化key
+	drvp_eeprom_init();//初始化eeprom
 	for(;;)
 	{
 	}
@@ -127,6 +133,33 @@ static void Error_Handler(void)
   /* User may add here some code to deal with this error */
   while(1)
   {
+  }
+}
+
+/**
+  * @brief  This function handles SysTick Handler.
+  * @param  None
+  * @retval None
+  */
+void SysTick_Handler(void)
+{
+  static uint8_t keycnt=0;
+  static uint8_t eepromcnt=0;
+  
+	HAL_IncTick();
+	
+  drvp_led_prc_1ms();
+	
+  if(++keycnt>=10)
+  {
+    keycnt=0;
+    drvp_key_prc_10ms();
+  }
+	
+	if(++eepromcnt>=10)
+  {
+    eepromcnt=0;
+    drvp_eeprom_prc_10ms();
   }
 }
 

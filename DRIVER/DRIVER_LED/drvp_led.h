@@ -7,6 +7,7 @@
 typedef enum
 {
   E_LED_0,
+	E_LED_1,
   E_LED_COUNT
 }E_LED_TYPE;
 

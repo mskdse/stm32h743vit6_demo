@@ -21,8 +21,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7xx_it.h"
 #include "stm32h7xx_hal.h"
-#include "drvp_led.h"
-#include "drvp_key.h"
 
 
 /** @addtogroup STM32H7xx_HAL_Examples
@@ -118,25 +116,6 @@ void DebugMon_Handler(void)
 void PendSV_Handler(void)
 {
 }
-
-/**
-  * @brief  This function handles SysTick Handler.
-  * @param  None
-  * @retval None
-  */
-void SysTick_Handler(void)
-{
-  static uint8_t prc_key_t=0;
-  prc_key_t++;  
-	HAL_IncTick();
-  drvp_led_prc_1ms();
-  if(prc_key_t>=10)
-  {
-    prc_key_t=0;
-    drvp_key_prc_10ms();
-  }
-}
-  
 
 /******************************************************************************/
 /*                 STM32H7xx Peripherals Interrupt Handlers                   */

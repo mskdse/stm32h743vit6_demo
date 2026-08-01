@@ -3,7 +3,7 @@
 
 #include "stm32h7xx_hal.h"
 
-#define MAX_LED_NUM    1
+#define MAX_LED_NUM    2
 
 void drv_led_init(void);
 void drv_led_on(uint8_t led);

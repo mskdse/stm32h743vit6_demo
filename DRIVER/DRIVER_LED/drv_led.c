@@ -13,7 +13,8 @@ typedef struct
 /* 这个可以扩展，第一个成员是索引默认从0开始加，第二个成员是GPIO组，第三个成员是GPIO具体的pin */
 const static drv_led_type drv_led[MAX_LED_NUM]=
 {
-    {0,GPIOB,GPIO_PIN_0,GPIO_PIN_SET,GPIO_NOPULL,GPIO_SPEED_FREQ_MEDIUM}
+    {0,GPIOB,GPIO_PIN_0,GPIO_PIN_SET,GPIO_NOPULL,GPIO_SPEED_FREQ_MEDIUM},
+		{1,GPIOC,GPIO_PIN_13,GPIO_PIN_SET,GPIO_NOPULL,GPIO_SPEED_FREQ_MEDIUM}
 };
 
 void drv_led_init(void)
@@ -21,6 +22,7 @@ void drv_led_init(void)
   GPIO_InitTypeDef gpio_cfg;
   gpio_cfg.Mode=GPIO_MODE_OUTPUT_PP;
   __HAL_RCC_GPIOB_CLK_ENABLE();
+	__HAL_RCC_GPIOC_CLK_ENABLE();
   for(int i=0;i<MAX_LED_NUM;i++)
   {
      gpio_cfg.Speed=drv_led[i].gpio_speed;
