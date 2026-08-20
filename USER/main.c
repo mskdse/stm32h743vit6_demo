@@ -5,15 +5,18 @@
 #include "drvp_key.h"
 #include "base_timer6.h"
 #include "pwm_timer2.h"
+#include "pwm_timer1.h"
 #include "pwm_in_timer5.h"
 #include "drvp_eeprom.h"
 
 static void SystemClock_Config(void);
 static void Error_Handler(void);
+static void MPU_Config(void);
 static void CPU_CACHE_Enable(void);
 
 int main(void)
 {
+    MPU_Config();//配置MPU内存保护单元
 	CPU_CACHE_Enable();//开启Cache
 	HAL_Init();//HAL库的初始化
 	SystemClock_Config();//配置系统时钟为400MHZ
@@ -137,6 +140,53 @@ static void Error_Handler(void)
 }
 
 /**
+  * @brief  Configure the MPU attributes as Write Through for External SDRAM.
+  * @note   The Base Address is SDRAM_DEVICE_ADDR
+  *         The Configured Region Size is 32MB because same as SDRAM size.
+  * @param  None
+  * @retval None
+  */
+static void MPU_Config(void)
+{
+  MPU_Region_InitTypeDef MPU_InitStruct;
+  
+  /* Disable the MPU */
+  HAL_MPU_Disable();
+
+  /* Configure the MPU as Strongly ordered for not defined regions */
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = 0x00;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_4GB;
+  MPU_InitStruct.AccessPermission = MPU_REGION_NO_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.SubRegionDisable = 0x87;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /* Enable the MPU */
+  HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
+}
+
+/**
+  * @brief  CPU L1-Cache enable.
+  * @param  None
+  * @retval None
+  */
+static void CPU_CACHE_Enable(void)
+{
+  /* Enable I-Cache */
+  SCB_EnableICache();
+
+  /* Enable D-Cache */
+  SCB_EnableDCache();
+}
+
+/**
   * @brief  This function handles SysTick Handler.
   * @param  None
   * @retval None
@@ -161,18 +211,4 @@ void SysTick_Handler(void)
     eepromcnt=0;
     drvp_eeprom_prc_10ms();
   }
-}
-
-/**
-  * @brief  CPU L1-Cache enable.
-  * @param  None
-  * @retval None
-  */
-static void CPU_CACHE_Enable(void)
-{
-  /* Enable I-Cache */
-  SCB_EnableICache();
-
-  /* Enable D-Cache */
-  SCB_EnableDCache();
 }

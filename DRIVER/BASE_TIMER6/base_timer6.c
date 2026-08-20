@@ -24,10 +24,10 @@ void base_timer6_init(uint16_t xms,void(*tim_calbk)(void))
 	HAL_TIM_Base_Start_IT(&tim6_handle);
 }
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-	if(TIM6==htim->Instance) timer6_callback();
-}
+//void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+//{
+//	if(TIM6==htim->Instance) timer6_callback();
+//}
 
 void TIM6_DAC_IRQHandler(void)
 {

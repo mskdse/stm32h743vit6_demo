@@ -123,6 +123,7 @@
 .\outfiles\main.o: .\CIRCULAR_BUFFER\port\config.h
 .\outfiles\main.o: .\DRIVER\BASE_TIMER6\base_timer6.h
 .\outfiles\main.o: .\DRIVER\PWM_TIMER2\pwm_timer2.h
+.\outfiles\main.o: .\DRIVER\PWM_TIMER1\pwm_timer1.h
 .\outfiles\main.o: .\DRIVER\PWM_IN_TIMER5\pwm_in_timer5.h
 .\outfiles\main.o: .\DRIVER\DRIVER_EEPROM\drvp_eeprom.h
 .\outfiles\main.o: .\DRIVER\DRIVER_EEPROM\drv_eeprom.h

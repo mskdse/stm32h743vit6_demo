@@ -128,7 +128,7 @@ void drvp_eeprom_prc_10ms(void)
         }
         break;
 
-        case EEPROM_STATE_IDLE:
+        case EEPROM_STATE_IDLE:break;
         default: break;
     }
 }

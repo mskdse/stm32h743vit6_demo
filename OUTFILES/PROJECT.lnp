@@ -130,6 +130,7 @@
 ".\outfiles\base_timer6.o"
 ".\outfiles\pwm_timer2.o"
 ".\outfiles\pwm_in_timer5.o"
+".\outfiles\pwm_timer1.o"
 ".\outfiles\drv_eeprom.o"
 ".\outfiles\drvp_eeprom.o"
 ".\outfiles\port.o"

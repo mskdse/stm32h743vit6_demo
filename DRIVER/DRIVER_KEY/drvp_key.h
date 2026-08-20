@@ -6,12 +6,12 @@
 
 typedef enum
 {
-    E_KEY_START,
-    E_KEY_0,
-    E_KEY_1,
-    E_KEY_2,
-    E_KEY_3,
-    E_KEY_COUNT=E_KEY_3
+	E_KEY_START,
+	E_KEY_1=E_KEY_START,
+	E_KEY_2,
+	E_KEY_3,
+	E_KEY_4,
+	E_KEY_COUNT
 }E_KEY_TYPE;
 
 typedef enum
