@@ -111,10 +111,12 @@
 .\outfiles\main.o: .\SEGGER_RTT\Config\SEGGER_RTT_Conf.h
 .\outfiles\main.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\outfiles\main.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\outfiles\main.o: C:\Users\EVC2-5\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.6.3\Include\EventRecorder.h
+.\outfiles\main.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\outfiles\main.o: .\DRIVER\DRIVER_LED\drvp_led.h
 .\outfiles\main.o: .\DRIVER\DRIVER_LED\drv_led.h
 .\outfiles\main.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\outfiles\main.o: .\MEM_MANGE\axi_mem_malloc.h
+.\outfiles\main.o: .\MEM_MANGE\sram_d2_malloc.h
 .\outfiles\main.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\outfiles\main.o: .\DRIVER\DRIVER_KEY\drvp_key.h
 .\outfiles\main.o: .\DRIVER\DRIVER_KEY\drv_key.h

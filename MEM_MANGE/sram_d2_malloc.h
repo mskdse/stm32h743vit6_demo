@@ -1,5 +1,5 @@
-#ifndef _AXI_MEM_MALLOC_H_
-#define _AXI_MEM_MALLOC_H_
+#ifndef _SRAM_D2_MALLOC_H_
+#define _SRAM_D2_MALLOC_H_
 
 #include <stdint.h>
 #include <string.h>
@@ -8,7 +8,7 @@
 /* ============ 内存池配置 ============ */
 #define ARRAY_MAX_SIZE         (20*1024)
 #define ARRAY_SIZE             (20*1024)
-#define ARRAY_ADDR_START       (0x24000000+0x00080000-ARRAY_SIZE)
+#define ARRAY_ADDR_START       (0x3003B000)
 
 /* 确保 4 字节对齐 */
 #if (ARRAY_ADDR_START%4!=0)
@@ -22,11 +22,11 @@
 
 /* ============ API 声明 ============ */
 
-void  axi_mem_init(void);
-void *axi_sram_malloc(uint32_t size);
-void  axi_sram_free(void *ptr);
+void  sram_d2_init(void);
+void *sram_d2_malloc(uint32_t size);
+void  sram_d2_free(void *ptr);
 
-uint32_t axi_mem_get_free_size(void);
-uint32_t axi_mem_get_alloc_count(void);
+uint32_t sram_d2_get_free_size(void);
+uint32_t sram_d2_get_alloc_count(void);
 
 #endif

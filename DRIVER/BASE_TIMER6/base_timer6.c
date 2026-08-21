@@ -1,7 +1,7 @@
 #include "base_timer6.h"
 
 static void (*timer6_callback)(void);
-static TIM_HandleTypeDef tim6_handle;
+__attribute__((section (".RAM_D2")))static TIM_HandleTypeDef tim6_handle;
 
 void base_timer6_init(uint16_t xms,void(*tim_calbk)(void))
 {

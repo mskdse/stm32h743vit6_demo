@@ -1,9 +1,14 @@
 #include "drv_eeprom.h"
 
-static I2C_HandleTypeDef  eepromi2c;
-volatile bool      eepromwendflag=false;
-volatile bool      eepromrendflag=false;
-volatile bool      eepromerrflag=false;
+__attribute__((section (".RAM_D2")))static I2C_HandleTypeDef  eepromi2c;
+__attribute__((section (".RAM_D2")))volatile bool      eepromwendflag=false;
+__attribute__((section (".RAM_D2")))volatile bool      eepromrendflag=false;
+__attribute__((section (".RAM_D2")))volatile bool      eepromerrflag=false;
+
+//static I2C_HandleTypeDef  eepromi2c;
+//volatile bool      eepromwendflag=false;
+//volatile bool      eepromrendflag=false;
+//volatile bool      eepromerrflag=false;
 
 void drv_eeprom_init(void)
 {

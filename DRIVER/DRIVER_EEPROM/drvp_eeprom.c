@@ -1,6 +1,7 @@
 #include "drvp_eeprom.h"
 
-static drvp_eeprom_type drvp_eeprom;
+__attribute__((section (".RAM_D2")))static drvp_eeprom_type drvp_eeprom;
+//static drvp_eeprom_type drvp_eeprom;
 
 typedef struct
 {

@@ -22,19 +22,32 @@ Dialog DLL:      TCM.DLL V1.56.6.0
  
 <h2>Project:</h2>
 C:\Users\EVC2-5\Desktop\stm32h743vit6_demo\PROJECT.uvprojx
-Project File Date:  08/15/2026
+Project File Date:  08/21/2026
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin'
 Build target 'PROJECT'
-compiling pwm_timer1.c...
 compiling main.c...
+USER\main.c(173): warning:  #177-D: function "MPU_Config"  was declared but never referenced
+  static void MPU_Config(void)
+USER\main.c: 1 warning, 0 errors
 linking...
-Program Size: Code=18106 RO-data=974 RW-data=20516 ZI-data=6468  
+.\OUTFILES\PROJECT.sct(31): warning: L6314W: No section matches pattern *(.RAM_D1).
+.\OUTFILES\PROJECT.sct(47): warning: L6314W: No section matches pattern *(.RAM_D2_EXTRA).
+.\OUTFILES\PROJECT.sct(52): warning: L6314W: No section matches pattern *(.RAM_D3).
+Program Size: Code=15100 RO-data=1008 RW-data=23420 ZI-data=5576  
+Finished: 0 information, 3 warning and 0 error messages.
 FromELF: creating hex file...
-".\OUTFILES\PROJECT.axf" - 0 Error(s), 0 Warning(s).
+".\OUTFILES\PROJECT.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.ARM_Compiler.1.6.3.pack
+                Keil::ARM_Compiler@1.6.3
+                Keil ARM Compiler extensions for ARM Compiler 5 and ARM Compiler 6
+   * Component: Event Recorder Variant: DAP Version: 1.4.0
+   * Component: STDOUT Variant: Breakpoint Version: 1.2.0
 
 Package Vendor: Keil
                 http://www.keil.com/pack/Keil.STM32H7xx_DFP.2.7.0.pack
@@ -42,9 +55,20 @@ Package Vendor: Keil
                 STMicroelectronics STM32H7 Series Device Support and Examples
 
 <h2>Collection of Component include folders:</h2>
+  ./RTE/Compiler
+  ./RTE/_PROJECT
+  C:/Users/EVC2-5/AppData/Local/Arm/Packs/Keil/ARM_Compiler/1.6.3/Include
   C:/Users/EVC2-5/AppData/Local/Arm/Packs/Keil/STM32H7xx_DFP/2.7.0/Drivers/CMSIS/Device/ST/STM32H7xx/Include
 
 <h2>Collection of Component Files used:</h2>
+
+   * Component: Keil::Compiler&ARM Compiler:Event Recorder&DAP@1.4.0
+      Source file:   Source/EventRecorder.c
+      Include file:  Include/EventRecorder.h
+      Include file:  Config/EventRecorderConf.h
+
+   * Component: Keil::Compiler&ARM Compiler:I/O:STDOUT&Breakpoint@1.2.0
+      Source file:   Source/retarget_io.c
 Build Time Elapsed:  00:00:30
 </pre>
 </body>

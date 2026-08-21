@@ -1,7 +1,9 @@
 #include "stm32h7xx.h"
 #include "SEGGER_RTT.h"
+#include "EventRecorder.h"
+#include <stdio.h>
 #include "drvp_led.h"
-#include "axi_mem_malloc.h"
+#include "sram_d2_malloc.h"
 #include "drvp_key.h"
 #include "base_timer6.h"
 #include "pwm_timer2.h"
@@ -14,20 +16,37 @@ static void Error_Handler(void);
 static void MPU_Config(void);
 static void CPU_CACHE_Enable(void);
 
+/* 数组表格定义在 .RAM_RESET_VCTOR 段，这段空间用来存储中断向量表，不得再其他地方再定义这个节区 */
+__attribute__((section(".RamVecTable")))static uint8_t RAM_VCTOR_TABLE[0x400];
+
 int main(void)
 {
-    MPU_Config();//配置MPU内存保护单元
+	/* 将中断向量表从FLASH的首地址拷贝到DTCM中然后设置中断向量表的偏移为DTCM首地址也就是数组地址 */
+	uint32_t *SouceAddr = (uint32_t *)FLASH_BANK1_BASE;
+	uint32_t *DestAddr  = (uint32_t *)RAM_VCTOR_TABLE;
+	memcpy(DestAddr, SouceAddr, 0x400);
+	SCB->VTOR = (uint32_t)RAM_VCTOR_TABLE;
+	
+	SEGGER_RTT_Init();//初始化RTT调试
+	EventRecorderInitialize(EventRecordAll, 1U);//初始化EventRecoder组件
+  EventRecorderStart();//组件Start运行
+	
+  //MPU_Config();//配置MPU内存保护单元
 	CPU_CACHE_Enable();//开启Cache
 	HAL_Init();//HAL库的初始化
 	SystemClock_Config();//配置系统时钟为400MHZ
 	
-	SEGGER_RTT_Init();//初始化RTT调试
-	axi_mem_init();//初始化内存管理	
+	sram_d2_init();//初始化D2域的SRAM2的最后的20KB的内存管理，用于我们动态使用	
 	drvp_led_init();//初始化led
   drvp_key_init();//初始化key
-	drvp_eeprom_init();//初始化eeprom
+	//drvp_eeprom_init();//初始化eeprom
 	for(;;)
 	{
+		uint16_t keyevt=drvp_key_rfifo();
+		if(keyevt!=KEY_EVENT_ERROR) SEGGER_RTT_printf(0,"key=%d,evt=%d\r\n",(keyevt>>8)&0xff,keyevt&0xff);
+		uint16_t a=10;
+		a++;
+		a--;
 	}
 }
 
@@ -122,7 +141,12 @@ static void SystemClock_Config(void)
   __HAL_RCC_CSI_ENABLE() ;
   
   __HAL_RCC_SYSCFG_CLK_ENABLE() ;
-  
+	
+	/* AXI-SRAM和SRAM4这些在时钟树手册里面是隐式使能的，所以其他的SRAM1/2/3需要我们手动使能 */
+	__HAL_RCC_D2SRAM1_CLK_ENABLE();
+	__HAL_RCC_D2SRAM2_CLK_ENABLE();
+	__HAL_RCC_D2SRAM3_CLK_ENABLE();
+	
   HAL_EnableCompensationCell();
 }
 
@@ -191,10 +215,11 @@ static void CPU_CACHE_Enable(void)
   * @param  None
   * @retval None
   */
-void SysTick_Handler(void)
+__attribute__((section(".ITCM_CODE"), used))void SysTick_Handler(void)
+//void SysTick_Handler(void)
 {
   static uint8_t keycnt=0;
-  static uint8_t eepromcnt=0;
+  //static uint8_t eepromcnt=0;
   
 	HAL_IncTick();
 	
@@ -206,9 +231,9 @@ void SysTick_Handler(void)
     drvp_key_prc_10ms();
   }
 	
-	if(++eepromcnt>=10)
-  {
-    eepromcnt=0;
-    drvp_eeprom_prc_10ms();
-  }
+//	if(++eepromcnt>=10)
+//  {
+//    eepromcnt=0;
+//    drvp_eeprom_prc_10ms();
+//  }
 }

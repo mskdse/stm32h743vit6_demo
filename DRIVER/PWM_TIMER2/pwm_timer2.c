@@ -1,8 +1,8 @@
 #include "pwm_timer2.h"
 
-TIM_HandleTypeDef   tim2_handle;
-static TIM_OC_InitTypeDef  oc_cfg;
-static uint16_t            timperiod;
+__attribute__((section (".RAM_D2")))TIM_HandleTypeDef   tim2_handle;
+__attribute__((section (".RAM_D2")))static TIM_OC_InitTypeDef  oc_cfg;
+__attribute__((section (".RAM_D2")))static uint16_t            timperiod;
 
 /* timer2 ch2-----PA1--->pwm */
 

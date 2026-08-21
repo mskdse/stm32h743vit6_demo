@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "axi_mem_malloc.h"
+#include "sram_d2_malloc.h"
 
 
 /**
@@ -72,7 +72,7 @@ bool circular_buffer_init(circular_buffer *cb, size_t size)
     cb->size = size;                       // 设置缓冲区大小
     cb->start = 0;                         // 初始化起始位置为0
     cb->end = 0;                           // 初始化结束位置为0
-    cb->buffer = (char *)axi_sram_malloc(cb->size); // 分配缓冲区空间
+    cb->buffer = (char *)sram_d2_malloc(cb->size); // 分配缓冲区空间
     if (cb->buffer == NULL)
     {
         return false;                      // 分配失败返回false
@@ -81,7 +81,7 @@ bool circular_buffer_init(circular_buffer *cb, size_t size)
     // 初始化互斥锁，防止多线程竞争
     if (!mutex_init(&cb->mutex))
     {                     // 初始化互斥锁
-        axi_sram_free(cb->buffer); // 若互斥锁初始化失败，释放已分配的内存
+        sram_d2_free(cb->buffer); // 若互斥锁初始化失败，释放已分配的内存
         return false;     // 互斥锁初始化失败返回false
     }
     return true;          // 成功初始化缓冲区
@@ -96,7 +96,7 @@ void circular_buffer_free(circular_buffer *cb)
 {
     if (cb->buffer)
     {
-        axi_sram_free(cb->buffer);      // 释放缓冲区内存
+        sram_d2_free(cb->buffer);      // 释放缓冲区内存
         cb->buffer = NULL;     // 将指针置空，避免野指针
     }
     mutex_destroy(&cb->mutex); // 销毁互斥锁

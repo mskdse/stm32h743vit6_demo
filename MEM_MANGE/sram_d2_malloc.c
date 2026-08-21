@@ -1,4 +1,4 @@
-#include "axi_mem_malloc.h"
+#include "sram_d2_malloc.h"
 
 /* ================================================================
  *  空闲链表 + 首次适应 内存管理
@@ -51,18 +51,16 @@ static inline uint32_t      blk_raw_size(mem_block_header_t *b)
 }
 
 /* ---------- 静态全局控制器实例 ---------- */
-static axi_mem_ctl_t mem_ctl;
+__attribute__((section (".RAM_D2")))static axi_mem_ctl_t mem_ctl;
 
 /* ---------- 分散加载定义的 AXI SRAM 内存池 ---------- */
-__attribute__((section(".bss.AXI_LAST"),used))
-__attribute__((aligned(4)))
-static uint8_t AXI_SRAM[ARRAY_SIZE];
+__attribute__((section (".RAM_MALLOC")))static uint8_t AXI_SRAM[ARRAY_SIZE];
 
 /* ================================================================
  *                          API 实现
  * ================================================================ */
 
-void axi_mem_init(void)
+void sram_d2_init(void)
 {
     mem_block_header_t *first;
 
@@ -85,7 +83,7 @@ void axi_mem_init(void)
  *   size : 请求字节数（内部对齐到 4 的倍数）
  *   返回 : 指向用户数据区的指针（头部之后），失败返回 NULL
  * ---------------------------------------------------------------- */
-void *axi_sram_malloc(uint32_t size)
+void *sram_d2_malloc(uint32_t size)
 {
     uint32_t need;
     uint32_t blk_size;
@@ -156,9 +154,9 @@ void *axi_sram_malloc(uint32_t size)
 
 /* ----------------------------------------------------------------
  *  释放：回收到空闲链表 + 前后向合并
- *   ptr : axi_sram_malloc 返回的指针
+ *   ptr : sram_d2_malloc 返回的指针
  * ---------------------------------------------------------------- */
-void axi_sram_free(void *ptr)
+void sram_d2_free(void *ptr)
 {
     mem_block_header_t *blk;
     mem_block_header_t *prev;
@@ -231,12 +229,12 @@ void axi_sram_free(void *ptr)
 /* ----------------------------------------------------------------
  *  查询接口
  * ---------------------------------------------------------------- */
-uint32_t axi_mem_get_free_size(void)
+uint32_t sram_d2_get_free_size(void)
 {
     return mem_ctl.free_size;
 }
 
-uint32_t axi_mem_get_alloc_count(void)
+uint32_t sram_d2_get_alloc_count(void)
 {
     return mem_ctl.alloc_count;
 }

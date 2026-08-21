@@ -50,7 +50,7 @@ const static drv_key_type drv_key=
     .readmask=drv_key_readmask
 };
 
-static drvp_key_type drvp_key;
+__attribute__((section (".RAM_D2")))static drvp_key_type drvp_key;
 
 static void drvp_key_wfifo(E_KEY_TYPE key, E_EVENT_TYPE event)
 {

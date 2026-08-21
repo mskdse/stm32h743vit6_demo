@@ -1,6 +1,6 @@
 #include "pwm_in_timer5.h" 
 
-TIM_HandleTypeDef tim5_handle; 
+__attribute__((section (".RAM_D2")))TIM_HandleTypeDef tim5_handle; 
 
 void pwm_in_timer5_init(void) 
 { 

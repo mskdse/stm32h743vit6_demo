@@ -1,8 +1,8 @@
 #include "pwm_timer1.h"
 
-TIM_HandleTypeDef          tim1_handle;
-static TIM_OC_InitTypeDef  oc_cfg;
-static uint16_t            timperiod;
+__attribute__((section (".RAM_D2")))TIM_HandleTypeDef          tim1_handle;
+__attribute__((section (".RAM_D2")))static TIM_OC_InitTypeDef  oc_cfg;
+__attribute__((section (".RAM_D2")))static uint16_t            timperiod;
 
 #ifdef USE_DEMO1
 /* timer1 ch1-----PE9--->pwm 生成有限个数的pwm，生成结束之后关闭，原理是高级定时器的重复计数器功能 */ 

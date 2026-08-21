@@ -120,7 +120,6 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name>?fw佴	w?</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -163,7 +162,7 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>arr</ItemText>
+          <ItemText>RAM_VCTOR_TABLE</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>
@@ -174,6 +173,11 @@
           <AccSizeX>0</AccSizeX>
         </Mm>
       </MemoryWindow1>
+      <ScvdPack>
+        <Filename>C:\Users\EVC2-5\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.6.3\EventRecorder.scvd</Filename>
+        <Type>Keil::ARM_Compiler@1.6.3</Type>
+        <SubType>1</SubType>
+      </ScvdPack>
       <Tracepoint>
         <THDelay>0</THDelay>
       </Tracepoint>
@@ -197,7 +201,7 @@
         <aLa>0</aLa>
         <aPa1>0</aPa1>
         <AscS4>0</AscS4>
-        <aSer4>0</aSer4>
+        <aSer4>1</aSer4>
         <StkLoc>1</StkLoc>
         <TrcWin>0</TrcWin>
         <newCpu>0</newCpu>
@@ -1944,7 +1948,7 @@
 
   <Group>
     <GroupName>MEM_MANGE</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1955,8 +1959,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\MEM_MANGE\axi_mem_malloc.c</PathWithFileName>
-      <FilenameWithoutPath>axi_mem_malloc.c</FilenameWithoutPath>
+      <PathWithFileName>.\MEM_MANGE\sram_d2_malloc.c</PathWithFileName>
+      <FilenameWithoutPath>sram_d2_malloc.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2056,6 +2060,14 @@
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
+  </Group>
+
+  <Group>
+    <GroupName>::Compiler</GroupName>
+    <tvExp>0</tvExp>
+    <tvExpOptDlg>0</tvExpOptDlg>
+    <cbSel>0</cbSel>
+    <RteFlg>1</RteFlg>
   </Group>
 
 </ProjectOpt>

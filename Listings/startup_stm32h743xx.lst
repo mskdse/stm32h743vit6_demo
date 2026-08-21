@@ -1268,11 +1268,13 @@ ARM Macro Assembler    Page 20
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M7.fp.dp --apcs=
 interwork --depend=.\outfiles\startup_stm32h743xx.d -o.\outfiles\startup_stm32h
-743xx.o -IC:\Users\EVC2-5\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\2.7.0\Driv
-ers\CMSIS\Device\ST\STM32H7xx\Include --predefine="__MICROLIB SETA 1" --predefi
-ne="__UVISION_VERSION SETA 543" --predefine="STM32H743xx SETA 1" --list=.\listi
-ngs\startup_stm32h743xx.lst STM32Cube_FW_H7_V1.12.0\Drivers\CMSIS\Device\ST\STM
-32H7xx\Source\Templates\arm\startup_stm32h743xx.s
+743xx.o -I.\RTE\Compiler -I.\RTE\_PROJECT -IC:\Users\EVC2-5\AppData\Local\Arm\P
+acks\Keil\ARM_Compiler\1.6.3\Include -IC:\Users\EVC2-5\AppData\Local\Arm\Packs\
+Keil\STM32H7xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include --predefine=
+"__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 543" --predefine="STM32
+H743xx SETA 1" --predefine="_RTE_ SETA 1" --list=.\listings\startup_stm32h743xx
+.lst STM32Cube_FW_H7_V1.12.0\Drivers\CMSIS\Device\ST\STM32H7xx\Source\Templates
+\arm\startup_stm32h743xx.s
 
 
 
@@ -3464,4 +3466,4 @@ H7xx\Source\Templates\arm\startup_stm32h743xx.s
 H7xx\Source\Templates\arm\startup_stm32h743xx.s
 Comment: __main used once
 3 symbols
-503 symbols in table
+504 symbols in table

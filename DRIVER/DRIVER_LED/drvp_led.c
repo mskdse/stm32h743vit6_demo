@@ -24,7 +24,7 @@ const static drv_led_type drv_led=
   .off=drv_led_off
 };
 
-static drvp_led_type drvp_led[E_LED_COUNT];
+__attribute__((section (".RAM_D2")))static drvp_led_type drvp_led[E_LED_COUNT];
 
 void drvp_led_init(void)
 {
