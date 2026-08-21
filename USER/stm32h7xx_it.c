@@ -56,12 +56,50 @@ void NMI_Handler(void)
   * @param  None
   * @retval None
   */
-void MemManage_Handler(void)
+extern void MemManage_Handler_C(uint32_t *stack);
+__asm void MemManage_Handler(void)
 {
-  /* Go to infinite loop when Memory Manage exception occurs */
-  while (1)
-  {
-  }
+    IMPORT MemManage_Handler_C
+
+    TST     LR, #4
+    ITE     EQ
+    MRSEQ   R0, MSP
+    MRSNE   R0, PSP
+    B       MemManage_Handler_C
+}
+void MemManage_Handler_C(uint32_t *stack)
+{
+    volatile uint32_t r0;
+    volatile uint32_t r1;
+    volatile uint32_t r2;
+    volatile uint32_t r3;
+    volatile uint32_t r12;
+    volatile uint32_t lr;
+    volatile uint32_t pc;
+    volatile uint32_t psr;
+
+    volatile uint32_t cfsr;
+    volatile uint32_t hfsr;
+    volatile uint32_t mmfar;
+    volatile uint32_t bfar;
+
+    r0  = stack[0];
+    r1  = stack[1];
+    r2  = stack[2];
+    r3  = stack[3];
+    r12 = stack[4];
+    lr  = stack[5];
+    pc  = stack[6];
+    psr = stack[7];
+
+    cfsr  = SCB->CFSR;
+    hfsr  = SCB->HFSR;
+    mmfar = SCB->MMFAR;
+    bfar  = SCB->BFAR;
+
+    while(1)
+    {
+    }
 }
 
 /**

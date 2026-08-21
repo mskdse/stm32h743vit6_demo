@@ -127,7 +127,6 @@
 ".\outfiles\drvp_led.o"
 ".\outfiles\drv_key.o"
 ".\outfiles\drvp_key.o"
-".\outfiles\base_timer6.o"
 ".\outfiles\pwm_timer2.o"
 ".\outfiles\pwm_in_timer5.o"
 ".\outfiles\pwm_timer1.o"

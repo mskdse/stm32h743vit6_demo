@@ -1,14 +1,17 @@
 #include "drv_eeprom.h"
+#include <string.h>
 
 __attribute__((section (".RAM_D2")))static I2C_HandleTypeDef  eepromi2c;
+/* 涉及到HAL句柄(尤其是有回调函数)必须先memset清空为默认态，DeInit或者调用默认值赋值函数都不行。
+   因为HAL的句柄有可能涉及到if判断，如果我的这个变量本身参数就没有初始为默认值
+	 或者0，那么初始化函数里面判断不通过会少赋值，导致比如说回调函数未注册然后PC
+	 指针跳转错误的一系列问题。
+*/
+
+
 __attribute__((section (".RAM_D2")))volatile bool      eepromwendflag=false;
 __attribute__((section (".RAM_D2")))volatile bool      eepromrendflag=false;
 __attribute__((section (".RAM_D2")))volatile bool      eepromerrflag=false;
-
-//static I2C_HandleTypeDef  eepromi2c;
-//volatile bool      eepromwendflag=false;
-//volatile bool      eepromrendflag=false;
-//volatile bool      eepromerrflag=false;
 
 void drv_eeprom_init(void)
 {
@@ -22,7 +25,8 @@ void drv_eeprom_init(void)
 	gpio_cfg.Pull=GPIO_PULLUP;
 	gpio_cfg.Speed=GPIO_SPEED_FREQ_HIGH;
 	HAL_GPIO_Init(GPIOB,&gpio_cfg);
-
+  
+	 memset(&eepromi2c,0,sizeof(I2C_HandleTypeDef));
 	 eepromi2c.Instance=I2C2;
 	 eepromi2c.Init.AddressingMode=I2C_ADDRESSINGMODE_7BIT;
 	 eepromi2c.Init.DualAddressMode=I2C_DUALADDRESS_DISABLE;

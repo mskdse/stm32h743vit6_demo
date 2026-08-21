@@ -1,4 +1,5 @@
 #include "pwm_timer2.h"
+#include <string.h>
 
 __attribute__((section (".RAM_D2")))TIM_HandleTypeDef   tim2_handle;
 __attribute__((section (".RAM_D2")))static TIM_OC_InitTypeDef  oc_cfg;
@@ -21,6 +22,7 @@ void pwm_timer2_init(uint16_t xms,uint8_t paluse)
 	gpio_cfg.Speed=GPIO_SPEED_FREQ_HIGH;
 	HAL_GPIO_Init(GPIOA,&gpio_cfg);
 	
+	memset(&tim2_handle,0,sizeof(TIM_HandleTypeDef));
 	tim2_handle.Instance=TIM2;
 	tim2_handle.Init.AutoReloadPreload=TIM_AUTORELOAD_PRELOAD_DISABLE;
 	tim2_handle.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;

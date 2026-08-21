@@ -1,4 +1,5 @@
 #include "pwm_timer1.h"
+#include <string.h>
 
 __attribute__((section (".RAM_D2")))TIM_HandleTypeDef          tim1_handle;
 __attribute__((section (".RAM_D2")))static TIM_OC_InitTypeDef  oc_cfg;
@@ -21,6 +22,7 @@ void pwm_timer1_init(uint16_t xms,uint8_t paluse,uint8_t count)
 	gpio_cfg.Speed=GPIO_SPEED_FREQ_HIGH;
 	HAL_GPIO_Init(GPIOE,&gpio_cfg);
 	
+	memset(&tim1_handle,0,sizeof(TIM_HandleTypeDef));
 	tim1_handle.Instance=TIM1;
 	tim1_handle.Init.AutoReloadPreload=TIM_AUTORELOAD_PRELOAD_DISABLE;
 	tim1_handle.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;
@@ -88,6 +90,7 @@ void pwm_timer1_init(uint16_t xms,uint8_t paluse)
 	gpio_cfg.Speed=GPIO_SPEED_FREQ_HIGH;
 	HAL_GPIO_Init(GPIOE,&gpio_cfg);
 	
+  memset(&tim1_handle,0,sizeof(TIM_HandleTypeDef));
 	tim1_handle.Instance=TIM1;
 	tim1_handle.Init.AutoReloadPreload=TIM_AUTORELOAD_PRELOAD_DISABLE;
 	tim1_handle.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;
@@ -140,6 +143,7 @@ void pwm_timer1_init(uint16_t xms,uint8_t paluse)
 	gpio_cfg.Pin=GPIO_PIN_15;
 	HAL_GPIO_Init(GPIOE,&gpio_cfg);
 	
+	memset(&tim1_handle,0,sizeof(TIM_HandleTypeDef));
 	tim1_handle.Instance=TIM1;
 	tim1_handle.Init.AutoReloadPreload=TIM_AUTORELOAD_PRELOAD_DISABLE;
 	tim1_handle.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;

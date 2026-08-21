@@ -1,4 +1,5 @@
 #include "pwm_in_timer5.h" 
+#include <string.h>
 
 __attribute__((section (".RAM_D2")))TIM_HandleTypeDef tim5_handle; 
 
@@ -14,7 +15,8 @@ void pwm_in_timer5_init(void)
 		gpio_cfg.Pull=GPIO_PULLUP; 
 		gpio_cfg.Speed=GPIO_SPEED_FREQ_HIGH; 
 		HAL_GPIO_Init(GPIOA,&gpio_cfg); 
-	
+	  
+	  memset(&tim5_handle,0,sizeof(TIM_HandleTypeDef));
 	  tim5_handle.Instance=TIM5;
 		tim5_handle.Init.AutoReloadPreload=TIM_AUTORELOAD_PRELOAD_DISABLE;
 		tim5_handle.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;

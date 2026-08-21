@@ -5,7 +5,7 @@
 #include "drvp_led.h"
 #include "sram_d2_malloc.h"
 #include "drvp_key.h"
-#include "base_timer6.h"
+//#include "base_timer6.h"
 #include "pwm_timer2.h"
 #include "pwm_timer1.h"
 #include "pwm_in_timer5.h"
@@ -31,7 +31,7 @@ int main(void)
 	EventRecorderInitialize(EventRecordAll, 1U);//初始化EventRecoder组件
   EventRecorderStart();//组件Start运行
 	
-  //MPU_Config();//配置MPU内存保护单元
+  MPU_Config();//配置MPU内存保护单元
 	CPU_CACHE_Enable();//开启Cache
 	HAL_Init();//HAL库的初始化
 	SystemClock_Config();//配置系统时钟为400MHZ
@@ -39,14 +39,11 @@ int main(void)
 	sram_d2_init();//初始化D2域的SRAM2的最后的20KB的内存管理，用于我们动态使用	
 	drvp_led_init();//初始化led
   drvp_key_init();//初始化key
-	//drvp_eeprom_init();//初始化eeprom
+	drvp_eeprom_init();//初始化eeprom
 	for(;;)
 	{
-		uint16_t keyevt=drvp_key_rfifo();
-		if(keyevt!=KEY_EVENT_ERROR) SEGGER_RTT_printf(0,"key=%d,evt=%d\r\n",(keyevt>>8)&0xff,keyevt&0xff);
-		uint16_t a=10;
-		a++;
-		a--;
+		uint16_t evt=drvp_key_rfifo();
+		if(evt!=KEY_EVENT_ERROR) SEGGER_RTT_printf(0,"key=%d,evt=%d\r\n",(evt>>8)&0xff,evt&0xff);
 	}
 }
 
@@ -216,10 +213,9 @@ static void CPU_CACHE_Enable(void)
   * @retval None
   */
 __attribute__((section(".ITCM_CODE"), used))void SysTick_Handler(void)
-//void SysTick_Handler(void)
 {
   static uint8_t keycnt=0;
-  //static uint8_t eepromcnt=0;
+  static uint8_t eepromcnt=0;
   
 	HAL_IncTick();
 	
@@ -231,9 +227,9 @@ __attribute__((section(".ITCM_CODE"), used))void SysTick_Handler(void)
     drvp_key_prc_10ms();
   }
 	
-//	if(++eepromcnt>=10)
-//  {
-//    eepromcnt=0;
-//    drvp_eeprom_prc_10ms();
-//  }
+	if(++eepromcnt>=10)
+  {
+    eepromcnt=0;
+    drvp_eeprom_prc_10ms();
+  }
 }

@@ -1,4 +1,5 @@
 #include "base_timer6.h"
+#include <string.h>
 
 static void (*timer6_callback)(void);
 __attribute__((section (".RAM_D2")))static TIM_HandleTypeDef tim6_handle;
@@ -7,6 +8,7 @@ void base_timer6_init(uint16_t xms,void(*tim_calbk)(void))
 {
 	__HAL_RCC_TIM6_CLK_ENABLE();
 	
+	memset(&tim6_handle,0,sizeof(TIM_HandleTypeDef));
 	tim6_handle.Instance=TIM6;
 	tim6_handle.Init.AutoReloadPreload=TIM_AUTORELOAD_PRELOAD_DISABLE;
 	tim6_handle.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;
