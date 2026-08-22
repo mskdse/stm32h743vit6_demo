@@ -10,6 +10,7 @@
 #include "pwm_timer1.h"
 #include "pwm_in_timer5.h"
 #include "drvp_eeprom.h"
+#include "qspi_flash.h"
 
 static void SystemClock_Config(void);
 static void Error_Handler(void);
@@ -40,6 +41,7 @@ int main(void)
 	drvp_led_init();//初始化led
   drvp_key_init();//初始化key
 	drvp_eeprom_init();//初始化eeprom
+	qspi_flash_w25q128_init();//初始化QSPI-FLASH
 	for(;;)
 	{
 		uint16_t evt=drvp_key_rfifo();
