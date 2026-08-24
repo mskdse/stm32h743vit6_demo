@@ -10,12 +10,13 @@
 #include "pwm_timer1.h"
 #include "pwm_in_timer5.h"
 #include "drvp_eeprom.h"
-#include "qspi_flash.h"
+#include "ff.h"
 
 static void SystemClock_Config(void);
 static void Error_Handler(void);
 static void MPU_Config(void);
 static void CPU_CACHE_Enable(void);
+static void FATFS_Init(uint8_t dev,bool ismount);
 
 /* 数组表格定义在 .RAM_RESET_VCTOR 段，这段空间用来存储中断向量表，不得再其他地方再定义这个节区 */
 __attribute__((section(".RamVecTable")))static uint8_t RAM_VCTOR_TABLE[0x400];
@@ -41,11 +42,8 @@ int main(void)
 	drvp_led_init();//初始化led
   drvp_key_init();//初始化key
 	drvp_eeprom_init();//初始化eeprom
-	qspi_flash_w25q128_init();//初始化QSPI-FLASH
-	uint32_t Did=0;
-	Did=qspi_flash_w25q128_read_id();
-	SEGGER_RTT_printf(0,"DEVICE=0x%x\r\n",Did);
-	qspi_flash_erase_sector(0);
+	
+	FATFS_Init(0,1);//初始化文件系统
 	for(;;)
 	{
 		uint16_t evt=drvp_key_rfifo();
@@ -238,4 +236,78 @@ __attribute__((section(".ITCM_CODE"), used))void SysTick_Handler(void)
     eepromcnt=0;
     drvp_eeprom_prc_10ms();
   }
+}
+
+/* 文件系统初始化函数 */
+#define NOT_FILE_SYS     0  //一开始没有文件系统，可以打开宏定义开关来创建一下
+__attribute__((section (".RAM_D2"))) FATFS   fs;
+__attribute__((section (".RAM_D2"))) FIL     file;
+__attribute__((section (".RAM_D2"))) FRESULT res;
+static void FATFS_Init(uint8_t dev,bool ismount)
+{
+    char volume[4];        // "0:" + '\0'，足够支持 0~9
+    char filepath[32];
+
+    memset(&fs,0,sizeof(FATFS));
+    memset(&file,0,sizeof(FIL));
+    memset(&res,0,sizeof(FRESULT));
+    snprintf(volume,sizeof(volume),"%u:",dev);
+	
+#if NOT_FILE_SYS
+    /* ==================== 1. 创建卷 ==================== */
+    MKFS_PARM opt =
+    {
+        .fmt     = FM_FAT,
+        .n_fat   = 1,
+        .align   = 0,
+        .n_root  = 0,
+        .au_size = 0
+    };
+    BYTE *work = (BYTE *)sram_d2_malloc(FF_MAX_SS * 2);
+    res = f_mkfs(volume, &opt, work, FF_MAX_SS * 2);
+    SEGGER_RTT_printf(0,"f_mkfs %s res: %d\r\n",volume,res);
+    sram_d2_free(work);
+    work = NULL;
+    /* ==================== 2. 挂载文件系统 ==================== */
+    res = f_mount(&fs, volume, 1);
+    SEGGER_RTT_printf(0,"f_mount %s res: %d\r\n",volume,res);
+    /* ==================== 3. 创建文件 ==================== */
+    snprintf(filepath,sizeof(filepath),"%shello.txt",volume);
+    res = f_open(&file,filepath,FA_CREATE_ALWAYS | FA_WRITE);
+    SEGGER_RTT_printf(0,"f_open %s res: %d\r\n",filepath,res);
+    /* ==================== 4. 写入数据 ==================== */
+    char text[] = "hello world";
+    UINT bytes_written = 0;
+    res = f_write(&file,text,strlen(text),&bytes_written);
+    SEGGER_RTT_printf(0,"f_write res: %d, len: %u\r\n",res,bytes_written);
+    /* ==================== 5. 关闭文件 ==================== */
+    res = f_close(&file);
+    SEGGER_RTT_printf(0,"f_close res: %d\r\n",res);
+    /* ==================== 6. 重新打开文件 ==================== */
+    res = f_open(&file,filepath,FA_READ);
+    SEGGER_RTT_printf(0,"f_open %s res: %d\r\n",filepath,res);
+    /* ==================== 7. 读取文件 ==================== */
+    char read_buf[32] = {0};
+    UINT bytes_read = 0;
+    res = f_read(&file,read_buf,sizeof(read_buf) - 1,&bytes_read);
+    SEGGER_RTT_printf(0,"f_read res: %d, len: %u\r\n",res,bytes_read);
+    if (res == FR_OK && bytes_read > 0)
+    {
+        read_buf[bytes_read] = '\0';
+        SEGGER_RTT_printf(0,"read data: [%s]\r\n",read_buf);
+    }
+    /* ==================== 8. 关闭文件 ==================== */
+    res = f_close(&file);
+    SEGGER_RTT_printf(0,"f_close res: %d\r\n",res);
+    /* ==================== 9. 删除文件 ==================== */
+    res = f_unlink(filepath);
+    SEGGER_RTT_printf(0,"f_unlink %s res: %d\r\n",filepath,res);
+    /* ==================== 10. 取消挂载 ==================== */
+    res = f_mount(&fs, volume, 0);
+    SEGGER_RTT_printf(0,"f_unmount %s res: %d\r\n",volume,res);
+#else
+    /* ==================== 挂载/取消挂载 ==================== */
+    res = f_mount(ismount ? &fs : NULL,volume,ismount ? 1 : 0);
+    SEGGER_RTT_printf(0,"%s %s res: %d\r\n",ismount ? "f_mount" : "f_unmount",volume,res);
+#endif
 }

@@ -63,11 +63,12 @@ static void qspi_flash_w25q128_wStateReg(uint8_t wcmd,uint8_t val,uint8_t useqsp
 }
 
 /* 等待状态寄存器函数 */
-static void qspi_flash_w25q128_waitStateReg(uint8_t wcmd,uint8_t match,uint8_t mask,uint8_t useqspi)
+static bool qspi_flash_w25q128_waitStateReg(uint8_t wcmd,uint8_t match,uint8_t mask,uint8_t useqspi)
 {
 	/* 轮询状态寄存器1，确保它的第一位WEL为1，第0位BUSY为0 */
 	QSPI_AutoPollingTypeDef  autocfg;
 	QSPI_CommandTypeDef      cmd;
+	HAL_StatusTypeDef        ret;
 	while(HAL_QSPI_STATE_BUSY==HAL_QSPI_GetState(&qspi_handle));//BUSY状态下无法写寄存器
 	cmd.Instruction=wcmd;//指定读哪个状态寄存器
 	cmd.Address=0;//没地址阶段，随便给
@@ -91,7 +92,15 @@ static void qspi_flash_w25q128_waitStateReg(uint8_t wcmd,uint8_t match,uint8_t m
 	autocfg.StatusBytesSize=1;//读取一个字节即状态寄存器1
 	autocfg.MatchMode=QSPI_MATCH_MODE_AND;//与逻辑
 	autocfg.AutomaticStop=QSPI_AUTOMATIC_STOP_ENABLE;//匹配成功停止轮询
-	HAL_QSPI_AutoPolling(&qspi_handle,&cmd,&autocfg,HAL_MAX_DELAY);
+	ret=HAL_QSPI_AutoPolling(&qspi_handle,&cmd,&autocfg,100);
+	if(HAL_OK!=ret)
+	{
+		HAL_QSPI_Abort(&qspi_handle);
+		HAL_QSPI_DeInit(&qspi_handle);
+		HAL_QSPI_Init(&qspi_handle);
+		return false;
+	}
+	return true;
 }
 
 /* QSPI-W25Q128初始化 */
@@ -106,7 +115,7 @@ void qspi_flash_w25q128_init(void)
 	
 	GPIO_InitTypeDef gpio_cfg;
 	gpio_cfg.Mode=GPIO_MODE_AF_PP;
-	gpio_cfg.Pull=GPIO_PULLUP;
+	gpio_cfg.Pull=GPIO_NOPULL;
 	gpio_cfg.Speed=GPIO_SPEED_FREQ_VERY_HIGH;
 	
 	gpio_cfg.Alternate=GPIO_AF10_QUADSPI;
@@ -165,13 +174,10 @@ void qspi_flash_w25q128_init(void)
 static void qspi_flash_w25q128_wEnable(uint8_t useqspi)
 {
 	qspi_flash_w25q128_wcmd(0x06,useqspi);//发送写使能命令
-	
-	/* 轮询状态寄存器1，期待它的第一位WEL为1，第0位BUSY为0 */
-	qspi_flash_w25q128_waitStateReg(0x05,0x02,0x03,useqspi);
 }
 
 /* 写失能命令 */
-static void qspi_flash_w25q128_wDisable(uint8_t useqspi)
+__attribute__((unused))static void qspi_flash_w25q128_wDisable(uint8_t useqspi)
 {
 	qspi_flash_w25q128_wcmd(0x04,useqspi);
 }
@@ -179,19 +185,21 @@ static void qspi_flash_w25q128_wDisable(uint8_t useqspi)
 /* 进入QSPI模式命令 */
 static void qspi_flash_w25q128_enterQSPIMODE(void)
 {
-/* 如果初次使用该器件，我还没有让它进入QSPI模式那就执行下面的序列 */
-#if NOT_ENTER_QSPI_MODE
-		/* 先将状态寄存器2的第一位设置为1使用QE使能 */
+	/* 退出QSPI模式,等待QE位为0 */
+	qspi_flash_w25q128_wcmd(0xFF,1);
+	while(!qspi_flash_w25q128_waitStateReg(0x35,0x00,0x02,1));
+	
+	/* 先将状态寄存器2的第一位设置为1使用QE使能 */
 	qspi_flash_w25q128_wEnable(0);
-	qspi_flash_w25q128_wStateReg(0x31,0x02,0);//使能QE位,QE位是一个非易失位，所以只需一次即可
-	qspi_flash_w25q128_wDisable(0);
+	qspi_flash_w25q128_wStateReg(0x31,0x02,0);//使能QE位
 	
 	/* 轮询状态寄存器2，确保它的第一位QE位为1 */
-	qspi_flash_w25q128_waitStateReg(0x35,0x02,0x02,0);
+	while(!qspi_flash_w25q128_waitStateReg(0x35,0x02,0x02,0));
+	
+	HAL_Delay(1000);//等待FLASH稳定
 	
 	/* 最后使用进入QSPI模式命令 */
 	qspi_flash_w25q128_wcmd(0x38,0);
-#endif
 }
 
 /* 读取ID测试，这个函数采用QSPI模式，我需要9Fh命令这个支持QSPI模式而且一次性读取8位MID,16位ID */ 
@@ -200,7 +208,7 @@ uint32_t qspi_flash_w25q128_read_id(void)
 	QSPI_CommandTypeDef cmd; 
 	 
 	/* 轮询状态寄存器1，期待它的第0位BUSY为0 */ 
-	qspi_flash_w25q128_waitStateReg(0x05,0x00,0x01,1); 
+	while(!qspi_flash_w25q128_waitStateReg(0x05,0x00,0x01,1)); 
 	 
 	while(HAL_QSPI_STATE_BUSY==HAL_QSPI_GetState(&qspi_handle));//BUSY状态下无法写寄存器 
 	cmd.Instruction=0x9F;//指定命令 
@@ -227,6 +235,8 @@ uint32_t qspi_flash_w25q128_read_id(void)
 /* 擦除扇区函数 */
 void qspi_flash_erase_sector(uint32_t addr)
 {
+	while(!qspi_flash_w25q128_waitStateReg(0x05,0x00,0x01,1));//轮询状态寄存器1，期待它的第0位BUSY为0
+	
 	qspi_flash_w25q128_wEnable(1);
 	
 	QSPI_CommandTypeDef cmd;
@@ -246,8 +256,80 @@ void qspi_flash_erase_sector(uint32_t addr)
 	cmd.DdrHoldHalfCycle=QSPI_DDR_HHC_ANALOG_DELAY;//双倍速率模式下的时钟延迟，这里器件没有双倍速率功能，随便给 
 	cmd.SIOOMode=QSPI_SIOO_INST_EVERY_CMD;//指令只第一次发送一次后面无需发送，这个不符合w25q128的特性，它是有很多命令的 
 	HAL_QSPI_Command(&qspi_handle,&cmd,HAL_MAX_DELAY);
+}
+
+/* 读取函数，没有限制，手册说的 */
+void qspi_flash_read(uint32_t addr,uint8_t* data,uint32_t len)
+{
+	while(!qspi_flash_w25q128_waitStateReg(0x05,0x00,0x01,1));//轮询状态寄存器1，期待它的第0位BUSY为0
 	
-	qspi_flash_w25q128_waitStateReg(0x05,0x00,0x01,1);//轮询状态寄存器1，期待它的第0位BUSY为0
+	QSPI_CommandTypeDef cmd;
+	while(HAL_QSPI_STATE_BUSY==HAL_QSPI_GetState(&qspi_handle));//BUSY状态下无法写寄存器 
+	cmd.Instruction=0x0B;//指定命令 
+	cmd.Address=addr;//指定地址
+	cmd.AlternateBytes=0;//无交替字节，随便给
+	cmd.AddressSize=QSPI_ADDRESS_24_BITS;//24位地址阶段
+	cmd.AlternateBytesSize=QSPI_ALTERNATE_BYTES_8_BITS;//无交替字节，随便给
+	cmd.DummyCycles=2;//空周期需要2个,符合手册 
+	cmd.InstructionMode=QSPI_INSTRUCTION_4_LINES;//命令阶段采用4线发送，符合手册 
+	cmd.AddressMode=QSPI_ADDRESS_4_LINES;//地址阶段四线，符合手册 
+	cmd.AlternateByteMode=QSPI_ALTERNATE_BYTES_NONE;//无交替字节阶段，符合手册 
+	cmd.DataMode=QSPI_DATA_4_LINES;//数据阶段采用四线发送，符合手册 
+	cmd.NbData=len;//有数据阶段 
+	cmd.DdrMode=QSPI_DDR_MODE_DISABLE;//双倍速率模式，即双边沿全部采样，这里器件不支持 
+	cmd.DdrHoldHalfCycle=QSPI_DDR_HHC_ANALOG_DELAY;//双倍速率模式下的时钟延迟，这里器件没有双倍速率功能，随便给 
+	cmd.SIOOMode=QSPI_SIOO_INST_EVERY_CMD;//指令只第一次发送一次后面无需发送，这个不符合w25q128的特性，它是有很多命令的 
+	HAL_QSPI_Command(&qspi_handle,&cmd,HAL_MAX_DELAY);
 	
-	qspi_flash_w25q128_wDisable(1);
+	HAL_QSPI_Receive(&qspi_handle,data,HAL_MAX_DELAY);
+}
+
+/* 页写入函数，有256字节大小的限制，而且不能跨页，也就是说实际写入<=256 */
+static void qspi_flash_page_write(uint32_t addr,uint8_t* data,uint16_t len)
+{
+	while(!qspi_flash_w25q128_waitStateReg(0x05,0x00,0x01,1));//轮询状态寄存器1，期待它的第0位BUSY为0
+	
+	qspi_flash_w25q128_wEnable(1);
+	
+	QSPI_CommandTypeDef cmd;
+	while(HAL_QSPI_STATE_BUSY==HAL_QSPI_GetState(&qspi_handle));//BUSY状态下无法写寄存器 
+	cmd.Instruction=0x02;//指定命令 
+	cmd.Address=addr;//指定地址
+	cmd.AlternateBytes=0;//无交替字节，随便给
+	cmd.AddressSize=QSPI_ADDRESS_24_BITS;//24位地址阶段
+	cmd.AlternateBytesSize=QSPI_ALTERNATE_BYTES_8_BITS;//无交替字节，随便给
+	cmd.DummyCycles=0;//无空周期,符合手册 
+	cmd.InstructionMode=QSPI_INSTRUCTION_4_LINES;//命令阶段采用4线发送，符合手册 
+	cmd.AddressMode=QSPI_ADDRESS_4_LINES;//地址阶段四线，符合手册 
+	cmd.AlternateByteMode=QSPI_ALTERNATE_BYTES_NONE;//无交替字节阶段，符合手册 
+	cmd.DataMode=QSPI_DATA_4_LINES;//数据阶段采用四线发送，符合手册 
+	cmd.NbData=len;//有数据阶段 
+	cmd.DdrMode=QSPI_DDR_MODE_DISABLE;//双倍速率模式，即双边沿全部采样，这里器件不支持 
+	cmd.DdrHoldHalfCycle=QSPI_DDR_HHC_ANALOG_DELAY;//双倍速率模式下的时钟延迟，这里器件没有双倍速率功能，随便给 
+	cmd.SIOOMode=QSPI_SIOO_INST_EVERY_CMD;//指令只第一次发送一次后面无需发送，这个不符合w25q128的特性，它是有很多命令的 
+	HAL_QSPI_Command(&qspi_handle,&cmd,HAL_MAX_DELAY);
+	
+	HAL_QSPI_Transmit(&qspi_handle,data,HAL_MAX_DELAY);
+}
+
+/* 写任意字节函数的封装 */
+void qspi_flash_write(uint32_t addr,uint8_t* data,uint32_t len)
+{
+	uint32_t page_remain;
+  uint32_t write_len;
+
+	while(len > 0)
+	{
+			/* 当前地址距离本页末尾还剩多少空间 */
+			page_remain = PAGE_SIZE - (addr & (PAGE_SIZE - 1));
+
+			/* 本次最多只能写当前页剩余空间 */
+			write_len = (len < page_remain) ? len : page_remain;
+
+			qspi_flash_page_write(addr, data, write_len);
+
+			addr += write_len;
+			data += write_len;
+			len  -= write_len;
+	}
 }
