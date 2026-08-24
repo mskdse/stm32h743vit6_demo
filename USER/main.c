@@ -42,6 +42,7 @@ int main(void)
   drvp_key_init();//初始化key
 	drvp_eeprom_init();//初始化eeprom
 	qspi_flash_w25q128_init();//初始化QSPI-FLASH
+	uint8_t id=qspi_flash_w25q128_read_id();
 	for(;;)
 	{
 		uint16_t evt=drvp_key_rfifo();

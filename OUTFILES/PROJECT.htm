@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\OUTFILES\PROJECT.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\OUTFILES\PROJECT.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sat Aug 22 17:30:38 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sat Aug 22 23:51:24 2026
 <BR><P>
 <H3>Maximum Stack Usage =        392 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -247,17 +247,17 @@ Global Symbols
 <P><STRONG><a name="[9]"></a>SysTick_Handler</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, main.o(.ITCM_CODE))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = SysTick_Handler &rArr; drvp_key_prc_10ms &rArr; drvp_key_wfifo &rArr; circular_buffer_write
 </UL>
-<BR>[Calls]<UL><LI><a href="#[136]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_IncTick (via Veneer)
-<LI><a href="#[138]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drvp_eeprom_prc_10ms (via Veneer)
+<BR>[Calls]<UL><LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_IncTick (via Veneer)
+<LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drvp_eeprom_prc_10ms (via Veneer)
 <LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drvp_key_prc_10ms (via Veneer)
-<LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drvp_led_prc_1ms (via Veneer)
+<LI><a href="#[136]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drvp_led_prc_1ms (via Veneer)
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32h743xx.o(RESET)
 </UL>
 <P><STRONG><a name="[98]"></a>__main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry.o(.ARM.Collect$$$$00000000))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32h743xx.o(.text)
 </UL>
-<P><STRONG><a name="[139]"></a>_main_stk</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry2.o(.ARM.Collect$$$$00000001))
+<P><STRONG><a name="[138]"></a>_main_stk</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry2.o(.ARM.Collect$$$$00000001))
 
 <P><STRONG><a name="[c3]"></a>_main_scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry5.o(.ARM.Collect$$$$00000004))
 <BR><BR>[Calls]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
@@ -267,17 +267,17 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
 </UL>
 
-<P><STRONG><a name="[13a]"></a>_main_clock</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry7b.o(.ARM.Collect$$$$00000008))
+<P><STRONG><a name="[139]"></a>_main_clock</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry7b.o(.ARM.Collect$$$$00000008))
 
-<P><STRONG><a name="[13b]"></a>_main_cpp_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry8b.o(.ARM.Collect$$$$0000000A))
+<P><STRONG><a name="[13a]"></a>_main_cpp_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry8b.o(.ARM.Collect$$$$0000000A))
 
-<P><STRONG><a name="[13c]"></a>_main_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry9a.o(.ARM.Collect$$$$0000000B))
+<P><STRONG><a name="[13b]"></a>_main_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry9a.o(.ARM.Collect$$$$0000000B))
 
-<P><STRONG><a name="[13d]"></a>__rt_lib_shutdown_fini</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry12b.o(.ARM.Collect$$$$0000000E))
+<P><STRONG><a name="[13c]"></a>__rt_lib_shutdown_fini</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry12b.o(.ARM.Collect$$$$0000000E))
 
-<P><STRONG><a name="[13e]"></a>__rt_final_cpp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry10a.o(.ARM.Collect$$$$0000000F))
+<P><STRONG><a name="[13d]"></a>__rt_final_cpp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry10a.o(.ARM.Collect$$$$0000000F))
 
-<P><STRONG><a name="[13f]"></a>__rt_final_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$00000011))
+<P><STRONG><a name="[13e]"></a>__rt_final_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$00000011))
 
 <P><STRONG><a name="[3]"></a>MemManage_Handler</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32h7xx_it.o(.emb_text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = MemManage_Handler &rArr; MemManage_Handler_C
@@ -286,7 +286,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32h743xx.o(RESET)
 </UL>
-<P><STRONG><a name="[140]"></a>__asm___15_EventRecorder_c_e8d3082c__atomic_inc8</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, eventrecorder.o(.emb_text), UNUSED)
+<P><STRONG><a name="[13f]"></a>__asm___15_EventRecorder_c_e8d3082c__atomic_inc8</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, eventrecorder.o(.emb_text), UNUSED)
 
 <P><STRONG><a name="[ce]"></a>__asm___15_EventRecorder_c_e8d3082c__atomic_inc32</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, eventrecorder.o(.emb_text))
 <BR><BR>[Called By]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventRecordItem
@@ -731,16 +731,16 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[141]"></a>__aeabi_memcpy8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text), UNUSED)
+<P><STRONG><a name="[140]"></a>__aeabi_memcpy8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text), UNUSED)
 
 <P><STRONG><a name="[c8]"></a>__aeabi_memset</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, memseta.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_memset$wrapper
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
 </UL>
 
-<P><STRONG><a name="[142]"></a>__aeabi_memset4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+<P><STRONG><a name="[141]"></a>__aeabi_memset4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
 
-<P><STRONG><a name="[143]"></a>__aeabi_memset8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+<P><STRONG><a name="[142]"></a>__aeabi_memset8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
 
 <P><STRONG><a name="[c7]"></a>__aeabi_memclr</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, memseta.o(.text))
 <BR><BR>[Calls]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
@@ -757,7 +757,7 @@ Global Symbols
 <LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventRecorderInitialize
 </UL>
 
-<P><STRONG><a name="[144]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+<P><STRONG><a name="[143]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
 
 <P><STRONG><a name="[c9]"></a>_memset$wrapper</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, memseta.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
@@ -769,11 +769,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_main_scatterload
 </UL>
 
-<P><STRONG><a name="[145]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
+<P><STRONG><a name="[144]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
 
-<P><STRONG><a name="[146]"></a>__decompress</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __dczerorl2.o(.text), UNUSED)
+<P><STRONG><a name="[145]"></a>__decompress</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __dczerorl2.o(.text), UNUSED)
 
-<P><STRONG><a name="[147]"></a>__decompress1</STRONG> (Thumb, 86 bytes, Stack size unknown bytes, __dczerorl2.o(.text), UNUSED)
+<P><STRONG><a name="[146]"></a>__decompress1</STRONG> (Thumb, 86 bytes, Stack size unknown bytes, __dczerorl2.o(.text), UNUSED)
 
 <P><STRONG><a name="[4]"></a>BusFault_Handler</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32h7xx_it.o(i.BusFault_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32h743xx.o(RESET)
@@ -955,7 +955,7 @@ Global Symbols
 <P><STRONG><a name="[9c]"></a>HAL_I2C_SlaveTxCpltCallback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32h7xx_hal_i2c.o(i.HAL_I2C_SlaveTxCpltCallback))
 <BR>[Address Reference Count : 1]<UL><LI> stm32h7xx_hal_i2c.o(i.HAL_I2C_Init)
 </UL>
-<P><STRONG><a name="[136]"></a>HAL_IncTick</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32h7xx_hal.o(i.HAL_IncTick))
+<P><STRONG><a name="[135]"></a>HAL_IncTick</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32h7xx_hal.o(i.HAL_IncTick))
 <BR><BR>[Called By]<UL><LI><a href="#[9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler (via Veneer)
 </UL>
 
@@ -1030,8 +1030,7 @@ Global Symbols
 <LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_WaitFlagStateUntilTimeout
 <LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_Config
 </UL>
-<BR>[Called By]<UL><LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_waitBusy
-<LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_enterQSPIMODE
+<BR>[Called By]<UL><LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_waitStateReg
 </UL>
 
 <P><STRONG><a name="[ed]"></a>HAL_QSPI_Command_IT</STRONG> (Thumb, 180 bytes, Stack size 24 bytes, stm32h7xx_hal_qspi.o(i.HAL_QSPI_Command_IT))
@@ -1041,8 +1040,7 @@ Global Symbols
 <LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_WaitFlagStateUntilTimeout
 <LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_Config
 </UL>
-<BR>[Called By]<UL><LI><a href="#[132]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_wcmd
-<LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_enterQSPIMODE
+<BR>[Called By]<UL><LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_read_id
 </UL>
 
 <P><STRONG><a name="[a7]"></a>HAL_QSPI_ErrorCallback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32h7xx_hal_qspi.o(i.HAL_QSPI_ErrorCallback))
@@ -1052,10 +1050,9 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> stm32h7xx_hal_qspi.o(i.HAL_QSPI_Init)
 </UL>
 <P><STRONG><a name="[130]"></a>HAL_QSPI_GetState</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32h7xx_hal_qspi.o(i.HAL_QSPI_GetState))
-<BR><BR>[Called By]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_init
-<LI><a href="#[132]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_wcmd
-<LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_waitBusy
-<LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_enterQSPIMODE
+<BR><BR>[Called By]<UL><LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_read_id
+<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_init
+<LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_waitStateReg
 </UL>
 
 <P><STRONG><a name="[ee]"></a>HAL_QSPI_IRQHandler</STRONG> (Thumb, 638 bytes, Stack size 24 bytes, stm32h7xx_hal_qspi.o(i.HAL_QSPI_IRQHandler))
@@ -1079,6 +1076,12 @@ Global Symbols
 <P><STRONG><a name="[af]"></a>HAL_QSPI_MspInit</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32h7xx_hal_qspi.o(i.HAL_QSPI_MspInit))
 <BR>[Address Reference Count : 1]<UL><LI> stm32h7xx_hal_qspi.o(i.HAL_QSPI_Init)
 </UL>
+<P><STRONG><a name="[131]"></a>HAL_QSPI_Receive_IT</STRONG> (Thumb, 156 bytes, Stack size 12 bytes, stm32h7xx_hal_qspi.o(i.HAL_QSPI_Receive_IT))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = HAL_QSPI_Receive_IT
+</UL>
+<BR>[Called By]<UL><LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_read_id
+</UL>
+
 <P><STRONG><a name="[f1]"></a>HAL_QSPI_SetTimeout</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32h7xx_hal_qspi.o(i.HAL_QSPI_SetTimeout))
 <BR><BR>[Called By]<UL><LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_QSPI_Init
 </UL>
@@ -1232,11 +1235,11 @@ Global Symbols
 <P><STRONG><a name="[5]"></a>UsageFault_Handler</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32h7xx_it.o(i.UsageFault_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32h743xx.o(RESET)
 </UL>
-<P><STRONG><a name="[148]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
+<P><STRONG><a name="[147]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
 
-<P><STRONG><a name="[149]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
+<P><STRONG><a name="[148]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
 
-<P><STRONG><a name="[14a]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
+<P><STRONG><a name="[149]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
 
 <P><STRONG><a name="[116]"></a>circular_buffer_init</STRONG> (Thumb, 76 bytes, Stack size 16 bytes, circular_buffer.o(i.circular_buffer_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = circular_buffer_init &rArr; sram_d2_malloc
@@ -1282,8 +1285,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
 <LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_EnableIRQ
-<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
 <LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_I2C_Init
+<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
 <LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> drvp_eeprom.o(.constdata)
@@ -1354,7 +1357,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[138]"></a>drvp_eeprom_prc_10ms</STRONG> (Thumb, 260 bytes, Stack size 24 bytes, drvp_eeprom.o(i.drvp_eeprom_prc_10ms))
+<P><STRONG><a name="[137]"></a>drvp_eeprom_prc_10ms</STRONG> (Thumb, 260 bytes, Stack size 24 bytes, drvp_eeprom.o(i.drvp_eeprom_prc_10ms))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = drvp_eeprom_prc_10ms
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler (via Veneer)
@@ -1391,13 +1394,13 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[137]"></a>drvp_led_prc_1ms</STRONG> (Thumb, 266 bytes, Stack size 8 bytes, drvp_led.o(i.drvp_led_prc_1ms))
+<P><STRONG><a name="[136]"></a>drvp_led_prc_1ms</STRONG> (Thumb, 266 bytes, Stack size 8 bytes, drvp_led.o(i.drvp_led_prc_1ms))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = drvp_led_prc_1ms
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler (via Veneer)
 </UL>
 
-<P><STRONG><a name="[95]"></a>main</STRONG> (Thumb, 104 bytes, Stack size 0 bytes, main.o(i.main))
+<P><STRONG><a name="[95]"></a>main</STRONG> (Thumb, 108 bytes, Stack size 0 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 384<LI>Call Chain = main &rArr; SEGGER_RTT_printf &rArr; SEGGER_RTT_vprintf &rArr; _PrintInt &rArr; _PrintUnsigned &rArr; _StoreChar &rArr; SEGGER_RTT_Write &rArr; SEGGER_RTT_WriteNoLock &rArr; _WriteBlocking
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
@@ -1405,6 +1408,7 @@ Global Symbols
 <LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Config
 <LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CPU_CACHE_Enable
 <LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_d2_init
+<LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_read_id
 <LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_init
 <LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drvp_eeprom_init
 <LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drvp_key_rfifo
@@ -1432,16 +1436,27 @@ Global Symbols
 <LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;circular_buffer_read
 </UL>
 
-<P><STRONG><a name="[12c]"></a>qspi_flash_w25q128_init</STRONG> (Thumb, 346 bytes, Stack size 32 bytes, qspi_flash.o(i.qspi_flash_w25q128_init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 264<LI>Call Chain = qspi_flash_w25q128_init &rArr; qspi_flash_w25q128_enterQSPIMODE &rArr; qspi_flash_w25q128_waitBusy &rArr; HAL_QSPI_AutoPolling_IT &rArr; QSPI_WaitFlagStateUntilTimeout
+<P><STRONG><a name="[12c]"></a>qspi_flash_w25q128_init</STRONG> (Thumb, 350 bytes, Stack size 32 bytes, qspi_flash.o(i.qspi_flash_w25q128_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 192<LI>Call Chain = qspi_flash_w25q128_init &rArr; qspi_flash_w25q128_enterQSPIMODE &rArr; qspi_flash_w25q128_waitStateReg &rArr; HAL_QSPI_AutoPolling_IT &rArr; QSPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
 <LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_EnableIRQ
+<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
 <LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_QSPI_Init
 <LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_QSPI_GetState
-<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
-<LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_enterQSPIMODE
+<LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_enterQSPIMODE
 <LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+</UL>
+<BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[12d]"></a>qspi_flash_w25q128_read_id</STRONG> (Thumb, 140 bytes, Stack size 64 bytes, qspi_flash.o(i.qspi_flash_w25q128_read_id))
+<BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = qspi_flash_w25q128_read_id &rArr; qspi_flash_w25q128_waitStateReg &rArr; HAL_QSPI_AutoPolling_IT &rArr; QSPI_WaitFlagStateUntilTimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_QSPI_Receive_IT
+<LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_QSPI_GetState
+<LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_QSPI_Command_IT
+<LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_waitStateReg
 </UL>
 <BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1449,9 +1464,9 @@ Global Symbols
 <P><STRONG><a name="[11a]"></a>sram_d2_free</STRONG> (Thumb, 214 bytes, Stack size 40 bytes, sram_d2_malloc.o(i.sram_d2_free))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = sram_d2_free
 </UL>
-<BR>[Calls]<UL><LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free_set_next
-<LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free_get_next
-<LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;blk_raw_size
+<BR>[Calls]<UL><LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free_set_next
+<LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free_get_next
+<LI><a href="#[132]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;blk_raw_size
 </UL>
 <BR>[Called By]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;circular_buffer_init
 </UL>
@@ -1459,7 +1474,7 @@ Global Symbols
 <P><STRONG><a name="[129]"></a>sram_d2_init</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, sram_d2_malloc.o(i.sram_d2_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = sram_d2_init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free_set_next
+<BR>[Calls]<UL><LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free_set_next
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
 </UL>
 <BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -1468,9 +1483,9 @@ Global Symbols
 <P><STRONG><a name="[118]"></a>sram_d2_malloc</STRONG> (Thumb, 228 bytes, Stack size 40 bytes, sram_d2_malloc.o(i.sram_d2_malloc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = sram_d2_malloc
 </UL>
-<BR>[Calls]<UL><LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free_set_next
-<LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free_get_next
-<LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;blk_raw_size
+<BR>[Calls]<UL><LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free_set_next
+<LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free_get_next
+<LI><a href="#[132]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;blk_raw_size
 </UL>
 <BR>[Called By]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;circular_buffer_init
 </UL>
@@ -1543,8 +1558,8 @@ Local Symbols
 <P><STRONG><a name="[d9]"></a>I2C_ITError</STRONG> (Thumb, 326 bytes, Stack size 24 bytes, stm32h7xx_hal_i2c.o(i.I2C_ITError))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = I2C_ITError &rArr; HAL_DMA_Abort_IT
 </UL>
-<BR>[Calls]<UL><LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_GetState
-<LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Abort_IT
+<BR>[Calls]<UL><LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Abort_IT
+<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_GetState
 <LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C_TreatErrorCallback
 <LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C_Flush_TXDR
 <LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C_Disable_IRQ
@@ -1720,71 +1735,39 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drvp_key_prc_10ms
 </UL>
 
-<P><STRONG><a name="[12d]"></a>qspi_flash_w25q128_enterQSPIMODE</STRONG> (Thumb, 220 bytes, Stack size 88 bytes, qspi_flash.o(i.qspi_flash_w25q128_enterQSPIMODE))
-<BR><BR>[Stack]<UL><LI>Max Depth = 232<LI>Call Chain = qspi_flash_w25q128_enterQSPIMODE &rArr; qspi_flash_w25q128_waitBusy &rArr; HAL_QSPI_AutoPolling_IT &rArr; QSPI_WaitFlagStateUntilTimeout
+<P><STRONG><a name="[12e]"></a>qspi_flash_w25q128_enterQSPIMODE</STRONG> (Thumb, 94 bytes, Stack size 8 bytes, qspi_flash.o(i.qspi_flash_w25q128_enterQSPIMODE))
+<BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = qspi_flash_w25q128_enterQSPIMODE &rArr; qspi_flash_w25q128_waitStateReg &rArr; HAL_QSPI_AutoPolling_IT &rArr; QSPI_WaitFlagStateUntilTimeout
 </UL>
-<BR>[Calls]<UL><LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_QSPI_GetState
-<LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_QSPI_Command_IT
-<LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_QSPI_AutoPolling_IT
-<LI><a href="#[132]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_wcmd
-<LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_waitBusy
-<LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_wEnable
-<LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_wDisable
+<BR>[Calls]<UL><LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_waitStateReg
 </UL>
 <BR>[Called By]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_init
 </UL>
 
-<P><STRONG><a name="[131]"></a>qspi_flash_w25q128_wDisable</STRONG> (Thumb, 10 bytes, Stack size 8 bytes, qspi_flash.o(i.qspi_flash_w25q128_wDisable))
-<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = qspi_flash_w25q128_wDisable &rArr; qspi_flash_w25q128_wcmd &rArr; HAL_QSPI_Command_IT &rArr; QSPI_WaitFlagStateUntilTimeout
-</UL>
-<BR>[Calls]<UL><LI><a href="#[132]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_wcmd
-</UL>
-<BR>[Called By]<UL><LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_enterQSPIMODE
-</UL>
-
-<P><STRONG><a name="[12f]"></a>qspi_flash_w25q128_wEnable</STRONG> (Thumb, 10 bytes, Stack size 8 bytes, qspi_flash.o(i.qspi_flash_w25q128_wEnable))
-<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = qspi_flash_w25q128_wEnable &rArr; qspi_flash_w25q128_wcmd &rArr; HAL_QSPI_Command_IT &rArr; QSPI_WaitFlagStateUntilTimeout
-</UL>
-<BR>[Calls]<UL><LI><a href="#[132]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_wcmd
-</UL>
-<BR>[Called By]<UL><LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_enterQSPIMODE
-</UL>
-
-<P><STRONG><a name="[12e]"></a>qspi_flash_w25q128_waitBusy</STRONG> (Thumb, 114 bytes, Stack size 88 bytes, qspi_flash.o(i.qspi_flash_w25q128_waitBusy))
-<BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = qspi_flash_w25q128_waitBusy &rArr; HAL_QSPI_AutoPolling_IT &rArr; QSPI_WaitFlagStateUntilTimeout
+<P><STRONG><a name="[12f]"></a>qspi_flash_w25q128_waitStateReg</STRONG> (Thumb, 116 bytes, Stack size 96 bytes, qspi_flash.o(i.qspi_flash_w25q128_waitStateReg))
+<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = qspi_flash_w25q128_waitStateReg &rArr; HAL_QSPI_AutoPolling_IT &rArr; QSPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_QSPI_GetState
 <LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_QSPI_AutoPolling_IT
 </UL>
-<BR>[Called By]<UL><LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_enterQSPIMODE
-</UL>
-
-<P><STRONG><a name="[132]"></a>qspi_flash_w25q128_wcmd</STRONG> (Thumb, 82 bytes, Stack size 64 bytes, qspi_flash.o(i.qspi_flash_w25q128_wcmd))
-<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = qspi_flash_w25q128_wcmd &rArr; HAL_QSPI_Command_IT &rArr; QSPI_WaitFlagStateUntilTimeout
-</UL>
-<BR>[Calls]<UL><LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_QSPI_GetState
-<LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_QSPI_Command_IT
-</UL>
-<BR>[Called By]<UL><LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_wEnable
-<LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_wDisable
-<LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_enterQSPIMODE
+<BR>[Called By]<UL><LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_read_id
+<LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qspi_flash_w25q128_enterQSPIMODE
 </UL>
 
 <P><STRONG><a name="[117]"></a>is_power_of_two</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, circular_buffer.o(i.is_power_of_two))
 <BR><BR>[Called By]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;circular_buffer_init
 </UL>
 
-<P><STRONG><a name="[133]"></a>blk_raw_size</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, sram_d2_malloc.o(i.blk_raw_size))
+<P><STRONG><a name="[132]"></a>blk_raw_size</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, sram_d2_malloc.o(i.blk_raw_size))
 <BR><BR>[Called By]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_d2_malloc
 <LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_d2_free
 </UL>
 
-<P><STRONG><a name="[134]"></a>free_get_next</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, sram_d2_malloc.o(i.free_get_next))
+<P><STRONG><a name="[133]"></a>free_get_next</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, sram_d2_malloc.o(i.free_get_next))
 <BR><BR>[Called By]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_d2_malloc
 <LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_d2_free
 </UL>
 
-<P><STRONG><a name="[135]"></a>free_set_next</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, sram_d2_malloc.o(i.free_set_next))
+<P><STRONG><a name="[134]"></a>free_set_next</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, sram_d2_malloc.o(i.free_set_next))
 <BR><BR>[Called By]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_d2_init
 <LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_d2_malloc
 <LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_d2_free
