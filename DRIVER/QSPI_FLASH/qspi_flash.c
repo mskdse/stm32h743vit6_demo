@@ -151,7 +151,7 @@ void qspi_flash_w25q128_init(void)
 	qspi_handle.Init.FifoThreshold=4;//FIFO阈值线，官方源码为4，所以我们保持一致
 	qspi_handle.Init.SampleShifting=QSPI_SAMPLE_SHIFTING_HALFCYCLE;//采样移位，比如说SPI是上升沿采样，现在延时半个周期再采样
 	qspi_handle.Init.FlashSize=23;//容量等于2^(flashsize+1),所以w25q128的128MB对应要填写23
-	qspi_handle.Init.ChipSelectHighTime=QSPI_CS_HIGH_TIME_8_CYCLE;//CS片选线到第一个时钟命令之间延时8个时钟周期
+	qspi_handle.Init.ChipSelectHighTime=QSPI_CS_HIGH_TIME_2_CYCLE;//CS片选线到第一个时钟命令之间延时2个时钟周期
 	qspi_handle.Init.ClockMode=QSPI_CLOCK_MODE_0;//QPSI模式0
 	qspi_handle.Init.FlashID=QSPI_FLASH_ID_1;//FLASH器件ID，双闪存模式下有用，只有一个器件而且只有一个存储器那就默认ID1
 	qspi_handle.Init.DualFlash=QSPI_DUALFLASH_DISABLE;//禁止双闪存模式
@@ -332,4 +332,42 @@ void qspi_flash_write(uint32_t addr,uint8_t* data,uint32_t len)
 			data += write_len;
 			len  -= write_len;
 	}
+}
+
+/* 让H7内核和W25Q128进入地址映射模式 */
+void qspi_flash_Enter_Mmap(void)
+{
+  while(!qspi_flash_w25q128_waitStateReg(0x05,0x00,0x01,1));//轮询状态寄存器1，期待它的第0位BUSY为0
+	
+	QSPI_CommandTypeDef           cmd;
+	QSPI_MemoryMappedTypeDef  mmapcfg;
+	
+	while(HAL_QSPI_STATE_BUSY==HAL_QSPI_GetState(&qspi_handle));//BUSY状态下无法写寄存器 
+	
+	/* 地址映射模式下CMD读命令不需要指定特定的地址和数据长度 */
+	cmd.Instruction=0x0B;//指定命令 
+	//cmd.Address=addr;//指定地址
+	cmd.AlternateBytes=0;//无交替字节，随便给
+	cmd.AddressSize=QSPI_ADDRESS_24_BITS;//24位地址阶段
+	cmd.AlternateBytesSize=QSPI_ALTERNATE_BYTES_8_BITS;//无交替字节，随便给
+	cmd.DummyCycles=2;//空周期需要2个,符合手册 
+	cmd.InstructionMode=QSPI_INSTRUCTION_4_LINES;//命令阶段采用4线发送，符合手册 
+	cmd.AddressMode=QSPI_ADDRESS_4_LINES;//地址阶段四线，符合手册 
+	cmd.AlternateByteMode=QSPI_ALTERNATE_BYTES_NONE;//无交替字节阶段，符合手册 
+	cmd.DataMode=QSPI_DATA_4_LINES;//数据阶段采用四线发送，符合手册 
+	//cmd.NbData=len;//有数据阶段 
+	cmd.DdrMode=QSPI_DDR_MODE_DISABLE;//双倍速率模式，即双边沿全部采样，这里器件不支持 
+	cmd.DdrHoldHalfCycle=QSPI_DDR_HHC_ANALOG_DELAY;//双倍速率模式下的时钟延迟，这里器件没有双倍速率功能，随便给 
+	cmd.SIOOMode=QSPI_SIOO_INST_EVERY_CMD;//指令只第一次发送一次后面无需发送，这个不符合w25q128的特性，它是有很多命令的 
+	mmapcfg.TimeOutActivation=QSPI_TIMEOUT_COUNTER_DISABLE;
+	mmapcfg.TimeOutPeriod=0;
+	HAL_QSPI_MemoryMapped(&qspi_handle,&cmd,&mmapcfg);
+}
+
+/* 让H7内核和W25Q128退出地址映射模式 */
+void qspi_flash_Exit_Mmap(void)
+{
+	HAL_QSPI_Abort(&qspi_handle);
+	HAL_QSPI_DeInit(&qspi_handle);
+	HAL_QSPI_Init(&qspi_handle);
 }

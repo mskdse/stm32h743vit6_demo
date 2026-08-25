@@ -17,4 +17,7 @@ void qspi_flash_erase_sector(uint32_t addr);
 void qspi_flash_read(uint32_t addr,uint8_t* data,uint32_t len);
 void qspi_flash_write(uint32_t addr,uint8_t* data,uint32_t len);
 
+void qspi_flash_Enter_Mmap(void);
+void qspi_flash_Exit_Mmap(void);
+
 #endif

@@ -3,61 +3,70 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: ¦ÌVision V5.35.0.0
-Copyright (C) 2021 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: 11 11, 11, LIC=IK1BF-6WSCX-II95V-PVULD-TC5LM-SRJ9B
+IDE-Version: ¦ÌVision V5.43.1.0
+Copyright (C) 2025 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 11 11, 11, LIC=GMZI6-DNH8Z-2ZLW4-F4GS1-C4LUG-L7S79
  
 Tool Versions:
-Toolchain:       MDK-ARM Plus  Version: 5.35.0.2
-Toolchain Path:  D:\Keil5\ARM\ARMCC\Bin
+Toolchain:       MDK-ARM Plus  Version: 5.43.0.0
+Toolchain Path:  C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin
 C Compiler:      Armcc.exe V5.06 update 7 (build 960)
 Assembler:       Armasm.exe V5.06 update 7 (build 960)
 Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
 Library Manager: ArmAr.exe V5.06 update 7 (build 960)
 Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
-CPU DLL:         SARMCM3.DLL V5.35.0.2
-Dialog DLL:      DCM.DLL V1.17.3.0
-Target DLL:      Segger\JL2CM3.dll V2.99.40.0
-Dialog DLL:      TCM.DLL V1.53.0.0
+CPU DLL:         SARMCM3.DLL V5.43.0.0
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      Segger\JL2CM3.dll V2.99.45.0
+Dialog DLL:      TCM.DLL V1.56.6.0
  
 <h2>Project:</h2>
-D:\stm32project\STM32H743VIT6\PROJECT.uvprojx
-Project File Date:  08/24/2026
+C:\Users\EVC2-5\Desktop\stm32h743vit6_demo\PROJECT.uvprojx
+Project File Date:  08/25/2026
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil5\ARM\ARMCC\Bin'
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin'
 Build target 'PROJECT'
-".\OUTFILES\PROJECT.axf" - 0 Error(s), 0 Warning(s).
+compiling main.c...
+linking...
+.\OUTFILES\PROJECT.sct(31): warning: L6314W: No section matches pattern *(.RAM_D1).
+.\OUTFILES\PROJECT.sct(47): warning: L6314W: No section matches pattern *(.RAM_D2_EXTRA).
+.\OUTFILES\PROJECT.sct(52): warning: L6314W: No section matches pattern *(.RAM_D3).
+Program Size: Code=19820 RO-data=1044 RW-data=23500 ZI-data=5576  
+Finished: 0 information, 3 warning and 0 error messages.
+FromELF: creating hex file...
+".\OUTFILES\PROJECT.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
 
 Package Vendor: Keil
                 http://www.keil.com/pack/Keil.ARM_Compiler.1.6.3.pack
-                Keil.ARM_Compiler.1.6.3
+                Keil::ARM_Compiler@1.6.3
                 Keil ARM Compiler extensions for ARM Compiler 5 and ARM Compiler 6
    * Component: Event Recorder Variant: DAP Version: 1.4.0
    * Component: STDOUT Variant: Breakpoint Version: 1.2.0
 
 Package Vendor: Keil
-                https://www.keil.com/pack/Keil.STM32H7xx_DFP.4.1.3.pack
-                Keil.STM32H7xx_DFP.4.1.3
-                STMicroelectronics STM32H7 Series Device Support
+                http://www.keil.com/pack/Keil.STM32H7xx_DFP.2.7.0.pack
+                Keil::STM32H7xx_DFP@2.7.0
+                STMicroelectronics STM32H7 Series Device Support and Examples
 
 <h2>Collection of Component include folders:</h2>
-  .\RTE\Compiler
-  .\RTE\_PROJECT
-  D:\Keil5\ARM\PACK\Keil\ARM_Compiler\1.6.3\Include
+  ./RTE/Compiler
+  ./RTE/_PROJECT
+  C:/Users/EVC2-5/AppData/Local/Arm/Packs/Keil/ARM_Compiler/1.6.3/Include
+  C:/Users/EVC2-5/AppData/Local/Arm/Packs/Keil/STM32H7xx_DFP/2.7.0/Drivers/CMSIS/Device/ST/STM32H7xx/Include
 
 <h2>Collection of Component Files used:</h2>
 
-   * Component: Keil.ARM Compiler::Compiler:Event Recorder:DAP:1.4.0
-      Source file:   Source\EventRecorder.c
-      Include file:  Config\EventRecorderConf.h
-      Include file:  Include\EventRecorder.h
+   * Component: Keil::Compiler&ARM Compiler:Event Recorder&DAP@1.4.0
+      Include file:  Config/EventRecorderConf.h
+      Include file:  Include/EventRecorder.h
+      Source file:   Source/EventRecorder.c
 
-   * Component: Keil.ARM Compiler::Compiler:I/O:STDOUT:Breakpoint:1.2.0
-      Source file:   Source\retarget_io.c
-Build Time Elapsed:  00:00:02
+   * Component: Keil::Compiler&ARM Compiler:I/O:STDOUT&Breakpoint@1.2.0
+      Source file:   Source/retarget_io.c
+Build Time Elapsed:  00:00:30
 </pre>
 </body>
 </html>
