@@ -92,7 +92,7 @@ static bool qspi_flash_w25q128_waitStateReg(uint8_t wcmd,uint8_t match,uint8_t m
 	autocfg.StatusBytesSize=1;//读取一个字节即状态寄存器1
 	autocfg.MatchMode=QSPI_MATCH_MODE_AND;//与逻辑
 	autocfg.AutomaticStop=QSPI_AUTOMATIC_STOP_ENABLE;//匹配成功停止轮询
-	ret=HAL_QSPI_AutoPolling(&qspi_handle,&cmd,&autocfg,100);
+	ret=HAL_QSPI_AutoPolling(&qspi_handle,&cmd,&autocfg,1);
 	if(HAL_OK!=ret)
 	{
 		HAL_QSPI_Abort(&qspi_handle);
@@ -196,7 +196,7 @@ static void qspi_flash_w25q128_enterQSPIMODE(void)
 	/* 轮询状态寄存器2，确保它的第一位QE位为1 */
 	while(!qspi_flash_w25q128_waitStateReg(0x35,0x02,0x02,0));
 	
-	HAL_Delay(1000);//等待FLASH稳定
+	HAL_Delay(500);//等待FLASH稳定
 	
 	/* 最后使用进入QSPI模式命令 */
 	qspi_flash_w25q128_wcmd(0x38,0);

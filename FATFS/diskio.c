@@ -159,6 +159,7 @@ DWORD get_fattime(void)
 #include <stdbool.h>
 #include "SEGGER_RTT.h"
 #include <stdio.h>
+#include "sram_d2_malloc.h"
 #define NOT_FILE_SYS     0  //一开始没有文件系统，可以打开宏定义开关来创建一下
 __attribute__((section (".RAM_D2"))) FATFS   fs;
 __attribute__((section (".RAM_D2"))) FIL     file;
