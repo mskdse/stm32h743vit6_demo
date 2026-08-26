@@ -147,7 +147,7 @@ void qspi_flash_w25q128_init(void)
 	memset(&qspi_handle,0,sizeof(QSPI_HandleTypeDef));//清空句柄
 	while(HAL_QSPI_STATE_BUSY==HAL_QSPI_GetState(&qspi_handle));//BUSY状态下无法写寄存器
 	qspi_handle.Instance=QUADSPI;//选择QSPI器件
-	qspi_handle.Init.ClockPrescaler=200-1;//时钟分频，QSPI挂载在AHB3总线上时钟为200MHZ，W25Q128最大支持104MHZ
+	qspi_handle.Init.ClockPrescaler=20-1;//时钟分频，QSPI挂载在AHB3总线上时钟为200MHZ，W25Q128最大支持104MHZ
 	qspi_handle.Init.FifoThreshold=4;//FIFO阈值线，官方源码为4，所以我们保持一致
 	qspi_handle.Init.SampleShifting=QSPI_SAMPLE_SHIFTING_HALFCYCLE;//采样移位，比如说SPI是上升沿采样，现在延时半个周期再采样
 	qspi_handle.Init.FlashSize=23;//容量等于2^(flashsize+1),所以w25q128的128MB对应要填写23
@@ -249,6 +249,84 @@ void qspi_flash_erase_sector(uint32_t addr)
 	cmd.DummyCycles=0;//空周期需要0个 
 	cmd.InstructionMode=QSPI_INSTRUCTION_4_LINES;//命令阶段采用4线发送，符合手册 
 	cmd.AddressMode=QSPI_ADDRESS_4_LINES;//地址阶段四线，符合手册 
+	cmd.AlternateByteMode=QSPI_ALTERNATE_BYTES_NONE;//无交替字节阶段，符合手册 
+	cmd.DataMode=QSPI_DATA_NONE;//无数据阶段，符合手册 
+	cmd.NbData=0;//无数据阶段 
+	cmd.DdrMode=QSPI_DDR_MODE_DISABLE;//双倍速率模式，即双边沿全部采样，这里器件不支持 
+	cmd.DdrHoldHalfCycle=QSPI_DDR_HHC_ANALOG_DELAY;//双倍速率模式下的时钟延迟，这里器件没有双倍速率功能，随便给 
+	cmd.SIOOMode=QSPI_SIOO_INST_EVERY_CMD;//指令只第一次发送一次后面无需发送，这个不符合w25q128的特性，它是有很多命令的 
+	HAL_QSPI_Command(&qspi_handle,&cmd,HAL_MAX_DELAY);
+}
+
+/* 擦除半块函数，半块的话32KB */
+void qspi_flash_erase_half_block(uint32_t addr)
+{
+	while(!qspi_flash_w25q128_waitStateReg(0x05,0x00,0x01,1));//轮询状态寄存器1，期待它的第0位BUSY为0
+	
+	qspi_flash_w25q128_wEnable(1);
+	
+	QSPI_CommandTypeDef cmd;
+	while(HAL_QSPI_STATE_BUSY==HAL_QSPI_GetState(&qspi_handle));//BUSY状态下无法写寄存器 
+	cmd.Instruction=0x52;//指定命令 
+	cmd.Address=addr;//指定地址
+	cmd.AlternateBytes=0;//无交替字节，随便给
+	cmd.AddressSize=QSPI_ADDRESS_24_BITS;//24位地址阶段
+	cmd.AlternateBytesSize=QSPI_ALTERNATE_BYTES_8_BITS;//无交替字节，随便给
+	cmd.DummyCycles=0;//空周期需要0个 
+	cmd.InstructionMode=QSPI_INSTRUCTION_4_LINES;//命令阶段采用4线发送，符合手册 
+	cmd.AddressMode=QSPI_ADDRESS_4_LINES;//地址阶段四线，符合手册 
+	cmd.AlternateByteMode=QSPI_ALTERNATE_BYTES_NONE;//无交替字节阶段，符合手册 
+	cmd.DataMode=QSPI_DATA_NONE;//无数据阶段，符合手册 
+	cmd.NbData=0;//无数据阶段 
+	cmd.DdrMode=QSPI_DDR_MODE_DISABLE;//双倍速率模式，即双边沿全部采样，这里器件不支持 
+	cmd.DdrHoldHalfCycle=QSPI_DDR_HHC_ANALOG_DELAY;//双倍速率模式下的时钟延迟，这里器件没有双倍速率功能，随便给 
+	cmd.SIOOMode=QSPI_SIOO_INST_EVERY_CMD;//指令只第一次发送一次后面无需发送，这个不符合w25q128的特性，它是有很多命令的 
+	HAL_QSPI_Command(&qspi_handle,&cmd,HAL_MAX_DELAY);
+}
+
+/* 擦除块函数，一块的话64KB */
+void qspi_flash_erase_block(uint32_t addr)
+{
+	while(!qspi_flash_w25q128_waitStateReg(0x05,0x00,0x01,1));//轮询状态寄存器1，期待它的第0位BUSY为0
+	
+	qspi_flash_w25q128_wEnable(1);
+	
+	QSPI_CommandTypeDef cmd;
+	while(HAL_QSPI_STATE_BUSY==HAL_QSPI_GetState(&qspi_handle));//BUSY状态下无法写寄存器 
+	cmd.Instruction=0xD8;//指定命令 
+	cmd.Address=addr;//指定地址
+	cmd.AlternateBytes=0;//无交替字节，随便给
+	cmd.AddressSize=QSPI_ADDRESS_24_BITS;//24位地址阶段
+	cmd.AlternateBytesSize=QSPI_ALTERNATE_BYTES_8_BITS;//无交替字节，随便给
+	cmd.DummyCycles=0;//空周期需要0个 
+	cmd.InstructionMode=QSPI_INSTRUCTION_4_LINES;//命令阶段采用4线发送，符合手册 
+	cmd.AddressMode=QSPI_ADDRESS_4_LINES;//地址阶段四线，符合手册 
+	cmd.AlternateByteMode=QSPI_ALTERNATE_BYTES_NONE;//无交替字节阶段，符合手册 
+	cmd.DataMode=QSPI_DATA_NONE;//无数据阶段，符合手册 
+	cmd.NbData=0;//无数据阶段 
+	cmd.DdrMode=QSPI_DDR_MODE_DISABLE;//双倍速率模式，即双边沿全部采样，这里器件不支持 
+	cmd.DdrHoldHalfCycle=QSPI_DDR_HHC_ANALOG_DELAY;//双倍速率模式下的时钟延迟，这里器件没有双倍速率功能，随便给 
+	cmd.SIOOMode=QSPI_SIOO_INST_EVERY_CMD;//指令只第一次发送一次后面无需发送，这个不符合w25q128的特性，它是有很多命令的 
+	HAL_QSPI_Command(&qspi_handle,&cmd,HAL_MAX_DELAY);
+}
+
+/* 全片擦除函数 */
+void qspi_flash_erase_chip(void)
+{
+	while(!qspi_flash_w25q128_waitStateReg(0x05,0x00,0x01,1));//轮询状态寄存器1，期待它的第0位BUSY为0
+	
+	qspi_flash_w25q128_wEnable(1);
+	
+	QSPI_CommandTypeDef cmd;
+	while(HAL_QSPI_STATE_BUSY==HAL_QSPI_GetState(&qspi_handle));//BUSY状态下无法写寄存器 
+	cmd.Instruction=0xC7;//指定命令 
+	cmd.Address=0;//无地址，随便给
+	cmd.AlternateBytes=0;//无交替字节，随便给
+	cmd.AddressSize=QSPI_ADDRESS_24_BITS;//24位地址阶段
+	cmd.AlternateBytesSize=QSPI_ALTERNATE_BYTES_8_BITS;//无交替字节，随便给
+	cmd.DummyCycles=0;//空周期需要0个 
+	cmd.InstructionMode=QSPI_INSTRUCTION_4_LINES;//命令阶段采用4线发送，符合手册 
+	cmd.AddressMode=QSPI_ADDRESS_NONE;//无地址阶段，符合手册 
 	cmd.AlternateByteMode=QSPI_ALTERNATE_BYTES_NONE;//无交替字节阶段，符合手册 
 	cmd.DataMode=QSPI_DATA_NONE;//无数据阶段，符合手册 
 	cmd.NbData=0;//无数据阶段 

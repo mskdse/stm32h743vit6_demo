@@ -1,0 +1,173 @@
+T48B0 000:206.619   SEGGER J-Link V8.16 Log File
+T48B0 000:206.844   DLL Compiled: Feb 26 2025 12:07:26
+T48B0 000:206.890   Logging started @ 2026-08-26 07:54
+T48B0 000:206.933   Process: C:\Users\EVC2-5\AppData\Local\Keil_v5\UV4\UV4.exe
+T48B0 000:206.986 - 206.976ms 
+T48B0 000:207.036 JLINK_SetWarnOutHandler(...)
+T48B0 000:207.079 - 0.044ms 
+T48B0 000:207.127 JLINK_OpenEx(...)
+T48B0 000:233.335   Firmware: J-Link V9 compiled May  7 2021 16:26:12
+T48B0 000:234.826   Firmware: J-Link V9 compiled May  7 2021 16:26:12
+T48B0 000:235.506   Decompressing FW timestamp took 165 us
+T48B0 000:242.608   Hardware: V9.70
+T48B0 000:242.700   S/N: 63728516
+T48B0 000:242.762   OEM: SEGGER
+T48B0 000:242.824   Feature(s): GDB, RDI, FlashBP, FlashDL, JFlash
+T48B0 000:243.721   Bootloader: (FW returned invalid version)
+T48B0 000:244.826   TELNET listener socket opened on port 19021
+T48B0 000:245.148   WEBSRV WEBSRV_Init(): Starting webserver thread(s)
+T48B0 000:247.349   WEBSRV Webserver running on local port 19080
+T48B0 000:247.657   Looking for J-Link GUI Server exe at: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\Segger\JLinkGUIServer.exe
+T48B0 000:247.882   Looking for J-Link GUI Server exe at: C:\Program Files\SEGGER\JLink_V960\JLinkGUIServer.exe
+T48B0 000:248.061   Forking J-Link GUI Server: C:\Program Files\SEGGER\JLink_V960\JLinkGUIServer.exe
+T48B0 000:428.344   J-Link GUI Server info: "J-Link GUI server V9.60 "
+T48B0 000:434.005 - 226.870ms returns "O.K."
+T48B0 000:434.109 JLINK_GetEmuCaps()
+T48B0 000:434.158 - 0.045ms returns 0xB9FF7BBF
+T48B0 000:434.208 JLINK_TIF_GetAvailable(...)
+T48B0 000:434.429 - 0.223ms 
+T48B0 000:434.499 JLINK_SetErrorOutHandler(...)
+T48B0 000:434.545 - 0.045ms 
+T48B0 000:434.611 JLINK_ExecCommand("ProjectFile = "C:\Users\EVC2-5\Desktop\stm32h743vit6_demo\H743_QSPI_FLASH_PRO\JLinkSettings.ini"", ...). 
+T48B0 000:464.491 - 29.881ms returns 0x00
+T48B0 000:464.587 JLINK_ExecCommand("Device = STM32H743VITx", ...). 
+T48B0 000:464.985   Flash bank @ 0x08000000: SFL: Parsing sectorization info from ELF file
+T48B0 000:465.056     FlashDevice.SectorInfo[0]: .SectorSize = 0x00020000, .SectorStartAddr = 0x00000000
+T48B0 000:465.119   FlashBank @0x08000000: Sectorization info from SFL ELF file ignored because sectorization override from DLL / XML file is active.
+T48B0 000:465.732   Flash bank @ 0x08100000: SFL: Parsing sectorization info from ELF file
+T48B0 000:465.803     FlashDevice.SectorInfo[0]: .SectorSize = 0x00020000, .SectorStartAddr = 0x00000000
+T48B0 000:465.865   FlashBank @0x08100000: Sectorization info from SFL ELF file ignored because sectorization override from DLL / XML file is active.
+T48B0 000:466.516   Flash bank @ 0x90000000: SFL: Parsing sectorization info from ELF file
+T48B0 000:466.588     FlashDevice.SectorInfo[0]: .SectorSize = 0x00010000, .SectorStartAddr = 0x00000000
+T48B0 000:496.543   Device "STM32H743VI" selected.
+T48B0 000:501.497 - 36.860ms returns 0x00
+T48B0 000:501.580 JLINK_ExecCommand("DisableConnectionTimeout", ...). 
+T48B0 000:501.641   ERROR: Unknown command
+T48B0 000:501.747 - 0.118ms returns 0x01
+T48B0 000:501.794 JLINK_GetHardwareVersion()
+T48B0 000:501.837 - 0.043ms returns 97000
+T48B0 000:502.014 JLINK_GetDLLVersion()
+T48B0 000:502.075 - 0.061ms returns 81600
+T48B0 000:502.121 JLINK_GetOEMString(...)
+T48B0 000:502.167 JLINK_GetFirmwareString(...)
+T48B0 000:502.209 - 0.042ms 
+T48B0 000:502.258 JLINK_GetDLLVersion()
+T48B0 000:502.301 - 0.042ms returns 81600
+T48B0 000:502.345 JLINK_GetCompileDateTime()
+T48B0 000:502.387 - 0.041ms 
+T48B0 000:502.432 JLINK_GetFirmwareString(...)
+T48B0 000:502.475 - 0.042ms 
+T48B0 000:502.519 JLINK_GetHardwareVersion()
+T48B0 000:502.562 - 0.042ms returns 97000
+T48B0 000:502.606 JLINK_GetSN()
+T48B0 000:502.648 - 0.042ms returns 63728516
+T48B0 000:502.726 JLINK_GetOEMString(...)
+T48B0 000:502.785 JLINK_TIF_Select(JLINKARM_TIF_SWD)
+T48B0 000:503.939 - 1.155ms returns 0x00
+T48B0 000:504.002 JLINK_HasError()
+T48B0 000:504.059 JLINK_SetSpeed(1000)
+T48B0 000:504.246 - 0.189ms 
+T48B0 000:504.590 JLINK_HasError()
+T48B0 000:504.649 JLINK_SetResetType(JLINKARM_RESET_TYPE_NORMAL)
+T48B0 000:504.729 - 0.080ms returns JLINKARM_RESET_TYPE_NORMAL
+T48B0 000:504.774 JLINK_Reset()
+T48B0 000:505.119   ConfigTargetSettings() start
+T48B0 000:505.205    J-Link Script File: Executing ConfigTargetSettings()
+T48B0 000:505.277   ConfigTargetSettings() end - Took 75us
+T48B0 000:505.343   InitTarget() start
+T48B0 000:505.405    J-Link Script File: Executing InitTarget()
+T48B0 000:505.734   SWD selected. Executing JTAG -> SWD switching sequence.
+T48B0 000:508.696   DAP initialized successfully.
+T48B0 000:519.919   InitTarget() end - Took 14.5ms
+T48B0 000:520.792   Found SW-DP with ID 0x6BA02477
+T48B0 000:523.523   DPIDR: 0x6BA02477
+T48B0 000:523.596   CoreSight SoC-400 or earlier
+T48B0 000:523.665   Scanning AP map to find all available APs
+T48B0 000:525.259   AP[3]: Stopped AP scan as end of AP map has been reached
+T48B0 000:525.333   AP[0]: AHB-AP (IDR: 0x84770001, ADDR: 0x00000000)
+T48B0 000:525.396   AP[1]: AHB-AP (IDR: 0x84770001, ADDR: 0x01000000)
+T48B0 000:525.458   AP[2]: APB-AP (IDR: 0x54770002, ADDR: 0x02000000)
+T48B0 000:525.520   Iterating through AP map to find AHB-AP to use
+T48B0 000:526.785   AP[0]: Core found
+T48B0 000:526.861   AP[0]: AHB-AP ROM base: 0xE00FE000
+T48B0 000:527.619   CPUID register: 0x411FC271. Implementer code: 0x41 (ARM)
+T48B0 000:528.451   Cache: L1 I/D-cache present
+T48B0 000:528.531   Found Cortex-M7 r1p1, Little endian.
+T48B0 000:528.950   -- Max. mem block: 0x00010E60
+T48B0 000:529.831   CPU_ReadMem(4 bytes @ 0xE000EDF0)
+T48B0 000:530.578   CPU_ReadMem(4 bytes @ 0xE0002000)
+T48B0 000:531.229   FPUnit: 8 code (BP) slots and 0 literal slots
+T48B0 000:531.303   CPU_ReadMem(4 bytes @ 0xE000EDFC)
+T48B0 000:531.885   CPU_WriteMem(4 bytes @ 0xE000EDFC)
+T48B0 000:532.511   CPU_ReadMem(4 bytes @ 0xE0001000)
+T48B0 000:533.051   CPU_WriteMem(4 bytes @ 0xE0001000)
+T48B0 000:533.671   CPU_ReadMem(4 bytes @ 0xE000ED88)
+T48B0 000:534.408   CPU_WriteMem(4 bytes @ 0xE000ED88)
+T48B0 000:534.972   CPU_ReadMem(4 bytes @ 0xE000ED88)
+T48B0 000:535.648   CPU_WriteMem(4 bytes @ 0xE000ED88)
+T48B0 000:536.380   CoreSight components:
+T48B0 000:536.453   ROMTbl[0] @ E00FE000
+T48B0 000:536.517   CPU_ReadMem(64 bytes @ 0xE00FE000)
+T48B0 000:537.939   CPU_ReadMem(32 bytes @ 0xE00FFFE0)
+T48B0 000:538.896   [0][0]: E00FF000 CID B105100D PID 000BB4C7 ROM Table
+T48B0 000:538.970   ROMTbl[1] @ E00FF000
+T48B0 000:539.032   CPU_ReadMem(64 bytes @ 0xE00FF000)
+T48B0 000:540.437   CPU_ReadMem(32 bytes @ 0xE000EFE0)
+T48B0 000:541.419   [1][0]: E000E000 CID B105E00D PID 000BB00C SCS-M7
+T48B0 000:541.493   CPU_ReadMem(32 bytes @ 0xE0001FE0)
+T48B0 000:542.464   [1][1]: E0001000 CID B105E00D PID 000BB002 DWT
+T48B0 000:542.538   CPU_ReadMem(32 bytes @ 0xE0002FE0)
+T48B0 000:543.566   [1][2]: E0002000 CID B105E00D PID 000BB00E FPB-M7
+T48B0 000:543.639   CPU_ReadMem(32 bytes @ 0xE0000FE0)
+T48B0 000:544.722   [1][3]: E0000000 CID B105E00D PID 000BB001 ITM
+T48B0 000:544.795   CPU_ReadMem(32 bytes @ 0xE0041FE0)
+T48B0 000:545.806   [0][1]: E0041000 CID B105900D PID 001BB975 ETM-M7
+T48B0 000:545.892   CPU_ReadMem(32 bytes @ 0xE0043FE0)
+T48B0 000:546.894   [0][2]: E0043000 CID B105900D PID 004BB906 CTI
+T48B0 000:546.968   CPU_WriteMem(4 bytes @ 0xE000ED84)
+T48B0 000:547.646   CPU_ReadMem(4 bytes @ 0xE000ED80)
+T48B0 000:548.333   I-Cache L1: 16 KB, 256 Sets, 32 Bytes/Line, 2-Way
+T48B0 000:548.406   CPU_WriteMem(4 bytes @ 0xE000ED84)
+T48B0 000:549.013   CPU_ReadMem(4 bytes @ 0xE000ED80)
+T48B0 000:549.660   D-Cache L1: 16 KB, 128 Sets, 32 Bytes/Line, 4-Way
+T48B0 000:549.817   JLINK_GetResetTypeDesc
+T48B0 000:549.929   - 0.111ms 
+T48B0 000:549.984   Reset type: NORMAL (https://wiki.segger.com/J-Link_Reset_Strategies)
+T48B0 000:550.039   CPU is running
+T48B0 000:550.111   CPU_WriteMem(4 bytes @ 0xE000EDF0)
+T48B0 000:550.760   CPU is running
+T48B0 000:550.865   CPU_WriteMem(4 bytes @ 0xE000EDFC)
+T48B0 000:551.468   Reset: Halt core after reset via DEMCR.VC_CORERESET.
+T48B0 000:552.005   Reset: Reset device via AIRCR.SYSRESETREQ.
+T48B0 000:552.086   CPU is running
+T48B0 000:552.150   CPU_WriteMem(4 bytes @ 0xE000ED0C)
+T48B0 000:606.120   CPU_ReadMem(4 bytes @ 0xE000EDF0)
+T48B0 000:606.815   CPU_ReadMem(4 bytes @ 0xE000EDF0)
+T48B0 000:613.957   CPU_WriteMem(4 bytes @ 0xE000EDFC)
+T48B0 000:620.772   CPU_ReadMem(4 bytes @ 0xE000EDF0)
+T48B0 000:628.130   CPU_WriteMem(4 bytes @ 0xE0002000)
+T48B0 000:629.004   CPU_ReadMem(4 bytes @ 0xE000EDFC)
+T48B0 000:629.697   CPU_ReadMem(4 bytes @ 0xE0001000)
+T48B0 000:630.430 - 125.654ms 
+T48B0 000:630.534 JLINK_GetId()
+T48B0 000:630.970 - 0.435ms returns 0x6BA02477
+T48B0 000:638.548 JLINK_GetFirmwareString(...)
+T48B0 000:638.728 - 0.180ms 
+T48B0 002:306.421 JLINK_SWO_Control(JLINKARM_SWO_CMD_GET_SPEED_INFO, ...)
+T48B0 002:306.756 - 0.334ms returns 0x00
+T48B0 002:306.814 JLINK_SWO_Control(JLINKARM_SWO_CMD_GET_SPEED_INFO, ...)
+T48B0 002:307.042 - 0.228ms returns 0x00
+T48B0 002:307.360 JLINK_SWO_Control(JLINKARM_SWO_CMD_GET_SPEED_INFO, ...)
+T48B0 002:307.597 - 0.237ms returns 0x00
+T48B0 006:573.574 JLINK_Close()
+T48B0 006:574.105   OnDisconnectTarget() start
+T48B0 006:574.190    J-Link Script File: Executing OnDisconnectTarget()
+T48B0 006:574.248   CPU_WriteMem(4 bytes @ 0x5C001004)
+T48B0 006:574.963   CPU_WriteMem(4 bytes @ 0x5C001034)
+T48B0 006:575.692   CPU_WriteMem(4 bytes @ 0x5C001054)
+T48B0 006:576.463   OnDisconnectTarget() end - Took 2.26ms
+T48B0 006:576.583   CPU_ReadMem(4 bytes @ 0xE0001000)
+T48B0 006:577.366   CPU_WriteMem(4 bytes @ 0xE0001004)
+T48B0 006:604.802 - 31.227ms
+T48B0 006:604.914   
+T48B0 006:604.957   Closed
