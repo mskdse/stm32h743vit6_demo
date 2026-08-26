@@ -1,7 +1,7 @@
 Dependencies for Project 'NewDevice', Target 'Cortex-M': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
 F (.\Abstract.txt)(0x68135CBA)()
-F (.\FlashPrg.c)(0x6A8E8EF2)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --apcs /ropi/rwpi -I ..\_Template -I .\ST_SDK\STM32H7xx_HAL_Driver\Inc -I .\ST_SDK\STM32H7xx_HAL_Driver\Inc\Legacy -I .\ST_SDK\CMSIS\Include -I .\ST_SDK\CMSIS\Device\ST\STM32H7xx\Include -I .\QSPI_Driver-IC:\Users\EVC2-5\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="543" -DSTM32H743xx -DUSE_FULL_LL_DRIVER-o .\objects\flashprg.o --depend .\objects\flashprg.d)
+F (.\FlashPrg.c)(0x6A8EAF1E)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --apcs /ropi/rwpi -I ..\_Template -I .\ST_SDK\STM32H7xx_HAL_Driver\Inc -I .\ST_SDK\STM32H7xx_HAL_Driver\Inc\Legacy -I .\ST_SDK\CMSIS\Include -I .\ST_SDK\CMSIS\Device\ST\STM32H7xx\Include -I .\QSPI_Driver-IC:\Users\EVC2-5\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="543" -DSTM32H743xx -DUSE_FULL_LL_DRIVER-o .\objects\flashprg.o --depend .\objects\flashprg.d)
 I (FlashOS.H)(0x6A8E6279)
 I (.\ST_SDK\CMSIS\Device\ST\STM32H7xx\Include\stm32h7xx.h)(0x6A6BEBDE)
 I (.\ST_SDK\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x6A6BEBDE)
@@ -444,7 +444,7 @@ I (.\ST_SDK\CMSIS\Include\cmsis_armcc.h)(0x6A6BEBDF)
 I (.\ST_SDK\CMSIS\Include\mpu_armv7.h)(0x6A6BEBDF)
 I (.\ST_SDK\CMSIS\Device\ST\STM32H7xx\Include\system_stm32h7xx.h)(0x6A6BEBDE)
 I (C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\include\math.h)(0x5E8E3CC2)
-F (.\QSPI_Driver\qspi_flash.c)(0x6A8E912A)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --apcs /ropi/rwpi -I ..\_Template -I .\ST_SDK\STM32H7xx_HAL_Driver\Inc -I .\ST_SDK\STM32H7xx_HAL_Driver\Inc\Legacy -I .\ST_SDK\CMSIS\Include -I .\ST_SDK\CMSIS\Device\ST\STM32H7xx\Include -I .\QSPI_Driver-IC:\Users\EVC2-5\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="543" -DSTM32H743xx -DUSE_FULL_LL_DRIVER-o .\objects\qspi_flash.o --depend .\objects\qspi_flash.d)
+F (.\QSPI_Driver\qspi_flash.c)(0x6A8EADD9)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --apcs /ropi/rwpi -I ..\_Template -I .\ST_SDK\STM32H7xx_HAL_Driver\Inc -I .\ST_SDK\STM32H7xx_HAL_Driver\Inc\Legacy -I .\ST_SDK\CMSIS\Include -I .\ST_SDK\CMSIS\Device\ST\STM32H7xx\Include -I .\QSPI_Driver-IC:\Users\EVC2-5\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="543" -DSTM32H743xx -DUSE_FULL_LL_DRIVER-o .\objects\qspi_flash.o --depend .\objects\qspi_flash.d)
 I (QSPI_Driver\qspi_flash.h)(0x6A8E7C15)
 I (.\ST_SDK\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal.h)(0x6A6BEBEB)
 I (.\ST_SDK\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_conf.h)(0x6A8E81A5)

@@ -67,12 +67,12 @@ static void CPU_CACHE_Enable(void);
  */
 
 int Init (unsigned long adr, unsigned long clk, unsigned long fnc) {
+	  SystemInit();
     MPU_Config();//配置MPU内存保护单元
 	  CPU_CACHE_Enable();//开启Cache
 	  HAL_Init();//HAL库的初始化
 	  SystemClock_Config();//配置系统时钟为400MHZ
 	  
-	  qspi_flash_Exit_Mmap();
 	  qspi_flash_w25q128_init();
 	  qspi_flash_Enter_Mmap();
   /* Add your Code */
@@ -87,7 +87,6 @@ int Init (unsigned long adr, unsigned long clk, unsigned long fnc) {
  */
 
 int UnInit (unsigned long fnc) {
-  qspi_flash_Exit_Mmap();
 	qspi_flash_w25q128_init();
 	qspi_flash_Enter_Mmap();
   /* Add your Code */

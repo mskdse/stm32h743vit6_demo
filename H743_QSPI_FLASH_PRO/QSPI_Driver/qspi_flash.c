@@ -11,7 +11,7 @@
 	 qspi-clk -----  PB2
 */
 
-__attribute__((section (".RAM_D2")))static QSPI_HandleTypeDef   qspi_handle;
+static QSPI_HandleTypeDef   qspi_handle;
 
 static void qspi_flash_w25q128_enterQSPIMODE(void);
 
@@ -66,9 +66,8 @@ static void qspi_flash_w25q128_wStateReg(uint8_t wcmd,uint8_t val,uint8_t useqsp
 static bool qspi_flash_w25q128_waitStateReg(uint8_t wcmd,uint8_t match,uint8_t mask,uint8_t useqspi)
 {
 	/* 轮询状态寄存器1，确保它的第一位WEL为1，第0位BUSY为0 */
-	QSPI_AutoPollingTypeDef  autocfg;
 	QSPI_CommandTypeDef      cmd;
-	HAL_StatusTypeDef        ret;
+	uint8_t                  rech;
 	while(HAL_QSPI_STATE_BUSY==HAL_QSPI_GetState(&qspi_handle));//BUSY状态下无法写寄存器
 	cmd.Instruction=wcmd;//指定读哪个状态寄存器
 	cmd.Address=0;//没地址阶段，随便给
@@ -82,24 +81,13 @@ static bool qspi_flash_w25q128_waitStateReg(uint8_t wcmd,uint8_t match,uint8_t m
 	cmd.AlternateByteMode=QSPI_ALTERNATE_BYTES_NONE;////就发一个命令，没有交替字节
 	if(useqspi) cmd.DataMode=QSPI_DATA_4_LINES;//数据阶段区分
 	else        cmd.DataMode=QSPI_DATA_1_LINE;
-	cmd.NbData=0;//这种情况下数据长度给多少都无所谓，HAL_QSPI_AutoPolling_IT函数内部会将StatusBytesSize赋值给NbData，也就是说这情况下这玩意没有用。
+	cmd.NbData=1;//收一个
 	cmd.DdrMode=QSPI_DDR_MODE_DISABLE;//双倍速率模式，即双边沿全部采样，这里器件不支持
 	cmd.DdrHoldHalfCycle=QSPI_DDR_HHC_ANALOG_DELAY;//双倍速率模式下的时钟延迟，这里器件没有双倍速率功能，随便给
 	cmd.SIOOMode=QSPI_SIOO_INST_EVERY_CMD;//指令只第一次发送一次后面无需发送，这个不符合w25q128的特性，它是有很多命令的
-	autocfg.Match=match;//期待值
-	autocfg.Mask=mask;//掩码
-	autocfg.Interval=0x10;//每128个时钟周期轮询一次
-	autocfg.StatusBytesSize=1;//读取一个字节即状态寄存器1
-	autocfg.MatchMode=QSPI_MATCH_MODE_AND;//与逻辑
-	autocfg.AutomaticStop=QSPI_AUTOMATIC_STOP_ENABLE;//匹配成功停止轮询
-	ret=HAL_QSPI_AutoPolling(&qspi_handle,&cmd,&autocfg,0);
-	if(HAL_OK!=ret)
-	{
-		HAL_QSPI_Abort(&qspi_handle);
-		HAL_QSPI_DeInit(&qspi_handle);
-		HAL_QSPI_Init(&qspi_handle);
-		return false;
-	}
+  HAL_QSPI_Command(&qspi_handle,&cmd,HAL_MAX_DELAY);
+	HAL_QSPI_Receive(&qspi_handle,&rech,HAL_MAX_DELAY);
+	if((rech&mask)!=match) return false;
 	return true;
 }
 
@@ -196,7 +184,7 @@ static void qspi_flash_w25q128_enterQSPIMODE(void)
 	/* 轮询状态寄存器2，确保它的第一位QE位为1 */
 	while(!qspi_flash_w25q128_waitStateReg(0x35,0x02,0x02,0));
 	
-	for(int i=0;i<1000000;i++);//等待FLASH稳定
+	for(int i=0;i<10000000;i++);//等待FLASH稳定
 	
 	/* 最后使用进入QSPI模式命令 */
 	qspi_flash_w25q128_wcmd(0x38,0);

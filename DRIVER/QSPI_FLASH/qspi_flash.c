@@ -196,7 +196,7 @@ static void qspi_flash_w25q128_enterQSPIMODE(void)
 	/* 轮询状态寄存器2，确保它的第一位QE位为1 */
 	while(!qspi_flash_w25q128_waitStateReg(0x35,0x02,0x02,0));
 	
-	HAL_Delay(500);//等待FLASH稳定
+	HAL_Delay(50);//等待FLASH稳定，实践发现50ms最好
 	
 	/* 最后使用进入QSPI模式命令 */
 	qspi_flash_w25q128_wcmd(0x38,0);
