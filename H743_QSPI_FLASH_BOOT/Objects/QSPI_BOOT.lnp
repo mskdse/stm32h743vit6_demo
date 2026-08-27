@@ -1,0 +1,27 @@
+--cpu Cortex-M7.fp.dp
+".\objects\main.o"
+".\objects\stm32h7xx_it.o"
+".\objects\qspi_flash.o"
+".\objects\stm32h7xx_hal.o"
+".\objects\stm32h7xx_hal_cortex.o"
+".\objects\stm32h7xx_hal_flash.o"
+".\objects\stm32h7xx_hal_flash_ex.o"
+".\objects\stm32h7xx_hal_gpio.o"
+".\objects\stm32h7xx_hal_mdma.o"
+".\objects\stm32h7xx_hal_pwr.o"
+".\objects\stm32h7xx_hal_pwr_ex.o"
+".\objects\stm32h7xx_hal_qspi.o"
+".\objects\stm32h7xx_hal_rcc.o"
+".\objects\stm32h7xx_hal_rcc_ex.o"
+".\objects\stm32h7xx_ll_delayblock.o"
+".\objects\stm32h7xx_ll_gpio.o"
+".\objects\stm32h7xx_ll_mdma.o"
+".\objects\stm32h7xx_ll_pwr.o"
+".\objects\stm32h7xx_ll_rcc.o"
+".\objects\stm32h7xx_ll_utils.o"
+".\objects\system_stm32h7xx.o"
+".\objects\startup_stm32h743xx.o"
+--library_type=microlib --strict --scatter ".\Objects\QSPI_BOOT.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\QSPI_BOOT.map" -o .\Objects\QSPI_BOOT.axf

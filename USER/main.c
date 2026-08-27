@@ -21,13 +21,26 @@ static void CPU_CACHE_Enable(void);
 /* 数组表格定义在 .RAM_RESET_VCTOR 段，这段空间用来存储中断向量表，不得再其他地方再定义这个节区 */
 __attribute__((section(".RamVecTable")))static uint8_t RAM_VCTOR_TABLE[0x400];
 
+/* 我现在的程序是运行在QSPI_FLASH还是普通FLASH，如果是QSPIFLASH的话，中断向量表必须拷贝0x9000000地址的 */
+#define  MY_FLASH_IS_QSPI_FLASH      1
+
 int main(void)
 {
 	/* 将中断向量表从FLASH的首地址拷贝到DTCM中然后设置中断向量表的偏移为DTCM首地址也就是数组地址 */
+	__disable_irq();
+	__DSB();
+	__ISB();
+#if MY_FLASH_IS_QSPI_FLASH
+	uint32_t *SouceAddr = (uint32_t *)0x90000000;
+#else
 	uint32_t *SouceAddr = (uint32_t *)FLASH_BANK1_BASE;
+#endif
 	uint32_t *DestAddr  = (uint32_t *)RAM_VCTOR_TABLE;
 	memcpy(DestAddr, SouceAddr, 0x400);
 	SCB->VTOR = (uint32_t)RAM_VCTOR_TABLE;
+	__DSB();
+	__ISB();
+	__enable_irq();
 	
 	SEGGER_RTT_Init();//初始化RTT调试
 	EventRecorderInitialize(EventRecordAll, 1U);//初始化EventRecoder组件
@@ -42,6 +55,7 @@ int main(void)
 	drvp_led_init();//初始化led
   drvp_key_init();//初始化key
 	drvp_eeprom_init();//初始化eeprom
+	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
 	for(;;)
 	{
 		uint16_t evt=drvp_key_rfifo();
@@ -191,18 +205,18 @@ static void MPU_Config(void)
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
 	
-	/* Configure the MPU QSPI flash */
-  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+	/* 配置QSPI，使它cache性能最高只用于执行代码，如果需要运行其他的比如文件系统存储需要重新加个QSPI配置并改变cache属性 */
+	MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = 0x90000000;//QSPI_BASE地址
   MPU_InitStruct.Size = MPU_REGION_SIZE_16MB;//W25Q128是16MB
   MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
   MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
   MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
-  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;//用来执行代码，那它就是只读，不存在多总线访问，所以开启共享改变cache属性
   MPU_InitStruct.Number = MPU_REGION_NUMBER1;
   MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL1;
   MPU_InitStruct.SubRegionDisable = 0x0;
-  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;//禁止执行代码，如果需要把程序下载到外部可以使能
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;//可以执行代码
   
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
 

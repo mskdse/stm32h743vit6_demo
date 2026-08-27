@@ -10,10 +10,13 @@
 #include "ff.h"			/* Basic definitions of FatFs */
 #include "diskio.h"		/* Declarations FatFs MAI */
 
+/* 如果程序下载到QSPI_FLASH，那就不要给它移植文件系统除非你愿意牺牲cache性能或者处理cache一致性问题并且还要确保不要把程序空间擦写掉
+   或者可以把QSPI_FLASH运行程序和存储数据分块，分别设置不同的Cache属性。
+*/
 #include "qspi_flash.h"
 
 /* Example: Mapping of physical drive number for each drive */
-#define DEV_QSPI_FLASH	0	/* Map FTL to physical drive 0 */
+//#define DEV_QSPI_FLASH	0	/* Map FTL to physical drive 0 */
 
 
 /*-----------------------------------------------------------------------*/
@@ -24,18 +27,18 @@ DSTATUS disk_status (
 	BYTE pdrv		/* Physical drive nmuber to identify the drive */
 )
 {
-	DSTATUS stat=0;
-	uint32_t flashid;
+//	DSTATUS stat=0;
+//	uint32_t flashid;
 
 	switch (pdrv) 
  {
-	case DEV_QSPI_FLASH :
-	{
-		flashid = qspi_flash_w25q128_read_id();
-	  if(FLASH_ID==(flashid&FLASH_ID_MASK)) stat&=~STA_NOINIT;
-	  else                                  stat|= STA_NOINIT;
-		return stat;
-	}
+//	case DEV_QSPI_FLASH :
+//	{
+//		flashid = qspi_flash_w25q128_read_id();
+//	  if(FLASH_ID==(flashid&FLASH_ID_MASK)) stat&=~STA_NOINIT;
+//	  else                                  stat|= STA_NOINIT;
+//		return stat;
+//	}
 	}
 	return STA_NOINIT;
 }
@@ -50,16 +53,16 @@ DSTATUS disk_initialize (
 	BYTE pdrv				/* Physical drive nmuber to identify the drive */
 )
 {
-	DSTATUS stat;
+//	DSTATUS stat;
 
 	switch (pdrv) 
  {
-	case DEV_QSPI_FLASH :
-	{
-		qspi_flash_w25q128_init();
-	  stat=disk_status(DEV_QSPI_FLASH);
-		return stat;
-	}
+//	case DEV_QSPI_FLASH :
+//	{
+//		qspi_flash_w25q128_init();
+//	  stat=disk_status(DEV_QSPI_FLASH);
+//		return stat;
+//	}
 	}
 	return STA_NOINIT;
 }
@@ -79,11 +82,11 @@ DRESULT disk_read (
 {
 	switch (pdrv) 
  {
-	case DEV_QSPI_FLASH :
-	{
-		qspi_flash_read((sector<<SECTOR_SIZE_BIT),buff,(count<<SECTOR_SIZE_BIT));
-		return RES_OK;
-	}
+//	case DEV_QSPI_FLASH :
+//	{
+//		qspi_flash_read((sector<<SECTOR_SIZE_BIT),buff,(count<<SECTOR_SIZE_BIT));
+//		return RES_OK;
+//	}
 	}
 	return RES_PARERR;
 }
@@ -105,12 +108,12 @@ DRESULT disk_write (
 {
 	switch (pdrv) 
  {
-	case DEV_QSPI_FLASH :
-	{
-		for(int i=0;i<count;i++) qspi_flash_erase_sector(((sector+i)<<SECTOR_SIZE_BIT));
-		qspi_flash_write((sector<<SECTOR_SIZE_BIT),(uint8_t*)buff,(count<<SECTOR_SIZE_BIT));
-		return RES_OK;
-	}
+//	case DEV_QSPI_FLASH :
+//	{
+//		for(int i=0;i<count;i++) qspi_flash_erase_sector(((sector+i)<<SECTOR_SIZE_BIT));
+//		qspi_flash_write((sector<<SECTOR_SIZE_BIT),(uint8_t*)buff,(count<<SECTOR_SIZE_BIT));
+//		return RES_OK;
+//	}
 	}
 	return RES_PARERR;
 }
@@ -132,12 +135,12 @@ DRESULT disk_ioctl (
 
 	switch (pdrv) 
 	{
-	case DEV_QSPI_FLASH :
-	{
-     if(GET_SECTOR_COUNT==cmd)      *(LBA_t*)buff=(W25Q128_SIZE/SECTOR_SIZE);
-		 else if(GET_SECTOR_SIZE==cmd)  *(WORD*) buff=SECTOR_SIZE;
-		 else if(GET_BLOCK_SIZE==cmd)   *(DWORD*)buff=1;
-	}
+//	case DEV_QSPI_FLASH :
+//	{
+//     if(GET_SECTOR_COUNT==cmd)      *(LBA_t*)buff=(W25Q128_SIZE/SECTOR_SIZE);
+//		 else if(GET_SECTOR_SIZE==cmd)  *(WORD*) buff=SECTOR_SIZE;
+//		 else if(GET_BLOCK_SIZE==cmd)   *(DWORD*)buff=1;
+//	}
   }
 	return res;
 }
