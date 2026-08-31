@@ -123,12 +123,10 @@
 .\outfiles\main.o: .\CIRCULAR_BUFFER\src\circular_buffer.h
 .\outfiles\main.o: .\CIRCULAR_BUFFER\port\port.h
 .\outfiles\main.o: .\CIRCULAR_BUFFER\port\config.h
-.\outfiles\main.o: .\DRIVER\PWM_TIMER2\pwm_timer2.h
-.\outfiles\main.o: .\DRIVER\PWM_TIMER1\pwm_timer1.h
-.\outfiles\main.o: .\DRIVER\PWM_IN_TIMER5\pwm_in_timer5.h
 .\outfiles\main.o: .\DRIVER\DRIVER_EEPROM\drvp_eeprom.h
 .\outfiles\main.o: .\DRIVER\DRIVER_EEPROM\drv_eeprom.h
 .\outfiles\main.o: .\FATFS\ff.h
 .\outfiles\main.o: .\FATFS\ffconf.h
 .\outfiles\main.o: .\DRIVER\QSPI_FLASH\qspi_flash.h
-.\outfiles\main.o: .\DRIVER\LPTIMER\drv_lptimer2.h
+.\outfiles\main.o: .\DRIVER\FMC_LCD\drvp_fmc_lcd.h
+.\outfiles\main.o: .\DRIVER\FMC_LCD\drv_fmc_lcd.h

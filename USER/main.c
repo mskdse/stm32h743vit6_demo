@@ -6,13 +6,14 @@
 #include "sram_d2_malloc.h"
 #include "drvp_key.h"
 //#include "base_timer6.h"
-#include "pwm_timer2.h"
-#include "pwm_timer1.h"
-#include "pwm_in_timer5.h"
+//#include "pwm_timer2.h"
+//#include "pwm_timer1.h"
+//#include "pwm_in_timer5.h"
 #include "drvp_eeprom.h"
 #include "ff.h"
 #include "qspi_flash.h"
-#include "drv_lptimer2.h"
+//#include "drv_lptimer2.h"
+#include "drvp_fmc_lcd.h"
 
 static void SystemClock_Config(void);
 static void Error_Handler(void);
@@ -56,6 +57,7 @@ int main(void)
 	drvp_led_init();//初始化led
   drvp_key_init();//初始化key
 	drvp_eeprom_init();//初始化eeprom
+	drvp_fmc_lcd_init();//初始化lcd
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
 	for(;;)
 	{
@@ -203,7 +205,6 @@ static void MPU_Config(void)
   MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
   MPU_InitStruct.SubRegionDisable = 0x87;
   MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
-
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
 	
 	/* 配置QSPI，使它cache性能最高只用于执行代码，如果需要运行其他的比如文件系统存储需要重新加个QSPI配置并改变cache属性 */
@@ -218,7 +219,20 @@ static void MPU_Config(void)
   MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL1;
   MPU_InitStruct.SubRegionDisable = 0x0;
   MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;//可以执行代码
-  
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+	
+	/* 配置FMC，确保时序正确，必须将其配置为Device或者store模式，不允许执行代码，ST官方配置是Device模式 */
+	MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = 0x60000000;//FMC的BANK1的第一片区域的地址
+  MPU_InitStruct.Size = MPU_REGION_SIZE_64MB;//BANK1总共是4*64MB,我们只用了第一片区域64MB
+  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;//Device模式强制共享，这个给什么都行
+  MPU_InitStruct.Number = MPU_REGION_NUMBER2;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.SubRegionDisable = 0x0;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;//不可以执行代码
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
   /* Enable the MPU */

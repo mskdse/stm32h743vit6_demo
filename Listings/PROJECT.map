@@ -3297,6 +3297,21 @@ Section Cross References
     drv_lptimer2.o(i.drv_lptimer2_init) refers to stm32h7xx_hal_lptim.o(i.HAL_LPTIM_Init) for HAL_LPTIM_Init
     drv_lptimer2.o(i.drv_lptimer2_init) refers to stm32h7xx_hal_lptim.o(i.HAL_LPTIM_PWM_Start) for HAL_LPTIM_PWM_Start
     drv_lptimer2.o(i.drv_lptimer2_init) refers to drv_lptimer2.o(.RAM_D2) for lptimer2_handle
+    drv_fmc_lcd.o(i.drv_fmc_bl_ctrl) refers to stm32h7xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
+    drv_fmc_lcd.o(i.drv_fmc_lcd_init) refers to stm32h7xx_hal_gpio.o(i.HAL_GPIO_Init) for HAL_GPIO_Init
+    drv_fmc_lcd.o(i.drv_fmc_lcd_init) refers to memseta.o(.text) for __aeabi_memclr4
+    drv_fmc_lcd.o(i.drv_fmc_lcd_init) refers to stm32h7xx_ll_fmc.o(i.FMC_NORSRAM_Timing_Init) for FMC_NORSRAM_Timing_Init
+    drv_fmc_lcd.o(i.drv_fmc_lcd_init) refers to stm32h7xx_ll_fmc.o(i.FMC_NORSRAM_Init) for FMC_NORSRAM_Init
+    drv_fmc_lcd.o(i.drv_fmc_lcd_rst) refers to stm32h7xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
+    drv_fmc_lcd.o(i.drv_fmc_lcd_rst) refers to stm32h7xx_hal.o(i.HAL_Delay) for HAL_Delay
+    drvp_fmc_lcd.o(i.drvp_fmc_lcd_init) refers to stm32h7xx_hal.o(i.HAL_Delay) for HAL_Delay
+    drvp_fmc_lcd.o(i.drvp_fmc_lcd_init) refers to drvp_fmc_lcd.o(.RAM_D2) for drv_lcd
+    drvp_fmc_lcd.o(.RAM_D2) refers to drv_fmc_lcd.o(i.drv_fmc_lcd_init) for drv_fmc_lcd_init
+    drvp_fmc_lcd.o(.RAM_D2) refers to drv_fmc_lcd.o(i.drv_fmc_lcd_rst) for drv_fmc_lcd_rst
+    drvp_fmc_lcd.o(.RAM_D2) refers to drv_fmc_lcd.o(i.drv_fmc_bl_ctrl) for drv_fmc_bl_ctrl
+    drvp_fmc_lcd.o(.RAM_D2) refers to drv_fmc_lcd.o(i.drv_fmc_write_cmd) for drv_fmc_write_cmd
+    drvp_fmc_lcd.o(.RAM_D2) refers to drv_fmc_lcd.o(i.drv_fmc_write_data) for drv_fmc_write_data
+    drvp_fmc_lcd.o(.RAM_D2) refers to drv_fmc_lcd.o(i.drv_fmc_read_data) for drv_fmc_read_data
     circular_buffer.o(i.circular_buffer_free) refers to sram_d2_malloc.o(i.sram_d2_free) for sram_d2_free
     circular_buffer.o(i.circular_buffer_free) refers to port.o(i.mutex_destroy) for mutex_destroy
     circular_buffer.o(i.circular_buffer_init) refers to circular_buffer.o(i.is_power_of_two) for is_power_of_two
@@ -3352,6 +3367,7 @@ Section Cross References
     main.o(i.main) refers to drvp_led.o(i.drvp_led_init) for drvp_led_init
     main.o(i.main) refers to drvp_key.o(i.drvp_key_init) for drvp_key_init
     main.o(i.main) refers to drvp_eeprom.o(i.drvp_eeprom_init) for drvp_eeprom_init
+    main.o(i.main) refers to drvp_fmc_lcd.o(i.drvp_fmc_lcd_init) for drvp_fmc_lcd_init
     main.o(i.main) refers to segger_rtt_printf.o(i.SEGGER_RTT_printf) for SEGGER_RTT_printf
     main.o(i.main) refers to drvp_key.o(i.drvp_key_rfifo) for drvp_key_rfifo
     main.o(i.main) refers to main.o(.RamVecTable) for RAM_VCTOR_TABLE
@@ -3737,7 +3753,6 @@ Removing Unused input sections from the image.
     Removing stm32h7xx_hal.o(i.HAL_DBGMCU_EnableDBGStandbyMode), (20 bytes).
     Removing stm32h7xx_hal.o(i.HAL_DBGMCU_EnableDBGStopMode), (20 bytes).
     Removing stm32h7xx_hal.o(i.HAL_DeInit), (132 bytes).
-    Removing stm32h7xx_hal.o(i.HAL_Delay), (40 bytes).
     Removing stm32h7xx_hal.o(i.HAL_DisableCompensationCell), (20 bytes).
     Removing stm32h7xx_hal.o(i.HAL_EXTI_D1_ClearFlag), (22 bytes).
     Removing stm32h7xx_hal.o(i.HAL_EXTI_D1_EventInputConfig), (168 bytes).
@@ -6298,8 +6313,6 @@ Removing Unused input sections from the image.
     Removing stm32h7xx_ll_fmc.o(i.FMC_NAND_Init), (52 bytes).
     Removing stm32h7xx_ll_fmc.o(i.FMC_NORSRAM_DeInit), (56 bytes).
     Removing stm32h7xx_ll_fmc.o(i.FMC_NORSRAM_Extended_Timing_Init), (68 bytes).
-    Removing stm32h7xx_ll_fmc.o(i.FMC_NORSRAM_Init), (164 bytes).
-    Removing stm32h7xx_ll_fmc.o(i.FMC_NORSRAM_Timing_Init), (90 bytes).
     Removing stm32h7xx_ll_fmc.o(i.FMC_NORSRAM_WriteOperation_Disable), (18 bytes).
     Removing stm32h7xx_ll_fmc.o(i.FMC_NORSRAM_WriteOperation_Enable), (18 bytes).
     Removing stm32h7xx_ll_fmc.o(i.FMC_SDRAM_DeInit), (32 bytes).
@@ -6730,6 +6743,12 @@ Removing Unused input sections from the image.
     Removing drv_lptimer2.o(.rrx_text), (6 bytes).
     Removing drv_lptimer2.o(i.drv_lptimer2_init), (224 bytes).
     Removing drv_lptimer2.o(.RAM_D2), (92 bytes).
+    Removing drv_fmc_lcd.o(.rev16_text), (4 bytes).
+    Removing drv_fmc_lcd.o(.revsh_text), (4 bytes).
+    Removing drv_fmc_lcd.o(.rrx_text), (6 bytes).
+    Removing drvp_fmc_lcd.o(.rev16_text), (4 bytes).
+    Removing drvp_fmc_lcd.o(.revsh_text), (4 bytes).
+    Removing drvp_fmc_lcd.o(.rrx_text), (6 bytes).
     Removing port.o(i.mutex_destroy), (2 bytes).
     Removing circular_buffer.o(i.circular_buffer_free), (36 bytes).
     Removing circular_buffer.o(i.circular_buffer_is_empty), (40 bytes).
@@ -6859,7 +6878,7 @@ Removing Unused input sections from the image.
     Removing retarget_io.o(i.fputc), (32 bytes).
     Removing retarget_io.o(i.stdout_putchar), (4 bytes).
 
-3136 unused section(s) (total 346662 bytes) removed from the image.
+3139 unused section(s) (total 346396 bytes) removed from the image.
 
 ==============================================================================
 
@@ -6883,21 +6902,21 @@ Image Symbol Table
     .ITCM_CODE                               0x00000000   Section        0  main.o(.ITCM_CODE)
     ../clib/../cmprslib/zerorunl2.c          0x00000000   Number         0  __dczerorl2.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry12b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry12a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry12a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry12b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
     ../clib/microlib/stdio/fputs.c           0x00000000   Number         0  fputs_e.o ABSOLUTE
@@ -6921,6 +6940,8 @@ Image Symbol Table
     DRIVER\DRIVER_KEY\drvp_key.c             0x00000000   Number         0  drvp_key.o ABSOLUTE
     DRIVER\DRIVER_LED\drv_led.c              0x00000000   Number         0  drv_led.o ABSOLUTE
     DRIVER\DRIVER_LED\drvp_led.c             0x00000000   Number         0  drvp_led.o ABSOLUTE
+    DRIVER\FMC_LCD\drv_fmc_lcd.c             0x00000000   Number         0  drv_fmc_lcd.o ABSOLUTE
+    DRIVER\FMC_LCD\drvp_fmc_lcd.c            0x00000000   Number         0  drvp_fmc_lcd.o ABSOLUTE
     DRIVER\LPTIMER\drv_lptimer2.c            0x00000000   Number         0  drv_lptimer2.o ABSOLUTE
     DRIVER\PWM_IN_TIMER5\pwm_in_timer5.c     0x00000000   Number         0  pwm_in_timer5.o ABSOLUTE
     DRIVER\PWM_TIMER1\pwm_timer1.c           0x00000000   Number         0  pwm_timer1.o ABSOLUTE
@@ -6932,6 +6953,8 @@ Image Symbol Table
     DRIVER\\DRIVER_KEY\\drvp_key.c           0x00000000   Number         0  drvp_key.o ABSOLUTE
     DRIVER\\DRIVER_LED\\drv_led.c            0x00000000   Number         0  drv_led.o ABSOLUTE
     DRIVER\\DRIVER_LED\\drvp_led.c           0x00000000   Number         0  drvp_led.o ABSOLUTE
+    DRIVER\\FMC_LCD\\drv_fmc_lcd.c           0x00000000   Number         0  drv_fmc_lcd.o ABSOLUTE
+    DRIVER\\FMC_LCD\\drvp_fmc_lcd.c          0x00000000   Number         0  drvp_fmc_lcd.o ABSOLUTE
     DRIVER\\LPTIMER\\drv_lptimer2.c          0x00000000   Number         0  drv_lptimer2.o ABSOLUTE
     DRIVER\\PWM_IN_TIMER5\\pwm_in_timer5.c   0x00000000   Number         0  pwm_in_timer5.o ABSOLUTE
     DRIVER\\PWM_TIMER1\\pwm_timer1.c         0x00000000   Number         0  pwm_timer1.o ABSOLUTE
@@ -7233,12 +7256,14 @@ Image Symbol Table
     eepromi2c                                0x300001f4   Data         132  drv_eeprom.o(.RAM_D2)
     .RAM_D2                                  0x3000027c   Section      266  drvp_eeprom.o(.RAM_D2)
     drvp_eeprom                              0x3000027c   Data         266  drvp_eeprom.o(.RAM_D2)
-    .RAM_D2                                  0x30000388   Section       16  sram_d2_malloc.o(.RAM_D2)
-    mem_ctl                                  0x30000388   Data          16  sram_d2_malloc.o(.RAM_D2)
-    .RAM_D2                                  0x30000398   Section     1041  segger_rtt.o(.RAM_D2)
-    _acUpBuffer                              0x30000398   Data        1024  segger_rtt.o(.RAM_D2)
-    _acDownBuffer                            0x30000798   Data          16  segger_rtt.o(.RAM_D2)
-    _ActiveTerminal                          0x300007a8   Data           1  segger_rtt.o(.RAM_D2)
+    .RAM_D2                                  0x30000388   Section       24  drvp_fmc_lcd.o(.RAM_D2)
+    drv_lcd                                  0x30000388   Data          24  drvp_fmc_lcd.o(.RAM_D2)
+    .RAM_D2                                  0x300003a0   Section       16  sram_d2_malloc.o(.RAM_D2)
+    mem_ctl                                  0x300003a0   Data          16  sram_d2_malloc.o(.RAM_D2)
+    .RAM_D2                                  0x300003b0   Section     1041  segger_rtt.o(.RAM_D2)
+    _acUpBuffer                              0x300003b0   Data        1024  segger_rtt.o(.RAM_D2)
+    _acDownBuffer                            0x300007b0   Data          16  segger_rtt.o(.RAM_D2)
+    _ActiveTerminal                          0x300007c0   Data           1  segger_rtt.o(.RAM_D2)
     .RAM_MALLOC                              0x3003b000   Section    20480  sram_d2_malloc.o(.RAM_MALLOC)
     AXI_SRAM                                 0x3003b000   Data       20480  sram_d2_malloc.o(.RAM_MALLOC)
     RESET                                    0x90000000   Section      664  startup_stm32h743xx.o(RESET)
@@ -7281,185 +7306,195 @@ Image Symbol Table
     i.EventRecorderTimerGetCount             0x90000840   Section        0  eventrecorder.o(i.EventRecorderTimerGetCount)
     i.EventRecorderTimerSetup                0x9000084c   Section        0  eventrecorder.o(i.EventRecorderTimerSetup)
     i.ExitRun0Mode                           0x90000870   Section        0  system_stm32h7xx.o(i.ExitRun0Mode)
-    i.HAL_DMA_Abort_IT                       0x90000874   Section        0  stm32h7xx_hal_dma.o(i.HAL_DMA_Abort_IT)
-    i.HAL_DMA_GetState                       0x90000c0c   Section        0  stm32h7xx_hal_dma.o(i.HAL_DMA_GetState)
-    i.HAL_EnableCompensationCell             0x90000c14   Section        0  stm32h7xx_hal.o(i.HAL_EnableCompensationCell)
-    i.HAL_GPIO_Init                          0x90000c28   Section        0  stm32h7xx_hal_gpio.o(i.HAL_GPIO_Init)
-    i.HAL_GPIO_ReadPin                       0x90000e24   Section        0  stm32h7xx_hal_gpio.o(i.HAL_GPIO_ReadPin)
-    i.HAL_GPIO_WritePin                      0x90000e34   Section        0  stm32h7xx_hal_gpio.o(i.HAL_GPIO_WritePin)
-    i.HAL_GetREVID                           0x90000e40   Section        0  stm32h7xx_hal.o(i.HAL_GetREVID)
-    i.HAL_GetTick                            0x90000e4c   Section        0  stm32h7xx_hal.o(i.HAL_GetTick)
-    i.HAL_I2C_AbortCpltCallback              0x90000e58   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_AbortCpltCallback)
-    i.HAL_I2C_AddrCallback                   0x90000e5a   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_AddrCallback)
-    i.HAL_I2C_DeInit                         0x90000e5c   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_DeInit)
-    i.HAL_I2C_ER_IRQHandler                  0x90000eac   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_ER_IRQHandler)
-    i.HAL_I2C_EV_IRQHandler                  0x90000f22   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_EV_IRQHandler)
-    i.HAL_I2C_ErrorCallback                  0x90000f40   Section        0  drv_eeprom.o(i.HAL_I2C_ErrorCallback)
-    i.HAL_I2C_Init                           0x90000f90   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_Init)
-    i.HAL_I2C_ListenCpltCallback             0x900010c4   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_ListenCpltCallback)
-    i.HAL_I2C_MasterRxCpltCallback           0x900010c6   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_MasterRxCpltCallback)
-    i.HAL_I2C_MasterTxCpltCallback           0x900010c8   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_MasterTxCpltCallback)
-    i.HAL_I2C_MemRxCpltCallback              0x900010cc   Section        0  drv_eeprom.o(i.HAL_I2C_MemRxCpltCallback)
-    i.HAL_I2C_MemTxCpltCallback              0x900010e4   Section        0  drv_eeprom.o(i.HAL_I2C_MemTxCpltCallback)
-    i.HAL_I2C_Mem_Read_IT                    0x900010fc   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_Mem_Read_IT)
-    i.HAL_I2C_Mem_Write_IT                   0x900011c4   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_Mem_Write_IT)
-    i.HAL_I2C_MspDeInit                      0x90001290   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_MspDeInit)
-    i.HAL_I2C_MspInit                        0x90001292   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_MspInit)
-    i.HAL_I2C_SlaveRxCpltCallback            0x90001294   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_SlaveRxCpltCallback)
-    i.HAL_I2C_SlaveTxCpltCallback            0x90001296   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_SlaveTxCpltCallback)
-    i.HAL_IncTick                            0x90001298   Section        0  stm32h7xx_hal.o(i.HAL_IncTick)
-    i.HAL_Init                               0x900012b0   Section        0  stm32h7xx_hal.o(i.HAL_Init)
-    i.HAL_InitTick                           0x90001310   Section        0  stm32h7xx_hal.o(i.HAL_InitTick)
-    i.HAL_MPU_ConfigRegion                   0x90001368   Section        0  stm32h7xx_hal_cortex.o(i.HAL_MPU_ConfigRegion)
-    i.HAL_MPU_Disable                        0x900013c4   Section        0  stm32h7xx_hal_cortex.o(i.HAL_MPU_Disable)
-    i.HAL_MPU_Enable                         0x900013f0   Section        0  stm32h7xx_hal_cortex.o(i.HAL_MPU_Enable)
-    i.HAL_MspInit                            0x90001430   Section        0  stm32h7xx_hal_msp_template.o(i.HAL_MspInit)
-    i.HAL_NVIC_EnableIRQ                     0x90001432   Section        0  stm32h7xx_hal_cortex.o(i.HAL_NVIC_EnableIRQ)
-    i.HAL_NVIC_SetPriority                   0x9000145a   Section        0  stm32h7xx_hal_cortex.o(i.HAL_NVIC_SetPriority)
-    i.HAL_NVIC_SetPriorityGrouping           0x900014d4   Section        0  stm32h7xx_hal_cortex.o(i.HAL_NVIC_SetPriorityGrouping)
-    i.HAL_RCC_ClockConfig                    0x900014fc   Section        0  stm32h7xx_hal_rcc.o(i.HAL_RCC_ClockConfig)
-    i.HAL_RCC_GetSysClockFreq                0x9000181c   Section        0  stm32h7xx_hal_rcc.o(i.HAL_RCC_GetSysClockFreq)
-    i.HAL_RCC_OscConfig                      0x90001a48   Section        0  stm32h7xx_hal_rcc.o(i.HAL_RCC_OscConfig)
-    i.HAL_SYSTICK_Config                     0x900022a0   Section        0  stm32h7xx_hal_cortex.o(i.HAL_SYSTICK_Config)
-    i.HAL_TIM_IRQHandler                     0x900022d4   Section        0  stm32h7xx_hal_tim.o(i.HAL_TIM_IRQHandler)
-    i.HardFaultHandler                       0x90002490   Section        0  segger_hardfaulthandler.o(i.HardFaultHandler)
-    i.I2C2_ER_IRQHandler                     0x900025f0   Section        0  drv_eeprom.o(i.I2C2_ER_IRQHandler)
-    i.I2C2_EV_IRQHandler                     0x90002600   Section        0  drv_eeprom.o(i.I2C2_EV_IRQHandler)
-    i.I2C_DMAAbort                           0x90002610   Section        0  stm32h7xx_hal_i2c.o(i.I2C_DMAAbort)
-    I2C_DMAAbort                             0x90002611   Thumb Code    34  stm32h7xx_hal_i2c.o(i.I2C_DMAAbort)
-    i.I2C_Disable_IRQ                        0x90002632   Section        0  stm32h7xx_hal_i2c.o(i.I2C_Disable_IRQ)
-    I2C_Disable_IRQ                          0x90002633   Thumb Code   110  stm32h7xx_hal_i2c.o(i.I2C_Disable_IRQ)
-    i.I2C_Enable_IRQ                         0x900026a0   Section        0  stm32h7xx_hal_i2c.o(i.I2C_Enable_IRQ)
-    I2C_Enable_IRQ                           0x900026a1   Thumb Code   156  stm32h7xx_hal_i2c.o(i.I2C_Enable_IRQ)
-    i.I2C_Flush_TXDR                         0x90002748   Section        0  stm32h7xx_hal_i2c.o(i.I2C_Flush_TXDR)
-    I2C_Flush_TXDR                           0x90002749   Thumb Code    40  stm32h7xx_hal_i2c.o(i.I2C_Flush_TXDR)
-    i.I2C_ITAddrCplt                         0x90002770   Section        0  stm32h7xx_hal_i2c.o(i.I2C_ITAddrCplt)
-    I2C_ITAddrCplt                           0x90002771   Thumb Code   206  stm32h7xx_hal_i2c.o(i.I2C_ITAddrCplt)
-    i.I2C_ITError                            0x90002840   Section        0  stm32h7xx_hal_i2c.o(i.I2C_ITError)
-    I2C_ITError                              0x90002841   Thumb Code   326  stm32h7xx_hal_i2c.o(i.I2C_ITError)
-    i.I2C_ITListenCplt                       0x90002994   Section        0  stm32h7xx_hal_i2c.o(i.I2C_ITListenCplt)
-    I2C_ITListenCplt                         0x90002995   Thumb Code   106  stm32h7xx_hal_i2c.o(i.I2C_ITListenCplt)
-    i.I2C_ITMasterCplt                       0x90002a04   Section        0  stm32h7xx_hal_i2c.o(i.I2C_ITMasterCplt)
-    I2C_ITMasterCplt                         0x90002a05   Thumb Code   288  stm32h7xx_hal_i2c.o(i.I2C_ITMasterCplt)
-    i.I2C_ITMasterSeqCplt                    0x90002b2c   Section        0  stm32h7xx_hal_i2c.o(i.I2C_ITMasterSeqCplt)
-    I2C_ITMasterSeqCplt                      0x90002b2d   Thumb Code    98  stm32h7xx_hal_i2c.o(i.I2C_ITMasterSeqCplt)
-    i.I2C_ITSlaveCplt                        0x90002b90   Section        0  stm32h7xx_hal_i2c.o(i.I2C_ITSlaveCplt)
-    I2C_ITSlaveCplt                          0x90002b91   Thumb Code   896  stm32h7xx_hal_i2c.o(i.I2C_ITSlaveCplt)
-    i.I2C_ITSlaveSeqCplt                     0x90002f20   Section        0  stm32h7xx_hal_i2c.o(i.I2C_ITSlaveSeqCplt)
-    I2C_ITSlaveSeqCplt                       0x90002f21   Thumb Code   140  stm32h7xx_hal_i2c.o(i.I2C_ITSlaveSeqCplt)
-    i.I2C_Master_ISR_DMA                     0x90002fac   Section        0  stm32h7xx_hal_i2c.o(i.I2C_Master_ISR_DMA)
-    I2C_Master_ISR_DMA                       0x90002fad   Thumb Code   352  stm32h7xx_hal_i2c.o(i.I2C_Master_ISR_DMA)
-    i.I2C_Mem_ISR_DMA                        0x9000310c   Section        0  stm32h7xx_hal_i2c.o(i.I2C_Mem_ISR_DMA)
-    I2C_Mem_ISR_DMA                          0x9000310d   Thumb Code   426  stm32h7xx_hal_i2c.o(i.I2C_Mem_ISR_DMA)
-    i.I2C_Mem_ISR_IT                         0x900032c0   Section        0  stm32h7xx_hal_i2c.o(i.I2C_Mem_ISR_IT)
-    I2C_Mem_ISR_IT                           0x900032c1   Thumb Code   404  stm32h7xx_hal_i2c.o(i.I2C_Mem_ISR_IT)
-    i.I2C_Slave_ISR_DMA                      0x9000345c   Section        0  stm32h7xx_hal_i2c.o(i.I2C_Slave_ISR_DMA)
-    I2C_Slave_ISR_DMA                        0x9000345d   Thumb Code   724  stm32h7xx_hal_i2c.o(i.I2C_Slave_ISR_DMA)
-    i.I2C_Slave_ISR_IT                       0x90003738   Section        0  stm32h7xx_hal_i2c.o(i.I2C_Slave_ISR_IT)
-    I2C_Slave_ISR_IT                         0x90003739   Thumb Code   330  stm32h7xx_hal_i2c.o(i.I2C_Slave_ISR_IT)
-    i.I2C_TransferConfig                     0x90003882   Section        0  stm32h7xx_hal_i2c.o(i.I2C_TransferConfig)
-    I2C_TransferConfig                       0x90003883   Thumb Code    56  stm32h7xx_hal_i2c.o(i.I2C_TransferConfig)
-    i.I2C_TreatErrorCallback                 0x900038ba   Section        0  stm32h7xx_hal_i2c.o(i.I2C_TreatErrorCallback)
-    I2C_TreatErrorCallback                   0x900038bb   Thumb Code    58  stm32h7xx_hal_i2c.o(i.I2C_TreatErrorCallback)
-    i.MPU_Config                             0x900038f4   Section        0  main.o(i.MPU_Config)
-    MPU_Config                               0x900038f5   Thumb Code   144  main.o(i.MPU_Config)
-    i.MemManage_Handler_C                    0x90003984   Section        0  stm32h7xx_it.o(i.MemManage_Handler_C)
-    i.NMI_Handler                            0x900039cc   Section        0  stm32h7xx_it.o(i.NMI_Handler)
-    i.PendSV_Handler                         0x900039ce   Section        0  stm32h7xx_it.o(i.PendSV_Handler)
-    i.SEGGER_RTT_Init                        0x900039d0   Section        0  segger_rtt.o(i.SEGGER_RTT_Init)
-    i.SEGGER_RTT_Write                       0x900039d8   Section        0  segger_rtt.o(i.SEGGER_RTT_Write)
-    i.SEGGER_RTT_WriteNoLock                 0x90003a24   Section        0  segger_rtt.o(i.SEGGER_RTT_WriteNoLock)
-    i.SEGGER_RTT_printf                      0x90003aa8   Section        0  segger_rtt_printf.o(i.SEGGER_RTT_printf)
-    i.SEGGER_RTT_vprintf                     0x90003acc   Section        0  segger_rtt_printf.o(i.SEGGER_RTT_vprintf)
-    i.SVC_Handler                            0x90003d1c   Section        0  stm32h7xx_it.o(i.SVC_Handler)
-    i.SystemClock_Config                     0x90003d20   Section        0  main.o(i.SystemClock_Config)
-    SystemClock_Config                       0x90003d21   Thumb Code   342  main.o(i.SystemClock_Config)
-    i.SystemInit                             0x90003e84   Section        0  system_stm32h7xx.o(i.SystemInit)
-    i.TIM1_UP_IRQHandler                     0x90003f80   Section        0  pwm_timer1.o(i.TIM1_UP_IRQHandler)
-    i.TIM5_IRQHandler                        0x90003f90   Section        0  pwm_in_timer5.o(i.TIM5_IRQHandler)
-    i.UsageFault_Handler                     0x90003fa0   Section        0  stm32h7xx_it.o(i.UsageFault_Handler)
-    i._DoInit                                0x90003fa4   Section        0  segger_rtt.o(i._DoInit)
-    _DoInit                                  0x90003fa5   Thumb Code    82  segger_rtt.o(i._DoInit)
-    i._GetAvailWriteSpace                    0x90004014   Section        0  segger_rtt.o(i._GetAvailWriteSpace)
-    _GetAvailWriteSpace                      0x90004015   Thumb Code    28  segger_rtt.o(i._GetAvailWriteSpace)
-    i._PrintInt                              0x90004030   Section        0  segger_rtt_printf.o(i._PrintInt)
-    _PrintInt                                0x90004031   Thumb Code   236  segger_rtt_printf.o(i._PrintInt)
-    i._PrintUnsigned                         0x9000411c   Section        0  segger_rtt_printf.o(i._PrintUnsigned)
-    _PrintUnsigned                           0x9000411d   Thumb Code   230  segger_rtt_printf.o(i._PrintUnsigned)
-    i._StoreChar                             0x90004208   Section        0  segger_rtt_printf.o(i._StoreChar)
-    _StoreChar                               0x90004209   Thumb Code    68  segger_rtt_printf.o(i._StoreChar)
-    i._WriteBlocking                         0x9000424c   Section        0  segger_rtt.o(i._WriteBlocking)
-    _WriteBlocking                           0x9000424d   Thumb Code   118  segger_rtt.o(i._WriteBlocking)
-    i._WriteNoCheck                          0x900042c2   Section        0  segger_rtt.o(i._WriteNoCheck)
-    _WriteNoCheck                            0x900042c3   Thumb Code    88  segger_rtt.o(i._WriteNoCheck)
-    i.__NVIC_GetPriorityGrouping             0x9000431c   Section        0  stm32h7xx_hal_cortex.o(i.__NVIC_GetPriorityGrouping)
-    __NVIC_GetPriorityGrouping               0x9000431d   Thumb Code    10  stm32h7xx_hal_cortex.o(i.__NVIC_GetPriorityGrouping)
-    i.__NVIC_SetPriority                     0x9000432c   Section        0  stm32h7xx_hal_cortex.o(i.__NVIC_SetPriority)
-    __NVIC_SetPriority                       0x9000432d   Thumb Code    32  stm32h7xx_hal_cortex.o(i.__NVIC_SetPriority)
-    i.__scatterload_copy                     0x90004354   Section       14  handlers.o(i.__scatterload_copy)
-    i.__scatterload_null                     0x90004362   Section        2  handlers.o(i.__scatterload_null)
-    i.__scatterload_zeroinit                 0x90004364   Section       14  handlers.o(i.__scatterload_zeroinit)
-    i.blk_raw_size                           0x90004372   Section        0  sram_d2_malloc.o(i.blk_raw_size)
-    blk_raw_size                             0x90004373   Thumb Code    10  sram_d2_malloc.o(i.blk_raw_size)
-    i.circular_buffer_init                   0x9000437c   Section        0  circular_buffer.o(i.circular_buffer_init)
-    i.circular_buffer_read                   0x900043c8   Section        0  circular_buffer.o(i.circular_buffer_read)
-    i.circular_buffer_write                  0x9000442a   Section        0  circular_buffer.o(i.circular_buffer_write)
-    i.crc16_ccitt                            0x90004494   Section        0  eventrecorder.o(i.crc16_ccitt)
-    crc16_ccitt                              0x90004495   Thumb Code    66  eventrecorder.o(i.crc16_ccitt)
-    i.drv_eeprom_clrerrflag                  0x900044d8   Section        0  drv_eeprom.o(i.drv_eeprom_clrerrflag)
-    i.drv_eeprom_clrrflag                    0x900044e4   Section        0  drv_eeprom.o(i.drv_eeprom_clrrflag)
-    i.drv_eeprom_clrwflag                    0x900044f0   Section        0  drv_eeprom.o(i.drv_eeprom_clrwflag)
-    i.drv_eeprom_init                        0x900044fc   Section        0  drv_eeprom.o(i.drv_eeprom_init)
-    i.drv_eeprom_readbuf                     0x900045c0   Section        0  drv_eeprom.o(i.drv_eeprom_readbuf)
-    i.drv_eeprom_reterrflag                  0x900045f0   Section        0  drv_eeprom.o(i.drv_eeprom_reterrflag)
-    i.drv_eeprom_retrflag                    0x900045fc   Section        0  drv_eeprom.o(i.drv_eeprom_retrflag)
-    i.drv_eeprom_retwflag                    0x90004608   Section        0  drv_eeprom.o(i.drv_eeprom_retwflag)
-    i.drv_eeprom_writebuf                    0x90004614   Section        0  drv_eeprom.o(i.drv_eeprom_writebuf)
-    i.drv_key_init                           0x90004644   Section        0  drv_key.o(i.drv_key_init)
-    i.drv_key_readmask                       0x900046f4   Section        0  drv_key.o(i.drv_key_readmask)
-    i.drv_led_init                           0x90004744   Section        0  drv_led.o(i.drv_led_init)
-    i.drv_led_off                            0x900047f4   Section        0  drv_led.o(i.drv_led_off)
-    i.drv_led_on                             0x9000481c   Section        0  drv_led.o(i.drv_led_on)
-    i.drvp_eeprom_init                       0x90004844   Section        0  drvp_eeprom.o(i.drvp_eeprom_init)
-    i.drvp_eeprom_prc_10ms                   0x900048ac   Section        0  drvp_eeprom.o(i.drvp_eeprom_prc_10ms)
-    i.drvp_key_init                          0x900049b8   Section        0  drvp_key.o(i.drvp_key_init)
-    i.drvp_key_prc_10ms                      0x900049dc   Section        0  drvp_key.o(i.drvp_key_prc_10ms)
-    i.drvp_key_rfifo                         0x90004b90   Section        0  drvp_key.o(i.drvp_key_rfifo)
-    i.drvp_key_wfifo                         0x90004bb0   Section        0  drvp_key.o(i.drvp_key_wfifo)
-    drvp_key_wfifo                           0x90004bb1   Thumb Code    24  drvp_key.o(i.drvp_key_wfifo)
-    i.drvp_led_init                          0x90004bcc   Section        0  drvp_led.o(i.drvp_led_init)
-    i.drvp_led_prc_1ms                       0x90004bdc   Section        0  drvp_led.o(i.drvp_led_prc_1ms)
-    i.free_get_next                          0x90004cf0   Section        0  sram_d2_malloc.o(i.free_get_next)
-    free_get_next                            0x90004cf1   Thumb Code     6  sram_d2_malloc.o(i.free_get_next)
-    i.free_set_next                          0x90004cf6   Section        0  sram_d2_malloc.o(i.free_set_next)
-    free_set_next                            0x90004cf7   Thumb Code     4  sram_d2_malloc.o(i.free_set_next)
-    i.is_power_of_two                        0x90004cfa   Section        0  circular_buffer.o(i.is_power_of_two)
-    is_power_of_two                          0x90004cfb   Thumb Code    18  circular_buffer.o(i.is_power_of_two)
-    i.main                                   0x90004d0c   Section        0  main.o(i.main)
-    i.mutex_init                             0x90004df0   Section        0  port.o(i.mutex_init)
-    i.mutex_lock                             0x90004df6   Section        0  port.o(i.mutex_lock)
-    i.mutex_unlock                           0x90004df8   Section        0  port.o(i.mutex_unlock)
-    i.sram_d2_free                           0x90004dfc   Section        0  sram_d2_malloc.o(i.sram_d2_free)
-    i.sram_d2_init                           0x90004ed8   Section        0  sram_d2_malloc.o(i.sram_d2_init)
-    i.sram_d2_malloc                         0x90004f18   Section        0  sram_d2_malloc.o(i.sram_d2_malloc)
-    .constdata                               0x90005000   Section       16  system_stm32h7xx.o(.constdata)
-    .constdata                               0x90005010   Section       40  drv_led.o(.constdata)
-    drv_led                                  0x90005010   Data          40  drv_led.o(.constdata)
-    .constdata                               0x90005038   Section       12  drvp_led.o(.constdata)
-    drv_led                                  0x90005038   Data          12  drvp_led.o(.constdata)
-    .constdata                               0x90005044   Section       96  drv_key.o(.constdata)
-    drv_key                                  0x90005044   Data          96  drv_key.o(.constdata)
-    .constdata                               0x900050a4   Section        8  drvp_key.o(.constdata)
-    drv_key                                  0x900050a4   Data           8  drvp_key.o(.constdata)
-    .constdata                               0x900050ac   Section       36  drvp_eeprom.o(.constdata)
-    drv_eeprom                               0x900050ac   Data          36  drvp_eeprom.o(.constdata)
-    .constdata                               0x900050d0   Section       33  segger_rtt.o(.constdata)
-    _aTerminalId                             0x900050d0   Data          16  segger_rtt.o(.constdata)
-    _aInitStr                                0x900050e0   Data          17  segger_rtt.o(.constdata)
-    .constdata                               0x900050f1   Section       16  segger_rtt_printf.o(.constdata)
-    _aV2C                                    0x900050f1   Data          16  segger_rtt_printf.o(.constdata)
-    .constdata                               0x90005104   Section       24  eventrecorder.o(.constdata)
-    __tagsym$$used                           0x90005104   Number         0  eventrecorder.o(.constdata)
+    i.FMC_NORSRAM_Init                       0x90000874   Section        0  stm32h7xx_ll_fmc.o(i.FMC_NORSRAM_Init)
+    i.FMC_NORSRAM_Timing_Init                0x90000918   Section        0  stm32h7xx_ll_fmc.o(i.FMC_NORSRAM_Timing_Init)
+    i.HAL_DMA_Abort_IT                       0x90000974   Section        0  stm32h7xx_hal_dma.o(i.HAL_DMA_Abort_IT)
+    i.HAL_DMA_GetState                       0x90000d0c   Section        0  stm32h7xx_hal_dma.o(i.HAL_DMA_GetState)
+    i.HAL_Delay                              0x90000d14   Section        0  stm32h7xx_hal.o(i.HAL_Delay)
+    i.HAL_EnableCompensationCell             0x90000d3c   Section        0  stm32h7xx_hal.o(i.HAL_EnableCompensationCell)
+    i.HAL_GPIO_Init                          0x90000d50   Section        0  stm32h7xx_hal_gpio.o(i.HAL_GPIO_Init)
+    i.HAL_GPIO_ReadPin                       0x90000f4c   Section        0  stm32h7xx_hal_gpio.o(i.HAL_GPIO_ReadPin)
+    i.HAL_GPIO_WritePin                      0x90000f5c   Section        0  stm32h7xx_hal_gpio.o(i.HAL_GPIO_WritePin)
+    i.HAL_GetREVID                           0x90000f68   Section        0  stm32h7xx_hal.o(i.HAL_GetREVID)
+    i.HAL_GetTick                            0x90000f74   Section        0  stm32h7xx_hal.o(i.HAL_GetTick)
+    i.HAL_I2C_AbortCpltCallback              0x90000f80   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_AbortCpltCallback)
+    i.HAL_I2C_AddrCallback                   0x90000f82   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_AddrCallback)
+    i.HAL_I2C_DeInit                         0x90000f84   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_DeInit)
+    i.HAL_I2C_ER_IRQHandler                  0x90000fd4   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_ER_IRQHandler)
+    i.HAL_I2C_EV_IRQHandler                  0x9000104a   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_EV_IRQHandler)
+    i.HAL_I2C_ErrorCallback                  0x90001068   Section        0  drv_eeprom.o(i.HAL_I2C_ErrorCallback)
+    i.HAL_I2C_Init                           0x900010b8   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_Init)
+    i.HAL_I2C_ListenCpltCallback             0x900011ec   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_ListenCpltCallback)
+    i.HAL_I2C_MasterRxCpltCallback           0x900011ee   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_MasterRxCpltCallback)
+    i.HAL_I2C_MasterTxCpltCallback           0x900011f0   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_MasterTxCpltCallback)
+    i.HAL_I2C_MemRxCpltCallback              0x900011f4   Section        0  drv_eeprom.o(i.HAL_I2C_MemRxCpltCallback)
+    i.HAL_I2C_MemTxCpltCallback              0x9000120c   Section        0  drv_eeprom.o(i.HAL_I2C_MemTxCpltCallback)
+    i.HAL_I2C_Mem_Read_IT                    0x90001224   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_Mem_Read_IT)
+    i.HAL_I2C_Mem_Write_IT                   0x900012ec   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_Mem_Write_IT)
+    i.HAL_I2C_MspDeInit                      0x900013b8   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_MspDeInit)
+    i.HAL_I2C_MspInit                        0x900013ba   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_MspInit)
+    i.HAL_I2C_SlaveRxCpltCallback            0x900013bc   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_SlaveRxCpltCallback)
+    i.HAL_I2C_SlaveTxCpltCallback            0x900013be   Section        0  stm32h7xx_hal_i2c.o(i.HAL_I2C_SlaveTxCpltCallback)
+    i.HAL_IncTick                            0x900013c0   Section        0  stm32h7xx_hal.o(i.HAL_IncTick)
+    i.HAL_Init                               0x900013d8   Section        0  stm32h7xx_hal.o(i.HAL_Init)
+    i.HAL_InitTick                           0x90001438   Section        0  stm32h7xx_hal.o(i.HAL_InitTick)
+    i.HAL_MPU_ConfigRegion                   0x90001490   Section        0  stm32h7xx_hal_cortex.o(i.HAL_MPU_ConfigRegion)
+    i.HAL_MPU_Disable                        0x900014ec   Section        0  stm32h7xx_hal_cortex.o(i.HAL_MPU_Disable)
+    i.HAL_MPU_Enable                         0x90001518   Section        0  stm32h7xx_hal_cortex.o(i.HAL_MPU_Enable)
+    i.HAL_MspInit                            0x90001558   Section        0  stm32h7xx_hal_msp_template.o(i.HAL_MspInit)
+    i.HAL_NVIC_EnableIRQ                     0x9000155a   Section        0  stm32h7xx_hal_cortex.o(i.HAL_NVIC_EnableIRQ)
+    i.HAL_NVIC_SetPriority                   0x90001582   Section        0  stm32h7xx_hal_cortex.o(i.HAL_NVIC_SetPriority)
+    i.HAL_NVIC_SetPriorityGrouping           0x900015fc   Section        0  stm32h7xx_hal_cortex.o(i.HAL_NVIC_SetPriorityGrouping)
+    i.HAL_RCC_ClockConfig                    0x90001624   Section        0  stm32h7xx_hal_rcc.o(i.HAL_RCC_ClockConfig)
+    i.HAL_RCC_GetSysClockFreq                0x90001944   Section        0  stm32h7xx_hal_rcc.o(i.HAL_RCC_GetSysClockFreq)
+    i.HAL_RCC_OscConfig                      0x90001b70   Section        0  stm32h7xx_hal_rcc.o(i.HAL_RCC_OscConfig)
+    i.HAL_SYSTICK_Config                     0x900023c8   Section        0  stm32h7xx_hal_cortex.o(i.HAL_SYSTICK_Config)
+    i.HAL_TIM_IRQHandler                     0x900023fc   Section        0  stm32h7xx_hal_tim.o(i.HAL_TIM_IRQHandler)
+    i.HardFaultHandler                       0x900025b8   Section        0  segger_hardfaulthandler.o(i.HardFaultHandler)
+    i.I2C2_ER_IRQHandler                     0x90002718   Section        0  drv_eeprom.o(i.I2C2_ER_IRQHandler)
+    i.I2C2_EV_IRQHandler                     0x90002728   Section        0  drv_eeprom.o(i.I2C2_EV_IRQHandler)
+    i.I2C_DMAAbort                           0x90002738   Section        0  stm32h7xx_hal_i2c.o(i.I2C_DMAAbort)
+    I2C_DMAAbort                             0x90002739   Thumb Code    34  stm32h7xx_hal_i2c.o(i.I2C_DMAAbort)
+    i.I2C_Disable_IRQ                        0x9000275a   Section        0  stm32h7xx_hal_i2c.o(i.I2C_Disable_IRQ)
+    I2C_Disable_IRQ                          0x9000275b   Thumb Code   110  stm32h7xx_hal_i2c.o(i.I2C_Disable_IRQ)
+    i.I2C_Enable_IRQ                         0x900027c8   Section        0  stm32h7xx_hal_i2c.o(i.I2C_Enable_IRQ)
+    I2C_Enable_IRQ                           0x900027c9   Thumb Code   156  stm32h7xx_hal_i2c.o(i.I2C_Enable_IRQ)
+    i.I2C_Flush_TXDR                         0x90002870   Section        0  stm32h7xx_hal_i2c.o(i.I2C_Flush_TXDR)
+    I2C_Flush_TXDR                           0x90002871   Thumb Code    40  stm32h7xx_hal_i2c.o(i.I2C_Flush_TXDR)
+    i.I2C_ITAddrCplt                         0x90002898   Section        0  stm32h7xx_hal_i2c.o(i.I2C_ITAddrCplt)
+    I2C_ITAddrCplt                           0x90002899   Thumb Code   206  stm32h7xx_hal_i2c.o(i.I2C_ITAddrCplt)
+    i.I2C_ITError                            0x90002968   Section        0  stm32h7xx_hal_i2c.o(i.I2C_ITError)
+    I2C_ITError                              0x90002969   Thumb Code   326  stm32h7xx_hal_i2c.o(i.I2C_ITError)
+    i.I2C_ITListenCplt                       0x90002abc   Section        0  stm32h7xx_hal_i2c.o(i.I2C_ITListenCplt)
+    I2C_ITListenCplt                         0x90002abd   Thumb Code   106  stm32h7xx_hal_i2c.o(i.I2C_ITListenCplt)
+    i.I2C_ITMasterCplt                       0x90002b2c   Section        0  stm32h7xx_hal_i2c.o(i.I2C_ITMasterCplt)
+    I2C_ITMasterCplt                         0x90002b2d   Thumb Code   288  stm32h7xx_hal_i2c.o(i.I2C_ITMasterCplt)
+    i.I2C_ITMasterSeqCplt                    0x90002c54   Section        0  stm32h7xx_hal_i2c.o(i.I2C_ITMasterSeqCplt)
+    I2C_ITMasterSeqCplt                      0x90002c55   Thumb Code    98  stm32h7xx_hal_i2c.o(i.I2C_ITMasterSeqCplt)
+    i.I2C_ITSlaveCplt                        0x90002cb8   Section        0  stm32h7xx_hal_i2c.o(i.I2C_ITSlaveCplt)
+    I2C_ITSlaveCplt                          0x90002cb9   Thumb Code   896  stm32h7xx_hal_i2c.o(i.I2C_ITSlaveCplt)
+    i.I2C_ITSlaveSeqCplt                     0x90003048   Section        0  stm32h7xx_hal_i2c.o(i.I2C_ITSlaveSeqCplt)
+    I2C_ITSlaveSeqCplt                       0x90003049   Thumb Code   140  stm32h7xx_hal_i2c.o(i.I2C_ITSlaveSeqCplt)
+    i.I2C_Master_ISR_DMA                     0x900030d4   Section        0  stm32h7xx_hal_i2c.o(i.I2C_Master_ISR_DMA)
+    I2C_Master_ISR_DMA                       0x900030d5   Thumb Code   352  stm32h7xx_hal_i2c.o(i.I2C_Master_ISR_DMA)
+    i.I2C_Mem_ISR_DMA                        0x90003234   Section        0  stm32h7xx_hal_i2c.o(i.I2C_Mem_ISR_DMA)
+    I2C_Mem_ISR_DMA                          0x90003235   Thumb Code   426  stm32h7xx_hal_i2c.o(i.I2C_Mem_ISR_DMA)
+    i.I2C_Mem_ISR_IT                         0x900033e8   Section        0  stm32h7xx_hal_i2c.o(i.I2C_Mem_ISR_IT)
+    I2C_Mem_ISR_IT                           0x900033e9   Thumb Code   404  stm32h7xx_hal_i2c.o(i.I2C_Mem_ISR_IT)
+    i.I2C_Slave_ISR_DMA                      0x90003584   Section        0  stm32h7xx_hal_i2c.o(i.I2C_Slave_ISR_DMA)
+    I2C_Slave_ISR_DMA                        0x90003585   Thumb Code   724  stm32h7xx_hal_i2c.o(i.I2C_Slave_ISR_DMA)
+    i.I2C_Slave_ISR_IT                       0x90003860   Section        0  stm32h7xx_hal_i2c.o(i.I2C_Slave_ISR_IT)
+    I2C_Slave_ISR_IT                         0x90003861   Thumb Code   330  stm32h7xx_hal_i2c.o(i.I2C_Slave_ISR_IT)
+    i.I2C_TransferConfig                     0x900039aa   Section        0  stm32h7xx_hal_i2c.o(i.I2C_TransferConfig)
+    I2C_TransferConfig                       0x900039ab   Thumb Code    56  stm32h7xx_hal_i2c.o(i.I2C_TransferConfig)
+    i.I2C_TreatErrorCallback                 0x900039e2   Section        0  stm32h7xx_hal_i2c.o(i.I2C_TreatErrorCallback)
+    I2C_TreatErrorCallback                   0x900039e3   Thumb Code    58  stm32h7xx_hal_i2c.o(i.I2C_TreatErrorCallback)
+    i.MPU_Config                             0x90003a1c   Section        0  main.o(i.MPU_Config)
+    MPU_Config                               0x90003a1d   Thumb Code   214  main.o(i.MPU_Config)
+    i.MemManage_Handler_C                    0x90003af4   Section        0  stm32h7xx_it.o(i.MemManage_Handler_C)
+    i.NMI_Handler                            0x90003b3c   Section        0  stm32h7xx_it.o(i.NMI_Handler)
+    i.PendSV_Handler                         0x90003b3e   Section        0  stm32h7xx_it.o(i.PendSV_Handler)
+    i.SEGGER_RTT_Init                        0x90003b40   Section        0  segger_rtt.o(i.SEGGER_RTT_Init)
+    i.SEGGER_RTT_Write                       0x90003b48   Section        0  segger_rtt.o(i.SEGGER_RTT_Write)
+    i.SEGGER_RTT_WriteNoLock                 0x90003b94   Section        0  segger_rtt.o(i.SEGGER_RTT_WriteNoLock)
+    i.SEGGER_RTT_printf                      0x90003c18   Section        0  segger_rtt_printf.o(i.SEGGER_RTT_printf)
+    i.SEGGER_RTT_vprintf                     0x90003c3c   Section        0  segger_rtt_printf.o(i.SEGGER_RTT_vprintf)
+    i.SVC_Handler                            0x90003e8c   Section        0  stm32h7xx_it.o(i.SVC_Handler)
+    i.SystemClock_Config                     0x90003e90   Section        0  main.o(i.SystemClock_Config)
+    SystemClock_Config                       0x90003e91   Thumb Code   342  main.o(i.SystemClock_Config)
+    i.SystemInit                             0x90003ff4   Section        0  system_stm32h7xx.o(i.SystemInit)
+    i.TIM1_UP_IRQHandler                     0x900040f0   Section        0  pwm_timer1.o(i.TIM1_UP_IRQHandler)
+    i.TIM5_IRQHandler                        0x90004100   Section        0  pwm_in_timer5.o(i.TIM5_IRQHandler)
+    i.UsageFault_Handler                     0x90004110   Section        0  stm32h7xx_it.o(i.UsageFault_Handler)
+    i._DoInit                                0x90004114   Section        0  segger_rtt.o(i._DoInit)
+    _DoInit                                  0x90004115   Thumb Code    82  segger_rtt.o(i._DoInit)
+    i._GetAvailWriteSpace                    0x90004184   Section        0  segger_rtt.o(i._GetAvailWriteSpace)
+    _GetAvailWriteSpace                      0x90004185   Thumb Code    28  segger_rtt.o(i._GetAvailWriteSpace)
+    i._PrintInt                              0x900041a0   Section        0  segger_rtt_printf.o(i._PrintInt)
+    _PrintInt                                0x900041a1   Thumb Code   236  segger_rtt_printf.o(i._PrintInt)
+    i._PrintUnsigned                         0x9000428c   Section        0  segger_rtt_printf.o(i._PrintUnsigned)
+    _PrintUnsigned                           0x9000428d   Thumb Code   230  segger_rtt_printf.o(i._PrintUnsigned)
+    i._StoreChar                             0x90004378   Section        0  segger_rtt_printf.o(i._StoreChar)
+    _StoreChar                               0x90004379   Thumb Code    68  segger_rtt_printf.o(i._StoreChar)
+    i._WriteBlocking                         0x900043bc   Section        0  segger_rtt.o(i._WriteBlocking)
+    _WriteBlocking                           0x900043bd   Thumb Code   118  segger_rtt.o(i._WriteBlocking)
+    i._WriteNoCheck                          0x90004432   Section        0  segger_rtt.o(i._WriteNoCheck)
+    _WriteNoCheck                            0x90004433   Thumb Code    88  segger_rtt.o(i._WriteNoCheck)
+    i.__NVIC_GetPriorityGrouping             0x9000448c   Section        0  stm32h7xx_hal_cortex.o(i.__NVIC_GetPriorityGrouping)
+    __NVIC_GetPriorityGrouping               0x9000448d   Thumb Code    10  stm32h7xx_hal_cortex.o(i.__NVIC_GetPriorityGrouping)
+    i.__NVIC_SetPriority                     0x9000449c   Section        0  stm32h7xx_hal_cortex.o(i.__NVIC_SetPriority)
+    __NVIC_SetPriority                       0x9000449d   Thumb Code    32  stm32h7xx_hal_cortex.o(i.__NVIC_SetPriority)
+    i.__scatterload_copy                     0x900044c4   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x900044d2   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x900044d4   Section       14  handlers.o(i.__scatterload_zeroinit)
+    i.blk_raw_size                           0x900044e2   Section        0  sram_d2_malloc.o(i.blk_raw_size)
+    blk_raw_size                             0x900044e3   Thumb Code    10  sram_d2_malloc.o(i.blk_raw_size)
+    i.circular_buffer_init                   0x900044ec   Section        0  circular_buffer.o(i.circular_buffer_init)
+    i.circular_buffer_read                   0x90004538   Section        0  circular_buffer.o(i.circular_buffer_read)
+    i.circular_buffer_write                  0x9000459a   Section        0  circular_buffer.o(i.circular_buffer_write)
+    i.crc16_ccitt                            0x90004604   Section        0  eventrecorder.o(i.crc16_ccitt)
+    crc16_ccitt                              0x90004605   Thumb Code    66  eventrecorder.o(i.crc16_ccitt)
+    i.drv_eeprom_clrerrflag                  0x90004648   Section        0  drv_eeprom.o(i.drv_eeprom_clrerrflag)
+    i.drv_eeprom_clrrflag                    0x90004654   Section        0  drv_eeprom.o(i.drv_eeprom_clrrflag)
+    i.drv_eeprom_clrwflag                    0x90004660   Section        0  drv_eeprom.o(i.drv_eeprom_clrwflag)
+    i.drv_eeprom_init                        0x9000466c   Section        0  drv_eeprom.o(i.drv_eeprom_init)
+    i.drv_eeprom_readbuf                     0x90004730   Section        0  drv_eeprom.o(i.drv_eeprom_readbuf)
+    i.drv_eeprom_reterrflag                  0x90004760   Section        0  drv_eeprom.o(i.drv_eeprom_reterrflag)
+    i.drv_eeprom_retrflag                    0x9000476c   Section        0  drv_eeprom.o(i.drv_eeprom_retrflag)
+    i.drv_eeprom_retwflag                    0x90004778   Section        0  drv_eeprom.o(i.drv_eeprom_retwflag)
+    i.drv_eeprom_writebuf                    0x90004784   Section        0  drv_eeprom.o(i.drv_eeprom_writebuf)
+    i.drv_fmc_bl_ctrl                        0x900047b4   Section        0  drv_fmc_lcd.o(i.drv_fmc_bl_ctrl)
+    i.drv_fmc_lcd_init                       0x900047c8   Section        0  drv_fmc_lcd.o(i.drv_fmc_lcd_init)
+    i.drv_fmc_lcd_rst                        0x900048d8   Section        0  drv_fmc_lcd.o(i.drv_fmc_lcd_rst)
+    i.drv_fmc_read_data                      0x90004910   Section        0  drv_fmc_lcd.o(i.drv_fmc_read_data)
+    i.drv_fmc_write_cmd                      0x9000491c   Section        0  drv_fmc_lcd.o(i.drv_fmc_write_cmd)
+    i.drv_fmc_write_data                     0x90004924   Section        0  drv_fmc_lcd.o(i.drv_fmc_write_data)
+    i.drv_key_init                           0x90004930   Section        0  drv_key.o(i.drv_key_init)
+    i.drv_key_readmask                       0x900049e0   Section        0  drv_key.o(i.drv_key_readmask)
+    i.drv_led_init                           0x90004a30   Section        0  drv_led.o(i.drv_led_init)
+    i.drv_led_off                            0x90004ae0   Section        0  drv_led.o(i.drv_led_off)
+    i.drv_led_on                             0x90004b08   Section        0  drv_led.o(i.drv_led_on)
+    i.drvp_eeprom_init                       0x90004b30   Section        0  drvp_eeprom.o(i.drvp_eeprom_init)
+    i.drvp_eeprom_prc_10ms                   0x90004b98   Section        0  drvp_eeprom.o(i.drvp_eeprom_prc_10ms)
+    i.drvp_fmc_lcd_init                      0x90004ca4   Section        0  drvp_fmc_lcd.o(i.drvp_fmc_lcd_init)
+    i.drvp_key_init                          0x90004ea8   Section        0  drvp_key.o(i.drvp_key_init)
+    i.drvp_key_prc_10ms                      0x90004ecc   Section        0  drvp_key.o(i.drvp_key_prc_10ms)
+    i.drvp_key_rfifo                         0x90005080   Section        0  drvp_key.o(i.drvp_key_rfifo)
+    i.drvp_key_wfifo                         0x900050a0   Section        0  drvp_key.o(i.drvp_key_wfifo)
+    drvp_key_wfifo                           0x900050a1   Thumb Code    24  drvp_key.o(i.drvp_key_wfifo)
+    i.drvp_led_init                          0x900050bc   Section        0  drvp_led.o(i.drvp_led_init)
+    i.drvp_led_prc_1ms                       0x900050cc   Section        0  drvp_led.o(i.drvp_led_prc_1ms)
+    i.free_get_next                          0x900051e0   Section        0  sram_d2_malloc.o(i.free_get_next)
+    free_get_next                            0x900051e1   Thumb Code     6  sram_d2_malloc.o(i.free_get_next)
+    i.free_set_next                          0x900051e6   Section        0  sram_d2_malloc.o(i.free_set_next)
+    free_set_next                            0x900051e7   Thumb Code     4  sram_d2_malloc.o(i.free_set_next)
+    i.is_power_of_two                        0x900051ea   Section        0  circular_buffer.o(i.is_power_of_two)
+    is_power_of_two                          0x900051eb   Thumb Code    18  circular_buffer.o(i.is_power_of_two)
+    i.main                                   0x900051fc   Section        0  main.o(i.main)
+    i.mutex_init                             0x900052e4   Section        0  port.o(i.mutex_init)
+    i.mutex_lock                             0x900052ea   Section        0  port.o(i.mutex_lock)
+    i.mutex_unlock                           0x900052ec   Section        0  port.o(i.mutex_unlock)
+    i.sram_d2_free                           0x900052f0   Section        0  sram_d2_malloc.o(i.sram_d2_free)
+    i.sram_d2_init                           0x900053cc   Section        0  sram_d2_malloc.o(i.sram_d2_init)
+    i.sram_d2_malloc                         0x9000540c   Section        0  sram_d2_malloc.o(i.sram_d2_malloc)
+    .constdata                               0x900054f4   Section       16  system_stm32h7xx.o(.constdata)
+    .constdata                               0x90005504   Section       40  drv_led.o(.constdata)
+    drv_led                                  0x90005504   Data          40  drv_led.o(.constdata)
+    .constdata                               0x9000552c   Section       12  drvp_led.o(.constdata)
+    drv_led                                  0x9000552c   Data          12  drvp_led.o(.constdata)
+    .constdata                               0x90005538   Section       96  drv_key.o(.constdata)
+    drv_key                                  0x90005538   Data          96  drv_key.o(.constdata)
+    .constdata                               0x90005598   Section        8  drvp_key.o(.constdata)
+    drv_key                                  0x90005598   Data           8  drvp_key.o(.constdata)
+    .constdata                               0x900055a0   Section       36  drvp_eeprom.o(.constdata)
+    drv_eeprom                               0x900055a0   Data          36  drvp_eeprom.o(.constdata)
+    .constdata                               0x900055c4   Section       33  segger_rtt.o(.constdata)
+    _aTerminalId                             0x900055c4   Data          16  segger_rtt.o(.constdata)
+    _aInitStr                                0x900055d4   Data          17  segger_rtt.o(.constdata)
+    .constdata                               0x900055e5   Section       16  segger_rtt_printf.o(.constdata)
+    _aV2C                                    0x900055e5   Data          16  segger_rtt_printf.o(.constdata)
+    .constdata                               0x900055f8   Section       24  eventrecorder.o(.constdata)
+    __tagsym$$used                           0x900055f8   Number         0  eventrecorder.o(.constdata)
 
     Global Symbols
 
@@ -7667,101 +7702,111 @@ Image Symbol Table
     EventRecorderTimerGetCount               0x90000841   Thumb Code     6  eventrecorder.o(i.EventRecorderTimerGetCount)
     EventRecorderTimerSetup                  0x9000084d   Thumb Code    28  eventrecorder.o(i.EventRecorderTimerSetup)
     ExitRun0Mode                             0x90000871   Thumb Code     2  system_stm32h7xx.o(i.ExitRun0Mode)
-    HAL_DMA_Abort_IT                         0x90000875   Thumb Code   906  stm32h7xx_hal_dma.o(i.HAL_DMA_Abort_IT)
-    HAL_DMA_GetState                         0x90000c0d   Thumb Code     8  stm32h7xx_hal_dma.o(i.HAL_DMA_GetState)
-    HAL_EnableCompensationCell               0x90000c15   Thumb Code    14  stm32h7xx_hal.o(i.HAL_EnableCompensationCell)
-    HAL_GPIO_Init                            0x90000c29   Thumb Code   456  stm32h7xx_hal_gpio.o(i.HAL_GPIO_Init)
-    HAL_GPIO_ReadPin                         0x90000e25   Thumb Code    16  stm32h7xx_hal_gpio.o(i.HAL_GPIO_ReadPin)
-    HAL_GPIO_WritePin                        0x90000e35   Thumb Code    12  stm32h7xx_hal_gpio.o(i.HAL_GPIO_WritePin)
-    HAL_GetREVID                             0x90000e41   Thumb Code     8  stm32h7xx_hal.o(i.HAL_GetREVID)
-    HAL_GetTick                              0x90000e4d   Thumb Code     6  stm32h7xx_hal.o(i.HAL_GetTick)
-    HAL_I2C_AbortCpltCallback                0x90000e59   Thumb Code     2  stm32h7xx_hal_i2c.o(i.HAL_I2C_AbortCpltCallback)
-    HAL_I2C_AddrCallback                     0x90000e5b   Thumb Code     2  stm32h7xx_hal_i2c.o(i.HAL_I2C_AddrCallback)
-    HAL_I2C_DeInit                           0x90000e5d   Thumb Code    74  stm32h7xx_hal_i2c.o(i.HAL_I2C_DeInit)
-    HAL_I2C_ER_IRQHandler                    0x90000ead   Thumb Code   118  stm32h7xx_hal_i2c.o(i.HAL_I2C_ER_IRQHandler)
-    HAL_I2C_EV_IRQHandler                    0x90000f23   Thumb Code    28  stm32h7xx_hal_i2c.o(i.HAL_I2C_EV_IRQHandler)
-    HAL_I2C_ErrorCallback                    0x90000f41   Thumb Code    64  drv_eeprom.o(i.HAL_I2C_ErrorCallback)
-    HAL_I2C_Init                             0x90000f91   Thumb Code   260  stm32h7xx_hal_i2c.o(i.HAL_I2C_Init)
-    HAL_I2C_ListenCpltCallback               0x900010c5   Thumb Code     2  stm32h7xx_hal_i2c.o(i.HAL_I2C_ListenCpltCallback)
-    HAL_I2C_MasterRxCpltCallback             0x900010c7   Thumb Code     2  stm32h7xx_hal_i2c.o(i.HAL_I2C_MasterRxCpltCallback)
-    HAL_I2C_MasterTxCpltCallback             0x900010c9   Thumb Code     2  stm32h7xx_hal_i2c.o(i.HAL_I2C_MasterTxCpltCallback)
-    HAL_I2C_MemRxCpltCallback                0x900010cd   Thumb Code    16  drv_eeprom.o(i.HAL_I2C_MemRxCpltCallback)
-    HAL_I2C_MemTxCpltCallback                0x900010e5   Thumb Code    16  drv_eeprom.o(i.HAL_I2C_MemTxCpltCallback)
-    HAL_I2C_Mem_Read_IT                      0x900010fd   Thumb Code   188  stm32h7xx_hal_i2c.o(i.HAL_I2C_Mem_Read_IT)
-    HAL_I2C_Mem_Write_IT                     0x900011c5   Thumb Code   190  stm32h7xx_hal_i2c.o(i.HAL_I2C_Mem_Write_IT)
-    HAL_I2C_MspDeInit                        0x90001291   Thumb Code     2  stm32h7xx_hal_i2c.o(i.HAL_I2C_MspDeInit)
-    HAL_I2C_MspInit                          0x90001293   Thumb Code     2  stm32h7xx_hal_i2c.o(i.HAL_I2C_MspInit)
-    HAL_I2C_SlaveRxCpltCallback              0x90001295   Thumb Code     2  stm32h7xx_hal_i2c.o(i.HAL_I2C_SlaveRxCpltCallback)
-    HAL_I2C_SlaveTxCpltCallback              0x90001297   Thumb Code     2  stm32h7xx_hal_i2c.o(i.HAL_I2C_SlaveTxCpltCallback)
-    HAL_IncTick                              0x90001299   Thumb Code    16  stm32h7xx_hal.o(i.HAL_IncTick)
-    HAL_Init                                 0x900012b1   Thumb Code    80  stm32h7xx_hal.o(i.HAL_Init)
-    HAL_InitTick                             0x90001311   Thumb Code    74  stm32h7xx_hal.o(i.HAL_InitTick)
-    HAL_MPU_ConfigRegion                     0x90001369   Thumb Code    86  stm32h7xx_hal_cortex.o(i.HAL_MPU_ConfigRegion)
-    HAL_MPU_Disable                          0x900013c5   Thumb Code    38  stm32h7xx_hal_cortex.o(i.HAL_MPU_Disable)
-    HAL_MPU_Enable                           0x900013f1   Thumb Code    58  stm32h7xx_hal_cortex.o(i.HAL_MPU_Enable)
-    HAL_MspInit                              0x90001431   Thumb Code     2  stm32h7xx_hal_msp_template.o(i.HAL_MspInit)
-    HAL_NVIC_EnableIRQ                       0x90001433   Thumb Code    40  stm32h7xx_hal_cortex.o(i.HAL_NVIC_EnableIRQ)
-    HAL_NVIC_SetPriority                     0x9000145b   Thumb Code   122  stm32h7xx_hal_cortex.o(i.HAL_NVIC_SetPriority)
-    HAL_NVIC_SetPriorityGrouping             0x900014d5   Thumb Code    32  stm32h7xx_hal_cortex.o(i.HAL_NVIC_SetPriorityGrouping)
-    HAL_RCC_ClockConfig                      0x900014fd   Thumb Code   774  stm32h7xx_hal_rcc.o(i.HAL_RCC_ClockConfig)
-    HAL_RCC_GetSysClockFreq                  0x9000181d   Thumb Code   524  stm32h7xx_hal_rcc.o(i.HAL_RCC_GetSysClockFreq)
-    HAL_RCC_OscConfig                        0x90001a49   Thumb Code  2130  stm32h7xx_hal_rcc.o(i.HAL_RCC_OscConfig)
-    HAL_SYSTICK_Config                       0x900022a1   Thumb Code    52  stm32h7xx_hal_cortex.o(i.HAL_SYSTICK_Config)
-    HAL_TIM_IRQHandler                       0x900022d5   Thumb Code   442  stm32h7xx_hal_tim.o(i.HAL_TIM_IRQHandler)
-    HardFaultHandler                         0x90002491   Thumb Code   242  segger_hardfaulthandler.o(i.HardFaultHandler)
-    I2C2_ER_IRQHandler                       0x900025f1   Thumb Code    10  drv_eeprom.o(i.I2C2_ER_IRQHandler)
-    I2C2_EV_IRQHandler                       0x90002601   Thumb Code    10  drv_eeprom.o(i.I2C2_EV_IRQHandler)
-    MemManage_Handler_C                      0x90003985   Thumb Code    68  stm32h7xx_it.o(i.MemManage_Handler_C)
-    NMI_Handler                              0x900039cd   Thumb Code     2  stm32h7xx_it.o(i.NMI_Handler)
-    PendSV_Handler                           0x900039cf   Thumb Code     2  stm32h7xx_it.o(i.PendSV_Handler)
-    SEGGER_RTT_Init                          0x900039d1   Thumb Code     8  segger_rtt.o(i.SEGGER_RTT_Init)
-    SEGGER_RTT_Write                         0x900039d9   Thumb Code    70  segger_rtt.o(i.SEGGER_RTT_Write)
-    SEGGER_RTT_WriteNoLock                   0x90003a25   Thumb Code   126  segger_rtt.o(i.SEGGER_RTT_WriteNoLock)
-    SEGGER_RTT_printf                        0x90003aa9   Thumb Code    34  segger_rtt_printf.o(i.SEGGER_RTT_printf)
-    SEGGER_RTT_vprintf                       0x90003acd   Thumb Code   582  segger_rtt_printf.o(i.SEGGER_RTT_vprintf)
-    SVC_Handler                              0x90003d1d   Thumb Code     2  stm32h7xx_it.o(i.SVC_Handler)
-    SystemInit                               0x90003e85   Thumb Code   212  system_stm32h7xx.o(i.SystemInit)
-    TIM1_UP_IRQHandler                       0x90003f81   Thumb Code    10  pwm_timer1.o(i.TIM1_UP_IRQHandler)
-    TIM5_IRQHandler                          0x90003f91   Thumb Code    10  pwm_in_timer5.o(i.TIM5_IRQHandler)
-    UsageFault_Handler                       0x90003fa1   Thumb Code     4  stm32h7xx_it.o(i.UsageFault_Handler)
-    __scatterload_copy                       0x90004355   Thumb Code    14  handlers.o(i.__scatterload_copy)
-    __scatterload_null                       0x90004363   Thumb Code     2  handlers.o(i.__scatterload_null)
-    __scatterload_zeroinit                   0x90004365   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
-    circular_buffer_init                     0x9000437d   Thumb Code    76  circular_buffer.o(i.circular_buffer_init)
-    circular_buffer_read                     0x900043c9   Thumb Code    98  circular_buffer.o(i.circular_buffer_read)
-    circular_buffer_write                    0x9000442b   Thumb Code   106  circular_buffer.o(i.circular_buffer_write)
-    drv_eeprom_clrerrflag                    0x900044d9   Thumb Code     8  drv_eeprom.o(i.drv_eeprom_clrerrflag)
-    drv_eeprom_clrrflag                      0x900044e5   Thumb Code     8  drv_eeprom.o(i.drv_eeprom_clrrflag)
-    drv_eeprom_clrwflag                      0x900044f1   Thumb Code     8  drv_eeprom.o(i.drv_eeprom_clrwflag)
-    drv_eeprom_init                          0x900044fd   Thumb Code   176  drv_eeprom.o(i.drv_eeprom_init)
-    drv_eeprom_readbuf                       0x900045c1   Thumb Code    38  drv_eeprom.o(i.drv_eeprom_readbuf)
-    drv_eeprom_reterrflag                    0x900045f1   Thumb Code     6  drv_eeprom.o(i.drv_eeprom_reterrflag)
-    drv_eeprom_retrflag                      0x900045fd   Thumb Code     6  drv_eeprom.o(i.drv_eeprom_retrflag)
-    drv_eeprom_retwflag                      0x90004609   Thumb Code     6  drv_eeprom.o(i.drv_eeprom_retwflag)
-    drv_eeprom_writebuf                      0x90004615   Thumb Code    38  drv_eeprom.o(i.drv_eeprom_writebuf)
-    drv_key_init                             0x90004645   Thumb Code   168  drv_key.o(i.drv_key_init)
-    drv_key_readmask                         0x900046f5   Thumb Code    74  drv_key.o(i.drv_key_readmask)
-    drv_led_init                             0x90004745   Thumb Code   168  drv_led.o(i.drv_led_init)
-    drv_led_off                              0x900047f5   Thumb Code    34  drv_led.o(i.drv_led_off)
-    drv_led_on                               0x9000481d   Thumb Code    34  drv_led.o(i.drv_led_on)
-    drvp_eeprom_init                         0x90004845   Thumb Code    90  drvp_eeprom.o(i.drvp_eeprom_init)
-    drvp_eeprom_prc_10ms                     0x900048ad   Thumb Code   260  drvp_eeprom.o(i.drvp_eeprom_prc_10ms)
-    drvp_key_init                            0x900049b9   Thumb Code    28  drvp_key.o(i.drvp_key_init)
-    drvp_key_prc_10ms                        0x900049dd   Thumb Code   424  drvp_key.o(i.drvp_key_prc_10ms)
-    drvp_key_rfifo                           0x90004b91   Thumb Code    26  drvp_key.o(i.drvp_key_rfifo)
-    drvp_led_init                            0x90004bcd   Thumb Code    10  drvp_led.o(i.drvp_led_init)
-    drvp_led_prc_1ms                         0x90004bdd   Thumb Code   266  drvp_led.o(i.drvp_led_prc_1ms)
-    main                                     0x90004d0d   Thumb Code   178  main.o(i.main)
-    mutex_init                               0x90004df1   Thumb Code     6  port.o(i.mutex_init)
-    mutex_lock                               0x90004df7   Thumb Code     2  port.o(i.mutex_lock)
-    mutex_unlock                             0x90004df9   Thumb Code     2  port.o(i.mutex_unlock)
-    sram_d2_free                             0x90004dfd   Thumb Code   214  sram_d2_malloc.o(i.sram_d2_free)
-    sram_d2_init                             0x90004ed9   Thumb Code    54  sram_d2_malloc.o(i.sram_d2_init)
-    sram_d2_malloc                           0x90004f19   Thumb Code   228  sram_d2_malloc.o(i.sram_d2_malloc)
-    D1CorePrescTable                         0x90005000   Data          16  system_stm32h7xx.o(.constdata)
-    EventRecorderInfo                        0x90005104   Data          24  eventrecorder.o(.constdata)
-    Region$$Table$$Base                      0x9000511c   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x9000517c   Number         0  anon$$obj.o(Region$$Table)
+    FMC_NORSRAM_Init                         0x90000875   Thumb Code   160  stm32h7xx_ll_fmc.o(i.FMC_NORSRAM_Init)
+    FMC_NORSRAM_Timing_Init                  0x90000919   Thumb Code    90  stm32h7xx_ll_fmc.o(i.FMC_NORSRAM_Timing_Init)
+    HAL_DMA_Abort_IT                         0x90000975   Thumb Code   906  stm32h7xx_hal_dma.o(i.HAL_DMA_Abort_IT)
+    HAL_DMA_GetState                         0x90000d0d   Thumb Code     8  stm32h7xx_hal_dma.o(i.HAL_DMA_GetState)
+    HAL_Delay                                0x90000d15   Thumb Code    36  stm32h7xx_hal.o(i.HAL_Delay)
+    HAL_EnableCompensationCell               0x90000d3d   Thumb Code    14  stm32h7xx_hal.o(i.HAL_EnableCompensationCell)
+    HAL_GPIO_Init                            0x90000d51   Thumb Code   456  stm32h7xx_hal_gpio.o(i.HAL_GPIO_Init)
+    HAL_GPIO_ReadPin                         0x90000f4d   Thumb Code    16  stm32h7xx_hal_gpio.o(i.HAL_GPIO_ReadPin)
+    HAL_GPIO_WritePin                        0x90000f5d   Thumb Code    12  stm32h7xx_hal_gpio.o(i.HAL_GPIO_WritePin)
+    HAL_GetREVID                             0x90000f69   Thumb Code     8  stm32h7xx_hal.o(i.HAL_GetREVID)
+    HAL_GetTick                              0x90000f75   Thumb Code     6  stm32h7xx_hal.o(i.HAL_GetTick)
+    HAL_I2C_AbortCpltCallback                0x90000f81   Thumb Code     2  stm32h7xx_hal_i2c.o(i.HAL_I2C_AbortCpltCallback)
+    HAL_I2C_AddrCallback                     0x90000f83   Thumb Code     2  stm32h7xx_hal_i2c.o(i.HAL_I2C_AddrCallback)
+    HAL_I2C_DeInit                           0x90000f85   Thumb Code    74  stm32h7xx_hal_i2c.o(i.HAL_I2C_DeInit)
+    HAL_I2C_ER_IRQHandler                    0x90000fd5   Thumb Code   118  stm32h7xx_hal_i2c.o(i.HAL_I2C_ER_IRQHandler)
+    HAL_I2C_EV_IRQHandler                    0x9000104b   Thumb Code    28  stm32h7xx_hal_i2c.o(i.HAL_I2C_EV_IRQHandler)
+    HAL_I2C_ErrorCallback                    0x90001069   Thumb Code    64  drv_eeprom.o(i.HAL_I2C_ErrorCallback)
+    HAL_I2C_Init                             0x900010b9   Thumb Code   260  stm32h7xx_hal_i2c.o(i.HAL_I2C_Init)
+    HAL_I2C_ListenCpltCallback               0x900011ed   Thumb Code     2  stm32h7xx_hal_i2c.o(i.HAL_I2C_ListenCpltCallback)
+    HAL_I2C_MasterRxCpltCallback             0x900011ef   Thumb Code     2  stm32h7xx_hal_i2c.o(i.HAL_I2C_MasterRxCpltCallback)
+    HAL_I2C_MasterTxCpltCallback             0x900011f1   Thumb Code     2  stm32h7xx_hal_i2c.o(i.HAL_I2C_MasterTxCpltCallback)
+    HAL_I2C_MemRxCpltCallback                0x900011f5   Thumb Code    16  drv_eeprom.o(i.HAL_I2C_MemRxCpltCallback)
+    HAL_I2C_MemTxCpltCallback                0x9000120d   Thumb Code    16  drv_eeprom.o(i.HAL_I2C_MemTxCpltCallback)
+    HAL_I2C_Mem_Read_IT                      0x90001225   Thumb Code   188  stm32h7xx_hal_i2c.o(i.HAL_I2C_Mem_Read_IT)
+    HAL_I2C_Mem_Write_IT                     0x900012ed   Thumb Code   190  stm32h7xx_hal_i2c.o(i.HAL_I2C_Mem_Write_IT)
+    HAL_I2C_MspDeInit                        0x900013b9   Thumb Code     2  stm32h7xx_hal_i2c.o(i.HAL_I2C_MspDeInit)
+    HAL_I2C_MspInit                          0x900013bb   Thumb Code     2  stm32h7xx_hal_i2c.o(i.HAL_I2C_MspInit)
+    HAL_I2C_SlaveRxCpltCallback              0x900013bd   Thumb Code     2  stm32h7xx_hal_i2c.o(i.HAL_I2C_SlaveRxCpltCallback)
+    HAL_I2C_SlaveTxCpltCallback              0x900013bf   Thumb Code     2  stm32h7xx_hal_i2c.o(i.HAL_I2C_SlaveTxCpltCallback)
+    HAL_IncTick                              0x900013c1   Thumb Code    16  stm32h7xx_hal.o(i.HAL_IncTick)
+    HAL_Init                                 0x900013d9   Thumb Code    80  stm32h7xx_hal.o(i.HAL_Init)
+    HAL_InitTick                             0x90001439   Thumb Code    74  stm32h7xx_hal.o(i.HAL_InitTick)
+    HAL_MPU_ConfigRegion                     0x90001491   Thumb Code    86  stm32h7xx_hal_cortex.o(i.HAL_MPU_ConfigRegion)
+    HAL_MPU_Disable                          0x900014ed   Thumb Code    38  stm32h7xx_hal_cortex.o(i.HAL_MPU_Disable)
+    HAL_MPU_Enable                           0x90001519   Thumb Code    58  stm32h7xx_hal_cortex.o(i.HAL_MPU_Enable)
+    HAL_MspInit                              0x90001559   Thumb Code     2  stm32h7xx_hal_msp_template.o(i.HAL_MspInit)
+    HAL_NVIC_EnableIRQ                       0x9000155b   Thumb Code    40  stm32h7xx_hal_cortex.o(i.HAL_NVIC_EnableIRQ)
+    HAL_NVIC_SetPriority                     0x90001583   Thumb Code   122  stm32h7xx_hal_cortex.o(i.HAL_NVIC_SetPriority)
+    HAL_NVIC_SetPriorityGrouping             0x900015fd   Thumb Code    32  stm32h7xx_hal_cortex.o(i.HAL_NVIC_SetPriorityGrouping)
+    HAL_RCC_ClockConfig                      0x90001625   Thumb Code   774  stm32h7xx_hal_rcc.o(i.HAL_RCC_ClockConfig)
+    HAL_RCC_GetSysClockFreq                  0x90001945   Thumb Code   524  stm32h7xx_hal_rcc.o(i.HAL_RCC_GetSysClockFreq)
+    HAL_RCC_OscConfig                        0x90001b71   Thumb Code  2130  stm32h7xx_hal_rcc.o(i.HAL_RCC_OscConfig)
+    HAL_SYSTICK_Config                       0x900023c9   Thumb Code    52  stm32h7xx_hal_cortex.o(i.HAL_SYSTICK_Config)
+    HAL_TIM_IRQHandler                       0x900023fd   Thumb Code   442  stm32h7xx_hal_tim.o(i.HAL_TIM_IRQHandler)
+    HardFaultHandler                         0x900025b9   Thumb Code   242  segger_hardfaulthandler.o(i.HardFaultHandler)
+    I2C2_ER_IRQHandler                       0x90002719   Thumb Code    10  drv_eeprom.o(i.I2C2_ER_IRQHandler)
+    I2C2_EV_IRQHandler                       0x90002729   Thumb Code    10  drv_eeprom.o(i.I2C2_EV_IRQHandler)
+    MemManage_Handler_C                      0x90003af5   Thumb Code    68  stm32h7xx_it.o(i.MemManage_Handler_C)
+    NMI_Handler                              0x90003b3d   Thumb Code     2  stm32h7xx_it.o(i.NMI_Handler)
+    PendSV_Handler                           0x90003b3f   Thumb Code     2  stm32h7xx_it.o(i.PendSV_Handler)
+    SEGGER_RTT_Init                          0x90003b41   Thumb Code     8  segger_rtt.o(i.SEGGER_RTT_Init)
+    SEGGER_RTT_Write                         0x90003b49   Thumb Code    70  segger_rtt.o(i.SEGGER_RTT_Write)
+    SEGGER_RTT_WriteNoLock                   0x90003b95   Thumb Code   126  segger_rtt.o(i.SEGGER_RTT_WriteNoLock)
+    SEGGER_RTT_printf                        0x90003c19   Thumb Code    34  segger_rtt_printf.o(i.SEGGER_RTT_printf)
+    SEGGER_RTT_vprintf                       0x90003c3d   Thumb Code   582  segger_rtt_printf.o(i.SEGGER_RTT_vprintf)
+    SVC_Handler                              0x90003e8d   Thumb Code     2  stm32h7xx_it.o(i.SVC_Handler)
+    SystemInit                               0x90003ff5   Thumb Code   212  system_stm32h7xx.o(i.SystemInit)
+    TIM1_UP_IRQHandler                       0x900040f1   Thumb Code    10  pwm_timer1.o(i.TIM1_UP_IRQHandler)
+    TIM5_IRQHandler                          0x90004101   Thumb Code    10  pwm_in_timer5.o(i.TIM5_IRQHandler)
+    UsageFault_Handler                       0x90004111   Thumb Code     4  stm32h7xx_it.o(i.UsageFault_Handler)
+    __scatterload_copy                       0x900044c5   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x900044d3   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x900044d5   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    circular_buffer_init                     0x900044ed   Thumb Code    76  circular_buffer.o(i.circular_buffer_init)
+    circular_buffer_read                     0x90004539   Thumb Code    98  circular_buffer.o(i.circular_buffer_read)
+    circular_buffer_write                    0x9000459b   Thumb Code   106  circular_buffer.o(i.circular_buffer_write)
+    drv_eeprom_clrerrflag                    0x90004649   Thumb Code     8  drv_eeprom.o(i.drv_eeprom_clrerrflag)
+    drv_eeprom_clrrflag                      0x90004655   Thumb Code     8  drv_eeprom.o(i.drv_eeprom_clrrflag)
+    drv_eeprom_clrwflag                      0x90004661   Thumb Code     8  drv_eeprom.o(i.drv_eeprom_clrwflag)
+    drv_eeprom_init                          0x9000466d   Thumb Code   176  drv_eeprom.o(i.drv_eeprom_init)
+    drv_eeprom_readbuf                       0x90004731   Thumb Code    38  drv_eeprom.o(i.drv_eeprom_readbuf)
+    drv_eeprom_reterrflag                    0x90004761   Thumb Code     6  drv_eeprom.o(i.drv_eeprom_reterrflag)
+    drv_eeprom_retrflag                      0x9000476d   Thumb Code     6  drv_eeprom.o(i.drv_eeprom_retrflag)
+    drv_eeprom_retwflag                      0x90004779   Thumb Code     6  drv_eeprom.o(i.drv_eeprom_retwflag)
+    drv_eeprom_writebuf                      0x90004785   Thumb Code    38  drv_eeprom.o(i.drv_eeprom_writebuf)
+    drv_fmc_bl_ctrl                          0x900047b5   Thumb Code    16  drv_fmc_lcd.o(i.drv_fmc_bl_ctrl)
+    drv_fmc_lcd_init                         0x900047c9   Thumb Code   256  drv_fmc_lcd.o(i.drv_fmc_lcd_init)
+    drv_fmc_lcd_rst                          0x900048d9   Thumb Code    52  drv_fmc_lcd.o(i.drv_fmc_lcd_rst)
+    drv_fmc_read_data                        0x90004911   Thumb Code     6  drv_fmc_lcd.o(i.drv_fmc_read_data)
+    drv_fmc_write_cmd                        0x9000491d   Thumb Code     8  drv_fmc_lcd.o(i.drv_fmc_write_cmd)
+    drv_fmc_write_data                       0x90004925   Thumb Code     6  drv_fmc_lcd.o(i.drv_fmc_write_data)
+    drv_key_init                             0x90004931   Thumb Code   168  drv_key.o(i.drv_key_init)
+    drv_key_readmask                         0x900049e1   Thumb Code    74  drv_key.o(i.drv_key_readmask)
+    drv_led_init                             0x90004a31   Thumb Code   168  drv_led.o(i.drv_led_init)
+    drv_led_off                              0x90004ae1   Thumb Code    34  drv_led.o(i.drv_led_off)
+    drv_led_on                               0x90004b09   Thumb Code    34  drv_led.o(i.drv_led_on)
+    drvp_eeprom_init                         0x90004b31   Thumb Code    90  drvp_eeprom.o(i.drvp_eeprom_init)
+    drvp_eeprom_prc_10ms                     0x90004b99   Thumb Code   260  drvp_eeprom.o(i.drvp_eeprom_prc_10ms)
+    drvp_fmc_lcd_init                        0x90004ca5   Thumb Code   510  drvp_fmc_lcd.o(i.drvp_fmc_lcd_init)
+    drvp_key_init                            0x90004ea9   Thumb Code    28  drvp_key.o(i.drvp_key_init)
+    drvp_key_prc_10ms                        0x90004ecd   Thumb Code   424  drvp_key.o(i.drvp_key_prc_10ms)
+    drvp_key_rfifo                           0x90005081   Thumb Code    26  drvp_key.o(i.drvp_key_rfifo)
+    drvp_led_init                            0x900050bd   Thumb Code    10  drvp_led.o(i.drvp_led_init)
+    drvp_led_prc_1ms                         0x900050cd   Thumb Code   266  drvp_led.o(i.drvp_led_prc_1ms)
+    main                                     0x900051fd   Thumb Code   182  main.o(i.main)
+    mutex_init                               0x900052e5   Thumb Code     6  port.o(i.mutex_init)
+    mutex_lock                               0x900052eb   Thumb Code     2  port.o(i.mutex_lock)
+    mutex_unlock                             0x900052ed   Thumb Code     2  port.o(i.mutex_unlock)
+    sram_d2_free                             0x900052f1   Thumb Code   214  sram_d2_malloc.o(i.sram_d2_free)
+    sram_d2_init                             0x900053cd   Thumb Code    54  sram_d2_malloc.o(i.sram_d2_init)
+    sram_d2_malloc                           0x9000540d   Thumb Code   228  sram_d2_malloc.o(i.sram_d2_malloc)
+    D1CorePrescTable                         0x900054f4   Data          16  system_stm32h7xx.o(.constdata)
+    EventRecorderInfo                        0x900055f8   Data          24  eventrecorder.o(.constdata)
+    Region$$Table$$Base                      0x90005610   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x90005670   Number         0  anon$$obj.o(Region$$Table)
 
 
 
@@ -7771,51 +7816,51 @@ Memory Map of the image
 
   Image Entry point : 0x90000299
 
-  Load Region LR_IROM1 (Base: 0x90000000, Size: 0x0000adb4, Max: 0x01000000, ABSOLUTE, COMPRESSED[0x000052c8])
+  Load Region LR_IROM1 (Base: 0x90000000, Size: 0x0000b2c0, Max: 0x01000000, ABSOLUTE, COMPRESSED[0x000057d4])
 
-    Execution Region ER_ITCM (Exec base: 0x00000000, Load base: 0x9000517c, Size: 0x0000006c, Max: 0x00010000, ABSOLUTE)
-
-    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
-
-    0x00000000   0x9000517c   0x00000044   Code   RO        18727    .ITCM_CODE          main.o
-    0x00000044   0x900051c0   0x0000000a   Ven    RO        19825    Veneer$$Code        anon$$obj.o
-    0x0000004e   0x900051ca   0x0000000a   Ven    RO        19826    Veneer$$Code        anon$$obj.o
-    0x00000058   0x900051d4   0x0000000a   Ven    RO        19827    Veneer$$Code        anon$$obj.o
-    0x00000062   0x900051de   0x0000000a   Ven    RO        19828    Veneer$$Code        anon$$obj.o
-
-
-    Execution Region RW_IRAM_RESET (Exec base: 0x20000000, Load base: 0x900051e8, Size: 0x00000400, Max: 0x00000400, ABSOLUTE, COMPRESSED[0x0000000c])
+    Execution Region ER_ITCM (Exec base: 0x00000000, Load base: 0x90005670, Size: 0x0000006c, Max: 0x00010000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   COMPRESSED   0x00000400   Data   RW        18733    .RamVecTable        main.o
+    0x00000000   0x90005670   0x00000044   Code   RO        18813    .ITCM_CODE          main.o
+    0x00000044   0x900056b4   0x0000000a   Ven    RO        19905    Veneer$$Code        anon$$obj.o
+    0x0000004e   0x900056be   0x0000000a   Ven    RO        19906    Veneer$$Code        anon$$obj.o
+    0x00000058   0x900056c8   0x0000000a   Ven    RO        19907    Veneer$$Code        anon$$obj.o
+    0x00000062   0x900056d2   0x0000000a   Ven    RO        19908    Veneer$$Code        anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000400, Load base: 0x900051f4, Size: 0x000015e8, Max: 0x0001fc00, ABSOLUTE)
+    Execution Region RW_IRAM_RESET (Exec base: 0x20000000, Load base: 0x900056dc, Size: 0x00000400, Max: 0x00000400, ABSOLUTE, COMPRESSED[0x0000000c])
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000400   0x900051f4   0x00000008   Data   RW           17    .data               system_stm32h7xx.o
-    0x20000408   0x900051fc   0x00000009   Data   RW          425    .data               stm32h7xx_hal.o
-    0x20000411   0x90005205   0x00000003   PAD
-    0x20000414   0x90005208   0x00000004   Data   RW        18068    .data               drvp_key.o
-    0x20000418   0x9000520c   0x00000002   Data   RW        18734    .data               main.o
-    0x2000041a   0x9000520e   0x00000002   PAD
-    0x2000041c   0x90005210   0x00000004   Data   RW        19193    .data               segger_hardfaulthandler.o
-    0x20000420        -       0x000000a8   Zero   RW        18945    .bss                segger_rtt.o
-    0x200004c8        -       0x00000040   Zero   RW        19192    .bss                segger_hardfaulthandler.o
-    0x20000508   0x90005214   0x00000038   PAD
-    0x20000540        -       0x000004a4   Zero   RW        19604    .bss.noinit         eventrecorder.o
-    0x200009e4   0x90005214   0x00000004   PAD
+    0x20000000   COMPRESSED   0x00000400   Data   RW        18819    .RamVecTable        main.o
+
+
+    Execution Region RW_IRAM1 (Exec base: 0x20000400, Load base: 0x900056e8, Size: 0x000015e8, Max: 0x0001fc00, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x20000400   0x900056e8   0x00000008   Data   RW           17    .data               system_stm32h7xx.o
+    0x20000408   0x900056f0   0x00000009   Data   RW          425    .data               stm32h7xx_hal.o
+    0x20000411   0x900056f9   0x00000003   PAD
+    0x20000414   0x900056fc   0x00000004   Data   RW        18068    .data               drvp_key.o
+    0x20000418   0x90005700   0x00000002   Data   RW        18820    .data               main.o
+    0x2000041a   0x90005702   0x00000002   PAD
+    0x2000041c   0x90005704   0x00000004   Data   RW        19273    .data               segger_hardfaulthandler.o
+    0x20000420        -       0x000000a8   Zero   RW        19025    .bss                segger_rtt.o
+    0x200004c8        -       0x00000040   Zero   RW        19272    .bss                segger_hardfaulthandler.o
+    0x20000508   0x90005708   0x00000038   PAD
+    0x20000540        -       0x000004a4   Zero   RW        19684    .bss.noinit         eventrecorder.o
+    0x200009e4   0x90005708   0x00000004   PAD
     0x200009e8        -       0x00001000   Zero   RW            1    STACK               startup_stm32h743xx.o
 
 
-    Execution Region RW_IRAM2 (Exec base: 0x24000000, Load base: 0x90005214, Size: 0x00000000, Max: 0x00080000, ABSOLUTE)
+    Execution Region RW_IRAM2 (Exec base: 0x24000000, Load base: 0x90005708, Size: 0x00000000, Max: 0x00080000, ABSOLUTE)
 
     **** No section assigned to this execution region ****
 
 
-    Execution Region RW_IRAM3 (Exec base: 0x30000000, Load base: 0x90005214, Size: 0x000007ac, Max: 0x0003b000, ABSOLUTE, COMPRESSED[0x00000010])
+    Execution Region RW_IRAM3 (Exec base: 0x30000000, Load base: 0x90005708, Size: 0x000007c4, Max: 0x0003b000, ABSOLUTE, COMPRESSED[0x00000028])
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -7828,213 +7873,226 @@ Memory Map of the image
     0x3000027b   COMPRESSED   0x00000001   PAD
     0x3000027c   COMPRESSED   0x0000010a   Data   RW        18367    .RAM_D2             drvp_eeprom.o
     0x30000386   COMPRESSED   0x00000002   PAD
-    0x30000388   COMPRESSED   0x00000010   Data   RW        18669    .RAM_D2             sram_d2_malloc.o
-    0x30000398   COMPRESSED   0x00000411   Data   RW        18944    .RAM_D2             segger_rtt.o
+    0x30000388   COMPRESSED   0x00000018   Data   RW        18616    .RAM_D2             drvp_fmc_lcd.o
+    0x300003a0   COMPRESSED   0x00000010   Data   RW        18755    .RAM_D2             sram_d2_malloc.o
+    0x300003b0   COMPRESSED   0x00000411   Data   RW        19024    .RAM_D2             segger_rtt.o
 
 
-    Execution Region RW_IRAM_MALLOC (Exec base: 0x3003b000, Load base: 0x90005224, Size: 0x00005000, Max: 0x00005000, ABSOLUTE, COMPRESSED[0x000000a4])
+    Execution Region RW_IRAM_MALLOC (Exec base: 0x3003b000, Load base: 0x90005730, Size: 0x00005000, Max: 0x00005000, ABSOLUTE, COMPRESSED[0x000000a4])
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x3003b000   COMPRESSED   0x00005000   Data   RW        18670    .RAM_MALLOC         sram_d2_malloc.o
+    0x3003b000   COMPRESSED   0x00005000   Data   RW        18756    .RAM_MALLOC         sram_d2_malloc.o
 
 
-    Execution Region RW_IRAM5 (Exec base: 0x30040000, Load base: 0x900052c8, Size: 0x00000000, Max: 0x00008000, ABSOLUTE)
-
-    **** No section assigned to this execution region ****
-
-
-    Execution Region RW_IRAM4 (Exec base: 0x38000000, Load base: 0x900052c8, Size: 0x00000000, Max: 0x00010000, ABSOLUTE)
+    Execution Region RW_IRAM5 (Exec base: 0x30040000, Load base: 0x900057d4, Size: 0x00000000, Max: 0x00008000, ABSOLUTE)
 
     **** No section assigned to this execution region ****
 
 
-    Execution Region ER_IROM1 (Exec base: 0x90000000, Load base: 0x90000000, Size: 0x0000517c, Max: 0x01000000, ABSOLUTE)
+    Execution Region RW_IRAM4 (Exec base: 0x38000000, Load base: 0x900057d4, Size: 0x00000000, Max: 0x00010000, ABSOLUTE)
+
+    **** No section assigned to this execution region ****
+
+
+    Execution Region ER_IROM1 (Exec base: 0x90000000, Load base: 0x90000000, Size: 0x00005670, Max: 0x01000000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x90000000   0x90000000   0x00000298   Data   RO            3    RESET               startup_stm32h743xx.o
-    0x90000298   0x90000298   0x00000000   Code   RO        19770  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x90000298   0x90000298   0x00000004   Code   RO        19793    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x9000029c   0x9000029c   0x00000004   Code   RO        19796    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x900002a0   0x900002a0   0x00000000   Code   RO        19798    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x900002a0   0x900002a0   0x00000000   Code   RO        19800    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x900002a0   0x900002a0   0x00000008   Code   RO        19801    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x900002a8   0x900002a8   0x00000004   Code   RO        19808    .ARM.Collect$$$$0000000E  mc_w.l(entry12b.o)
-    0x900002ac   0x900002ac   0x00000000   Code   RO        19803    .ARM.Collect$$$$0000000F  mc_w.l(entry10a.o)
-    0x900002ac   0x900002ac   0x00000000   Code   RO        19805    .ARM.Collect$$$$00000011  mc_w.l(entry11a.o)
-    0x900002ac   0x900002ac   0x00000004   Code   RO        19794    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
-    0x900002b0   0x900002b0   0x00000012   Code   RO        18843    .emb_text           stm32h7xx_it.o
+    0x90000298   0x90000298   0x00000000   Code   RO        19850  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x90000298   0x90000298   0x00000004   Code   RO        19873    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x9000029c   0x9000029c   0x00000004   Code   RO        19876    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x900002a0   0x900002a0   0x00000000   Code   RO        19878    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x900002a0   0x900002a0   0x00000000   Code   RO        19880    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x900002a0   0x900002a0   0x00000008   Code   RO        19881    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x900002a8   0x900002a8   0x00000004   Code   RO        19888    .ARM.Collect$$$$0000000E  mc_w.l(entry12b.o)
+    0x900002ac   0x900002ac   0x00000000   Code   RO        19883    .ARM.Collect$$$$0000000F  mc_w.l(entry10a.o)
+    0x900002ac   0x900002ac   0x00000000   Code   RO        19885    .ARM.Collect$$$$00000011  mc_w.l(entry11a.o)
+    0x900002ac   0x900002ac   0x00000004   Code   RO        19874    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x900002b0   0x900002b0   0x00000012   Code   RO        18923    .emb_text           stm32h7xx_it.o
     0x900002c2   0x900002c2   0x00000002   PAD
-    0x900002c4   0x900002c4   0x00000074   Code   RO        19586    .emb_text           eventrecorder.o
+    0x900002c4   0x900002c4   0x00000074   Code   RO        19666    .emb_text           eventrecorder.o
     0x90000338   0x90000338   0x0000002c   Code   RO            4    .text               startup_stm32h743xx.o
-    0x90000364   0x90000364   0x00000014   Code   RO        19185    .text               hardfaulthandler.o
-    0x90000378   0x90000378   0x00000024   Code   RO        19781    .text               mc_w.l(memcpya.o)
-    0x9000039c   0x9000039c   0x00000024   Code   RO        19783    .text               mc_w.l(memseta.o)
-    0x900003c0   0x900003c0   0x00000024   Code   RO        19813    .text               mc_w.l(init.o)
-    0x900003e4   0x900003e4   0x00000056   Code   RO        19823    .text               mc_w.l(__dczerorl2.o)
-    0x9000043a   0x9000043a   0x00000004   Code   RO        18844    i.BusFault_Handler  stm32h7xx_it.o
+    0x90000364   0x90000364   0x00000014   Code   RO        19265    .text               hardfaulthandler.o
+    0x90000378   0x90000378   0x00000024   Code   RO        19861    .text               mc_w.l(memcpya.o)
+    0x9000039c   0x9000039c   0x00000024   Code   RO        19863    .text               mc_w.l(memseta.o)
+    0x900003c0   0x900003c0   0x00000024   Code   RO        19893    .text               mc_w.l(init.o)
+    0x900003e4   0x900003e4   0x00000056   Code   RO        19903    .text               mc_w.l(__dczerorl2.o)
+    0x9000043a   0x9000043a   0x00000004   Code   RO        18924    i.BusFault_Handler  stm32h7xx_it.o
     0x9000043e   0x9000043e   0x00000002   PAD
-    0x90000440   0x90000440   0x00000130   Code   RO        18728    i.CPU_CACHE_Enable  main.o
-    0x90000570   0x90000570   0x00000002   Code   RO        18845    i.DebugMon_Handler  stm32h7xx_it.o
-    0x90000572   0x90000572   0x00000004   Code   RO        18729    i.Error_Handler     main.o
+    0x90000440   0x90000440   0x00000130   Code   RO        18814    i.CPU_CACHE_Enable  main.o
+    0x90000570   0x90000570   0x00000002   Code   RO        18925    i.DebugMon_Handler  stm32h7xx_it.o
+    0x90000572   0x90000572   0x00000004   Code   RO        18815    i.Error_Handler     main.o
     0x90000576   0x90000576   0x00000002   PAD
-    0x90000578   0x90000578   0x0000003c   Code   RO        19588    i.EventGetTS        eventrecorder.o
-    0x900005b4   0x900005b4   0x000000d8   Code   RO        19592    i.EventRecordItem   eventrecorder.o
-    0x9000068c   0x9000068c   0x0000005c   Code   RO        19595    i.EventRecorderEnable  eventrecorder.o
-    0x900006e8   0x900006e8   0x00000128   Code   RO        19596    i.EventRecorderInitialize  eventrecorder.o
-    0x90000810   0x90000810   0x00000030   Code   RO        19597    i.EventRecorderStart  eventrecorder.o
-    0x90000840   0x90000840   0x0000000c   Code   RO        19599    i.EventRecorderTimerGetCount  eventrecorder.o
-    0x9000084c   0x9000084c   0x00000024   Code   RO        19601    i.EventRecorderTimerSetup  eventrecorder.o
+    0x90000578   0x90000578   0x0000003c   Code   RO        19668    i.EventGetTS        eventrecorder.o
+    0x900005b4   0x900005b4   0x000000d8   Code   RO        19672    i.EventRecordItem   eventrecorder.o
+    0x9000068c   0x9000068c   0x0000005c   Code   RO        19675    i.EventRecorderEnable  eventrecorder.o
+    0x900006e8   0x900006e8   0x00000128   Code   RO        19676    i.EventRecorderInitialize  eventrecorder.o
+    0x90000810   0x90000810   0x00000030   Code   RO        19677    i.EventRecorderStart  eventrecorder.o
+    0x90000840   0x90000840   0x0000000c   Code   RO        19679    i.EventRecorderTimerGetCount  eventrecorder.o
+    0x9000084c   0x9000084c   0x00000024   Code   RO        19681    i.EventRecorderTimerSetup  eventrecorder.o
     0x90000870   0x90000870   0x00000002   Code   RO           13    i.ExitRun0Mode      system_stm32h7xx.o
     0x90000872   0x90000872   0x00000002   PAD
-    0x90000874   0x90000874   0x00000398   Code   RO         2597    i.HAL_DMA_Abort_IT  stm32h7xx_hal_dma.o
-    0x90000c0c   0x90000c0c   0x00000008   Code   RO         2600    i.HAL_DMA_GetState  stm32h7xx_hal_dma.o
-    0x90000c14   0x90000c14   0x00000014   Code   RO          391    i.HAL_EnableCompensationCell  stm32h7xx_hal.o
-    0x90000c28   0x90000c28   0x000001fc   Code   RO         4522    i.HAL_GPIO_Init     stm32h7xx_hal_gpio.o
-    0x90000e24   0x90000e24   0x00000010   Code   RO         4524    i.HAL_GPIO_ReadPin  stm32h7xx_hal_gpio.o
-    0x90000e34   0x90000e34   0x0000000c   Code   RO         4526    i.HAL_GPIO_WritePin  stm32h7xx_hal_gpio.o
-    0x90000e40   0x90000e40   0x0000000c   Code   RO          395    i.HAL_GetREVID      stm32h7xx_hal.o
-    0x90000e4c   0x90000e4c   0x0000000c   Code   RO          396    i.HAL_GetTick       stm32h7xx_hal.o
-    0x90000e58   0x90000e58   0x00000002   Code   RO         5625    i.HAL_I2C_AbortCpltCallback  stm32h7xx_hal_i2c.o
-    0x90000e5a   0x90000e5a   0x00000002   Code   RO         5626    i.HAL_I2C_AddrCallback  stm32h7xx_hal_i2c.o
-    0x90000e5c   0x90000e5c   0x00000050   Code   RO         5627    i.HAL_I2C_DeInit    stm32h7xx_hal_i2c.o
-    0x90000eac   0x90000eac   0x00000076   Code   RO         5629    i.HAL_I2C_ER_IRQHandler  stm32h7xx_hal_i2c.o
-    0x90000f22   0x90000f22   0x0000001c   Code   RO         5630    i.HAL_I2C_EV_IRQHandler  stm32h7xx_hal_i2c.o
-    0x90000f3e   0x90000f3e   0x00000002   PAD
-    0x90000f40   0x90000f40   0x00000050   Code   RO        18255    i.HAL_I2C_ErrorCallback  drv_eeprom.o
-    0x90000f90   0x90000f90   0x00000134   Code   RO         5636    i.HAL_I2C_Init      stm32h7xx_hal_i2c.o
-    0x900010c4   0x900010c4   0x00000002   Code   RO         5638    i.HAL_I2C_ListenCpltCallback  stm32h7xx_hal_i2c.o
-    0x900010c6   0x900010c6   0x00000002   Code   RO         5639    i.HAL_I2C_MasterRxCpltCallback  stm32h7xx_hal_i2c.o
-    0x900010c8   0x900010c8   0x00000002   Code   RO         5640    i.HAL_I2C_MasterTxCpltCallback  stm32h7xx_hal_i2c.o
-    0x900010ca   0x900010ca   0x00000002   PAD
-    0x900010cc   0x900010cc   0x00000018   Code   RO        18256    i.HAL_I2C_MemRxCpltCallback  drv_eeprom.o
-    0x900010e4   0x900010e4   0x00000018   Code   RO        18257    i.HAL_I2C_MemTxCpltCallback  drv_eeprom.o
-    0x900010fc   0x900010fc   0x000000c8   Code   RO         5656    i.HAL_I2C_Mem_Read_IT  stm32h7xx_hal_i2c.o
-    0x900011c4   0x900011c4   0x000000cc   Code   RO         5659    i.HAL_I2C_Mem_Write_IT  stm32h7xx_hal_i2c.o
-    0x90001290   0x90001290   0x00000002   Code   RO         5660    i.HAL_I2C_MspDeInit  stm32h7xx_hal_i2c.o
-    0x90001292   0x90001292   0x00000002   Code   RO         5661    i.HAL_I2C_MspInit   stm32h7xx_hal_i2c.o
-    0x90001294   0x90001294   0x00000002   Code   RO         5664    i.HAL_I2C_SlaveRxCpltCallback  stm32h7xx_hal_i2c.o
-    0x90001296   0x90001296   0x00000002   Code   RO         5665    i.HAL_I2C_SlaveTxCpltCallback  stm32h7xx_hal_i2c.o
-    0x90001298   0x90001298   0x00000018   Code   RO          402    i.HAL_IncTick       stm32h7xx_hal.o
-    0x900012b0   0x900012b0   0x00000060   Code   RO          403    i.HAL_Init          stm32h7xx_hal.o
-    0x90001310   0x90001310   0x00000058   Code   RO          404    i.HAL_InitTick      stm32h7xx_hal.o
-    0x90001368   0x90001368   0x0000005c   Code   RO         1432    i.HAL_MPU_ConfigRegion  stm32h7xx_hal_cortex.o
-    0x900013c4   0x900013c4   0x0000002c   Code   RO         1433    i.HAL_MPU_Disable   stm32h7xx_hal_cortex.o
-    0x900013f0   0x900013f0   0x00000040   Code   RO         1435    i.HAL_MPU_Enable    stm32h7xx_hal_cortex.o
-    0x90001430   0x90001430   0x00000002   Code   RO         8263    i.HAL_MspInit       stm32h7xx_hal_msp_template.o
-    0x90001432   0x90001432   0x00000028   Code   RO         1439    i.HAL_NVIC_EnableIRQ  stm32h7xx_hal_cortex.o
-    0x9000145a   0x9000145a   0x0000007a   Code   RO         1445    i.HAL_NVIC_SetPriority  stm32h7xx_hal_cortex.o
-    0x900014d4   0x900014d4   0x00000028   Code   RO         1446    i.HAL_NVIC_SetPriorityGrouping  stm32h7xx_hal_cortex.o
-    0x900014fc   0x900014fc   0x00000320   Code   RO         9816    i.HAL_RCC_ClockConfig  stm32h7xx_hal_rcc.o
-    0x9000181c   0x9000181c   0x0000022c   Code   RO         9825    i.HAL_RCC_GetSysClockFreq  stm32h7xx_hal_rcc.o
-    0x90001a48   0x90001a48   0x00000858   Code   RO         9828    i.HAL_RCC_OscConfig  stm32h7xx_hal_rcc.o
-    0x900022a0   0x900022a0   0x00000034   Code   RO         1450    i.HAL_SYSTICK_Config  stm32h7xx_hal_cortex.o
-    0x900022d4   0x900022d4   0x000001ba   Code   RO        13128    i.HAL_TIM_IRQHandler  stm32h7xx_hal_tim.o
-    0x9000248e   0x9000248e   0x00000002   PAD
-    0x90002490   0x90002490   0x00000160   Code   RO        19191    i.HardFaultHandler  segger_hardfaulthandler.o
-    0x900025f0   0x900025f0   0x00000010   Code   RO        18258    i.I2C2_ER_IRQHandler  drv_eeprom.o
-    0x90002600   0x90002600   0x00000010   Code   RO        18259    i.I2C2_EV_IRQHandler  drv_eeprom.o
-    0x90002610   0x90002610   0x00000022   Code   RO         5679    i.I2C_DMAAbort      stm32h7xx_hal_i2c.o
-    0x90002632   0x90002632   0x0000006e   Code   RO         5685    i.I2C_Disable_IRQ   stm32h7xx_hal_i2c.o
-    0x900026a0   0x900026a0   0x000000a8   Code   RO         5686    i.I2C_Enable_IRQ    stm32h7xx_hal_i2c.o
-    0x90002748   0x90002748   0x00000028   Code   RO         5687    i.I2C_Flush_TXDR    stm32h7xx_hal_i2c.o
-    0x90002770   0x90002770   0x000000ce   Code   RO         5688    i.I2C_ITAddrCplt    stm32h7xx_hal_i2c.o
-    0x9000283e   0x9000283e   0x00000002   PAD
-    0x90002840   0x90002840   0x00000154   Code   RO         5689    i.I2C_ITError       stm32h7xx_hal_i2c.o
-    0x90002994   0x90002994   0x00000070   Code   RO         5690    i.I2C_ITListenCplt  stm32h7xx_hal_i2c.o
-    0x90002a04   0x90002a04   0x00000128   Code   RO         5691    i.I2C_ITMasterCplt  stm32h7xx_hal_i2c.o
-    0x90002b2c   0x90002b2c   0x00000062   Code   RO         5692    i.I2C_ITMasterSeqCplt  stm32h7xx_hal_i2c.o
-    0x90002b8e   0x90002b8e   0x00000002   PAD
-    0x90002b90   0x90002b90   0x00000390   Code   RO         5693    i.I2C_ITSlaveCplt   stm32h7xx_hal_i2c.o
-    0x90002f20   0x90002f20   0x0000008c   Code   RO         5694    i.I2C_ITSlaveSeqCplt  stm32h7xx_hal_i2c.o
-    0x90002fac   0x90002fac   0x00000160   Code   RO         5696    i.I2C_Master_ISR_DMA  stm32h7xx_hal_i2c.o
-    0x9000310c   0x9000310c   0x000001b4   Code   RO         5698    i.I2C_Mem_ISR_DMA   stm32h7xx_hal_i2c.o
-    0x900032c0   0x900032c0   0x0000019c   Code   RO         5699    i.I2C_Mem_ISR_IT    stm32h7xx_hal_i2c.o
-    0x9000345c   0x9000345c   0x000002dc   Code   RO         5702    i.I2C_Slave_ISR_DMA  stm32h7xx_hal_i2c.o
-    0x90003738   0x90003738   0x0000014a   Code   RO         5703    i.I2C_Slave_ISR_IT  stm32h7xx_hal_i2c.o
-    0x90003882   0x90003882   0x00000038   Code   RO         5704    i.I2C_TransferConfig  stm32h7xx_hal_i2c.o
-    0x900038ba   0x900038ba   0x0000003a   Code   RO         5705    i.I2C_TreatErrorCallback  stm32h7xx_hal_i2c.o
-    0x900038f4   0x900038f4   0x00000090   Code   RO        18730    i.MPU_Config        main.o
-    0x90003984   0x90003984   0x00000048   Code   RO        18846    i.MemManage_Handler_C  stm32h7xx_it.o
-    0x900039cc   0x900039cc   0x00000002   Code   RO        18847    i.NMI_Handler       stm32h7xx_it.o
-    0x900039ce   0x900039ce   0x00000002   Code   RO        18848    i.PendSV_Handler    stm32h7xx_it.o
-    0x900039d0   0x900039d0   0x00000008   Code   RO        18917    i.SEGGER_RTT_Init   segger_rtt.o
-    0x900039d8   0x900039d8   0x0000004c   Code   RO        18932    i.SEGGER_RTT_Write  segger_rtt.o
-    0x90003a24   0x90003a24   0x00000084   Code   RO        18935    i.SEGGER_RTT_WriteNoLock  segger_rtt.o
-    0x90003aa8   0x90003aa8   0x00000022   Code   RO        19147    i.SEGGER_RTT_printf  segger_rtt_printf.o
-    0x90003aca   0x90003aca   0x00000002   PAD
-    0x90003acc   0x90003acc   0x00000250   Code   RO        19148    i.SEGGER_RTT_vprintf  segger_rtt_printf.o
-    0x90003d1c   0x90003d1c   0x00000002   Code   RO        18849    i.SVC_Handler       stm32h7xx_it.o
-    0x90003d1e   0x90003d1e   0x00000002   PAD
-    0x90003d20   0x90003d20   0x00000164   Code   RO        18731    i.SystemClock_Config  main.o
-    0x90003e84   0x90003e84   0x000000fc   Code   RO           15    i.SystemInit        system_stm32h7xx.o
-    0x90003f80   0x90003f80   0x00000010   Code   RO        18208    i.TIM1_UP_IRQHandler  pwm_timer1.o
-    0x90003f90   0x90003f90   0x00000010   Code   RO        18159    i.TIM5_IRQHandler   pwm_in_timer5.o
-    0x90003fa0   0x90003fa0   0x00000004   Code   RO        18850    i.UsageFault_Handler  stm32h7xx_it.o
-    0x90003fa4   0x90003fa4   0x00000070   Code   RO        18939    i._DoInit           segger_rtt.o
-    0x90004014   0x90004014   0x0000001c   Code   RO        18940    i._GetAvailWriteSpace  segger_rtt.o
-    0x90004030   0x90004030   0x000000ec   Code   RO        19149    i._PrintInt         segger_rtt_printf.o
-    0x9000411c   0x9000411c   0x000000ec   Code   RO        19150    i._PrintUnsigned    segger_rtt_printf.o
-    0x90004208   0x90004208   0x00000044   Code   RO        19151    i._StoreChar        segger_rtt_printf.o
-    0x9000424c   0x9000424c   0x00000076   Code   RO        18942    i._WriteBlocking    segger_rtt.o
-    0x900042c2   0x900042c2   0x00000058   Code   RO        18943    i._WriteNoCheck     segger_rtt.o
-    0x9000431a   0x9000431a   0x00000002   PAD
-    0x9000431c   0x9000431c   0x00000010   Code   RO         1452    i.__NVIC_GetPriorityGrouping  stm32h7xx_hal_cortex.o
-    0x9000432c   0x9000432c   0x00000028   Code   RO         1453    i.__NVIC_SetPriority  stm32h7xx_hal_cortex.o
-    0x90004354   0x90004354   0x0000000e   Code   RO        19817    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x90004362   0x90004362   0x00000002   Code   RO        19818    i.__scatterload_null  mc_w.l(handlers.o)
-    0x90004364   0x90004364   0x0000000e   Code   RO        19819    i.__scatterload_zeroinit  mc_w.l(handlers.o)
-    0x90004372   0x90004372   0x0000000a   Code   RO        18661    i.blk_raw_size      sram_d2_malloc.o
-    0x9000437c   0x9000437c   0x0000004c   Code   RO        18596    i.circular_buffer_init  circular_buffer.o
-    0x900043c8   0x900043c8   0x00000062   Code   RO        18600    i.circular_buffer_read  circular_buffer.o
-    0x9000442a   0x9000442a   0x0000006a   Code   RO        18601    i.circular_buffer_write  circular_buffer.o
-    0x90004494   0x90004494   0x00000042   Code   RO        19603    i.crc16_ccitt       eventrecorder.o
-    0x900044d6   0x900044d6   0x00000002   PAD
-    0x900044d8   0x900044d8   0x0000000c   Code   RO        18260    i.drv_eeprom_clrerrflag  drv_eeprom.o
-    0x900044e4   0x900044e4   0x0000000c   Code   RO        18261    i.drv_eeprom_clrrflag  drv_eeprom.o
-    0x900044f0   0x900044f0   0x0000000c   Code   RO        18262    i.drv_eeprom_clrwflag  drv_eeprom.o
-    0x900044fc   0x900044fc   0x000000c4   Code   RO        18263    i.drv_eeprom_init   drv_eeprom.o
-    0x900045c0   0x900045c0   0x00000030   Code   RO        18264    i.drv_eeprom_readbuf  drv_eeprom.o
-    0x900045f0   0x900045f0   0x0000000c   Code   RO        18265    i.drv_eeprom_reterrflag  drv_eeprom.o
-    0x900045fc   0x900045fc   0x0000000c   Code   RO        18266    i.drv_eeprom_retrflag  drv_eeprom.o
-    0x90004608   0x90004608   0x0000000c   Code   RO        18267    i.drv_eeprom_retwflag  drv_eeprom.o
-    0x90004614   0x90004614   0x00000030   Code   RO        18268    i.drv_eeprom_writebuf  drv_eeprom.o
-    0x90004644   0x90004644   0x000000b0   Code   RO        18027    i.drv_key_init      drv_key.o
-    0x900046f4   0x900046f4   0x00000050   Code   RO        18028    i.drv_key_readmask  drv_key.o
-    0x90004744   0x90004744   0x000000b0   Code   RO        17917    i.drv_led_init      drv_led.o
-    0x900047f4   0x900047f4   0x00000028   Code   RO        17918    i.drv_led_off       drv_led.o
-    0x9000481c   0x9000481c   0x00000028   Code   RO        17919    i.drv_led_on        drv_led.o
-    0x90004844   0x90004844   0x00000068   Code   RO        18363    i.drvp_eeprom_init  drvp_eeprom.o
-    0x900048ac   0x900048ac   0x0000010c   Code   RO        18364    i.drvp_eeprom_prc_10ms  drvp_eeprom.o
-    0x900049b8   0x900049b8   0x00000024   Code   RO        18062    i.drvp_key_init     drvp_key.o
-    0x900049dc   0x900049dc   0x000001b4   Code   RO        18063    i.drvp_key_prc_10ms  drvp_key.o
-    0x90004b90   0x90004b90   0x00000020   Code   RO        18064    i.drvp_key_rfifo    drvp_key.o
-    0x90004bb0   0x90004bb0   0x0000001c   Code   RO        18065    i.drvp_key_wfifo    drvp_key.o
-    0x90004bcc   0x90004bcc   0x00000010   Code   RO        17958    i.drvp_led_init     drvp_led.o
-    0x90004bdc   0x90004bdc   0x00000114   Code   RO        17961    i.drvp_led_prc_1ms  drvp_led.o
-    0x90004cf0   0x90004cf0   0x00000006   Code   RO        18662    i.free_get_next     sram_d2_malloc.o
-    0x90004cf6   0x90004cf6   0x00000004   Code   RO        18663    i.free_set_next     sram_d2_malloc.o
-    0x90004cfa   0x90004cfa   0x00000012   Code   RO        18602    i.is_power_of_two   circular_buffer.o
-    0x90004d0c   0x90004d0c   0x000000e4   Code   RO        18732    i.main              main.o
-    0x90004df0   0x90004df0   0x00000006   Code   RO        18556    i.mutex_init        port.o
-    0x90004df6   0x90004df6   0x00000002   Code   RO        18557    i.mutex_lock        port.o
-    0x90004df8   0x90004df8   0x00000002   Code   RO        18558    i.mutex_unlock      port.o
-    0x90004dfa   0x90004dfa   0x00000002   PAD
-    0x90004dfc   0x90004dfc   0x000000dc   Code   RO        18664    i.sram_d2_free      sram_d2_malloc.o
-    0x90004ed8   0x90004ed8   0x00000040   Code   RO        18667    i.sram_d2_init      sram_d2_malloc.o
-    0x90004f18   0x90004f18   0x000000e8   Code   RO        18668    i.sram_d2_malloc    sram_d2_malloc.o
-    0x90005000   0x90005000   0x00000010   Data   RO           16    .constdata          system_stm32h7xx.o
-    0x90005010   0x90005010   0x00000028   Data   RO        17920    .constdata          drv_led.o
-    0x90005038   0x90005038   0x0000000c   Data   RO        17966    .constdata          drvp_led.o
-    0x90005044   0x90005044   0x00000060   Data   RO        18029    .constdata          drv_key.o
-    0x900050a4   0x900050a4   0x00000008   Data   RO        18067    .constdata          drvp_key.o
-    0x900050ac   0x900050ac   0x00000024   Data   RO        18368    .constdata          drvp_eeprom.o
-    0x900050d0   0x900050d0   0x00000021   Data   RO        18946    .constdata          segger_rtt.o
-    0x900050f1   0x900050f1   0x00000010   Data   RO        19152    .constdata          segger_rtt_printf.o
-    0x90005101   0x90005101   0x00000003   PAD
-    0x90005104   0x90005104   0x00000018   Data   RO        19605    .constdata          eventrecorder.o
-    0x9000511c   0x9000511c   0x00000060   Data   RO        19815    Region$$Table       anon$$obj.o
+    0x90000874   0x90000874   0x000000a4   Code   RO        15706    i.FMC_NORSRAM_Init  stm32h7xx_ll_fmc.o
+    0x90000918   0x90000918   0x0000005a   Code   RO        15707    i.FMC_NORSRAM_Timing_Init  stm32h7xx_ll_fmc.o
+    0x90000972   0x90000972   0x00000002   PAD
+    0x90000974   0x90000974   0x00000398   Code   RO         2597    i.HAL_DMA_Abort_IT  stm32h7xx_hal_dma.o
+    0x90000d0c   0x90000d0c   0x00000008   Code   RO         2600    i.HAL_DMA_GetState  stm32h7xx_hal_dma.o
+    0x90000d14   0x90000d14   0x00000028   Code   RO          384    i.HAL_Delay         stm32h7xx_hal.o
+    0x90000d3c   0x90000d3c   0x00000014   Code   RO          391    i.HAL_EnableCompensationCell  stm32h7xx_hal.o
+    0x90000d50   0x90000d50   0x000001fc   Code   RO         4522    i.HAL_GPIO_Init     stm32h7xx_hal_gpio.o
+    0x90000f4c   0x90000f4c   0x00000010   Code   RO         4524    i.HAL_GPIO_ReadPin  stm32h7xx_hal_gpio.o
+    0x90000f5c   0x90000f5c   0x0000000c   Code   RO         4526    i.HAL_GPIO_WritePin  stm32h7xx_hal_gpio.o
+    0x90000f68   0x90000f68   0x0000000c   Code   RO          395    i.HAL_GetREVID      stm32h7xx_hal.o
+    0x90000f74   0x90000f74   0x0000000c   Code   RO          396    i.HAL_GetTick       stm32h7xx_hal.o
+    0x90000f80   0x90000f80   0x00000002   Code   RO         5625    i.HAL_I2C_AbortCpltCallback  stm32h7xx_hal_i2c.o
+    0x90000f82   0x90000f82   0x00000002   Code   RO         5626    i.HAL_I2C_AddrCallback  stm32h7xx_hal_i2c.o
+    0x90000f84   0x90000f84   0x00000050   Code   RO         5627    i.HAL_I2C_DeInit    stm32h7xx_hal_i2c.o
+    0x90000fd4   0x90000fd4   0x00000076   Code   RO         5629    i.HAL_I2C_ER_IRQHandler  stm32h7xx_hal_i2c.o
+    0x9000104a   0x9000104a   0x0000001c   Code   RO         5630    i.HAL_I2C_EV_IRQHandler  stm32h7xx_hal_i2c.o
+    0x90001066   0x90001066   0x00000002   PAD
+    0x90001068   0x90001068   0x00000050   Code   RO        18255    i.HAL_I2C_ErrorCallback  drv_eeprom.o
+    0x900010b8   0x900010b8   0x00000134   Code   RO         5636    i.HAL_I2C_Init      stm32h7xx_hal_i2c.o
+    0x900011ec   0x900011ec   0x00000002   Code   RO         5638    i.HAL_I2C_ListenCpltCallback  stm32h7xx_hal_i2c.o
+    0x900011ee   0x900011ee   0x00000002   Code   RO         5639    i.HAL_I2C_MasterRxCpltCallback  stm32h7xx_hal_i2c.o
+    0x900011f0   0x900011f0   0x00000002   Code   RO         5640    i.HAL_I2C_MasterTxCpltCallback  stm32h7xx_hal_i2c.o
+    0x900011f2   0x900011f2   0x00000002   PAD
+    0x900011f4   0x900011f4   0x00000018   Code   RO        18256    i.HAL_I2C_MemRxCpltCallback  drv_eeprom.o
+    0x9000120c   0x9000120c   0x00000018   Code   RO        18257    i.HAL_I2C_MemTxCpltCallback  drv_eeprom.o
+    0x90001224   0x90001224   0x000000c8   Code   RO         5656    i.HAL_I2C_Mem_Read_IT  stm32h7xx_hal_i2c.o
+    0x900012ec   0x900012ec   0x000000cc   Code   RO         5659    i.HAL_I2C_Mem_Write_IT  stm32h7xx_hal_i2c.o
+    0x900013b8   0x900013b8   0x00000002   Code   RO         5660    i.HAL_I2C_MspDeInit  stm32h7xx_hal_i2c.o
+    0x900013ba   0x900013ba   0x00000002   Code   RO         5661    i.HAL_I2C_MspInit   stm32h7xx_hal_i2c.o
+    0x900013bc   0x900013bc   0x00000002   Code   RO         5664    i.HAL_I2C_SlaveRxCpltCallback  stm32h7xx_hal_i2c.o
+    0x900013be   0x900013be   0x00000002   Code   RO         5665    i.HAL_I2C_SlaveTxCpltCallback  stm32h7xx_hal_i2c.o
+    0x900013c0   0x900013c0   0x00000018   Code   RO          402    i.HAL_IncTick       stm32h7xx_hal.o
+    0x900013d8   0x900013d8   0x00000060   Code   RO          403    i.HAL_Init          stm32h7xx_hal.o
+    0x90001438   0x90001438   0x00000058   Code   RO          404    i.HAL_InitTick      stm32h7xx_hal.o
+    0x90001490   0x90001490   0x0000005c   Code   RO         1432    i.HAL_MPU_ConfigRegion  stm32h7xx_hal_cortex.o
+    0x900014ec   0x900014ec   0x0000002c   Code   RO         1433    i.HAL_MPU_Disable   stm32h7xx_hal_cortex.o
+    0x90001518   0x90001518   0x00000040   Code   RO         1435    i.HAL_MPU_Enable    stm32h7xx_hal_cortex.o
+    0x90001558   0x90001558   0x00000002   Code   RO         8263    i.HAL_MspInit       stm32h7xx_hal_msp_template.o
+    0x9000155a   0x9000155a   0x00000028   Code   RO         1439    i.HAL_NVIC_EnableIRQ  stm32h7xx_hal_cortex.o
+    0x90001582   0x90001582   0x0000007a   Code   RO         1445    i.HAL_NVIC_SetPriority  stm32h7xx_hal_cortex.o
+    0x900015fc   0x900015fc   0x00000028   Code   RO         1446    i.HAL_NVIC_SetPriorityGrouping  stm32h7xx_hal_cortex.o
+    0x90001624   0x90001624   0x00000320   Code   RO         9816    i.HAL_RCC_ClockConfig  stm32h7xx_hal_rcc.o
+    0x90001944   0x90001944   0x0000022c   Code   RO         9825    i.HAL_RCC_GetSysClockFreq  stm32h7xx_hal_rcc.o
+    0x90001b70   0x90001b70   0x00000858   Code   RO         9828    i.HAL_RCC_OscConfig  stm32h7xx_hal_rcc.o
+    0x900023c8   0x900023c8   0x00000034   Code   RO         1450    i.HAL_SYSTICK_Config  stm32h7xx_hal_cortex.o
+    0x900023fc   0x900023fc   0x000001ba   Code   RO        13128    i.HAL_TIM_IRQHandler  stm32h7xx_hal_tim.o
+    0x900025b6   0x900025b6   0x00000002   PAD
+    0x900025b8   0x900025b8   0x00000160   Code   RO        19271    i.HardFaultHandler  segger_hardfaulthandler.o
+    0x90002718   0x90002718   0x00000010   Code   RO        18258    i.I2C2_ER_IRQHandler  drv_eeprom.o
+    0x90002728   0x90002728   0x00000010   Code   RO        18259    i.I2C2_EV_IRQHandler  drv_eeprom.o
+    0x90002738   0x90002738   0x00000022   Code   RO         5679    i.I2C_DMAAbort      stm32h7xx_hal_i2c.o
+    0x9000275a   0x9000275a   0x0000006e   Code   RO         5685    i.I2C_Disable_IRQ   stm32h7xx_hal_i2c.o
+    0x900027c8   0x900027c8   0x000000a8   Code   RO         5686    i.I2C_Enable_IRQ    stm32h7xx_hal_i2c.o
+    0x90002870   0x90002870   0x00000028   Code   RO         5687    i.I2C_Flush_TXDR    stm32h7xx_hal_i2c.o
+    0x90002898   0x90002898   0x000000ce   Code   RO         5688    i.I2C_ITAddrCplt    stm32h7xx_hal_i2c.o
+    0x90002966   0x90002966   0x00000002   PAD
+    0x90002968   0x90002968   0x00000154   Code   RO         5689    i.I2C_ITError       stm32h7xx_hal_i2c.o
+    0x90002abc   0x90002abc   0x00000070   Code   RO         5690    i.I2C_ITListenCplt  stm32h7xx_hal_i2c.o
+    0x90002b2c   0x90002b2c   0x00000128   Code   RO         5691    i.I2C_ITMasterCplt  stm32h7xx_hal_i2c.o
+    0x90002c54   0x90002c54   0x00000062   Code   RO         5692    i.I2C_ITMasterSeqCplt  stm32h7xx_hal_i2c.o
+    0x90002cb6   0x90002cb6   0x00000002   PAD
+    0x90002cb8   0x90002cb8   0x00000390   Code   RO         5693    i.I2C_ITSlaveCplt   stm32h7xx_hal_i2c.o
+    0x90003048   0x90003048   0x0000008c   Code   RO         5694    i.I2C_ITSlaveSeqCplt  stm32h7xx_hal_i2c.o
+    0x900030d4   0x900030d4   0x00000160   Code   RO         5696    i.I2C_Master_ISR_DMA  stm32h7xx_hal_i2c.o
+    0x90003234   0x90003234   0x000001b4   Code   RO         5698    i.I2C_Mem_ISR_DMA   stm32h7xx_hal_i2c.o
+    0x900033e8   0x900033e8   0x0000019c   Code   RO         5699    i.I2C_Mem_ISR_IT    stm32h7xx_hal_i2c.o
+    0x90003584   0x90003584   0x000002dc   Code   RO         5702    i.I2C_Slave_ISR_DMA  stm32h7xx_hal_i2c.o
+    0x90003860   0x90003860   0x0000014a   Code   RO         5703    i.I2C_Slave_ISR_IT  stm32h7xx_hal_i2c.o
+    0x900039aa   0x900039aa   0x00000038   Code   RO         5704    i.I2C_TransferConfig  stm32h7xx_hal_i2c.o
+    0x900039e2   0x900039e2   0x0000003a   Code   RO         5705    i.I2C_TreatErrorCallback  stm32h7xx_hal_i2c.o
+    0x90003a1c   0x90003a1c   0x000000d6   Code   RO        18816    i.MPU_Config        main.o
+    0x90003af2   0x90003af2   0x00000002   PAD
+    0x90003af4   0x90003af4   0x00000048   Code   RO        18926    i.MemManage_Handler_C  stm32h7xx_it.o
+    0x90003b3c   0x90003b3c   0x00000002   Code   RO        18927    i.NMI_Handler       stm32h7xx_it.o
+    0x90003b3e   0x90003b3e   0x00000002   Code   RO        18928    i.PendSV_Handler    stm32h7xx_it.o
+    0x90003b40   0x90003b40   0x00000008   Code   RO        18997    i.SEGGER_RTT_Init   segger_rtt.o
+    0x90003b48   0x90003b48   0x0000004c   Code   RO        19012    i.SEGGER_RTT_Write  segger_rtt.o
+    0x90003b94   0x90003b94   0x00000084   Code   RO        19015    i.SEGGER_RTT_WriteNoLock  segger_rtt.o
+    0x90003c18   0x90003c18   0x00000022   Code   RO        19227    i.SEGGER_RTT_printf  segger_rtt_printf.o
+    0x90003c3a   0x90003c3a   0x00000002   PAD
+    0x90003c3c   0x90003c3c   0x00000250   Code   RO        19228    i.SEGGER_RTT_vprintf  segger_rtt_printf.o
+    0x90003e8c   0x90003e8c   0x00000002   Code   RO        18929    i.SVC_Handler       stm32h7xx_it.o
+    0x90003e8e   0x90003e8e   0x00000002   PAD
+    0x90003e90   0x90003e90   0x00000164   Code   RO        18817    i.SystemClock_Config  main.o
+    0x90003ff4   0x90003ff4   0x000000fc   Code   RO           15    i.SystemInit        system_stm32h7xx.o
+    0x900040f0   0x900040f0   0x00000010   Code   RO        18208    i.TIM1_UP_IRQHandler  pwm_timer1.o
+    0x90004100   0x90004100   0x00000010   Code   RO        18159    i.TIM5_IRQHandler   pwm_in_timer5.o
+    0x90004110   0x90004110   0x00000004   Code   RO        18930    i.UsageFault_Handler  stm32h7xx_it.o
+    0x90004114   0x90004114   0x00000070   Code   RO        19019    i._DoInit           segger_rtt.o
+    0x90004184   0x90004184   0x0000001c   Code   RO        19020    i._GetAvailWriteSpace  segger_rtt.o
+    0x900041a0   0x900041a0   0x000000ec   Code   RO        19229    i._PrintInt         segger_rtt_printf.o
+    0x9000428c   0x9000428c   0x000000ec   Code   RO        19230    i._PrintUnsigned    segger_rtt_printf.o
+    0x90004378   0x90004378   0x00000044   Code   RO        19231    i._StoreChar        segger_rtt_printf.o
+    0x900043bc   0x900043bc   0x00000076   Code   RO        19022    i._WriteBlocking    segger_rtt.o
+    0x90004432   0x90004432   0x00000058   Code   RO        19023    i._WriteNoCheck     segger_rtt.o
+    0x9000448a   0x9000448a   0x00000002   PAD
+    0x9000448c   0x9000448c   0x00000010   Code   RO         1452    i.__NVIC_GetPriorityGrouping  stm32h7xx_hal_cortex.o
+    0x9000449c   0x9000449c   0x00000028   Code   RO         1453    i.__NVIC_SetPriority  stm32h7xx_hal_cortex.o
+    0x900044c4   0x900044c4   0x0000000e   Code   RO        19897    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x900044d2   0x900044d2   0x00000002   Code   RO        19898    i.__scatterload_null  mc_w.l(handlers.o)
+    0x900044d4   0x900044d4   0x0000000e   Code   RO        19899    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x900044e2   0x900044e2   0x0000000a   Code   RO        18747    i.blk_raw_size      sram_d2_malloc.o
+    0x900044ec   0x900044ec   0x0000004c   Code   RO        18682    i.circular_buffer_init  circular_buffer.o
+    0x90004538   0x90004538   0x00000062   Code   RO        18686    i.circular_buffer_read  circular_buffer.o
+    0x9000459a   0x9000459a   0x0000006a   Code   RO        18687    i.circular_buffer_write  circular_buffer.o
+    0x90004604   0x90004604   0x00000042   Code   RO        19683    i.crc16_ccitt       eventrecorder.o
+    0x90004646   0x90004646   0x00000002   PAD
+    0x90004648   0x90004648   0x0000000c   Code   RO        18260    i.drv_eeprom_clrerrflag  drv_eeprom.o
+    0x90004654   0x90004654   0x0000000c   Code   RO        18261    i.drv_eeprom_clrrflag  drv_eeprom.o
+    0x90004660   0x90004660   0x0000000c   Code   RO        18262    i.drv_eeprom_clrwflag  drv_eeprom.o
+    0x9000466c   0x9000466c   0x000000c4   Code   RO        18263    i.drv_eeprom_init   drv_eeprom.o
+    0x90004730   0x90004730   0x00000030   Code   RO        18264    i.drv_eeprom_readbuf  drv_eeprom.o
+    0x90004760   0x90004760   0x0000000c   Code   RO        18265    i.drv_eeprom_reterrflag  drv_eeprom.o
+    0x9000476c   0x9000476c   0x0000000c   Code   RO        18266    i.drv_eeprom_retrflag  drv_eeprom.o
+    0x90004778   0x90004778   0x0000000c   Code   RO        18267    i.drv_eeprom_retwflag  drv_eeprom.o
+    0x90004784   0x90004784   0x00000030   Code   RO        18268    i.drv_eeprom_writebuf  drv_eeprom.o
+    0x900047b4   0x900047b4   0x00000014   Code   RO        18558    i.drv_fmc_bl_ctrl   drv_fmc_lcd.o
+    0x900047c8   0x900047c8   0x00000110   Code   RO        18559    i.drv_fmc_lcd_init  drv_fmc_lcd.o
+    0x900048d8   0x900048d8   0x00000038   Code   RO        18560    i.drv_fmc_lcd_rst   drv_fmc_lcd.o
+    0x90004910   0x90004910   0x0000000c   Code   RO        18561    i.drv_fmc_read_data  drv_fmc_lcd.o
+    0x9000491c   0x9000491c   0x00000008   Code   RO        18562    i.drv_fmc_write_cmd  drv_fmc_lcd.o
+    0x90004924   0x90004924   0x0000000c   Code   RO        18563    i.drv_fmc_write_data  drv_fmc_lcd.o
+    0x90004930   0x90004930   0x000000b0   Code   RO        18027    i.drv_key_init      drv_key.o
+    0x900049e0   0x900049e0   0x00000050   Code   RO        18028    i.drv_key_readmask  drv_key.o
+    0x90004a30   0x90004a30   0x000000b0   Code   RO        17917    i.drv_led_init      drv_led.o
+    0x90004ae0   0x90004ae0   0x00000028   Code   RO        17918    i.drv_led_off       drv_led.o
+    0x90004b08   0x90004b08   0x00000028   Code   RO        17919    i.drv_led_on        drv_led.o
+    0x90004b30   0x90004b30   0x00000068   Code   RO        18363    i.drvp_eeprom_init  drvp_eeprom.o
+    0x90004b98   0x90004b98   0x0000010c   Code   RO        18364    i.drvp_eeprom_prc_10ms  drvp_eeprom.o
+    0x90004ca4   0x90004ca4   0x00000204   Code   RO        18615    i.drvp_fmc_lcd_init  drvp_fmc_lcd.o
+    0x90004ea8   0x90004ea8   0x00000024   Code   RO        18062    i.drvp_key_init     drvp_key.o
+    0x90004ecc   0x90004ecc   0x000001b4   Code   RO        18063    i.drvp_key_prc_10ms  drvp_key.o
+    0x90005080   0x90005080   0x00000020   Code   RO        18064    i.drvp_key_rfifo    drvp_key.o
+    0x900050a0   0x900050a0   0x0000001c   Code   RO        18065    i.drvp_key_wfifo    drvp_key.o
+    0x900050bc   0x900050bc   0x00000010   Code   RO        17958    i.drvp_led_init     drvp_led.o
+    0x900050cc   0x900050cc   0x00000114   Code   RO        17961    i.drvp_led_prc_1ms  drvp_led.o
+    0x900051e0   0x900051e0   0x00000006   Code   RO        18748    i.free_get_next     sram_d2_malloc.o
+    0x900051e6   0x900051e6   0x00000004   Code   RO        18749    i.free_set_next     sram_d2_malloc.o
+    0x900051ea   0x900051ea   0x00000012   Code   RO        18688    i.is_power_of_two   circular_buffer.o
+    0x900051fc   0x900051fc   0x000000e8   Code   RO        18818    i.main              main.o
+    0x900052e4   0x900052e4   0x00000006   Code   RO        18642    i.mutex_init        port.o
+    0x900052ea   0x900052ea   0x00000002   Code   RO        18643    i.mutex_lock        port.o
+    0x900052ec   0x900052ec   0x00000002   Code   RO        18644    i.mutex_unlock      port.o
+    0x900052ee   0x900052ee   0x00000002   PAD
+    0x900052f0   0x900052f0   0x000000dc   Code   RO        18750    i.sram_d2_free      sram_d2_malloc.o
+    0x900053cc   0x900053cc   0x00000040   Code   RO        18753    i.sram_d2_init      sram_d2_malloc.o
+    0x9000540c   0x9000540c   0x000000e8   Code   RO        18754    i.sram_d2_malloc    sram_d2_malloc.o
+    0x900054f4   0x900054f4   0x00000010   Data   RO           16    .constdata          system_stm32h7xx.o
+    0x90005504   0x90005504   0x00000028   Data   RO        17920    .constdata          drv_led.o
+    0x9000552c   0x9000552c   0x0000000c   Data   RO        17966    .constdata          drvp_led.o
+    0x90005538   0x90005538   0x00000060   Data   RO        18029    .constdata          drv_key.o
+    0x90005598   0x90005598   0x00000008   Data   RO        18067    .constdata          drvp_key.o
+    0x900055a0   0x900055a0   0x00000024   Data   RO        18368    .constdata          drvp_eeprom.o
+    0x900055c4   0x900055c4   0x00000021   Data   RO        19026    .constdata          segger_rtt.o
+    0x900055e5   0x900055e5   0x00000010   Data   RO        19232    .constdata          segger_rtt_printf.o
+    0x900055f5   0x900055f5   0x00000003   PAD
+    0x900055f8   0x900055f8   0x00000018   Data   RO        19685    .constdata          eventrecorder.o
+    0x90005610   0x90005610   0x00000060   Data   RO        19895    Region$$Table       anon$$obj.o
 
 
 ==============================================================================
@@ -8046,14 +8104,16 @@ Image component sizes
 
        298          0          0          0          0       4294   circular_buffer.o
        524        114          0        135          0       8733   drv_eeprom.o
+       380         36          0          0          0       3980   drv_fmc_lcd.o
        256         14         96          0          0       2110   drv_key.o
        256         20         40          0          0       2518   drv_led.o
        372         22         36        266          0       3150   drvp_eeprom.o
+       516          6          0         24          0       1536   drvp_fmc_lcd.o
        532         36          8         64          0       5209   drvp_key.o
        292         16         12         32          0       2443   drvp_led.o
        942         68         24          0       1188      11508   eventrecorder.o
         20          2          0          0          0        268   hardfaulthandler.o
-      1104         82          0       1026          0      41592   main.o
+      1178         82          0       1026          0      41520   main.o
         10          0          0          0          0       2441   port.o
         16          6          0        188          0       1320   pwm_in_timer5.o
         16          6          0        218          0        763   pwm_timer1.o
@@ -8062,7 +8122,7 @@ Image component sizes
       1166         16         16          0          0       5921   segger_rtt_printf.o
        536         20          0      20496          0       4987   sram_d2_malloc.o
         44         12        664          0       4096        996   startup_stm32h743xx.o
-       252         54          0          9          0      23713   stm32h7xx_hal.o
+       292         58          0          9          0      24393   stm32h7xx_hal.o
        510         40          0          0          0      42889   stm32h7xx_hal_cortex.o
        928         14          0          0          0       3706   stm32h7xx_hal_dma.o
        536         52          0          0          0       3103   stm32h7xx_hal_gpio.o
@@ -8071,12 +8131,13 @@ Image component sizes
       3492         78          0          0          0       5420   stm32h7xx_hal_rcc.o
        442          0          0          0          0       1053   stm32h7xx_hal_tim.o
        106          4          0          0          0       4250   stm32h7xx_it.o
-       254         40         16          8          0    1216412   system_stm32h7xx.o
+       254          4          0          0          0       3249   stm32h7xx_ll_fmc.o
+       254         40         16          8          0    1231532   system_stm32h7xx.o
 
     ----------------------------------------------------------------------
-     19676       1030       1044      23500       5576    1442017   Object Totals
+     20944       1080       1044      23524       5576    1466510   Object Totals
         40          0         96          0          0          0   (incl. Generated)
-        28          0          3         13         60          0   (incl. Padding)
+        32          0          3         13         60          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -8117,15 +8178,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     19924       1046       1044      23500       5576    1429393   Grand Totals
-     19924       1046       1044        224       5576    1429393   ELF Image Totals (compressed)
-     19924       1046       1044        224          0          0   ROM Totals
+     21192       1096       1044      23524       5576    1452886   Grand Totals
+     21192       1096       1044        248       5576    1452886   ELF Image Totals (compressed)
+     21192       1096       1044        248          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                20968 (  20.48kB)
-    Total RW  Size (RW Data + ZI Data)             29076 (  28.39kB)
-    Total ROM Size (Code + RO Data + RW Data)      21192 (  20.70kB)
+    Total RO  Size (Code + RO Data)                22236 (  21.71kB)
+    Total RW  Size (RW Data + ZI Data)             29100 (  28.42kB)
+    Total ROM Size (Code + RO Data + RW Data)      22484 (  21.96kB)
 
 ==============================================================================
 
