@@ -131,3 +131,4 @@
 .\outfiles\main.o: .\FATFS\ff.h
 .\outfiles\main.o: .\FATFS\ffconf.h
 .\outfiles\main.o: .\DRIVER\QSPI_FLASH\qspi_flash.h
+.\outfiles\main.o: .\DRIVER\LPTIMER\drv_lptimer2.h

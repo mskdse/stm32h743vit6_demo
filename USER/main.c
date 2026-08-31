@@ -12,6 +12,7 @@
 #include "drvp_eeprom.h"
 #include "ff.h"
 #include "qspi_flash.h"
+#include "drv_lptimer2.h"
 
 static void SystemClock_Config(void);
 static void Error_Handler(void);

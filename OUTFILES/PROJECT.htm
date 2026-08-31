@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\OUTFILES\PROJECT.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\OUTFILES\PROJECT.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Thu Aug 27 11:19:54 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Mon Aug 31 09:49:53 2026
 <BR><P>
 <H3>Maximum Stack Usage =        392 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -719,8 +719,8 @@ Global Symbols
 <P><STRONG><a name="[bd]"></a>__aeabi_memclr</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, memseta.o(.text))
 <BR><BR>[Calls]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
 </UL>
-<BR>[Called By]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_d2_init
-<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;circular_buffer_init
+<BR>[Called By]<UL><LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;circular_buffer_init
+<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_d2_init
 </UL>
 
 <P><STRONG><a name="[c9]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text))
@@ -1298,7 +1298,6 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
 <LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
-<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_d2_init
 <LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drvp_eeprom_init
 <LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drvp_key_rfifo
 <LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drvp_key_init
@@ -1310,6 +1309,7 @@ Global Symbols
 <LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
 <LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Config
 <LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CPU_CACHE_Enable
+<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_d2_init
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
@@ -1594,9 +1594,9 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[11c]"></a>free_set_next</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, sram_d2_malloc.o(i.free_set_next))
-<BR><BR>[Called By]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_d2_init
-<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_d2_malloc
+<BR><BR>[Called By]<UL><LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_d2_malloc
 <LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_d2_free
+<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_d2_init
 </UL>
 
 <P><STRONG><a name="[116]"></a>CPU_CACHE_Enable</STRONG> (Thumb, 294 bytes, Stack size 8 bytes, main.o(i.CPU_CACHE_Enable))

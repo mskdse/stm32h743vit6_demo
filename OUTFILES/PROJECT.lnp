@@ -133,6 +133,7 @@
 ".\outfiles\drv_eeprom.o"
 ".\outfiles\drvp_eeprom.o"
 ".\outfiles\qspi_flash.o"
+".\outfiles\drv_lptimer2.o"
 ".\outfiles\port.o"
 ".\outfiles\circular_buffer.o"
 ".\outfiles\sram_d2_malloc.o"
