@@ -35,8 +35,8 @@ D/C--->PE3
    访问数据的话地址肯定为0x60080000(第19位置位),但是由于16位宽访问下
 	 它会访问右移一位的地址，所以我们必须手动向左移一位是0x60100000(第20位置位)，访问命令的话不用管，因为此时D/C无论如何都是0
 */
-#define FMC_LCD_ADDR_CMD     (0x60000000)
-#define FMC_LCD_ADDR_DATA    (0x60100000)
+#define FMC_LCD_ADDR_CMD     ((uint32_t)0x60000000)
+#define FMC_LCD_ADDR_DATA    ((uint32_t)0x60100000)
 
 /* fmc初始化函数 */
 void drv_fmc_lcd_init(void)
@@ -95,8 +95,12 @@ void drv_fmc_lcd_init(void)
 	fmc_lcd_cfg.CLKDivision=0;//没有时钟信号，不需要配置分频
 	fmc_lcd_cfg.DataLatency=0;//不是同步器件，没有同步存储器的数据延迟
 	fmc_lcd_cfg.DataSetupTime=2;//lcd手册给的数据建立周期是10ns
-	FMC_NORSRAM_Timing_Init(FMC_NORSRAM_DEVICE,&fmc_lcd_cfg,FMC_NORSRAM_BANK1);
 	FMC_NORSRAM_Init(FMC_NORSRAM_DEVICE,&fmc_cfg);
+	FMC_NORSRAM_Timing_Init(FMC_NORSRAM_DEVICE,&fmc_lcd_cfg,FMC_NORSRAM_BANK1);
+	
+	/* ll库内部没有使能，这里必须调用 */
+	__FMC_NORSRAM_ENABLE(FMC_NORSRAM_DEVICE,FMC_NORSRAM_BANK1);
+	__FMC_ENABLE();
 }
 
 /* lcd复位函数 */
