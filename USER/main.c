@@ -16,6 +16,7 @@
 #include "drvp_fmc_lcd.h"
 #include "lvgl.h"
 #include "lv_port_disp_template.h"
+#include "lv_demo_benchmark.h"
 
 static void SystemClock_Config(void);
 static void Error_Handler(void);
@@ -27,20 +28,6 @@ __attribute__((section(".RamVecTable")))static uint8_t RAM_VCTOR_TABLE[0x400];
 
 /* 我现在的程序是运行在QSPI_FLASH还是普通FLASH，如果是QSPIFLASH的话，中断向量表必须拷贝0x9000000地址的 */
 #define  MY_FLASH_IS_QSPI_FLASH      1
-
-void lv_ex_label(void)
-{
-	uint32_t pixel_count = MY_DISP_HOR_RES * MY_DISP_VER_RES;  // 320 * 240 = 76800
-    
-    /* 设置全屏窗口 */
-    drvp_fmc_lcd_set_wid(0, MY_DISP_HOR_RES, 0, MY_DISP_VER_RES);
-    
-    /* 循环写入红色数据（RGB565: 0xF800） */
-    for (uint32_t i = 0; i < pixel_count; i++) {
-        *((volatile uint16_t*)0x60100000) = RGB565_RED;  // RGB565 红色
-    }
-}
-
 
 int main(void)
 {
@@ -74,15 +61,15 @@ int main(void)
   drvp_key_init();//初始化key
 	drvp_eeprom_init();//初始化eeprom
 	drvp_fmc_lcd_init();//初始化lcd
-	drvp_fmc_lcd_set_axis_scan(0,0,1,1,0);//设置LCD的坐标轴适配开发板以及显存扫描方向
-//	lv_init();//LVGL初始化
-//	lv_port_disp_init();//LVGL底层支持初始化
-	lv_ex_label();
+	drvp_fmc_lcd_set_axis_scan(0,1,1,0,0);//设置LCD的坐标轴适配开发板以及显存扫描方向
+	lv_init();//LVGL初始化
+	lv_port_disp_init();//LVGL底层支持初始化
+	lv_demo_benchmark();//允许LVGL的测试Demo
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
 	for(;;)
 	{		
-//    lv_task_handler();
-//		HAL_Delay(10);
+    lv_task_handler();
+		HAL_Delay(10);
 	}
 }
 
@@ -299,5 +286,5 @@ __attribute__((section(".ITCM_CODE"), used))void SysTick_Handler(void)
     drvp_eeprom_prc_10ms();
   }
 	
-	//lv_tick_inc(1);
+	lv_tick_inc(1);
 }

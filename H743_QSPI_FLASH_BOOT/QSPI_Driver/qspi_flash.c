@@ -135,7 +135,7 @@ void qspi_flash_w25q128_init(void)
 	memset(&qspi_handle,0,sizeof(QSPI_HandleTypeDef));//清空句柄
 	while(HAL_QSPI_STATE_BUSY==HAL_QSPI_GetState(&qspi_handle));//BUSY状态下无法写寄存器
 	qspi_handle.Instance=QUADSPI;//选择QSPI器件
-	qspi_handle.Init.ClockPrescaler=20-1;//时钟分频，QSPI挂载在AHB3总线上时钟为200MHZ，W25Q128最大支持104MHZ
+	qspi_handle.Init.ClockPrescaler=4-1;//时钟分频，QSPI挂载在AHB3总线上时钟为200MHZ，W25Q128最大支持104MHZ
 	qspi_handle.Init.FifoThreshold=4;//FIFO阈值线，官方源码为4，所以我们保持一致
 	qspi_handle.Init.SampleShifting=QSPI_SAMPLE_SHIFTING_HALFCYCLE;//采样移位，比如说SPI是上升沿采样，现在延时半个周期再采样
 	qspi_handle.Init.FlashSize=23;//容量等于2^(flashsize+1),所以w25q128的128MB对应要填写23

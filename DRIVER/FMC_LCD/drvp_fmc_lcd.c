@@ -10,17 +10,9 @@ typedef struct
 	uint16_t(*rdata)(void);
 }drv_fmc_lcd_type;
 
-__attribute__((section (".RAM_D2")))static drv_fmc_lcd_type drv_lcd=
-{
-	.init = drv_fmc_lcd_init,
-	.rst  = drv_fmc_lcd_rst,
-	.bl   = drv_fmc_bl_ctrl,
-	.wcmd = drv_fmc_write_cmd,
-	.wdata= drv_fmc_write_data,
-	.rdata= drv_fmc_read_data
-};
+__attribute__((section (".RAM_D2")))static drv_fmc_lcd_type drv_lcd;
 
-__attribute__((section (".RAM_D2")))static drv_fmc_lcd_type* drv_lcd_pot=&drv_lcd;
+__attribute__((section (".RAM_D2")))static drv_fmc_lcd_type* drv_lcd_pot;
 
 /* LCD读取ID函数 */
 uint32_t drvp_fmc_lcd_readid(void)
@@ -56,14 +48,14 @@ void drvp_fmc_lcd_set_wid(uint16_t xstart,uint16_t xstop,
 	drv_lcd_pot->wcmd(0x2A);
 	drv_lcd_pot->wdata((xstart>>8)&0xff);
 	drv_lcd_pot->wdata(xstart&(0xff));
-	drv_lcd_pot->wdata(((xstop-1)>>8)&0xff);
-	drv_lcd_pot->wdata((xstop-1)&(0xff));
+	drv_lcd_pot->wdata(((xstop)>>8)&0xff);
+	drv_lcd_pot->wdata((xstop)&(0xff));
 	
 	drv_lcd_pot->wcmd(0x2B);
 	drv_lcd_pot->wdata((ystart>>8)&0xff);
 	drv_lcd_pot->wdata(ystart&(0xff));
-	drv_lcd_pot->wdata(((ystop-1)>>8)&0xff);
-	drv_lcd_pot->wdata((ystop-1)&(0xff));
+	drv_lcd_pot->wdata(((ystop)>>8)&0xff);
+	drv_lcd_pot->wdata((ystop)&(0xff));
 }
 
 /* 写显存 */
@@ -122,6 +114,15 @@ void drvp_fmc_lcd_set_axis_scan(uint8_t my,uint8_t mx,uint8_t mv,uint8_t ml,uint
 /* LCD初始化函数 */
 void drvp_fmc_lcd_init(void)
 {
+	/* 注册回调和指针 */
+	drv_lcd.init = drv_fmc_lcd_init;
+	drv_lcd.rst  = drv_fmc_lcd_rst;
+	drv_lcd.bl   = drv_fmc_bl_ctrl;
+	drv_lcd.wcmd = drv_fmc_write_cmd;
+	drv_lcd.wdata= drv_fmc_write_data;
+	drv_lcd.rdata= drv_fmc_read_data;
+	drv_lcd_pot=&drv_lcd;
+
 	/* 关闭背光 */
 	drv_lcd_pot->bl(false);
 	HAL_Delay(10);

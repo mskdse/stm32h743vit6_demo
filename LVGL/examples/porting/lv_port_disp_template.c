@@ -157,6 +157,7 @@ void disp_disable_update(void)
     disp_flush_enabled = false;
 }
 
+#include "SEGGER_RTT.h"
 /*Flush the content of the internal buffer the specific area on the display
  *You can use DMA or any hardware acceleration to do this operation in the background but
  *'lv_disp_flush_ready()' has to be called when finished.*/
@@ -174,9 +175,9 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
 //                color_p++;
 //            }
 //        }
-		
+
 		 drvp_fmc_lcd_set_wid(area->x1,area->x2,area->y1,area->y2);
-		 drvp_fmc_lcd_writebuf((uint16_t*)color_p,((area->x2-area->x1)*(area->y2-area->y1)));
+		 drvp_fmc_lcd_writebuf((uint16_t*)color_p,((area->x2-area->x1+1)*(area->y2-area->y1+1)));
     }
 
     /*IMPORTANT!!!
