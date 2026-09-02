@@ -14,9 +14,10 @@
 #include "qspi_flash.h"
 //#include "drv_lptimer2.h"
 #include "drvp_fmc_lcd.h"
-#include "lvgl.h"
-#include "lv_port_disp_template.h"
-#include "lv_demo_benchmark.h"
+//#include "lvgl.h"
+//#include "lv_port_disp_template.h"
+//#include "lv_demo_benchmark.h"
+//#include "bdmamux_pwm.h"
 
 static void SystemClock_Config(void);
 static void Error_Handler(void);
@@ -62,14 +63,15 @@ int main(void)
 	drvp_eeprom_init();//初始化eeprom
 	drvp_fmc_lcd_init();//初始化lcd
 	drvp_fmc_lcd_set_axis_scan(0,1,1,0,0);//设置LCD的坐标轴适配开发板以及显存扫描方向
-	lv_init();//LVGL初始化
-	lv_port_disp_init();//LVGL底层支持初始化
-	lv_demo_benchmark();//允许LVGL的测试Demo
+//	lv_init();//LVGL初始化
+//	lv_port_disp_init();//LVGL底层支持初始化
+//	lv_demo_benchmark();//允许LVGL的测试Demo
+
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
 	for(;;)
 	{		
-    lv_task_handler();
-		HAL_Delay(10);
+//    lv_task_handler();
+//		HAL_Delay(10);
 	}
 }
 
@@ -241,6 +243,20 @@ static void MPU_Config(void)
   MPU_InitStruct.SubRegionDisable = 0x0;
   MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;//不可以执行代码
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
+	
+	/* 配置SRAM4为NoCache属性，这片区域给BDMA用其他的比如说USB,以太网这些不用这个因为路径太长了 */
+	MPU_InitStruct.Enable           = MPU_REGION_ENABLE;
+	MPU_InitStruct.BaseAddress      = 0x38000000;
+	MPU_InitStruct.Size             = ARM_MPU_REGION_SIZE_64KB;
+	MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+	MPU_InitStruct.IsBufferable     = MPU_ACCESS_NOT_BUFFERABLE;
+	MPU_InitStruct.IsCacheable      = MPU_ACCESS_NOT_CACHEABLE;
+	MPU_InitStruct.IsShareable      = MPU_ACCESS_SHAREABLE;
+	MPU_InitStruct.Number           = MPU_REGION_NUMBER3;
+	MPU_InitStruct.TypeExtField     = MPU_TEX_LEVEL1;
+	MPU_InitStruct.SubRegionDisable = 0x00;
+	MPU_InitStruct.DisableExec      = MPU_INSTRUCTION_ACCESS_DISABLE;
+	HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
   /* Enable the MPU */
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
@@ -286,5 +302,5 @@ __attribute__((section(".ITCM_CODE"), used))void SysTick_Handler(void)
     drvp_eeprom_prc_10ms();
   }
 	
-	lv_tick_inc(1);
+//	lv_tick_inc(1);
 }
