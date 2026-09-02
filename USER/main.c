@@ -18,6 +18,7 @@
 //#include "lv_port_disp_template.h"
 //#include "lv_demo_benchmark.h"
 //#include "bdmamux_pwm.h"
+#include "dma1mux_pwm.h"
 
 static void SystemClock_Config(void);
 static void Error_Handler(void);
@@ -66,10 +67,18 @@ int main(void)
 //	lv_init();//LVGL初始化
 //	lv_port_disp_init();//LVGL底层支持初始化
 //	lv_demo_benchmark();//允许LVGL的测试Demo
-
+  dma1mux_pwm_init(3);
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
 	for(;;)
 	{		
+		uint16_t x=drvp_key_rfifo();
+		if(x!=KEY_EVENT_ERROR && ((x&0xff)==E_EVENT_CLICK))
+		{
+			static uint8_t i=1;
+			dma1mux_pwm_set_cnt(i);
+			i++;
+			if(i>=9) i=1;
+		}
 //    lv_task_handler();
 //		HAL_Delay(10);
 	}
@@ -253,6 +262,20 @@ static void MPU_Config(void)
 	MPU_InitStruct.IsCacheable      = MPU_ACCESS_NOT_CACHEABLE;
 	MPU_InitStruct.IsShareable      = MPU_ACCESS_SHAREABLE;
 	MPU_InitStruct.Number           = MPU_REGION_NUMBER3;
+	MPU_InitStruct.TypeExtField     = MPU_TEX_LEVEL1;
+	MPU_InitStruct.SubRegionDisable = 0x00;
+	MPU_InitStruct.DisableExec      = MPU_INSTRUCTION_ACCESS_DISABLE;
+	HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /* 配置SRAM1+2为NoCache属性，这片区域给我们日常使用，就是把他当作普通SRAM对待 */
+	MPU_InitStruct.Enable           = MPU_REGION_ENABLE;
+	MPU_InitStruct.BaseAddress      = 0x30000000;
+	MPU_InitStruct.Size             = ARM_MPU_REGION_SIZE_256KB;
+	MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+	MPU_InitStruct.IsBufferable     = MPU_ACCESS_NOT_BUFFERABLE;
+	MPU_InitStruct.IsCacheable      = MPU_ACCESS_NOT_CACHEABLE;
+	MPU_InitStruct.IsShareable      = MPU_ACCESS_SHAREABLE;
+	MPU_InitStruct.Number           = MPU_REGION_NUMBER4;
 	MPU_InitStruct.TypeExtField     = MPU_TEX_LEVEL1;
 	MPU_InitStruct.SubRegionDisable = 0x00;
 	MPU_InitStruct.DisableExec      = MPU_INSTRUCTION_ACCESS_DISABLE;
