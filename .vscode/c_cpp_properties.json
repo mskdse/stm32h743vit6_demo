@@ -130,6 +130,7 @@
                 "d:\\stm32project\\STM32H743VIT6\\LVGL\\demos\\benchmark",
                 "d:\\stm32project\\STM32H743VIT6\\DRIVER\\BDMAMUX_PWM",
                 "d:\\stm32project\\STM32H743VIT6\\DRIVER\\DMA1MUX_PWM",
+                "d:\\stm32project\\STM32H743VIT6\\DRIVER\\USART1_DMA",
                 "D:\\Keil5\\ARM\\ARMCC\\include",
                 "D:\\Keil5\\ARM\\ARMCC\\include\\rw",
                 "d:\\stm32project\\STM32H743VIT6\\STM32Cube_FW_H7_V1.12.0\\Drivers\\CMSIS\\Device\\ST\\STM32H7xx\\Source\\Templates\\arm",

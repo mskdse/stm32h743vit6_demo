@@ -1,8 +1,10 @@
-#ifndef _DRV_LPTIMER2_H_
-#define _DRV_LPTIMER2_H_
+#ifndef _USART1_DMA_H_
+#define _USART1_DMA_H_
 
 #include "stm32h7xx_hal.h"
 
-void drv_lptimer2_init(void);
+void usart1_dma_init(uint32_t badue);
+void usart1_my_printf(const char *format, ...);
+
 
 #endif
