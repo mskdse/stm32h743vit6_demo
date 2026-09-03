@@ -11,4 +11,8 @@ void drv_fmc_write_cmd(uint16_t cmd);
 void drv_fmc_write_data(uint16_t data);
 uint16_t drv_fmc_read_data(void);
 
+
+void drv_fmc_dma_m2m_init(void(*Callback)(DMA_HandleTypeDef *_hdma));
+void drv_fmc_dma_m2m_tranf(uint16_t* buf,uint16_t len);
+
 #endif

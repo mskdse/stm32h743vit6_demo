@@ -25,62 +25,35 @@
     #define MY_DISP_VER_RES    240
 #endif
 
+/* DMA最大单次传输长度（根据你的DMA配置，通常是16位传输） */
+#define DMA_MAX_TRANSFER_LEN    65535
+
 /**********************
  *      TYPEDEFS
  **********************/
+typedef struct {
+    lv_disp_drv_t *disp_drv;
+    const lv_area_t *area;
+    lv_color_t *color_p;
+    uint32_t total_pixels;
+    uint32_t sent_pixels;
+    bool is_busy;
+} disp_flush_ctx_t;
+
+static void dma_transfer_next_chunk(void);
+static disp_flush_ctx_t flush_ctx = {0};
 
 /**********************
  *  STATIC PROTOTYPES
  **********************/
 static void disp_init(void);
-
 static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p);
 //static void gpu_fill(lv_disp_drv_t * disp_drv, lv_color_t * dest_buf, lv_coord_t dest_width,
 //        const lv_area_t * fill_area, lv_color_t color);
 
-/**********************
- *  STATIC VARIABLES
- **********************/
-
-/**********************
- *      MACROS
- **********************/
-
-/**********************
- *   GLOBAL FUNCTIONS
- **********************/
-
 void lv_port_disp_init(void)
 {
-    /*-------------------------
-     * Initialize your display
-     * -----------------------*/
     disp_init();
-
-    /*-----------------------------
-     * Create a buffer for drawing
-     *----------------------------*/
-
-    /**
-     * LVGL requires a buffer where it internally draws the widgets.
-     * Later this buffer will passed to your display driver's `flush_cb` to copy its content to your display.
-     * The buffer has to be greater than 1 display row
-     *
-     * There are 3 buffering configurations:
-     * 1. Create ONE buffer:
-     *      LVGL will draw the display's content here and writes it to your display
-     *
-     * 2. Create TWO buffer:
-     *      LVGL will draw the display's content to a buffer and writes it your display.
-     *      You should use DMA to write the buffer's content to the display.
-     *      It will enable LVGL to draw the next part of the screen to the other buffer while
-     *      the data is being sent form the first buffer. It makes rendering and flushing parallel.
-     *
-     * 3. Double buffering
-     *      Set 2 screens sized buffers and set disp_drv.full_refresh = 1.
-     *      This way LVGL will always provide the whole rendered screen in `flush_cb`
-     *      and you only need to change the frame buffer's address.
-     */
 
 //    /* Example for 1) */
 //    static lv_disp_draw_buf_t draw_buf_dsc_1;
@@ -95,14 +68,9 @@ void lv_port_disp_init(void)
 
     /* Example for 3) also set disp_drv.full_refresh = 1 below*/
     static lv_disp_draw_buf_t draw_buf_dsc_3;
-    __attribute__((section (".RAM_D1"),used))static lv_color_t buf_3_1[MY_DISP_HOR_RES * MY_DISP_VER_RES];            /*A screen sized buffer*/
-    __attribute__((section (".RAM_D1"),used))static lv_color_t buf_3_2[MY_DISP_HOR_RES * MY_DISP_VER_RES];            /*Another screen sized buffer*/
-    lv_disp_draw_buf_init(&draw_buf_dsc_3, buf_3_1, buf_3_2,
-                          MY_DISP_VER_RES * MY_DISP_HOR_RES);   /*Initialize the display buffer*/
-
-    /*-----------------------------------
-     * Register the display in LVGL
-     *----------------------------------*/
+    __attribute__((section (".RAM_D1"),used))static lv_color_t buf_3_1[MY_DISP_HOR_RES * MY_DISP_VER_RES];            
+    __attribute__((section (".RAM_D1"),used))static lv_color_t buf_3_2[MY_DISP_HOR_RES * MY_DISP_VER_RES];      
+    lv_disp_draw_buf_init(&draw_buf_dsc_3, buf_3_1, buf_3_2,MY_DISP_VER_RES * MY_DISP_HOR_RES);
 
     static lv_disp_drv_t disp_drv;                         /*Descriptor of a display driver*/
     lv_disp_drv_init(&disp_drv);                    /*Basic initialization*/
@@ -135,10 +103,62 @@ void lv_port_disp_init(void)
  *   STATIC FUNCTIONS
  **********************/
 
+/* DMA全满中断，由于我一次传输可能超过65535的最大限制，所以让ai写一个DMA分块传输 */
+static void dma_comptle_callback(DMA_HandleTypeDef *_hdma)
+{
+	if(DMA1_Stream1==_hdma->Instance)
+	{
+		/* 更新已发送像素计数 */
+		uint32_t chunk_size = flush_ctx.total_pixels - flush_ctx.sent_pixels;
+
+		if (chunk_size > DMA_MAX_TRANSFER_LEN) chunk_size = DMA_MAX_TRANSFER_LEN;
+
+		flush_ctx.sent_pixels += chunk_size;
+
+		/* 检查是否所有数据都已发送完成 */
+		if (flush_ctx.sent_pixels >= flush_ctx.total_pixels) 
+		{
+				/* 所有数据传输完成，通知LVGL */
+				flush_ctx.is_busy = false;
+				lv_disp_flush_ready(flush_ctx.disp_drv);
+		} 
+		else dma_transfer_next_chunk();/* 还有数据未传输，继续下一块 */
+	}
+}
+/* 启动下一块DMA传输 */
+static void dma_transfer_next_chunk(void)
+{
+    uint32_t remaining = flush_ctx.total_pixels - flush_ctx.sent_pixels;
+    uint32_t chunk_size = (remaining > DMA_MAX_TRANSFER_LEN) ? DMA_MAX_TRANSFER_LEN : remaining;
+    
+    /* 计算当前要发送的数据起始地址 */
+    lv_color_t *current_color_p = flush_ctx.color_p + flush_ctx.sent_pixels;
+    
+    /* 注意：这里需要根据你的LCD窗口设置来计算实际的起始坐标偏移 */
+    /* 由于是全屏刷新，且开启了full_refresh，LVGL会一次性提供整个屏幕的数据 */
+    /* 但我们分块传输时，需要确保LCD窗口跟随数据块的位置 */
+    
+    /* 计算当前块对应的窗口坐标 */
+    uint32_t pixels_per_row = MY_DISP_HOR_RES;
+    uint32_t start_pixel = flush_ctx.sent_pixels;
+    uint16_t start_x = start_pixel % pixels_per_row;
+    uint16_t start_y = start_pixel / pixels_per_row;
+    uint16_t end_pixel = flush_ctx.sent_pixels + chunk_size - 1;
+    uint16_t end_x = end_pixel % pixels_per_row;
+    uint16_t end_y = end_pixel / pixels_per_row;
+    
+    /* 设置LCD窗口为当前块的范围 */
+    drvp_fmc_lcd_set_wid(start_x, end_x, start_y, end_y);
+    
+    /* 启动DMA传输当前块 */
+    drv_fmc_dma_m2m_tranf((uint16_t*)current_color_p, chunk_size);
+}
+
 /*Initialize your display and the required peripherals.*/
 static void disp_init(void)
 {
     /*You code here*/
+	  drv_fmc_dma_m2m_init(dma_comptle_callback);
 }
 
 volatile bool disp_flush_enabled = true;
@@ -157,32 +177,54 @@ void disp_disable_update(void)
     disp_flush_enabled = false;
 }
 
-#include "SEGGER_RTT.h"
 /*Flush the content of the internal buffer the specific area on the display
  *You can use DMA or any hardware acceleration to do this operation in the background but
  *'lv_disp_flush_ready()' has to be called when finished.*/
 static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p)
 {
-    if(disp_flush_enabled) 
-	 {
-        /*The most simple case (but also the slowest) to put all pixels to the screen one-by-one*/
-//        int32_t x;
-//        int32_t y;
-//        for(y = area->y1; y <= area->y2; y++) {
-//            for(x = area->x1; x <= area->x2; x++) {
-//                /*Put a pixel to the display. For example:*/
-//                /*put_px(x, y, *color_p)*/
-//                color_p++;
-//            }
-//        }
+//    if(disp_flush_enabled) 
+//	 {
+//        /*The most simple case (but also the slowest) to put all pixels to the screen one-by-one*/
+////        int32_t x;
+////        int32_t y;
+////        for(y = area->y1; y <= area->y2; y++) {
+////            for(x = area->x1; x <= area->x2; x++) {
+////                /*Put a pixel to the display. For example:*/
+////                /*put_px(x, y, *color_p)*/
+////                color_p++;
+////            }
+////        }
 
-		 drvp_fmc_lcd_set_wid(area->x1,area->x2,area->y1,area->y2);
-		 drvp_fmc_lcd_writebuf((uint16_t*)color_p,((area->x2-area->x1+1)*(area->y2-area->y1+1)));
+////		 drvp_fmc_lcd_set_wid(area->x1,area->x2,area->y1,area->y2);
+////		 drvp_fmc_lcd_writebuf((uint16_t*)color_p,((area->x2-area->x1+1)*(area->y2-area->y1+1)));
+//    }
+
+//    /*IMPORTANT!!!
+//     *Inform the graphics library that you are ready with the flushing*/
+//    lv_disp_flush_ready(disp_drv);
+	
+	   if(!disp_flush_enabled) 
+	  {
+		  lv_disp_flush_ready(disp_drv);
+		  return;
     }
 
-    /*IMPORTANT!!!
-     *Inform the graphics library that you are ready with the flushing*/
-    lv_disp_flush_ready(disp_drv);
+    /* 如果上一次DMA传输还未完成，理论上不应该发生（LVGL会等待flush_ready） */
+    if (flush_ctx.is_busy) while (flush_ctx.is_busy);/* 安全保护：等待上一次完成（实际项目中可加超时处理） */
+
+    /* 计算总像素数 */
+    uint32_t total_pixels = (area->x2 - area->x1 + 1) * (area->y2 - area->y1 + 1);
+    
+    /* 保存上下文供DMA回调使用 */
+    flush_ctx.disp_drv = disp_drv;
+    flush_ctx.area = area;
+    flush_ctx.color_p = color_p;
+    flush_ctx.total_pixels = total_pixels;
+    flush_ctx.sent_pixels = 0;
+    flush_ctx.is_busy = true;
+
+    /* 启动第一块DMA传输 */
+    dma_transfer_next_chunk();
 }
 
 /*OPTIONAL: GPU INTERFACE*/

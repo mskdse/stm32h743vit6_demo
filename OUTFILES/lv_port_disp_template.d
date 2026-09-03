@@ -237,7 +237,3 @@
 .\outfiles\lv_port_disp_template.o: .\LVGL\src/extra/widgets/led/lv_led.h
 .\outfiles\lv_port_disp_template.o: .\LVGL\src/extra/widgets/imgbtn/lv_imgbtn.h
 .\outfiles\lv_port_disp_template.o: .\LVGL\src/extra/widgets/span/lv_span.h
-.\outfiles\lv_port_disp_template.o: .\SEGGER_RTT\RTT\SEGGER_RTT.h
-.\outfiles\lv_port_disp_template.o: .\SEGGER_RTT\RTT\SEGGER_RTT_ConfDefaults.h
-.\outfiles\lv_port_disp_template.o: .\SEGGER_RTT\Config\SEGGER_RTT_Conf.h
-.\outfiles\lv_port_disp_template.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

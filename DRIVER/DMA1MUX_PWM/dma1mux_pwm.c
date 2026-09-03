@@ -125,7 +125,6 @@ void dma1mux_pwm_set_cnt(uint8_t cnt)
 {
 	__disable_irq();
 	HAL_DMA_Abort(&dma1_cfg);
-	HAL_DMA_Abort_IT(&dma1_cfg);
 	if((cnt*2)<=DMA_PWM_MAX_CNT)
 	{
 		dma1mux_fill_buf(&dma1_ctrl_buf[0],cnt);

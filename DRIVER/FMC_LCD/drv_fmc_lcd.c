@@ -38,6 +38,43 @@ D/C--->PE3
 #define FMC_LCD_ADDR_CMD     ((uint32_t)0x60000000)
 #define FMC_LCD_ADDR_DATA    ((uint32_t)0x60100000)
 
+__attribute__((section (".RAM_D2")))static DMA_HandleTypeDef dma1_cfg;
+
+void drv_fmc_dma_m2m_init(void(*Callback)(DMA_HandleTypeDef *_hdma))
+{
+	__HAL_RCC_DMA1_CLK_ENABLE();
+	memset(&dma1_cfg,0,sizeof(DMA_HandleTypeDef));
+	dma1_cfg.Instance=DMA1_Stream1;
+	dma1_cfg.Init.Direction=DMA_MEMORY_TO_MEMORY;
+	dma1_cfg.Init.FIFOMode=DMA_FIFOMODE_ENABLE;
+	dma1_cfg.Init.FIFOThreshold=DMA_FIFO_THRESHOLD_1QUARTERFULL;
+	dma1_cfg.Init.MemBurst=DMA_MBURST_SINGLE;
+	dma1_cfg.Init.MemDataAlignment=DMA_MDATAALIGN_HALFWORD;
+	dma1_cfg.Init.MemInc=DMA_MINC_DISABLE;
+	dma1_cfg.Init.Mode=DMA_NORMAL;
+	dma1_cfg.Init.PeriphBurst=DMA_PBURST_SINGLE;
+	dma1_cfg.Init.PeriphDataAlignment=DMA_PDATAALIGN_HALFWORD;
+	dma1_cfg.Init.PeriphInc=DMA_PINC_ENABLE;
+	dma1_cfg.Init.Priority=DMA_PRIORITY_VERY_HIGH;
+	dma1_cfg.Init.Request=DMA_REQUEST_MEM2MEM;
+	HAL_DMA_Init(&dma1_cfg);
+	
+	HAL_DMA_RegisterCallback(&dma1_cfg,HAL_DMA_XFER_CPLT_CB_ID,Callback);
+	
+	HAL_NVIC_SetPriority(DMA1_Stream1_IRQn,10,0);
+	HAL_NVIC_EnableIRQ(DMA1_Stream1_IRQn);
+}
+
+void drv_fmc_dma_m2m_tranf(uint16_t* buf,uint16_t len)
+{
+	HAL_DMA_Start_IT(&dma1_cfg,(uint32_t)buf,FMC_LCD_ADDR_DATA,len);
+}
+
+void DMA1_Stream1_IRQHandler(void)
+{
+	HAL_DMA_IRQHandler(&dma1_cfg);
+}
+
 /* fmc³õÊ¼»¯º¯Êý */
 void drv_fmc_lcd_init(void)
 {
