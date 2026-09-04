@@ -69,7 +69,10 @@ int main(void)
 //	lv_port_disp_init();//LVGL底层支持初始化
 //	lv_demo_benchmark();//允许LVGL的测试Demo
   usart1_dma_init(115200);
-	usart1_my_printf("hello world\r\n");
+	usart1_my_printf("hello world1\r\n");
+	usart1_my_printf("hello world2\r\n");
+	usart1_my_printf("hello world3\r\n");
+	usart1_my_printf("hello world4\r\n");
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
 	for(;;)
 	{		
