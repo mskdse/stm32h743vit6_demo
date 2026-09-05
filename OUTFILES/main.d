@@ -131,3 +131,4 @@
 .\outfiles\main.o: .\DRIVER\FMC_LCD\drvp_fmc_lcd.h
 .\outfiles\main.o: .\DRIVER\FMC_LCD\drv_fmc_lcd.h
 .\outfiles\main.o: .\DRIVER\USART1_DMA\usart1_dma.h
+.\outfiles\main.o: .\DRIVER\SPI_FLASH\spi_flash.h

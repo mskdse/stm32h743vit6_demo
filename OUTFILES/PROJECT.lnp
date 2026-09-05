@@ -139,6 +139,7 @@
 ".\outfiles\bdmamux_pwm.o"
 ".\outfiles\dma1mux_pwm.o"
 ".\outfiles\usart1_dma.o"
+".\outfiles\spi_flash.o"
 ".\outfiles\port.o"
 ".\outfiles\circular_buffer.o"
 ".\outfiles\sram_d2_malloc.o"

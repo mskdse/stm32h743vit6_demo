@@ -110,3 +110,4 @@
 .\outfiles\usart1_dma.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\outfiles\usart1_dma.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\outfiles\usart1_dma.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\usart1_dma.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h

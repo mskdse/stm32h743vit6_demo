@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>STM32H743xx,USE_HAL_DRIVER,USE_FULL_LL_DRIVER,DEBUG=1</Define>
               <Undefine></Undefine>
-              <IncludePath>.\USER;.\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc;.\STM32Cube_FW_H7_V1.12.0\Drivers\CMSIS\Include;.\STM32Cube_FW_H7_V1.12.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include;.\DRIVER;.\DRIVER\DRIVER_LED;.\DRIVER\DRIVER_KEY;.\SEGGER_RTT\Config;.\SEGGER_RTT\RTT;.\CIRCULAR_BUFFER\src;.\CIRCULAR_BUFFER\port;.\MEM_MANGE;.\DRIVER\BASE_TIMER6;.\DRIVER\PWM_TIMER2;.\DRIVER\PWM_IN_TIMER5;.\DRIVER\DRIVER_EEPROM;.\DRIVER\PWM_TIMER1;.\DRIVER\QSPI_FLASH;.\FATFS;.\DRIVER\LPTIMER;.\DRIVER\FMC_LCD;.\LVGL;.\LVGL\src;.\LVGL\examples\porting;.\LVGL\demos;.\LVGL\demos\benchmark;.\DRIVER\BDMAMUX_PWM;.\DRIVER\DMA1MUX_PWM;.\DRIVER\USART1_DMA</IncludePath>
+              <IncludePath>.\USER;.\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc;.\STM32Cube_FW_H7_V1.12.0\Drivers\CMSIS\Include;.\STM32Cube_FW_H7_V1.12.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include;.\DRIVER;.\DRIVER\DRIVER_LED;.\DRIVER\DRIVER_KEY;.\SEGGER_RTT\Config;.\SEGGER_RTT\RTT;.\CIRCULAR_BUFFER\src;.\CIRCULAR_BUFFER\port;.\MEM_MANGE;.\DRIVER\BASE_TIMER6;.\DRIVER\PWM_TIMER2;.\DRIVER\PWM_IN_TIMER5;.\DRIVER\DRIVER_EEPROM;.\DRIVER\PWM_TIMER1;.\DRIVER\QSPI_FLASH;.\FATFS;.\DRIVER\LPTIMER;.\DRIVER\FMC_LCD;.\LVGL;.\LVGL\src;.\LVGL\examples\porting;.\LVGL\demos;.\LVGL\demos\benchmark;.\DRIVER\BDMAMUX_PWM;.\DRIVER\DMA1MUX_PWM;.\DRIVER\USART1_DMA;.\DRIVER\SPI_FLASH</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1322,6 +1322,11 @@
               <FileName>usart1_dma.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\DRIVER\USART1_DMA\usart1_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>spi_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\DRIVER\SPI_FLASH\spi_flash.c</FilePath>
             </File>
           </Files>
         </Group>

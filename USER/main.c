@@ -20,6 +20,7 @@
 //#include "bdmamux_pwm.h"
 //#include "dma1mux_pwm.h"
 #include "usart1_dma.h"
+#include "spi_flash.h"
 
 static void SystemClock_Config(void);
 static void Error_Handler(void);
@@ -69,10 +70,9 @@ int main(void)
 //	lv_port_disp_init();//LVGL底层支持初始化
 //	lv_demo_benchmark();//允许LVGL的测试Demo
   usart1_dma_init(115200);
-	usart1_my_printf("hello world1\r\n");
-	usart1_my_printf("hello world2\r\n");
-	usart1_my_printf("hello world3\r\n");
-	usart1_my_printf("hello world4\r\n");
+	spi_flash_w25q128_init();
+	usart1_my_printf("w25q128_id=0x%x\r\n",spi_flash_w25q128_readid());
+	usart1_my_printf("APP_TASK_RUN......\r\n");
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
 	for(;;)
 	{		
