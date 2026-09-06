@@ -45,7 +45,7 @@ int main(void)
 	drvp_fmc_lcd_init();//初始化lcd
 	drvp_fmc_lcd_set_axis_scan(0,1,1,0,0);//设置LCD的坐标轴适配开发板以及显存扫描方向
   usart1_dma_init(115200);//串口初始化
-	//spi_flash_w25q128_init();//W25Q128初始化
+	spi_flash_w25q128_init();//W25Q128初始化
 	lv_init();//LVGL初始化
 	lv_port_disp_init();//LVGL底层支持初始化
 	lv_demo_benchmark();//允许LVGL的测试Demo

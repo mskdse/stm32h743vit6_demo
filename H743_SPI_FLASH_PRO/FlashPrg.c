@@ -341,6 +341,20 @@ static void MPU_Config(void)
 	MPU_InitStruct.SubRegionDisable = 0x00;
 	MPU_InitStruct.DisableExec      = MPU_INSTRUCTION_ACCESS_DISABLE;
 	HAL_MPU_ConfigRegion(&MPU_InitStruct);
+	
+	/* 临时配置SPI_FLASH的地址下的MPU配置防止CPU误判 */
+	MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = 0xD0000000;//SPI_FLASH的地址
+  MPU_InitStruct.Size = MPU_REGION_SIZE_16MB;//W25Q128是16MB
+  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER6;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL1;
+  MPU_InitStruct.SubRegionDisable = 0x0;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
   /* Enable the MPU */
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);

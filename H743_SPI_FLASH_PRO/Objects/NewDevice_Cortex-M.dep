@@ -1,7 +1,7 @@
 Dependencies for Project 'NewDevice', Target 'Cortex-M': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::ARMCC
 F (.\Abstract.txt)(0x6A955B33)()
-F (.\FlashPrg.c)(0x6A9D2050)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --apcs /ropi/rwpi -I ..\_Template -I .\ST_SDK\STM32H7xx_HAL_Driver\Inc -I .\ST_SDK\STM32H7xx_HAL_Driver\Inc\Legacy -I .\ST_SDK\CMSIS\Include -I .\ST_SDK\CMSIS\Device\ST\STM32H7xx\Include -I .\SPI_Driver-ID:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\4.1.3\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="535" -DSTM32H743xx -DUSE_FULL_LL_DRIVER-o .\objects\flashprg.o --depend .\objects\flashprg.d)
+F (.\FlashPrg.c)(0x6A9D6C64)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --apcs /ropi/rwpi -I ..\_Template -I .\ST_SDK\STM32H7xx_HAL_Driver\Inc -I .\ST_SDK\STM32H7xx_HAL_Driver\Inc\Legacy -I .\ST_SDK\CMSIS\Include -I .\ST_SDK\CMSIS\Device\ST\STM32H7xx\Include -I .\SPI_Driver-ID:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\4.1.3\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="535" -DSTM32H743xx -DUSE_FULL_LL_DRIVER-o .\objects\flashprg.o --depend .\objects\flashprg.d)
 I (FlashOS.H)(0x6A955B33)
 I (.\ST_SDK\CMSIS\Device\ST\STM32H7xx\Include\stm32h7xx.h)(0x6A955B33)
 I (.\ST_SDK\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x6A955B33)
@@ -486,7 +486,7 @@ I (.\ST_SDK\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_pwr_ex.h)(0x6A955B33)
 I (.\ST_SDK\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_qspi.h)(0x6A955B33)
 I (.\ST_SDK\STM32H7xx_HAL_Driver\Inc\stm32h7xx_ll_delayblock.h)(0x6A955B33)
 I (.\ST_SDK\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_spi.h)(0x6A9D22B1)
-F (.\SPI_Driver\spi_flash.c)(0x6A9D22FD)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --apcs /ropi/rwpi -I ..\_Template -I .\ST_SDK\STM32H7xx_HAL_Driver\Inc -I .\ST_SDK\STM32H7xx_HAL_Driver\Inc\Legacy -I .\ST_SDK\CMSIS\Include -I .\ST_SDK\CMSIS\Device\ST\STM32H7xx\Include -I .\SPI_Driver-ID:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\4.1.3\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="535" -DSTM32H743xx -DUSE_FULL_LL_DRIVER-o .\objects\spi_flash.o --depend .\objects\spi_flash.d)
+F (.\SPI_Driver\spi_flash.c)(0x6A9D698D)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --apcs /ropi/rwpi -I ..\_Template -I .\ST_SDK\STM32H7xx_HAL_Driver\Inc -I .\ST_SDK\STM32H7xx_HAL_Driver\Inc\Legacy -I .\ST_SDK\CMSIS\Include -I .\ST_SDK\CMSIS\Device\ST\STM32H7xx\Include -I .\SPI_Driver-ID:\Keil5\ARM\PACK\Keil\STM32H7xx_DFP\4.1.3\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="535" -DSTM32H743xx -DUSE_FULL_LL_DRIVER-o .\objects\spi_flash.o --depend .\objects\spi_flash.d)
 I (SPI_Driver\spi_flash.h)(0x6A9D0275)
 I (.\ST_SDK\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal.h)(0x6A955B33)
 I (.\ST_SDK\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_conf.h)(0x6A9D21AC)
