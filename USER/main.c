@@ -1,26 +1,4 @@
-#include "stm32h7xx.h"
-#include "SEGGER_RTT.h"
-#include "EventRecorder.h"
-#include <stdio.h>
-#include "drvp_led.h"
-#include "sram_d2_malloc.h"
-#include "drvp_key.h"
-//#include "base_timer6.h"
-//#include "pwm_timer2.h"
-//#include "pwm_timer1.h"
-//#include "pwm_in_timer5.h"
-#include "drvp_eeprom.h"
-#include "ff.h"
-#include "qspi_flash.h"
-//#include "drv_lptimer2.h"
-#include "drvp_fmc_lcd.h"
-//#include "lvgl.h"
-//#include "lv_port_disp_template.h"
-//#include "lv_demo_benchmark.h"
-//#include "bdmamux_pwm.h"
-//#include "dma1mux_pwm.h"
-#include "usart1_dma.h"
-#include "spi_flash.h"
+#include "main.h"
 
 static void SystemClock_Config(void);
 static void Error_Handler(void);
@@ -66,18 +44,17 @@ int main(void)
 	drvp_eeprom_init();//初始化eeprom
 	drvp_fmc_lcd_init();//初始化lcd
 	drvp_fmc_lcd_set_axis_scan(0,1,1,0,0);//设置LCD的坐标轴适配开发板以及显存扫描方向
-//	lv_init();//LVGL初始化
-//	lv_port_disp_init();//LVGL底层支持初始化
-//	lv_demo_benchmark();//允许LVGL的测试Demo
-  usart1_dma_init(115200);
-	spi_flash_w25q128_init();
-	usart1_my_printf("w25q128_id=0x%x\r\n",spi_flash_w25q128_readid());
+  usart1_dma_init(115200);//串口初始化
+	//spi_flash_w25q128_init();//W25Q128初始化
+	lv_init();//LVGL初始化
+	lv_port_disp_init();//LVGL底层支持初始化
+	lv_demo_benchmark();//允许LVGL的测试Demo
 	usart1_my_printf("APP_TASK_RUN......\r\n");
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
 	for(;;)
 	{		
-//    lv_task_handler();
-//		HAL_Delay(10);
+    lv_task_handler();
+		HAL_Delay(10);
 	}
 }
 
@@ -336,5 +313,5 @@ __attribute__((section(".ITCM_CODE"), used))void SysTick_Handler(void)
     drvp_eeprom_prc_10ms();
   }
 	
-	//lv_tick_inc(1);
+	lv_tick_inc(1);
 }

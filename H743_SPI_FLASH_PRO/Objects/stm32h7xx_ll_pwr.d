@@ -1,0 +1,11 @@
+.\objects\stm32h7xx_ll_pwr.o: ST_SDK\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_pwr.c
+.\objects\stm32h7xx_ll_pwr.o: .\ST_SDK\STM32H7xx_HAL_Driver\Inc\stm32h7xx_ll_pwr.h
+.\objects\stm32h7xx_ll_pwr.o: .\ST_SDK\CMSIS\Device\ST\STM32H7xx\Include\stm32h7xx.h
+.\objects\stm32h7xx_ll_pwr.o: .\ST_SDK\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h
+.\objects\stm32h7xx_ll_pwr.o: .\ST_SDK\CMSIS\Include\core_cm7.h
+.\objects\stm32h7xx_ll_pwr.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\stm32h7xx_ll_pwr.o: .\ST_SDK\CMSIS\Include\cmsis_version.h
+.\objects\stm32h7xx_ll_pwr.o: .\ST_SDK\CMSIS\Include\cmsis_compiler.h
+.\objects\stm32h7xx_ll_pwr.o: .\ST_SDK\CMSIS\Include\cmsis_armcc.h
+.\objects\stm32h7xx_ll_pwr.o: .\ST_SDK\CMSIS\Include\mpu_armv7.h
+.\objects\stm32h7xx_ll_pwr.o: .\ST_SDK\CMSIS\Device\ST\STM32H7xx\Include\system_stm32h7xx.h

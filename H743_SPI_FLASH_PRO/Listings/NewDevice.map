@@ -1,0 +1,99 @@
+Component: ARM Compiler 5.06 update 7 (build 960) Tool: armlink [4d3601]
+
+==============================================================================
+
+Image Symbol Table
+
+    Local Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    .text                                    0x00000000   Section        0  flashprg.o(.text)
+    FlashDev.c                               0x00000000   Number         0  flashdev.o ABSOLUTE
+    FlashPrg.c                               0x00000000   Number         0  flashprg.o ABSOLUTE
+    .constdata                               0x00000020   Section     4256  flashdev.o(.constdata)
+
+    Global Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    BuildAttributes$$THM_ISAv3M$S$PE$A:L22$X:L11$S22$IEEE1$IW$RWPI$~STKCKD$USESV7$~SHL$OSPACE$ROPI$EBA8$STANDARDLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    Init                                     0x00000001   Thumb Code     6  flashprg.o(.text)
+    UnInit                                   0x00000007   Thumb Code     6  flashprg.o(.text)
+    EraseChip                                0x0000000d   Thumb Code     4  flashprg.o(.text)
+    EraseSector                              0x00000011   Thumb Code     6  flashprg.o(.text)
+    ProgramPage                              0x00000017   Thumb Code     6  flashprg.o(.text)
+    FlashDevice                              0x00000020   Data        4256  flashdev.o(.constdata)
+
+
+
+==============================================================================
+
+Memory Map of the image
+
+  Image entry point : Not specified.
+
+  Load Region PRG (Base: 0x00000000, Size: 0x00000020, Max: 0xffffffff, PI)
+
+    Execution Region PrgCode (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x0000001c, Max: 0xffffffff, PI)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x00000000   0x00000000   0x0000001c   Code   RO            1    .text               flashprg.o
+
+
+    Execution Region PrgData (Exec base: 0x0000001c, Load base: 0x0000001c, Size: 0x00000004, Max: 0xffffffff, PI)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x0000001c   0x0000001c   0x00000004   Data   RW           27    PDT$$ptr            anon$$obj.o
+
+
+
+  Load Region DSCR (Base: 0x00000020, Size: 0x000010a0, Max: 0xffffffff, PI)
+
+    Execution Region DevDscr (Exec base: 0x00000020, Load base: 0x00000020, Size: 0x000010a0, Max: 0xffffffff, PI)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x00000020   0x00000020   0x000010a0   Data   RO           18    .constdata          flashdev.o
+
+
+==============================================================================
+
+Image component sizes
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
+
+         0          0       4256          0          0        466   flashdev.o
+        28          0          0          0          0       3416   flashprg.o
+
+    ----------------------------------------------------------------------
+        28          0       4256          4          0       3882   Object Totals
+         0          0          0          4          0          0   (incl. Generated)
+         0          0          0          0          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+         0          0          0          0          0          0   Library Totals
+         0          0          0          0          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+==============================================================================
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
+
+        28          0       4256          4          0       3882   Grand Totals
+        28          0       4256          4          0       3882   ELF Image Totals
+        28          0       4256          4          0          0   ROM Totals
+
+==============================================================================
+
+    Total RO  Size (Code + RO Data)                 4284 (   4.18kB)
+    Total RW  Size (RW Data + ZI Data)                 4 (   0.00kB)
+    Total ROM Size (Code + RO Data + RW Data)       4288 (   4.19kB)
+
+==============================================================================
+

@@ -103,3 +103,10 @@ LR_IROM1 0x90000000 0x01000000  {    ; load region size_region
 	*(.RAM_D3)
 	}
 }
+
+; ========== 新增：SPI Flash 字库存储区 ==========
+LR_SPIFLASH 0xD0000000 0x01000000  {  ; 逻辑地址16MB，但是不可访问哦，只允许下载
+  ER_SPIFLASH 0xD0000000 0x01000000  {
+    *(.spi_flash_ro*)   ; 专门用于字库的自定义段
+  }
+}

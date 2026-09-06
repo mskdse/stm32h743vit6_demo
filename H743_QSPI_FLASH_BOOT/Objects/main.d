@@ -2,7 +2,7 @@
 .\objects\main.o: .\ST_SDK\CMSIS\Device\ST\STM32H7xx\Include\stm32h7xx.h
 .\objects\main.o: .\ST_SDK\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h
 .\objects\main.o: .\ST_SDK\CMSIS\Include\core_cm7.h
-.\objects\main.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\main.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\main.o: .\ST_SDK\CMSIS\Include\cmsis_version.h
 .\objects\main.o: .\ST_SDK\CMSIS\Include\cmsis_compiler.h
 .\objects\main.o: .\ST_SDK\CMSIS\Include\cmsis_armcc.h
@@ -14,8 +14,8 @@
 .\objects\main.o: .\ST_SDK\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_def.h
 .\objects\main.o: .\ST_SDK\CMSIS\Device\ST\STM32H7xx\Include\stm32h7xx.h
 .\objects\main.o: .\ST_SDK\STM32H7xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h
-.\objects\main.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\objects\main.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\main.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\main.o: D:\Keil5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\main.o: .\ST_SDK\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_rcc_ex.h
 .\objects\main.o: .\ST_SDK\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_gpio.h
 .\objects\main.o: .\ST_SDK\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_gpio_ex.h
