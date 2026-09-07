@@ -46,7 +46,7 @@ void spi_flash_w25q128_init(void)
 	spi_handle.Init.CLKPolarity=SPI_POLARITY_LOW;
 	spi_handle.Init.CLKPhase=SPI_PHASE_1EDGE;
 	spi_handle.Init.NSS=SPI_NSS_SOFT;
-	spi_handle.Init.BaudRatePrescaler=SPI_BAUDRATEPRESCALER_32;
+	spi_handle.Init.BaudRatePrescaler=SPI_BAUDRATEPRESCALER_256;
 	spi_handle.Init.FirstBit=SPI_FIRSTBIT_MSB;
 	spi_handle.Init.TIMode=SPI_TIMODE_DISABLE;
 	spi_handle.Init.CRCCalculation=SPI_CRCCALCULATION_DISABLE;
@@ -68,16 +68,19 @@ void spi_flash_w25q128_init(void)
 static inline void spi_flash_cs_low(void)
 {
 	HAL_GPIO_WritePin(GPIOD,GPIO_PIN_3,GPIO_PIN_RESET);
+	for(int i=0;i<0xFFFF;i++);
 }
 
 static inline void spi_flash_cs_high(void)
 {
 	HAL_GPIO_WritePin(GPIOD,GPIO_PIN_3,GPIO_PIN_SET);
+	for(int i=0;i<0xFFFF;i++);
 }
 
 static void spi_flash_tranmit_recv(uint8_t* wbuf,uint8_t* rbuf,uint16_t size) 
 { 
 	HAL_SPI_TransmitReceive(&spi_handle,wbuf,rbuf,size,HAL_MAX_DELAY);
+	for(int i=0;i<0xFFFF;i++);
 }
 
 /* ----------------------------------------以下是操作SPI时序的操作层------------------------------------- */
@@ -138,6 +141,8 @@ void spi_flash_erase_sector_4k(uint32_t addr)
 
 void spi_flash_erase_sector_32k(uint32_t addr)
 {
+	spi_flash_w25q128_waitbusy();
+	
 	spi_flash_w25q128_wenable();
 	
 	spi_dummybuf[0]=0x52;
@@ -146,10 +151,8 @@ void spi_flash_erase_sector_32k(uint32_t addr)
 	spi_dummybuf[3]=((addr>>0)&0xff);
 	
 	spi_flash_cs_low();
-  spi_flash_tranmit_recv(spi_dummybuf,spi_dummybuf,4);
-  spi_flash_cs_high();
-	
-	spi_flash_w25q128_waitbusy();
+    spi_flash_tranmit_recv(spi_dummybuf,spi_dummybuf,4);
+    spi_flash_cs_high();
 }
 
 void spi_flash_erase_sector_64k(uint32_t addr)
@@ -170,6 +173,8 @@ void spi_flash_erase_sector_64k(uint32_t addr)
 
 void spi_flash_erase_chip(void)
 {
+	spi_flash_w25q128_waitbusy();
+	
 	spi_flash_w25q128_wenable();
 	
 	spi_dummybuf[0]=0xC7;
@@ -177,8 +182,6 @@ void spi_flash_erase_chip(void)
 	spi_flash_cs_low();
   spi_flash_tranmit_recv(spi_dummybuf,spi_dummybuf,1);
   spi_flash_cs_high();
-	
-	spi_flash_w25q128_waitbusy();
 }
 
 void spi_flash_read(uint32_t addr,uint8_t* data,uint32_t len)
@@ -207,6 +210,8 @@ void spi_flash_read(uint32_t addr,uint8_t* data,uint32_t len)
 
 static void spi_flash_page_write(uint32_t addr,uint8_t* data,uint16_t len)
 {
+	spi_flash_w25q128_waitbusy();
+	
 	spi_flash_w25q128_wenable();
 	
 	spi_dummybuf[0]=0x02;
@@ -218,8 +223,6 @@ static void spi_flash_page_write(uint32_t addr,uint8_t* data,uint16_t len)
 	spi_flash_tranmit_recv(spi_dummybuf,spi_dummybuf,4);//命令写无所谓
   spi_flash_tranmit_recv(data,spi_dummybuf,len);//上层缓冲区读写绝不能同一buffer,页的话256字节不用分片够的
   spi_flash_cs_high();
-	
-	spi_flash_w25q128_waitbusy();
 }
 
 void spi_flash_write(uint32_t addr,uint8_t* data,uint32_t len)

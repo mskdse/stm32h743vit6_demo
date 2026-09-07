@@ -68,12 +68,12 @@ static void CPU_CACHE_Enable(void);
 
 int Init (unsigned long adr, unsigned long clk, unsigned long fnc) {
 	  SystemInit();
-    MPU_Config();//配置MPU内存保护单元
-	  CPU_CACHE_Enable();//开启Cache
+//    MPU_Config();//配置MPU内存保护单元
+//	  CPU_CACHE_Enable();//开启Cache
 	  HAL_Init();//HAL库的初始化
-	  SystemClock_Config();//配置系统时钟为400MHZ
-	  
+	  SystemClock_Config();//配置系统时钟为400MHZ	  
 	  spi_flash_w25q128_init();
+	  spi_flash_w25q128_read_id();
   /* Add your Code */
   return (0);                                  // Finished without Errors
 }
@@ -86,6 +86,7 @@ int Init (unsigned long adr, unsigned long clk, unsigned long fnc) {
  */
 
 int UnInit (unsigned long fnc) {
+	/* 如果程序是下载到外部的QSPI-FLASH那么必须加这两行代码，否则取指异常 */
 	spi_flash_w25q128_init();
   /* Add your Code */
   return (0);                                  // Finished without Errors
@@ -129,6 +130,41 @@ int ProgramPage (unsigned long adr, unsigned long sz, unsigned char *buf) {
   spi_flash_write((adr-0xD0000000),buf,sz);//多少字节不用管，反正我这个底层API是能写任意字节的
   /* Add your Code */
   return (0);                                  // Finished without Errors
+}
+
+/* 血的教训，QSPI-FLASH支持地址映射，所以MDK能自动读取对应地址处的数据从而进行校验，但是这玩意不行
+所以我们只能手动填写它的校验函数,ai就行，这玩意不复杂
+*/
+unsigned long Verify (unsigned long adr, unsigned long sz, unsigned char *buf)
+{
+    unsigned long current_add = adr - 0xD0000000;  // 物理地址偏移
+    unsigned long remain = sz;
+    unsigned long offset = 0;
+    
+    // 分批大小：256字节（根据你SRAM大小调整）
+    #define VERIFY_BATCH_SIZE  256
+    uint8_t read_buf[VERIFY_BATCH_SIZE];
+    
+    while (remain > 0) {
+        unsigned long batch_size = (remain > VERIFY_BATCH_SIZE) ? VERIFY_BATCH_SIZE : remain;
+        
+        // 从SPI Flash读取数据
+        spi_flash_read(current_add, read_buf, batch_size);
+        
+        // 对比数据
+        for (unsigned long i = 0; i < batch_size; i++) {
+            if (read_buf[i] != buf[offset + i]) {
+                return adr + offset + i;  // 返回出错处的逻辑地址
+            }
+        }
+        
+        // 更新偏移
+        current_add += batch_size;
+        offset += batch_size;
+        remain -= batch_size;
+    }
+    
+    return adr + sz;  // 校验成功
 }
 
 /**
@@ -341,20 +377,6 @@ static void MPU_Config(void)
 	MPU_InitStruct.SubRegionDisable = 0x00;
 	MPU_InitStruct.DisableExec      = MPU_INSTRUCTION_ACCESS_DISABLE;
 	HAL_MPU_ConfigRegion(&MPU_InitStruct);
-	
-	/* 临时配置SPI_FLASH的地址下的MPU配置防止CPU误判 */
-	MPU_InitStruct.Enable = MPU_REGION_ENABLE;
-  MPU_InitStruct.BaseAddress = 0xD0000000;//SPI_FLASH的地址
-  MPU_InitStruct.Size = MPU_REGION_SIZE_16MB;//W25Q128是16MB
-  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
-  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
-  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
-  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
-  MPU_InitStruct.Number = MPU_REGION_NUMBER6;
-  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL1;
-  MPU_InitStruct.SubRegionDisable = 0x0;
-  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
-  HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
   /* Enable the MPU */
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);

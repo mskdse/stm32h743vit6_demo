@@ -8,9 +8,6 @@ static void CPU_CACHE_Enable(void);
 /* 数组表格定义在 .RAM_RESET_VCTOR 段，这段空间用来存储中断向量表，不得再其他地方再定义这个节区 */
 __attribute__((section(".RamVecTable")))static uint8_t RAM_VCTOR_TABLE[0x400];
 
-/* 我现在的程序是运行在QSPI_FLASH还是普通FLASH，如果是QSPIFLASH的话，中断向量表必须拷贝0x9000000地址的 */
-#define  MY_FLASH_IS_QSPI_FLASH      1
-
 int main(void)
 {
 	/* 将中断向量表从FLASH的首地址拷贝到DTCM中然后设置中断向量表的偏移为DTCM首地址也就是数组地址 */
@@ -46,15 +43,15 @@ int main(void)
 	drvp_fmc_lcd_set_axis_scan(0,1,1,0,0);//设置LCD的坐标轴适配开发板以及显存扫描方向
   usart1_dma_init(115200);//串口初始化
 	spi_flash_w25q128_init();//W25Q128初始化
-	lv_init();//LVGL初始化
-	lv_port_disp_init();//LVGL底层支持初始化
-	lv_demo_benchmark();//允许LVGL的测试Demo
+//	lv_init();//LVGL初始化
+//	lv_port_disp_init();//LVGL底层支持初始化
+//	lv_demo_benchmark();//允许LVGL的测试Demo
 	usart1_my_printf("APP_TASK_RUN......\r\n");
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
 	for(;;)
 	{		
-    lv_task_handler();
-		HAL_Delay(10);
+//    lv_task_handler();
+//		HAL_Delay(10);
 	}
 }
 
@@ -313,5 +310,5 @@ __attribute__((section(".ITCM_CODE"), used))void SysTick_Handler(void)
     drvp_eeprom_prc_10ms();
   }
 	
-	lv_tick_inc(1);
+	//lv_tick_inc(1);
 }

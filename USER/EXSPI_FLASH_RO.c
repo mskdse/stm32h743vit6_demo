@@ -1,4 +1,7 @@
-#include <stdint.h>
+#include "main.h"
+
+/* QSPI-FLASH无法和SPI-FLASH一起下载，想把字库下到SPI-FALSH里面必须是内部FLASH+SPI-FLASH */
+#if  (MY_FLASH_IS_QSPI_FLASH==0)
 
 __attribute__((section(".spi_flash_ro"), used))
 const uint8_t g_extflash_test_pattern[256] = {
@@ -36,3 +39,5 @@ const uint8_t g_extflash_test_pattern[256] = {
     0xF0, 0xF1, 0xF2, 0xF3, 0xF4, 0xF5, 0xF6, 0xF7,
     0xF8, 0xF9, 0xFA, 0xFB, 0xFC, 0xFD, 0xFE, 0xFF,
 };
+
+#endif

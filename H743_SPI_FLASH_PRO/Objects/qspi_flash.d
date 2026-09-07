@@ -27,5 +27,6 @@
 .\objects\qspi_flash.o: .\ST_SDK\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_pwr_ex.h
 .\objects\qspi_flash.o: .\ST_SDK\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_qspi.h
 .\objects\qspi_flash.o: .\ST_SDK\STM32H7xx_HAL_Driver\Inc\stm32h7xx_ll_delayblock.h
+.\objects\qspi_flash.o: .\ST_SDK\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_spi.h
 .\objects\qspi_flash.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\qspi_flash.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
