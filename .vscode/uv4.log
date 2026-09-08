@@ -1,4 +1,12 @@
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil5\ARM\ARMCC\Bin'
 Build target 'PROJECT'
-".\OUTFILES\PROJECT.axf" - 0 Error(s), 0 Warning(s).
-Build Time Elapsed:  00:00:02
+compiling can1_fd.c...
+linking...
+.\OUTFILES\PROJECT.sct(82): warning: L6314W: No section matches pattern *(.RAM_D1).
+.\OUTFILES\PROJECT.sct(98): warning: L6314W: No section matches pattern *(.RAM_D2_EXTRA).
+.\OUTFILES\PROJECT.sct(110): warning: L6314W: No section matches pattern *(.spi_flash_ro).
+Program Size: Code=37524 RO-data=1092 RW-data=30668 ZI-data=5576  
+Finished: 0 information, 3 warning and 0 error messages.
+FromELF: creating hex file...
+".\OUTFILES\PROJECT.axf" - 0 Error(s), 3 Warning(s).
+Build Time Elapsed:  00:00:04
