@@ -116,7 +116,6 @@ void usart1_my_printf(const char *format, ...)
 	va_start(args, format);
 	len=vsnprintf((char *)USART1_DMA_TX_FIFO,USART1_DMA_TX_SIZE,format,args);
 	va_end(args);
-	USART1_DMA_TX_FIFO[len]='\0';
 	
 	DMA1_Stream2->NDTR=len;
 	DMA1_Stream2->M0AR=(uint32_t)USART1_DMA_TX_FIFO;

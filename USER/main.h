@@ -27,5 +27,6 @@
 #include "dma1mux_pwm.h"
 #include "usart1_dma.h"
 #include "spi_flash.h"
+#include "can1_fd.h"
 
 #endif
