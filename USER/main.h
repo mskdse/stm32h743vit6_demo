@@ -4,6 +4,9 @@
 /* 我现在的程序是运行在QSPI_FLASH还是普通FLASH，如果是QSPIFLASH的话，中断向量表必须拷贝0x9000000地址的 */
 #define  MY_FLASH_IS_QSPI_FLASH      1
 
+/* 是否运行LVGL图形库 */
+#define USE_LVGL_RUN                 0
+
 #include "stm32h7xx.h"
 #include "SEGGER_RTT.h"
 #include "EventRecorder.h"
