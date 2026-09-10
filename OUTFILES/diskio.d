@@ -1,7 +1,7 @@
 .\outfiles\diskio.o: FATFS\diskio.c
 .\outfiles\diskio.o: FATFS\ff.h
 .\outfiles\diskio.o: FATFS\ffconf.h
-.\outfiles\diskio.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\outfiles\diskio.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
 .\outfiles\diskio.o: FATFS\diskio.h
 .\outfiles\diskio.o: .\DRIVER\QSPI_FLASH\qspi_flash.h
 .\outfiles\diskio.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal.h
@@ -18,8 +18,8 @@
 .\outfiles\diskio.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include\system_stm32h7xx.h
 .\outfiles\diskio.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal.h
 .\outfiles\diskio.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h
-.\outfiles\diskio.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\outfiles\diskio.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\outfiles\diskio.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\diskio.o: D:\Keil5\ARM\ARMCC\Bin\..\include\math.h
 .\outfiles\diskio.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_rcc_ex.h
 .\outfiles\diskio.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_gpio.h
 .\outfiles\diskio.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_gpio_ex.h

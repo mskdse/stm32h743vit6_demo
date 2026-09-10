@@ -104,7 +104,10 @@ void can1_fd_init(void)
 
     __HAL_RCC_FDCAN_FORCE_RESET();
     __HAL_RCC_FDCAN_RELEASE_RESET();
-
+     /* 官方默认的是用锁相环PLL1_Q作为FDCAN的时钟源，这里会引发歧义
+        寄存器查看，锁相环Q的时钟是200MHZ，而并非我们正常认知是用APB1总线
+	      然后时钟频率是100MHZ。
+  	*/
     __HAL_RCC_GPIOB_CLK_ENABLE();
     RCC_PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_FDCAN;
     RCC_PeriphClkInit.FdcanClockSelection = RCC_FDCANCLKSOURCE_PLL;
@@ -136,29 +139,29 @@ void can1_fd_init(void)
     hfdcan1.Instance=FDCAN1;
 
 #if   USE_CAN_FD_FOMAT
-    /* 设置仲裁阶段MBPS为500MBPS，公式为1/((1/25MHZ)*(1+seg1+seg2))BPS */
-    hfdcan1.Init.NominalPrescaler=4;//仲裁阶段时钟4分频25MHZ，1tq=1/(25MHZ)s
+    /* 设置仲裁阶段MBPS为500KBPS，公式为1/((1/25MHZ)*(1+seg1+seg2))BPS */
+    hfdcan1.Init.NominalPrescaler=8;//仲裁阶段时钟8分频25MHZ，1tq=1/(25MHZ)s
     hfdcan1.Init.NominalSyncJumpWidth=10;
-    hfdcan1.Init.NominalTimeSeg1=35;
-    hfdcan1.Init.NominalTimeSeg2=14;
+    hfdcan1.Init.NominalTimeSeg1=37;
+    hfdcan1.Init.NominalTimeSeg2=12;
     
      /* 设置数据阶段MBPS为1MBPS */
-    hfdcan1.Init.DataPrescaler=4;//数据阶段时钟4分频25MHZ，1tq=1/(25MHZ)s
+    hfdcan1.Init.DataPrescaler=8;//数据阶段时钟8分频25MHZ，1tq=1/(25MHZ)s
     hfdcan1.Init.DataSyncJumpWidth=10;
     hfdcan1.Init.DataTimeSeg1=18;
     hfdcan1.Init.DataTimeSeg2=6;
 #elif USE_STD_CAN_FOMAT
-    /* CAN2.0标准格式不允许变速，我们必须统一给它500MBPS或者1MBPS，不得发生变速
+    /* CAN2.0标准格式不允许变速，我们必须统一给它500KBPS或者1MBPS，不得发生变速
 		   而且采样点保持一致，这里我们指定1MBPS，采样点=(1+18)/(1+18+6)=76%，注意不要
   		超过它们各自的数据范围 */
-    hfdcan1.Init.NominalPrescaler=4;
+    hfdcan1.Init.NominalPrescaler=8;
     hfdcan1.Init.NominalSyncJumpWidth=10;
     hfdcan1.Init.NominalTimeSeg1=18;
     hfdcan1.Init.NominalTimeSeg2=6;
-    hfdcan1.Init.DataPrescaler=hfdcan1.Init.NominalPrescaler;
-    hfdcan1.Init.DataSyncJumpWidth=hfdcan1.Init.NominalSyncJumpWidth;
-    hfdcan1.Init.DataTimeSeg1=hfdcan1.Init.NominalTimeSeg1;
-    hfdcan1.Init.DataTimeSeg2=hfdcan1.Init.NominalTimeSeg2;
+//    hfdcan1.Init.DataPrescaler=;不用给，反正没有变速机制会自动与仲裁段一致
+//    hfdcan1.Init.DataSyncJumpWidth=;
+//    hfdcan1.Init.DataTimeSeg1=;
+//    hfdcan1.Init.DataTimeSeg2=;
 #endif
 
 #if   USE_CAN_FD_FOMAT

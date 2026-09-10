@@ -7210,11 +7210,11 @@ Image Symbol Table
     ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  depilogue.o ABSOLUTE
     ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixul.o ABSOLUTE
     ../fplib/microlib/fpmul.c                0x00000000   Number         0  dmul.o ABSOLUTE
-    C:/Users/EVC2-5/AppData/Local/Arm/Packs/Keil/ARM_Compiler/1.6.3/Source/EventRecorder.c 0x00000000   Number         0  eventrecorder.o ABSOLUTE
-    C:/Users/EVC2-5/AppData/Local/Arm/Packs/Keil/ARM_Compiler/1.6.3/Source/retarget_io.c 0x00000000   Number         0  retarget_io.o ABSOLUTE
-    C:\Users\EVC2-5\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.6.3\Source\EventRecorder.c 0x00000000   Number         0  eventrecorder.o ABSOLUTE
     CIRCULAR_BUFFER\port\port.c              0x00000000   Number         0  port.o ABSOLUTE
     CIRCULAR_BUFFER\src\circular_buffer.c    0x00000000   Number         0  circular_buffer.o ABSOLUTE
+    D:\Keil5\ARM\PACK\Keil\ARM_Compiler\1.6.3\Source\EventRecorder.c 0x00000000   Number         0  eventrecorder.o ABSOLUTE
+    D:\Keil5\ARM\PACK\Keil\ARM_Compiler\1.6.3\Source\retarget_io.c 0x00000000   Number         0  retarget_io.o ABSOLUTE
+    D:\\Keil5\\ARM\\PACK\\Keil\\ARM_Compiler\\1.6.3\\Source\\EventRecorder.c 0x00000000   Number         0  eventrecorder.o ABSOLUTE
     DRIVER\BDMAMUX_PWM\bdmamux_pwm.c         0x00000000   Number         0  bdmamux_pwm.o ABSOLUTE
     DRIVER\CAN1_FD\can1_fd.c                 0x00000000   Number         0  can1_fd.o ABSOLUTE
     DRIVER\DMA1MUX_PWM\dma1mux_pwm.c         0x00000000   Number         0  dma1mux_pwm.o ABSOLUTE
@@ -7873,86 +7873,86 @@ Image Symbol Table
     blk_raw_size                             0x90009ef5   Thumb Code    10  sram_d2_malloc.o(i.blk_raw_size)
     i.can1_fd_get_msg                        0x90009f00   Section        0  can1_fd.o(i.can1_fd_get_msg)
     i.can1_fd_init                           0x90009f6c   Section        0  can1_fd.o(i.can1_fd_init)
-    i.can1_fd_init_filter                    0x9000a148   Section        0  can1_fd.o(i.can1_fd_init_filter)
-    can1_fd_init_filter                      0x9000a149   Thumb Code   276  can1_fd.o(i.can1_fd_init_filter)
-    i.can1_fd_send_msg_std                   0x9000a268   Section        0  can1_fd.o(i.can1_fd_send_msg_std)
-    i.circular_buffer_init                   0x9000a2bc   Section        0  circular_buffer.o(i.circular_buffer_init)
-    i.circular_buffer_write                  0x9000a308   Section        0  circular_buffer.o(i.circular_buffer_write)
-    i.crc16_ccitt                            0x9000a372   Section        0  eventrecorder.o(i.crc16_ccitt)
-    crc16_ccitt                              0x9000a373   Thumb Code    66  eventrecorder.o(i.crc16_ccitt)
-    i.dma1mux_fill_buf                       0x9000a3b4   Section        0  dma1mux_pwm.o(i.dma1mux_fill_buf)
-    dma1mux_fill_buf                         0x9000a3b5   Thumb Code    62  dma1mux_pwm.o(i.dma1mux_fill_buf)
-    i.drv_eeprom_clrerrflag                  0x9000a3f4   Section        0  drv_eeprom.o(i.drv_eeprom_clrerrflag)
-    i.drv_eeprom_clrrflag                    0x9000a400   Section        0  drv_eeprom.o(i.drv_eeprom_clrrflag)
-    i.drv_eeprom_clrwflag                    0x9000a40c   Section        0  drv_eeprom.o(i.drv_eeprom_clrwflag)
-    i.drv_eeprom_init                        0x9000a418   Section        0  drv_eeprom.o(i.drv_eeprom_init)
-    i.drv_eeprom_readbuf                     0x9000a4dc   Section        0  drv_eeprom.o(i.drv_eeprom_readbuf)
-    i.drv_eeprom_reterrflag                  0x9000a50c   Section        0  drv_eeprom.o(i.drv_eeprom_reterrflag)
-    i.drv_eeprom_retrflag                    0x9000a518   Section        0  drv_eeprom.o(i.drv_eeprom_retrflag)
-    i.drv_eeprom_retwflag                    0x9000a524   Section        0  drv_eeprom.o(i.drv_eeprom_retwflag)
-    i.drv_eeprom_writebuf                    0x9000a530   Section        0  drv_eeprom.o(i.drv_eeprom_writebuf)
-    i.drv_fmc_bl_ctrl                        0x9000a560   Section        0  drv_fmc_lcd.o(i.drv_fmc_bl_ctrl)
-    i.drv_fmc_lcd_init                       0x9000a574   Section        0  drv_fmc_lcd.o(i.drv_fmc_lcd_init)
-    i.drv_fmc_lcd_rst                        0x9000a69c   Section        0  drv_fmc_lcd.o(i.drv_fmc_lcd_rst)
-    i.drv_fmc_read_data                      0x9000a6d4   Section        0  drv_fmc_lcd.o(i.drv_fmc_read_data)
-    i.drv_fmc_write_cmd                      0x9000a6e0   Section        0  drv_fmc_lcd.o(i.drv_fmc_write_cmd)
-    i.drv_fmc_write_data                     0x9000a6e8   Section        0  drv_fmc_lcd.o(i.drv_fmc_write_data)
-    i.drv_key_init                           0x9000a6f4   Section        0  drv_key.o(i.drv_key_init)
-    i.drv_key_readmask                       0x9000a7a4   Section        0  drv_key.o(i.drv_key_readmask)
-    i.drv_led_init                           0x9000a7f4   Section        0  drv_led.o(i.drv_led_init)
-    i.drv_led_off                            0x9000a8a4   Section        0  drv_led.o(i.drv_led_off)
-    i.drv_led_on                             0x9000a8cc   Section        0  drv_led.o(i.drv_led_on)
-    i.drvp_eeprom_init                       0x9000a8f4   Section        0  drvp_eeprom.o(i.drvp_eeprom_init)
-    i.drvp_eeprom_prc_10ms                   0x9000a95c   Section        0  drvp_eeprom.o(i.drvp_eeprom_prc_10ms)
-    i.drvp_fmc_lcd_init                      0x9000aa68   Section        0  drvp_fmc_lcd.o(i.drvp_fmc_lcd_init)
-    i.drvp_fmc_lcd_set_axis_scan             0x9000ad50   Section        0  drvp_fmc_lcd.o(i.drvp_fmc_lcd_set_axis_scan)
-    i.drvp_fmc_lcd_set_wid                   0x9000addc   Section        0  drvp_fmc_lcd.o(i.drvp_fmc_lcd_set_wid)
-    i.drvp_fmc_lcd_writesigle                0x9000ae54   Section        0  drvp_fmc_lcd.o(i.drvp_fmc_lcd_writesigle)
-    i.drvp_key_init                          0x9000ae80   Section        0  drvp_key.o(i.drvp_key_init)
-    i.drvp_key_prc_10ms                      0x9000aea4   Section        0  drvp_key.o(i.drvp_key_prc_10ms)
-    i.drvp_key_wfifo                         0x9000b058   Section        0  drvp_key.o(i.drvp_key_wfifo)
-    drvp_key_wfifo                           0x9000b059   Thumb Code    24  drvp_key.o(i.drvp_key_wfifo)
-    i.drvp_led_init                          0x9000b074   Section        0  drvp_led.o(i.drvp_led_init)
-    i.drvp_led_prc_1ms                       0x9000b084   Section        0  drvp_led.o(i.drvp_led_prc_1ms)
-    i.free_get_next                          0x9000b198   Section        0  sram_d2_malloc.o(i.free_get_next)
-    free_get_next                            0x9000b199   Thumb Code     6  sram_d2_malloc.o(i.free_get_next)
-    i.free_set_next                          0x9000b19e   Section        0  sram_d2_malloc.o(i.free_set_next)
-    free_set_next                            0x9000b19f   Thumb Code     4  sram_d2_malloc.o(i.free_set_next)
-    i.is_power_of_two                        0x9000b1a2   Section        0  circular_buffer.o(i.is_power_of_two)
-    is_power_of_two                          0x9000b1a3   Thumb Code    18  circular_buffer.o(i.is_power_of_two)
-    i.main                                   0x9000b1b4   Section        0  main.o(i.main)
-    i.mutex_init                             0x9000b450   Section        0  port.o(i.mutex_init)
-    i.mutex_lock                             0x9000b456   Section        0  port.o(i.mutex_lock)
-    i.mutex_unlock                           0x9000b458   Section        0  port.o(i.mutex_unlock)
-    i.spi_flash_w25q128_init                 0x9000b45c   Section        0  spi_flash.o(i.spi_flash_w25q128_init)
-    i.sram_d2_free                           0x9000b688   Section        0  sram_d2_malloc.o(i.sram_d2_free)
-    i.sram_d2_init                           0x9000b764   Section        0  sram_d2_malloc.o(i.sram_d2_init)
-    i.sram_d2_malloc                         0x9000b7a4   Section        0  sram_d2_malloc.o(i.sram_d2_malloc)
-    i.usart1_dma_init                        0x9000b88c   Section        0  usart1_dma.o(i.usart1_dma_init)
-    i.usart1_my_printf                       0x9000ba70   Section        0  usart1_dma.o(i.usart1_my_printf)
-    .constdata                               0x9000bacc   Section       16  system_stm32h7xx.o(.constdata)
-    .constdata                               0x9000badc   Section        8  stm32h7xx_hal_dma.o(.constdata)
-    flagBitshiftOffset                       0x9000badc   Data           8  stm32h7xx_hal_dma.o(.constdata)
-    .constdata                               0x9000bae4   Section       92  stm32h7xx_hal_fdcan.o(.constdata)
-    DLCtoBytes                               0x9000bae4   Data          16  stm32h7xx_hal_fdcan.o(.constdata)
-    .constdata                               0x9000bb40   Section       24  stm32h7xx_hal_uart.o(.constdata)
-    .constdata                               0x9000bb58   Section       40  drv_led.o(.constdata)
-    drv_led                                  0x9000bb58   Data          40  drv_led.o(.constdata)
-    .constdata                               0x9000bb80   Section       12  drvp_led.o(.constdata)
-    drv_led                                  0x9000bb80   Data          12  drvp_led.o(.constdata)
-    .constdata                               0x9000bb8c   Section       96  drv_key.o(.constdata)
-    drv_key                                  0x9000bb8c   Data          96  drv_key.o(.constdata)
-    .constdata                               0x9000bbec   Section        8  drvp_key.o(.constdata)
-    drv_key                                  0x9000bbec   Data           8  drvp_key.o(.constdata)
-    .constdata                               0x9000bbf4   Section       36  drvp_eeprom.o(.constdata)
-    drv_eeprom                               0x9000bbf4   Data          36  drvp_eeprom.o(.constdata)
-    .constdata                               0x9000bc18   Section       33  segger_rtt.o(.constdata)
-    _aTerminalId                             0x9000bc18   Data          16  segger_rtt.o(.constdata)
-    _aInitStr                                0x9000bc28   Data          17  segger_rtt.o(.constdata)
-    .constdata                               0x9000bc39   Section       16  segger_rtt_printf.o(.constdata)
-    _aV2C                                    0x9000bc39   Data          16  segger_rtt_printf.o(.constdata)
-    .constdata                               0x9000bc4c   Section       24  eventrecorder.o(.constdata)
-    __tagsym$$used                           0x9000bc4c   Number         0  eventrecorder.o(.constdata)
+    i.can1_fd_init_filter                    0x9000a138   Section        0  can1_fd.o(i.can1_fd_init_filter)
+    can1_fd_init_filter                      0x9000a139   Thumb Code   276  can1_fd.o(i.can1_fd_init_filter)
+    i.can1_fd_send_msg_std                   0x9000a258   Section        0  can1_fd.o(i.can1_fd_send_msg_std)
+    i.circular_buffer_init                   0x9000a2ac   Section        0  circular_buffer.o(i.circular_buffer_init)
+    i.circular_buffer_write                  0x9000a2f8   Section        0  circular_buffer.o(i.circular_buffer_write)
+    i.crc16_ccitt                            0x9000a362   Section        0  eventrecorder.o(i.crc16_ccitt)
+    crc16_ccitt                              0x9000a363   Thumb Code    66  eventrecorder.o(i.crc16_ccitt)
+    i.dma1mux_fill_buf                       0x9000a3a4   Section        0  dma1mux_pwm.o(i.dma1mux_fill_buf)
+    dma1mux_fill_buf                         0x9000a3a5   Thumb Code    62  dma1mux_pwm.o(i.dma1mux_fill_buf)
+    i.drv_eeprom_clrerrflag                  0x9000a3e4   Section        0  drv_eeprom.o(i.drv_eeprom_clrerrflag)
+    i.drv_eeprom_clrrflag                    0x9000a3f0   Section        0  drv_eeprom.o(i.drv_eeprom_clrrflag)
+    i.drv_eeprom_clrwflag                    0x9000a3fc   Section        0  drv_eeprom.o(i.drv_eeprom_clrwflag)
+    i.drv_eeprom_init                        0x9000a408   Section        0  drv_eeprom.o(i.drv_eeprom_init)
+    i.drv_eeprom_readbuf                     0x9000a4cc   Section        0  drv_eeprom.o(i.drv_eeprom_readbuf)
+    i.drv_eeprom_reterrflag                  0x9000a4fc   Section        0  drv_eeprom.o(i.drv_eeprom_reterrflag)
+    i.drv_eeprom_retrflag                    0x9000a508   Section        0  drv_eeprom.o(i.drv_eeprom_retrflag)
+    i.drv_eeprom_retwflag                    0x9000a514   Section        0  drv_eeprom.o(i.drv_eeprom_retwflag)
+    i.drv_eeprom_writebuf                    0x9000a520   Section        0  drv_eeprom.o(i.drv_eeprom_writebuf)
+    i.drv_fmc_bl_ctrl                        0x9000a550   Section        0  drv_fmc_lcd.o(i.drv_fmc_bl_ctrl)
+    i.drv_fmc_lcd_init                       0x9000a564   Section        0  drv_fmc_lcd.o(i.drv_fmc_lcd_init)
+    i.drv_fmc_lcd_rst                        0x9000a68c   Section        0  drv_fmc_lcd.o(i.drv_fmc_lcd_rst)
+    i.drv_fmc_read_data                      0x9000a6c4   Section        0  drv_fmc_lcd.o(i.drv_fmc_read_data)
+    i.drv_fmc_write_cmd                      0x9000a6d0   Section        0  drv_fmc_lcd.o(i.drv_fmc_write_cmd)
+    i.drv_fmc_write_data                     0x9000a6d8   Section        0  drv_fmc_lcd.o(i.drv_fmc_write_data)
+    i.drv_key_init                           0x9000a6e4   Section        0  drv_key.o(i.drv_key_init)
+    i.drv_key_readmask                       0x9000a794   Section        0  drv_key.o(i.drv_key_readmask)
+    i.drv_led_init                           0x9000a7e4   Section        0  drv_led.o(i.drv_led_init)
+    i.drv_led_off                            0x9000a894   Section        0  drv_led.o(i.drv_led_off)
+    i.drv_led_on                             0x9000a8bc   Section        0  drv_led.o(i.drv_led_on)
+    i.drvp_eeprom_init                       0x9000a8e4   Section        0  drvp_eeprom.o(i.drvp_eeprom_init)
+    i.drvp_eeprom_prc_10ms                   0x9000a94c   Section        0  drvp_eeprom.o(i.drvp_eeprom_prc_10ms)
+    i.drvp_fmc_lcd_init                      0x9000aa58   Section        0  drvp_fmc_lcd.o(i.drvp_fmc_lcd_init)
+    i.drvp_fmc_lcd_set_axis_scan             0x9000ad40   Section        0  drvp_fmc_lcd.o(i.drvp_fmc_lcd_set_axis_scan)
+    i.drvp_fmc_lcd_set_wid                   0x9000adcc   Section        0  drvp_fmc_lcd.o(i.drvp_fmc_lcd_set_wid)
+    i.drvp_fmc_lcd_writesigle                0x9000ae44   Section        0  drvp_fmc_lcd.o(i.drvp_fmc_lcd_writesigle)
+    i.drvp_key_init                          0x9000ae70   Section        0  drvp_key.o(i.drvp_key_init)
+    i.drvp_key_prc_10ms                      0x9000ae94   Section        0  drvp_key.o(i.drvp_key_prc_10ms)
+    i.drvp_key_wfifo                         0x9000b048   Section        0  drvp_key.o(i.drvp_key_wfifo)
+    drvp_key_wfifo                           0x9000b049   Thumb Code    24  drvp_key.o(i.drvp_key_wfifo)
+    i.drvp_led_init                          0x9000b064   Section        0  drvp_led.o(i.drvp_led_init)
+    i.drvp_led_prc_1ms                       0x9000b074   Section        0  drvp_led.o(i.drvp_led_prc_1ms)
+    i.free_get_next                          0x9000b188   Section        0  sram_d2_malloc.o(i.free_get_next)
+    free_get_next                            0x9000b189   Thumb Code     6  sram_d2_malloc.o(i.free_get_next)
+    i.free_set_next                          0x9000b18e   Section        0  sram_d2_malloc.o(i.free_set_next)
+    free_set_next                            0x9000b18f   Thumb Code     4  sram_d2_malloc.o(i.free_set_next)
+    i.is_power_of_two                        0x9000b192   Section        0  circular_buffer.o(i.is_power_of_two)
+    is_power_of_two                          0x9000b193   Thumb Code    18  circular_buffer.o(i.is_power_of_two)
+    i.main                                   0x9000b1a4   Section        0  main.o(i.main)
+    i.mutex_init                             0x9000b440   Section        0  port.o(i.mutex_init)
+    i.mutex_lock                             0x9000b446   Section        0  port.o(i.mutex_lock)
+    i.mutex_unlock                           0x9000b448   Section        0  port.o(i.mutex_unlock)
+    i.spi_flash_w25q128_init                 0x9000b44c   Section        0  spi_flash.o(i.spi_flash_w25q128_init)
+    i.sram_d2_free                           0x9000b678   Section        0  sram_d2_malloc.o(i.sram_d2_free)
+    i.sram_d2_init                           0x9000b754   Section        0  sram_d2_malloc.o(i.sram_d2_init)
+    i.sram_d2_malloc                         0x9000b794   Section        0  sram_d2_malloc.o(i.sram_d2_malloc)
+    i.usart1_dma_init                        0x9000b87c   Section        0  usart1_dma.o(i.usart1_dma_init)
+    i.usart1_my_printf                       0x9000ba60   Section        0  usart1_dma.o(i.usart1_my_printf)
+    .constdata                               0x9000babc   Section       16  system_stm32h7xx.o(.constdata)
+    .constdata                               0x9000bacc   Section        8  stm32h7xx_hal_dma.o(.constdata)
+    flagBitshiftOffset                       0x9000bacc   Data           8  stm32h7xx_hal_dma.o(.constdata)
+    .constdata                               0x9000bad4   Section       92  stm32h7xx_hal_fdcan.o(.constdata)
+    DLCtoBytes                               0x9000bad4   Data          16  stm32h7xx_hal_fdcan.o(.constdata)
+    .constdata                               0x9000bb30   Section       24  stm32h7xx_hal_uart.o(.constdata)
+    .constdata                               0x9000bb48   Section       40  drv_led.o(.constdata)
+    drv_led                                  0x9000bb48   Data          40  drv_led.o(.constdata)
+    .constdata                               0x9000bb70   Section       12  drvp_led.o(.constdata)
+    drv_led                                  0x9000bb70   Data          12  drvp_led.o(.constdata)
+    .constdata                               0x9000bb7c   Section       96  drv_key.o(.constdata)
+    drv_key                                  0x9000bb7c   Data          96  drv_key.o(.constdata)
+    .constdata                               0x9000bbdc   Section        8  drvp_key.o(.constdata)
+    drv_key                                  0x9000bbdc   Data           8  drvp_key.o(.constdata)
+    .constdata                               0x9000bbe4   Section       36  drvp_eeprom.o(.constdata)
+    drv_eeprom                               0x9000bbe4   Data          36  drvp_eeprom.o(.constdata)
+    .constdata                               0x9000bc08   Section       33  segger_rtt.o(.constdata)
+    _aTerminalId                             0x9000bc08   Data          16  segger_rtt.o(.constdata)
+    _aInitStr                                0x9000bc18   Data          17  segger_rtt.o(.constdata)
+    .constdata                               0x9000bc29   Section       16  segger_rtt_printf.o(.constdata)
+    _aV2C                                    0x9000bc29   Data          16  segger_rtt_printf.o(.constdata)
+    .constdata                               0x9000bc3c   Section       24  eventrecorder.o(.constdata)
+    __tagsym$$used                           0x9000bc3c   Number         0  eventrecorder.o(.constdata)
 
     Global Symbols
 
@@ -8322,55 +8322,55 @@ Image Symbol Table
     __scatterload_null                       0x90009643   Thumb Code     2  handlers.o(i.__scatterload_null)
     __scatterload_zeroinit                   0x90009645   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
     can1_fd_get_msg                          0x90009f01   Thumb Code   104  can1_fd.o(i.can1_fd_get_msg)
-    can1_fd_init                             0x90009f6d   Thumb Code   446  can1_fd.o(i.can1_fd_init)
-    can1_fd_send_msg_std                     0x9000a269   Thumb Code    74  can1_fd.o(i.can1_fd_send_msg_std)
-    circular_buffer_init                     0x9000a2bd   Thumb Code    76  circular_buffer.o(i.circular_buffer_init)
-    circular_buffer_write                    0x9000a309   Thumb Code   106  circular_buffer.o(i.circular_buffer_write)
-    drv_eeprom_clrerrflag                    0x9000a3f5   Thumb Code     8  drv_eeprom.o(i.drv_eeprom_clrerrflag)
-    drv_eeprom_clrrflag                      0x9000a401   Thumb Code     8  drv_eeprom.o(i.drv_eeprom_clrrflag)
-    drv_eeprom_clrwflag                      0x9000a40d   Thumb Code     8  drv_eeprom.o(i.drv_eeprom_clrwflag)
-    drv_eeprom_init                          0x9000a419   Thumb Code   176  drv_eeprom.o(i.drv_eeprom_init)
-    drv_eeprom_readbuf                       0x9000a4dd   Thumb Code    38  drv_eeprom.o(i.drv_eeprom_readbuf)
-    drv_eeprom_reterrflag                    0x9000a50d   Thumb Code     6  drv_eeprom.o(i.drv_eeprom_reterrflag)
-    drv_eeprom_retrflag                      0x9000a519   Thumb Code     6  drv_eeprom.o(i.drv_eeprom_retrflag)
-    drv_eeprom_retwflag                      0x9000a525   Thumb Code     6  drv_eeprom.o(i.drv_eeprom_retwflag)
-    drv_eeprom_writebuf                      0x9000a531   Thumb Code    38  drv_eeprom.o(i.drv_eeprom_writebuf)
-    drv_fmc_bl_ctrl                          0x9000a561   Thumb Code    16  drv_fmc_lcd.o(i.drv_fmc_bl_ctrl)
-    drv_fmc_lcd_init                         0x9000a575   Thumb Code   278  drv_fmc_lcd.o(i.drv_fmc_lcd_init)
-    drv_fmc_lcd_rst                          0x9000a69d   Thumb Code    52  drv_fmc_lcd.o(i.drv_fmc_lcd_rst)
-    drv_fmc_read_data                        0x9000a6d5   Thumb Code     6  drv_fmc_lcd.o(i.drv_fmc_read_data)
-    drv_fmc_write_cmd                        0x9000a6e1   Thumb Code     8  drv_fmc_lcd.o(i.drv_fmc_write_cmd)
-    drv_fmc_write_data                       0x9000a6e9   Thumb Code     6  drv_fmc_lcd.o(i.drv_fmc_write_data)
-    drv_key_init                             0x9000a6f5   Thumb Code   168  drv_key.o(i.drv_key_init)
-    drv_key_readmask                         0x9000a7a5   Thumb Code    74  drv_key.o(i.drv_key_readmask)
-    drv_led_init                             0x9000a7f5   Thumb Code   168  drv_led.o(i.drv_led_init)
-    drv_led_off                              0x9000a8a5   Thumb Code    34  drv_led.o(i.drv_led_off)
-    drv_led_on                               0x9000a8cd   Thumb Code    34  drv_led.o(i.drv_led_on)
-    drvp_eeprom_init                         0x9000a8f5   Thumb Code    90  drvp_eeprom.o(i.drvp_eeprom_init)
-    drvp_eeprom_prc_10ms                     0x9000a95d   Thumb Code   260  drvp_eeprom.o(i.drvp_eeprom_prc_10ms)
-    drvp_fmc_lcd_init                        0x9000aa69   Thumb Code   710  drvp_fmc_lcd.o(i.drvp_fmc_lcd_init)
-    drvp_fmc_lcd_set_axis_scan               0x9000ad51   Thumb Code   136  drvp_fmc_lcd.o(i.drvp_fmc_lcd_set_axis_scan)
-    drvp_fmc_lcd_set_wid                     0x9000addd   Thumb Code   116  drvp_fmc_lcd.o(i.drvp_fmc_lcd_set_wid)
-    drvp_fmc_lcd_writesigle                  0x9000ae55   Thumb Code    38  drvp_fmc_lcd.o(i.drvp_fmc_lcd_writesigle)
-    drvp_key_init                            0x9000ae81   Thumb Code    28  drvp_key.o(i.drvp_key_init)
-    drvp_key_prc_10ms                        0x9000aea5   Thumb Code   424  drvp_key.o(i.drvp_key_prc_10ms)
-    drvp_led_init                            0x9000b075   Thumb Code    10  drvp_led.o(i.drvp_led_init)
-    drvp_led_prc_1ms                         0x9000b085   Thumb Code   266  drvp_led.o(i.drvp_led_prc_1ms)
-    main                                     0x9000b1b5   Thumb Code   546  main.o(i.main)
-    mutex_init                               0x9000b451   Thumb Code     6  port.o(i.mutex_init)
-    mutex_lock                               0x9000b457   Thumb Code     2  port.o(i.mutex_lock)
-    mutex_unlock                             0x9000b459   Thumb Code     2  port.o(i.mutex_unlock)
-    spi_flash_w25q128_init                   0x9000b45d   Thumb Code   524  spi_flash.o(i.spi_flash_w25q128_init)
-    sram_d2_free                             0x9000b689   Thumb Code   214  sram_d2_malloc.o(i.sram_d2_free)
-    sram_d2_init                             0x9000b765   Thumb Code    54  sram_d2_malloc.o(i.sram_d2_init)
-    sram_d2_malloc                           0x9000b7a5   Thumb Code   228  sram_d2_malloc.o(i.sram_d2_malloc)
-    usart1_dma_init                          0x9000b88d   Thumb Code   460  usart1_dma.o(i.usart1_dma_init)
-    usart1_my_printf                         0x9000ba71   Thumb Code    74  usart1_dma.o(i.usart1_my_printf)
-    D1CorePrescTable                         0x9000bacc   Data          16  system_stm32h7xx.o(.constdata)
-    UARTPrescTable                           0x9000bb40   Data          24  stm32h7xx_hal_uart.o(.constdata)
-    EventRecorderInfo                        0x9000bc4c   Data          24  eventrecorder.o(.constdata)
-    Region$$Table$$Base                      0x9000bc64   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x9000bcd4   Number         0  anon$$obj.o(Region$$Table)
+    can1_fd_init                             0x90009f6d   Thumb Code   430  can1_fd.o(i.can1_fd_init)
+    can1_fd_send_msg_std                     0x9000a259   Thumb Code    74  can1_fd.o(i.can1_fd_send_msg_std)
+    circular_buffer_init                     0x9000a2ad   Thumb Code    76  circular_buffer.o(i.circular_buffer_init)
+    circular_buffer_write                    0x9000a2f9   Thumb Code   106  circular_buffer.o(i.circular_buffer_write)
+    drv_eeprom_clrerrflag                    0x9000a3e5   Thumb Code     8  drv_eeprom.o(i.drv_eeprom_clrerrflag)
+    drv_eeprom_clrrflag                      0x9000a3f1   Thumb Code     8  drv_eeprom.o(i.drv_eeprom_clrrflag)
+    drv_eeprom_clrwflag                      0x9000a3fd   Thumb Code     8  drv_eeprom.o(i.drv_eeprom_clrwflag)
+    drv_eeprom_init                          0x9000a409   Thumb Code   176  drv_eeprom.o(i.drv_eeprom_init)
+    drv_eeprom_readbuf                       0x9000a4cd   Thumb Code    38  drv_eeprom.o(i.drv_eeprom_readbuf)
+    drv_eeprom_reterrflag                    0x9000a4fd   Thumb Code     6  drv_eeprom.o(i.drv_eeprom_reterrflag)
+    drv_eeprom_retrflag                      0x9000a509   Thumb Code     6  drv_eeprom.o(i.drv_eeprom_retrflag)
+    drv_eeprom_retwflag                      0x9000a515   Thumb Code     6  drv_eeprom.o(i.drv_eeprom_retwflag)
+    drv_eeprom_writebuf                      0x9000a521   Thumb Code    38  drv_eeprom.o(i.drv_eeprom_writebuf)
+    drv_fmc_bl_ctrl                          0x9000a551   Thumb Code    16  drv_fmc_lcd.o(i.drv_fmc_bl_ctrl)
+    drv_fmc_lcd_init                         0x9000a565   Thumb Code   278  drv_fmc_lcd.o(i.drv_fmc_lcd_init)
+    drv_fmc_lcd_rst                          0x9000a68d   Thumb Code    52  drv_fmc_lcd.o(i.drv_fmc_lcd_rst)
+    drv_fmc_read_data                        0x9000a6c5   Thumb Code     6  drv_fmc_lcd.o(i.drv_fmc_read_data)
+    drv_fmc_write_cmd                        0x9000a6d1   Thumb Code     8  drv_fmc_lcd.o(i.drv_fmc_write_cmd)
+    drv_fmc_write_data                       0x9000a6d9   Thumb Code     6  drv_fmc_lcd.o(i.drv_fmc_write_data)
+    drv_key_init                             0x9000a6e5   Thumb Code   168  drv_key.o(i.drv_key_init)
+    drv_key_readmask                         0x9000a795   Thumb Code    74  drv_key.o(i.drv_key_readmask)
+    drv_led_init                             0x9000a7e5   Thumb Code   168  drv_led.o(i.drv_led_init)
+    drv_led_off                              0x9000a895   Thumb Code    34  drv_led.o(i.drv_led_off)
+    drv_led_on                               0x9000a8bd   Thumb Code    34  drv_led.o(i.drv_led_on)
+    drvp_eeprom_init                         0x9000a8e5   Thumb Code    90  drvp_eeprom.o(i.drvp_eeprom_init)
+    drvp_eeprom_prc_10ms                     0x9000a94d   Thumb Code   260  drvp_eeprom.o(i.drvp_eeprom_prc_10ms)
+    drvp_fmc_lcd_init                        0x9000aa59   Thumb Code   710  drvp_fmc_lcd.o(i.drvp_fmc_lcd_init)
+    drvp_fmc_lcd_set_axis_scan               0x9000ad41   Thumb Code   136  drvp_fmc_lcd.o(i.drvp_fmc_lcd_set_axis_scan)
+    drvp_fmc_lcd_set_wid                     0x9000adcd   Thumb Code   116  drvp_fmc_lcd.o(i.drvp_fmc_lcd_set_wid)
+    drvp_fmc_lcd_writesigle                  0x9000ae45   Thumb Code    38  drvp_fmc_lcd.o(i.drvp_fmc_lcd_writesigle)
+    drvp_key_init                            0x9000ae71   Thumb Code    28  drvp_key.o(i.drvp_key_init)
+    drvp_key_prc_10ms                        0x9000ae95   Thumb Code   424  drvp_key.o(i.drvp_key_prc_10ms)
+    drvp_led_init                            0x9000b065   Thumb Code    10  drvp_led.o(i.drvp_led_init)
+    drvp_led_prc_1ms                         0x9000b075   Thumb Code   266  drvp_led.o(i.drvp_led_prc_1ms)
+    main                                     0x9000b1a5   Thumb Code   546  main.o(i.main)
+    mutex_init                               0x9000b441   Thumb Code     6  port.o(i.mutex_init)
+    mutex_lock                               0x9000b447   Thumb Code     2  port.o(i.mutex_lock)
+    mutex_unlock                             0x9000b449   Thumb Code     2  port.o(i.mutex_unlock)
+    spi_flash_w25q128_init                   0x9000b44d   Thumb Code   524  spi_flash.o(i.spi_flash_w25q128_init)
+    sram_d2_free                             0x9000b679   Thumb Code   214  sram_d2_malloc.o(i.sram_d2_free)
+    sram_d2_init                             0x9000b755   Thumb Code    54  sram_d2_malloc.o(i.sram_d2_init)
+    sram_d2_malloc                           0x9000b795   Thumb Code   228  sram_d2_malloc.o(i.sram_d2_malloc)
+    usart1_dma_init                          0x9000b87d   Thumb Code   460  usart1_dma.o(i.usart1_dma_init)
+    usart1_my_printf                         0x9000ba61   Thumb Code    74  usart1_dma.o(i.usart1_my_printf)
+    D1CorePrescTable                         0x9000babc   Data          16  system_stm32h7xx.o(.constdata)
+    UARTPrescTable                           0x9000bb30   Data          24  stm32h7xx_hal_uart.o(.constdata)
+    EventRecorderInfo                        0x9000bc3c   Data          24  eventrecorder.o(.constdata)
+    Region$$Table$$Base                      0x9000bc54   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x9000bcc4   Number         0  anon$$obj.o(Region$$Table)
 
 
 
@@ -8380,51 +8380,51 @@ Memory Map of the image
 
   Image Entry point : 0x90000299
 
-  Load Region LR_IROM1 (Base: 0x90000000, Size: 0x00016a44, Max: 0x01000000, ABSOLUTE, COMPRESSED[0x0000bee4])
+  Load Region LR_IROM1 (Base: 0x90000000, Size: 0x00016a34, Max: 0x01000000, ABSOLUTE, COMPRESSED[0x0000bed4])
 
-    Execution Region ER_ITCM (Exec base: 0x00000000, Load base: 0x9000bcd4, Size: 0x0000006c, Max: 0x00010000, ABSOLUTE)
+    Execution Region ER_ITCM (Exec base: 0x00000000, Load base: 0x9000bcc4, Size: 0x0000006c, Max: 0x00010000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x00000000   0x9000bcd4   0x00000044   Code   RO        19459    .ITCM_CODE          main.o
-    0x00000044   0x9000bd18   0x0000000a   Ven    RO        21044    Veneer$$Code        anon$$obj.o
-    0x0000004e   0x9000bd22   0x0000000a   Ven    RO        21045    Veneer$$Code        anon$$obj.o
-    0x00000058   0x9000bd2c   0x0000000a   Ven    RO        21046    Veneer$$Code        anon$$obj.o
-    0x00000062   0x9000bd36   0x0000000a   Ven    RO        21047    Veneer$$Code        anon$$obj.o
+    0x00000000   0x9000bcc4   0x00000044   Code   RO        19459    .ITCM_CODE          main.o
+    0x00000044   0x9000bd08   0x0000000a   Ven    RO        21044    Veneer$$Code        anon$$obj.o
+    0x0000004e   0x9000bd12   0x0000000a   Ven    RO        21045    Veneer$$Code        anon$$obj.o
+    0x00000058   0x9000bd1c   0x0000000a   Ven    RO        21046    Veneer$$Code        anon$$obj.o
+    0x00000062   0x9000bd26   0x0000000a   Ven    RO        21047    Veneer$$Code        anon$$obj.o
 
 
-    Execution Region RW_IRAM_RESET (Exec base: 0x20000000, Load base: 0x9000bd40, Size: 0x00000400, Max: 0x00000400, ABSOLUTE, COMPRESSED[0x0000000c])
+    Execution Region RW_IRAM_RESET (Exec base: 0x20000000, Load base: 0x9000bd30, Size: 0x00000400, Max: 0x00000400, ABSOLUTE, COMPRESSED[0x0000000c])
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x20000000   COMPRESSED   0x00000400   Data   RW        19465    .RamVecTable        main.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000400, Load base: 0x9000bd4c, Size: 0x000015e8, Max: 0x0001fc00, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000400, Load base: 0x9000bd3c, Size: 0x000015e8, Max: 0x0001fc00, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000400   0x9000bd4c   0x00000008   Data   RW           17    .data               system_stm32h7xx.o
-    0x20000408   0x9000bd54   0x00000009   Data   RW          425    .data               stm32h7xx_hal.o
-    0x20000411   0x9000bd5d   0x00000003   PAD
-    0x20000414   0x9000bd60   0x00000004   Data   RW        18272    .data               drvp_key.o
-    0x20000418   0x9000bd64   0x00000002   Data   RW        19466    .data               main.o
-    0x2000041a   0x9000bd66   0x00000002   PAD
-    0x2000041c   0x9000bd68   0x00000004   Data   RW        20367    .data               segger_hardfaulthandler.o
+    0x20000400   0x9000bd3c   0x00000008   Data   RW           17    .data               system_stm32h7xx.o
+    0x20000408   0x9000bd44   0x00000009   Data   RW          425    .data               stm32h7xx_hal.o
+    0x20000411   0x9000bd4d   0x00000003   PAD
+    0x20000414   0x9000bd50   0x00000004   Data   RW        18272    .data               drvp_key.o
+    0x20000418   0x9000bd54   0x00000002   Data   RW        19466    .data               main.o
+    0x2000041a   0x9000bd56   0x00000002   PAD
+    0x2000041c   0x9000bd58   0x00000004   Data   RW        20367    .data               segger_hardfaulthandler.o
     0x20000420        -       0x000000a8   Zero   RW        20119    .bss                segger_rtt.o
     0x200004c8        -       0x00000040   Zero   RW        20366    .bss                segger_hardfaulthandler.o
-    0x20000508   0x9000bd6c   0x00000038   PAD
+    0x20000508   0x9000bd5c   0x00000038   PAD
     0x20000540        -       0x000004a4   Zero   RW        20778    .bss.noinit         eventrecorder.o
-    0x200009e4   0x9000bd6c   0x00000004   PAD
+    0x200009e4   0x9000bd5c   0x00000004   PAD
     0x200009e8        -       0x00001000   Zero   RW            1    STACK               startup_stm32h743xx.o
 
 
-    Execution Region RW_IRAM2 (Exec base: 0x24000000, Load base: 0x9000bd6c, Size: 0x00000000, Max: 0x00080000, ABSOLUTE)
+    Execution Region RW_IRAM2 (Exec base: 0x24000000, Load base: 0x9000bd5c, Size: 0x00000000, Max: 0x00080000, ABSOLUTE)
 
     **** No section assigned to this execution region ****
 
 
-    Execution Region RW_IRAM3 (Exec base: 0x30000000, Load base: 0x9000bd6c, Size: 0x000058c4, Max: 0x0003b000, ABSOLUTE, COMPRESSED[0x000000b4])
+    Execution Region RW_IRAM3 (Exec base: 0x30000000, Load base: 0x9000bd5c, Size: 0x000058c4, Max: 0x0003b000, ABSOLUTE, COMPRESSED[0x000000b4])
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -8450,26 +8450,26 @@ Memory Map of the image
     0x300054b0   COMPRESSED   0x00000411   Data   RW        20118    .RAM_D2             segger_rtt.o
 
 
-    Execution Region RW_IRAM_MALLOC (Exec base: 0x3003b000, Load base: 0x9000be20, Size: 0x00005000, Max: 0x00005000, ABSOLUTE, COMPRESSED[0x000000a4])
+    Execution Region RW_IRAM_MALLOC (Exec base: 0x3003b000, Load base: 0x9000be10, Size: 0x00005000, Max: 0x00005000, ABSOLUTE, COMPRESSED[0x000000a4])
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x3003b000   COMPRESSED   0x00005000   Data   RW        19402    .RAM_MALLOC         sram_d2_malloc.o
 
 
-    Execution Region RW_IRAM5 (Exec base: 0x30040000, Load base: 0x9000bec4, Size: 0x00000000, Max: 0x00008000, ABSOLUTE)
+    Execution Region RW_IRAM5 (Exec base: 0x30040000, Load base: 0x9000beb4, Size: 0x00000000, Max: 0x00008000, ABSOLUTE)
 
     **** No section assigned to this execution region ****
 
 
-    Execution Region RW_IRAM4 (Exec base: 0x38000000, Load base: 0x9000bec4, Size: 0x00000020, Max: 0x00010000, ABSOLUTE)
+    Execution Region RW_IRAM4 (Exec base: 0x38000000, Load base: 0x9000beb4, Size: 0x00000020, Max: 0x00010000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x38000000   0x9000bec4   0x00000020   Data   RW        19045    .RAM_D3             bdmamux_pwm.o
+    0x38000000   0x9000beb4   0x00000020   Data   RW        19045    .RAM_D3             bdmamux_pwm.o
 
 
-    Execution Region ER_IROM1 (Exec base: 0x90000000, Load base: 0x90000000, Size: 0x0000bcd4, Max: 0x01000000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x90000000, Load base: 0x90000000, Size: 0x0000bcc4, Max: 0x01000000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -8727,73 +8727,73 @@ Memory Map of the image
     0x90009ef4   0x90009ef4   0x0000000a   Code   RO        19393    i.blk_raw_size      sram_d2_malloc.o
     0x90009efe   0x90009efe   0x00000002   PAD
     0x90009f00   0x90009f00   0x0000006c   Code   RO        19203    i.can1_fd_get_msg   can1_fd.o
-    0x90009f6c   0x90009f6c   0x000001dc   Code   RO        19204    i.can1_fd_init      can1_fd.o
-    0x9000a148   0x9000a148   0x00000120   Code   RO        19205    i.can1_fd_init_filter  can1_fd.o
-    0x9000a268   0x9000a268   0x00000054   Code   RO        19207    i.can1_fd_send_msg_std  can1_fd.o
-    0x9000a2bc   0x9000a2bc   0x0000004c   Code   RO        19328    i.circular_buffer_init  circular_buffer.o
-    0x9000a308   0x9000a308   0x0000006a   Code   RO        19333    i.circular_buffer_write  circular_buffer.o
-    0x9000a372   0x9000a372   0x00000042   Code   RO        20777    i.crc16_ccitt       eventrecorder.o
-    0x9000a3b4   0x9000a3b4   0x0000003e   Code   RO        19084    i.dma1mux_fill_buf  dma1mux_pwm.o
-    0x9000a3f2   0x9000a3f2   0x00000002   PAD
-    0x9000a3f4   0x9000a3f4   0x0000000c   Code   RO        18464    i.drv_eeprom_clrerrflag  drv_eeprom.o
-    0x9000a400   0x9000a400   0x0000000c   Code   RO        18465    i.drv_eeprom_clrrflag  drv_eeprom.o
-    0x9000a40c   0x9000a40c   0x0000000c   Code   RO        18466    i.drv_eeprom_clrwflag  drv_eeprom.o
-    0x9000a418   0x9000a418   0x000000c4   Code   RO        18467    i.drv_eeprom_init   drv_eeprom.o
-    0x9000a4dc   0x9000a4dc   0x00000030   Code   RO        18468    i.drv_eeprom_readbuf  drv_eeprom.o
-    0x9000a50c   0x9000a50c   0x0000000c   Code   RO        18469    i.drv_eeprom_reterrflag  drv_eeprom.o
-    0x9000a518   0x9000a518   0x0000000c   Code   RO        18470    i.drv_eeprom_retrflag  drv_eeprom.o
-    0x9000a524   0x9000a524   0x0000000c   Code   RO        18471    i.drv_eeprom_retwflag  drv_eeprom.o
-    0x9000a530   0x9000a530   0x00000030   Code   RO        18472    i.drv_eeprom_writebuf  drv_eeprom.o
-    0x9000a560   0x9000a560   0x00000014   Code   RO        18888    i.drv_fmc_bl_ctrl   drv_fmc_lcd.o
-    0x9000a574   0x9000a574   0x00000128   Code   RO        18891    i.drv_fmc_lcd_init  drv_fmc_lcd.o
-    0x9000a69c   0x9000a69c   0x00000038   Code   RO        18892    i.drv_fmc_lcd_rst   drv_fmc_lcd.o
-    0x9000a6d4   0x9000a6d4   0x0000000c   Code   RO        18893    i.drv_fmc_read_data  drv_fmc_lcd.o
-    0x9000a6e0   0x9000a6e0   0x00000008   Code   RO        18894    i.drv_fmc_write_cmd  drv_fmc_lcd.o
-    0x9000a6e8   0x9000a6e8   0x0000000c   Code   RO        18895    i.drv_fmc_write_data  drv_fmc_lcd.o
-    0x9000a6f4   0x9000a6f4   0x000000b0   Code   RO        18231    i.drv_key_init      drv_key.o
-    0x9000a7a4   0x9000a7a4   0x00000050   Code   RO        18232    i.drv_key_readmask  drv_key.o
-    0x9000a7f4   0x9000a7f4   0x000000b0   Code   RO        18121    i.drv_led_init      drv_led.o
-    0x9000a8a4   0x9000a8a4   0x00000028   Code   RO        18122    i.drv_led_off       drv_led.o
-    0x9000a8cc   0x9000a8cc   0x00000028   Code   RO        18123    i.drv_led_on        drv_led.o
-    0x9000a8f4   0x9000a8f4   0x00000068   Code   RO        18567    i.drvp_eeprom_init  drvp_eeprom.o
-    0x9000a95c   0x9000a95c   0x0000010c   Code   RO        18568    i.drvp_eeprom_prc_10ms  drvp_eeprom.o
-    0x9000aa68   0x9000aa68   0x000002e8   Code   RO        18966    i.drvp_fmc_lcd_init  drvp_fmc_lcd.o
-    0x9000ad50   0x9000ad50   0x0000008c   Code   RO        18969    i.drvp_fmc_lcd_set_axis_scan  drvp_fmc_lcd.o
-    0x9000addc   0x9000addc   0x00000078   Code   RO        18970    i.drvp_fmc_lcd_set_wid  drvp_fmc_lcd.o
-    0x9000ae54   0x9000ae54   0x0000002c   Code   RO        18972    i.drvp_fmc_lcd_writesigle  drvp_fmc_lcd.o
-    0x9000ae80   0x9000ae80   0x00000024   Code   RO        18266    i.drvp_key_init     drvp_key.o
-    0x9000aea4   0x9000aea4   0x000001b4   Code   RO        18267    i.drvp_key_prc_10ms  drvp_key.o
-    0x9000b058   0x9000b058   0x0000001c   Code   RO        18269    i.drvp_key_wfifo    drvp_key.o
-    0x9000b074   0x9000b074   0x00000010   Code   RO        18162    i.drvp_led_init     drvp_led.o
-    0x9000b084   0x9000b084   0x00000114   Code   RO        18165    i.drvp_led_prc_1ms  drvp_led.o
-    0x9000b198   0x9000b198   0x00000006   Code   RO        19394    i.free_get_next     sram_d2_malloc.o
-    0x9000b19e   0x9000b19e   0x00000004   Code   RO        19395    i.free_set_next     sram_d2_malloc.o
-    0x9000b1a2   0x9000b1a2   0x00000012   Code   RO        19334    i.is_power_of_two   circular_buffer.o
-    0x9000b1b4   0x9000b1b4   0x0000029c   Code   RO        19464    i.main              main.o
-    0x9000b450   0x9000b450   0x00000006   Code   RO        19288    i.mutex_init        port.o
-    0x9000b456   0x9000b456   0x00000002   Code   RO        19289    i.mutex_lock        port.o
-    0x9000b458   0x9000b458   0x00000002   Code   RO        19290    i.mutex_unlock      port.o
-    0x9000b45a   0x9000b45a   0x00000002   PAD
-    0x9000b45c   0x9000b45c   0x0000022c   Code   RO        18746    i.spi_flash_w25q128_init  spi_flash.o
-    0x9000b688   0x9000b688   0x000000dc   Code   RO        19396    i.sram_d2_free      sram_d2_malloc.o
-    0x9000b764   0x9000b764   0x00000040   Code   RO        19399    i.sram_d2_init      sram_d2_malloc.o
-    0x9000b7a4   0x9000b7a4   0x000000e8   Code   RO        19400    i.sram_d2_malloc    sram_d2_malloc.o
-    0x9000b88c   0x9000b88c   0x000001e4   Code   RO        19137    i.usart1_dma_init   usart1_dma.o
-    0x9000ba70   0x9000ba70   0x0000005c   Code   RO        19139    i.usart1_my_printf  usart1_dma.o
-    0x9000bacc   0x9000bacc   0x00000010   Data   RO           16    .constdata          system_stm32h7xx.o
-    0x9000badc   0x9000badc   0x00000008   Data   RO         2608    .constdata          stm32h7xx_hal_dma.o
-    0x9000bae4   0x9000bae4   0x0000005c   Data   RO         3713    .constdata          stm32h7xx_hal_fdcan.o
-    0x9000bb40   0x9000bb40   0x00000018   Data   RO        14345    .constdata          stm32h7xx_hal_uart.o
-    0x9000bb58   0x9000bb58   0x00000028   Data   RO        18124    .constdata          drv_led.o
-    0x9000bb80   0x9000bb80   0x0000000c   Data   RO        18170    .constdata          drvp_led.o
-    0x9000bb8c   0x9000bb8c   0x00000060   Data   RO        18233    .constdata          drv_key.o
-    0x9000bbec   0x9000bbec   0x00000008   Data   RO        18271    .constdata          drvp_key.o
-    0x9000bbf4   0x9000bbf4   0x00000024   Data   RO        18572    .constdata          drvp_eeprom.o
-    0x9000bc18   0x9000bc18   0x00000021   Data   RO        20120    .constdata          segger_rtt.o
-    0x9000bc39   0x9000bc39   0x00000010   Data   RO        20326    .constdata          segger_rtt_printf.o
-    0x9000bc49   0x9000bc49   0x00000003   PAD
-    0x9000bc4c   0x9000bc4c   0x00000018   Data   RO        20779    .constdata          eventrecorder.o
-    0x9000bc64   0x9000bc64   0x00000070   Data   RO        21034    Region$$Table       anon$$obj.o
+    0x90009f6c   0x90009f6c   0x000001cc   Code   RO        19204    i.can1_fd_init      can1_fd.o
+    0x9000a138   0x9000a138   0x00000120   Code   RO        19205    i.can1_fd_init_filter  can1_fd.o
+    0x9000a258   0x9000a258   0x00000054   Code   RO        19207    i.can1_fd_send_msg_std  can1_fd.o
+    0x9000a2ac   0x9000a2ac   0x0000004c   Code   RO        19328    i.circular_buffer_init  circular_buffer.o
+    0x9000a2f8   0x9000a2f8   0x0000006a   Code   RO        19333    i.circular_buffer_write  circular_buffer.o
+    0x9000a362   0x9000a362   0x00000042   Code   RO        20777    i.crc16_ccitt       eventrecorder.o
+    0x9000a3a4   0x9000a3a4   0x0000003e   Code   RO        19084    i.dma1mux_fill_buf  dma1mux_pwm.o
+    0x9000a3e2   0x9000a3e2   0x00000002   PAD
+    0x9000a3e4   0x9000a3e4   0x0000000c   Code   RO        18464    i.drv_eeprom_clrerrflag  drv_eeprom.o
+    0x9000a3f0   0x9000a3f0   0x0000000c   Code   RO        18465    i.drv_eeprom_clrrflag  drv_eeprom.o
+    0x9000a3fc   0x9000a3fc   0x0000000c   Code   RO        18466    i.drv_eeprom_clrwflag  drv_eeprom.o
+    0x9000a408   0x9000a408   0x000000c4   Code   RO        18467    i.drv_eeprom_init   drv_eeprom.o
+    0x9000a4cc   0x9000a4cc   0x00000030   Code   RO        18468    i.drv_eeprom_readbuf  drv_eeprom.o
+    0x9000a4fc   0x9000a4fc   0x0000000c   Code   RO        18469    i.drv_eeprom_reterrflag  drv_eeprom.o
+    0x9000a508   0x9000a508   0x0000000c   Code   RO        18470    i.drv_eeprom_retrflag  drv_eeprom.o
+    0x9000a514   0x9000a514   0x0000000c   Code   RO        18471    i.drv_eeprom_retwflag  drv_eeprom.o
+    0x9000a520   0x9000a520   0x00000030   Code   RO        18472    i.drv_eeprom_writebuf  drv_eeprom.o
+    0x9000a550   0x9000a550   0x00000014   Code   RO        18888    i.drv_fmc_bl_ctrl   drv_fmc_lcd.o
+    0x9000a564   0x9000a564   0x00000128   Code   RO        18891    i.drv_fmc_lcd_init  drv_fmc_lcd.o
+    0x9000a68c   0x9000a68c   0x00000038   Code   RO        18892    i.drv_fmc_lcd_rst   drv_fmc_lcd.o
+    0x9000a6c4   0x9000a6c4   0x0000000c   Code   RO        18893    i.drv_fmc_read_data  drv_fmc_lcd.o
+    0x9000a6d0   0x9000a6d0   0x00000008   Code   RO        18894    i.drv_fmc_write_cmd  drv_fmc_lcd.o
+    0x9000a6d8   0x9000a6d8   0x0000000c   Code   RO        18895    i.drv_fmc_write_data  drv_fmc_lcd.o
+    0x9000a6e4   0x9000a6e4   0x000000b0   Code   RO        18231    i.drv_key_init      drv_key.o
+    0x9000a794   0x9000a794   0x00000050   Code   RO        18232    i.drv_key_readmask  drv_key.o
+    0x9000a7e4   0x9000a7e4   0x000000b0   Code   RO        18121    i.drv_led_init      drv_led.o
+    0x9000a894   0x9000a894   0x00000028   Code   RO        18122    i.drv_led_off       drv_led.o
+    0x9000a8bc   0x9000a8bc   0x00000028   Code   RO        18123    i.drv_led_on        drv_led.o
+    0x9000a8e4   0x9000a8e4   0x00000068   Code   RO        18567    i.drvp_eeprom_init  drvp_eeprom.o
+    0x9000a94c   0x9000a94c   0x0000010c   Code   RO        18568    i.drvp_eeprom_prc_10ms  drvp_eeprom.o
+    0x9000aa58   0x9000aa58   0x000002e8   Code   RO        18966    i.drvp_fmc_lcd_init  drvp_fmc_lcd.o
+    0x9000ad40   0x9000ad40   0x0000008c   Code   RO        18969    i.drvp_fmc_lcd_set_axis_scan  drvp_fmc_lcd.o
+    0x9000adcc   0x9000adcc   0x00000078   Code   RO        18970    i.drvp_fmc_lcd_set_wid  drvp_fmc_lcd.o
+    0x9000ae44   0x9000ae44   0x0000002c   Code   RO        18972    i.drvp_fmc_lcd_writesigle  drvp_fmc_lcd.o
+    0x9000ae70   0x9000ae70   0x00000024   Code   RO        18266    i.drvp_key_init     drvp_key.o
+    0x9000ae94   0x9000ae94   0x000001b4   Code   RO        18267    i.drvp_key_prc_10ms  drvp_key.o
+    0x9000b048   0x9000b048   0x0000001c   Code   RO        18269    i.drvp_key_wfifo    drvp_key.o
+    0x9000b064   0x9000b064   0x00000010   Code   RO        18162    i.drvp_led_init     drvp_led.o
+    0x9000b074   0x9000b074   0x00000114   Code   RO        18165    i.drvp_led_prc_1ms  drvp_led.o
+    0x9000b188   0x9000b188   0x00000006   Code   RO        19394    i.free_get_next     sram_d2_malloc.o
+    0x9000b18e   0x9000b18e   0x00000004   Code   RO        19395    i.free_set_next     sram_d2_malloc.o
+    0x9000b192   0x9000b192   0x00000012   Code   RO        19334    i.is_power_of_two   circular_buffer.o
+    0x9000b1a4   0x9000b1a4   0x0000029c   Code   RO        19464    i.main              main.o
+    0x9000b440   0x9000b440   0x00000006   Code   RO        19288    i.mutex_init        port.o
+    0x9000b446   0x9000b446   0x00000002   Code   RO        19289    i.mutex_lock        port.o
+    0x9000b448   0x9000b448   0x00000002   Code   RO        19290    i.mutex_unlock      port.o
+    0x9000b44a   0x9000b44a   0x00000002   PAD
+    0x9000b44c   0x9000b44c   0x0000022c   Code   RO        18746    i.spi_flash_w25q128_init  spi_flash.o
+    0x9000b678   0x9000b678   0x000000dc   Code   RO        19396    i.sram_d2_free      sram_d2_malloc.o
+    0x9000b754   0x9000b754   0x00000040   Code   RO        19399    i.sram_d2_init      sram_d2_malloc.o
+    0x9000b794   0x9000b794   0x000000e8   Code   RO        19400    i.sram_d2_malloc    sram_d2_malloc.o
+    0x9000b87c   0x9000b87c   0x000001e4   Code   RO        19137    i.usart1_dma_init   usart1_dma.o
+    0x9000ba60   0x9000ba60   0x0000005c   Code   RO        19139    i.usart1_my_printf  usart1_dma.o
+    0x9000babc   0x9000babc   0x00000010   Data   RO           16    .constdata          system_stm32h7xx.o
+    0x9000bacc   0x9000bacc   0x00000008   Data   RO         2608    .constdata          stm32h7xx_hal_dma.o
+    0x9000bad4   0x9000bad4   0x0000005c   Data   RO         3713    .constdata          stm32h7xx_hal_fdcan.o
+    0x9000bb30   0x9000bb30   0x00000018   Data   RO        14345    .constdata          stm32h7xx_hal_uart.o
+    0x9000bb48   0x9000bb48   0x00000028   Data   RO        18124    .constdata          drv_led.o
+    0x9000bb70   0x9000bb70   0x0000000c   Data   RO        18170    .constdata          drvp_led.o
+    0x9000bb7c   0x9000bb7c   0x00000060   Data   RO        18233    .constdata          drv_key.o
+    0x9000bbdc   0x9000bbdc   0x00000008   Data   RO        18271    .constdata          drvp_key.o
+    0x9000bbe4   0x9000bbe4   0x00000024   Data   RO        18572    .constdata          drvp_eeprom.o
+    0x9000bc08   0x9000bc08   0x00000021   Data   RO        20120    .constdata          segger_rtt.o
+    0x9000bc29   0x9000bc29   0x00000010   Data   RO        20326    .constdata          segger_rtt_printf.o
+    0x9000bc39   0x9000bc39   0x00000003   PAD
+    0x9000bc3c   0x9000bc3c   0x00000018   Data   RO        20779    .constdata          eventrecorder.o
+    0x9000bc54   0x9000bc54   0x00000070   Data   RO        21034    Region$$Table       anon$$obj.o
 
 
 
@@ -8811,50 +8811,50 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       120          8          0         32          0       1320   bdmamux_pwm.o
-      1220        102          0      13624          0       8075   can1_fd.o
-       200          0          0          0          0       3407   circular_buffer.o
-       226         20          0        374          0       2196   dma1mux_pwm.o
-       524        114          0        135          0       8733   drv_eeprom.o
-       420         44          0        120          0       4710   drv_fmc_lcd.o
-       256         14         96          0          0       2110   drv_key.o
-       256         20         40          0          0       2518   drv_led.o
-       372         22         36        266          0       3150   drvp_eeprom.o
-      1048         48          0         28          0       3886   drvp_fmc_lcd.o
-       500         30          8         64          0       4640   drvp_key.o
-       292         16         12         32          0       2443   drvp_led.o
-       942         68         24          0       1188      11508   eventrecorder.o
-        20          2          0          0          0        268   hardfaulthandler.o
-      1822        154          0       1026          0      41300   main.o
-        10          0          0          0          0       2441   port.o
-        16          6          0        188          0       1320   pwm_in_timer5.o
-        16          6          0        218          0        763   pwm_timer1.o
-       352        110          0          4         64       3375   segger_hardfaulthandler.o
-       562         42         33       1041        168      10056   segger_rtt.o
-      1166         16         16          0          0       5921   segger_rtt_printf.o
-       628         60          0       4517          0       3890   spi_flash.o
-       536         20          0      20496          0       4987   sram_d2_malloc.o
-        44         12        664          0       4096        996   startup_stm32h743xx.o
-       292         58          0          9          0      24393   stm32h7xx_hal.o
-       510         40          0          0          0      42889   stm32h7xx_hal_cortex.o
-      5806        122          8          0          0      10622   stm32h7xx_hal_dma.o
-      3880        124         92          0          0      25284   stm32h7xx_hal_fdcan.o
-       536         52          0          0          0       3103   stm32h7xx_hal_gpio.o
-      5788        162          0          0          0      29221   stm32h7xx_hal_i2c.o
-         2          0          0          0          0        566   stm32h7xx_hal_msp_template.o
-      3640        114          0          0          0       7352   stm32h7xx_hal_rcc.o
-      5300        108          0          0          0       7709   stm32h7xx_hal_rcc_ex.o
-      1782         60          0          0          0      10787   stm32h7xx_hal_spi.o
-       492          0          0          0          0       1713   stm32h7xx_hal_tim.o
-      2450        180         24          0          0      34047   stm32h7xx_hal_uart.o
-         6          0          0          0          0       1889   stm32h7xx_hal_uart_ex.o
-       106          4          0          0          0       4250   stm32h7xx_it.o
-       254          4          0          0          0       3249   stm32h7xx_ll_fmc.o
-       298         40         16          8          0    1363465   system_stm32h7xx.o
-       680         64          0       2086          0       4207   usart1_dma.o
+       120          8          0         32          0       1252   bdmamux_pwm.o
+      1204        102          0      13624          0       7843   can1_fd.o
+       200          0          0          0          0       3283   circular_buffer.o
+       226         20          0        374          0       2112   dma1mux_pwm.o
+       524        114          0        135          0       8489   drv_eeprom.o
+       420         44          0        120          0       4566   drv_fmc_lcd.o
+       256         14         96          0          0       2058   drv_key.o
+       256         20         40          0          0       2458   drv_led.o
+       372         22         36        266          0       3054   drvp_eeprom.o
+      1048         48          0         28          0       3806   drvp_fmc_lcd.o
+       500         30          8         64          0       4448   drvp_key.o
+       292         16         12         32          0       2351   drvp_led.o
+       942         68         24          0       1188      10996   eventrecorder.o
+        20          2          0          0          0        252   hardfaulthandler.o
+      1822        154          0       1026          0      41108   main.o
+        10          0          0          0          0       2317   port.o
+        16          6          0        188          0       1252   pwm_in_timer5.o
+        16          6          0        218          0        739   pwm_timer1.o
+       352        110          0          4         64       3339   segger_hardfaulthandler.o
+       562         42         33       1041        168       9868   segger_rtt.o
+      1166         16         16          0          0       5813   segger_rtt_printf.o
+       628         60          0       4517          0       3766   spi_flash.o
+       536         20          0      20496          0       4879   sram_d2_malloc.o
+        44         12        664          0       4096        984   startup_stm32h743xx.o
+       292         58          0          9          0      24261   stm32h7xx_hal.o
+       510         40          0          0          0      42713   stm32h7xx_hal_cortex.o
+      5806        122          8          0          0      10502   stm32h7xx_hal_dma.o
+      3880        124         92          0          0      24900   stm32h7xx_hal_fdcan.o
+       536         52          0          0          0       3047   stm32h7xx_hal_gpio.o
+      5788        162          0          0          0      28785   stm32h7xx_hal_i2c.o
+         2          0          0          0          0        554   stm32h7xx_hal_msp_template.o
+      3640        114          0          0          0       7256   stm32h7xx_hal_rcc.o
+      5300        108          0          0          0       7617   stm32h7xx_hal_rcc_ex.o
+      1782         60          0          0          0      10587   stm32h7xx_hal_spi.o
+       492          0          0          0          0       1685   stm32h7xx_hal_tim.o
+      2450        180         24          0          0      33783   stm32h7xx_hal_uart.o
+         6          0          0          0          0       1853   stm32h7xx_hal_uart_ex.o
+       106          4          0          0          0       4126   stm32h7xx_it.o
+       254          4          0          0          0       3209   stm32h7xx_ll_fmc.o
+       298         40         16          8          0    1362985   system_stm32h7xx.o
+       680         64          0       2086          0       4063   usart1_dma.o
 
     ----------------------------------------------------------------------
-     43448       2066       1184      44292       5576    1708759   Object Totals
+     43432       2066       1184      44292       5576    1702959   Object Totals
         40          0        112          0          0          0   (incl. Generated)
         38          0          3         24         60          0   (incl. Padding)
 
@@ -8911,15 +8911,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     47264       2168       1184      44292       5576    1685611   Grand Totals
-     47264       2168       1184        420       5576    1685611   ELF Image Totals (compressed)
-     47264       2168       1184        420          0          0   ROM Totals
+     47248       2168       1184      44292       5576    1679811   Grand Totals
+     47248       2168       1184        420       5576    1679811   ELF Image Totals (compressed)
+     47248       2168       1184        420          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                48448 (  47.31kB)
+    Total RO  Size (Code + RO Data)                48432 (  47.30kB)
     Total RW  Size (RW Data + ZI Data)             49868 (  48.70kB)
-    Total ROM Size (Code + RO Data + RW Data)      48868 (  47.72kB)
+    Total ROM Size (Code + RO Data + RW Data)      48852 (  47.71kB)
 
 ==============================================================================
 
