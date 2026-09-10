@@ -3932,4 +3932,3 @@ __weak void HAL_RCCEx_LSECSS_Callback(void)
 /**
   * @}
   */
-
