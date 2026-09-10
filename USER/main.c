@@ -8,9 +8,6 @@ static void CPU_CACHE_Enable(void);
 /* 数组表格定义在 .RAM_RESET_VCTOR 段，这段空间用来存储中断向量表，不得再其他地方再定义这个节区 */
 __attribute__((section(".RamVecTable")))static uint8_t RAM_VCTOR_TABLE[0x400];
 
-RX_FIFO_TYPE rxfifo[20];
-uint8_t      size;
-
 int main(void)
 {
 	/* 将中断向量表从FLASH的首地址拷贝到DTCM中然后设置中断向量表的偏移为DTCM首地址也就是数组地址 */
@@ -55,6 +52,7 @@ int main(void)
   
 	can1_fd_init();
 	
+  RX_FIFO_TYPE rxfifo;
 	#define PDATA_SIZE    8
 	uint8_t pdata[PDATA_SIZE];
 	for(int i=0;i<PDATA_SIZE;i++) pdata[i]=i;
@@ -79,16 +77,12 @@ int main(void)
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
 	for(;;)
 	{		
-		if(can1_fd_get_msg(rxfifo,&size))
+		if(can1_fd_get_msg(&rxfifo))
 		{
-			usart1_my_printf("rxfifo_len=%d\r\n",size);
-			for(int i=0;i<size;i++)
-			{
-				usart1_my_printf("\r\n----------------------\r\n");
-				usart1_my_printf("id=0x%x\r\n",rxfifo[i].RxHeader.Identifier);
-				for(int j=0;j<PDATA_SIZE;j++) usart1_my_printf("rx=0x%x->",rxfifo[i].pdata[j]);
-				usart1_my_printf("\r\n----------------------\r\n");
-			}
+			usart1_my_printf("\r\n----fomat=%d------------------\r\n",rxfifo.RxHeader.FDFormat);
+			usart1_my_printf("id=0x%x\r\n",rxfifo.RxHeader.Identifier);
+			for(int j=0;j<PDATA_SIZE;j++) usart1_my_printf("rx=0x%x->",rxfifo.pdata[j]);
+			usart1_my_printf("\r\n----------------------\r\n");
 		}
 		
 #if USE_LVGL_RUN

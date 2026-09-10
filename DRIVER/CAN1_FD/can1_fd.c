@@ -99,7 +99,7 @@ static void can1_fd_init_filter(void)
 void can1_fd_init(void)
 {
     /* 摘抄SDK中的时钟和GPIO的初始化流程 */
-    GPIO_InitTypeDef  GPIO_InitStruct;
+    GPIO_InitTypeDef         GPIO_InitStruct;
     RCC_PeriphCLKInitTypeDef RCC_PeriphClkInit;
 
     __HAL_RCC_FDCAN_FORCE_RESET();
@@ -181,10 +181,10 @@ void can1_fd_init(void)
     hfdcan1.Init.RxBuffersNbr=0;
 
     hfdcan1.Init.RxFifo0ElmtSize=FDCAN_DATA_BYTES_8;
-    hfdcan1.Init.RxFifo0ElmtsNbr=10;
+    hfdcan1.Init.RxFifo0ElmtsNbr=30;
 
     hfdcan1.Init.RxFifo1ElmtSize=FDCAN_DATA_BYTES_8;
-    hfdcan1.Init.RxFifo1ElmtsNbr=10;
+    hfdcan1.Init.RxFifo1ElmtsNbr=30;
 		
 		hfdcan1.Init.TxElmtSize=FDCAN_DATA_BYTES_8;
 #endif
@@ -193,14 +193,14 @@ void can1_fd_init(void)
     hfdcan1.Init.MessageRAMOffset=0;//FDCAN1占用的10KB的共享RAM的偏移量为0从头使用，FDCAN2可以设置为一半的位置
     hfdcan1.Init.ProtocolException=ENABLE;//收到的报文协议异常则判定格式错误
     hfdcan1.Init.AutoRetransmission=ENABLE;//使能自动重传模式
-    
+    hfdcan1.Init.TransmitPause=ENABLE;//使能传输暂停机制，传输完成一帧之后让出一段时间，如果还是总线空闲则可以继续发送
+		
     hfdcan1.Init.StdFiltersNbr=4;//标准ID的过滤器有4条
     hfdcan1.Init.ExtFiltersNbr=3;//扩展ID的过滤器有3条
 
-    hfdcan1.Init.TransmitPause=ENABLE;//使能传输暂停机制，传输完成一帧之后让出一段时间，如果还是总线空闲则可以继续发送
     hfdcan1.Init.TxBuffersNbr=0;//发送缓冲区个数为0，不需要使用
     hfdcan1.Init.TxEventsNbr=0;//事件发送缓存个数为0不需要用
-    hfdcan1.Init.TxFifoQueueElmtsNbr=20;//20个发送FIFO或者发送队列的长度，选队列还是FIFO由下面控制
+    hfdcan1.Init.TxFifoQueueElmtsNbr=30;//30个发送FIFO或者发送队列的长度，选队列还是FIFO由下面控制
     hfdcan1.Init.TxFifoQueueMode=FDCAN_TX_FIFO_OPERATION;//选择FIFO模式
 	  HAL_FDCAN_Init(&hfdcan1);
 
@@ -286,19 +286,14 @@ void can1_fd_send_msg_ext(uint32_t id,uint32_t dlc,uint8_t* pdata,uint8_t msgid,
 }
 
 /* 接收函数，从队列中提取我们的数据 */
-bool can1_fd_get_msg(RX_FIFO_TYPE* rfifo,uint8_t* size)
+bool can1_fd_get_msg(RX_FIFO_TYPE* rmsg)
 {
-	if(FACAN1_RX_FIFO.rx_comptle)
+	if(FACAN1_RX_FIFO.read!=FACAN1_RX_FIFO.write)
 	{	
 		__disable_irq();
-		FACAN1_RX_FIFO.rx_comptle=false;
-		*size=(FACAN1_RX_FIFO.write+FDCAN_FIFO_SIZE-FACAN1_RX_FIFO.read)&(FDCAN_FIFO_SIZE-1);
-		for(int i=0;i<*size;i++)
-		{
-			memcpy(&rfifo[i].RxHeader,&FACAN1_RX_FIFO.fifo[FACAN1_RX_FIFO.read].RxHeader,sizeof(FDCAN_RxHeaderTypeDef));
-			memcpy(rfifo[i].pdata,FACAN1_RX_FIFO.fifo[FACAN1_RX_FIFO.read].pdata,64);
-			FACAN1_RX_FIFO.read=(FACAN1_RX_FIFO.read+1)&(FDCAN_FIFO_SIZE-1);
-		}
+		memcpy(&rmsg->RxHeader,&FACAN1_RX_FIFO.fifo[FACAN1_RX_FIFO.read].RxHeader,sizeof(FDCAN_RxHeaderTypeDef));
+		memcpy(rmsg->pdata,FACAN1_RX_FIFO.fifo[FACAN1_RX_FIFO.read].pdata,64);
+		FACAN1_RX_FIFO.read=(FACAN1_RX_FIFO.read+1)&(FDCAN_FIFO_SIZE-1);
 		__enable_irq();
 		return true;
 	}
@@ -316,7 +311,6 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 		                       &FACAN1_RX_FIFO.fifo[FACAN1_RX_FIFO.write].RxHeader,
 		                       FACAN1_RX_FIFO.fifo[FACAN1_RX_FIFO.write].pdata);
 		FACAN1_RX_FIFO.write=(FACAN1_RX_FIFO.write+1)&(FDCAN_FIFO_SIZE-1);
-		FACAN1_RX_FIFO.rx_comptle=true;
 		__enable_irq();
   }
 }
@@ -330,7 +324,6 @@ void HAL_FDCAN_RxFifo1Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo1ITs)
 		                       &FACAN1_RX_FIFO.fifo[FACAN1_RX_FIFO.write].RxHeader,
 		                       FACAN1_RX_FIFO.fifo[FACAN1_RX_FIFO.write].pdata);
 		FACAN1_RX_FIFO.write=(FACAN1_RX_FIFO.write+1)&(FDCAN_FIFO_SIZE-1);
-		FACAN1_RX_FIFO.rx_comptle=true;
 		__enable_irq();
   }
 }

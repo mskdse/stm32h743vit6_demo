@@ -26,7 +26,6 @@ typedef struct
 {
 	volatile uint8_t write;
 	volatile uint8_t read;
-	volatile bool    rx_comptle;
 	RX_FIFO_TYPE  fifo[FDCAN_FIFO_SIZE];
 }FDCAN_FIFO_TYPE;
 
@@ -48,7 +47,7 @@ typedef struct
 //#define FDCAN_DLC_BYTES_48 ((uint32_t)0x0000000EU) /*!< 48 bytes data field */
 //#define FDCAN_DLC_BYTES_64 ((uint32_t)0x0000000FU) /*!< 64 bytes data field */
 void can1_fd_init(void);
-bool can1_fd_get_msg(RX_FIFO_TYPE* rfifo,uint8_t* size);
+bool can1_fd_get_msg(RX_FIFO_TYPE* rmsg);
 void can1_fd_send_msg_std(uint16_t id,uint32_t dlc,uint8_t* pdata,uint8_t msgid,bool is_data_frame);
 void can1_fd_send_msg_ext(uint32_t id,uint32_t dlc,uint8_t* pdata,uint8_t msgid,bool is_data_frame);
 

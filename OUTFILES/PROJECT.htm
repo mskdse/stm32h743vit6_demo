@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\OUTFILES\PROJECT.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\OUTFILES\PROJECT.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Wed Sep 09 14:42:54 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Thu Sep 10 09:24:11 2026
 <BR><P>
-<H3>Maximum Stack Usage =        616 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        720 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 main &rArr; usart1_dma_init &rArr; HAL_UART_Init &rArr; UART_SetConfig &rArr; __aeabi_uldivmod
 <P>
@@ -712,9 +712,9 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
 <LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
 </UL>
-<BR>[Called By]<UL><LI><a href="#[13f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SetConfig
-<LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
+<BR>[Called By]<UL><LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
 <LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
+<LI><a href="#[13f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SetConfig
 </UL>
 
 <P><STRONG><a name="[164]"></a>__aeabi_memcpy</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, memcpya.o(.text))
@@ -1114,14 +1114,14 @@ Global Symbols
 <P><STRONG><a name="[a0]"></a>HAL_FDCAN_RxBufferNewMessageCallback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32h7xx_hal_fdcan.o(i.HAL_FDCAN_RxBufferNewMessageCallback))
 <BR>[Address Reference Count : 1]<UL><LI> stm32h7xx_hal_fdcan.o(i.HAL_FDCAN_Init)
 </UL>
-<P><STRONG><a name="[9b]"></a>HAL_FDCAN_RxFifo0Callback</STRONG> (Thumb, 88 bytes, Stack size 16 bytes, can1_fd.o(i.HAL_FDCAN_RxFifo0Callback))
+<P><STRONG><a name="[9b]"></a>HAL_FDCAN_RxFifo0Callback</STRONG> (Thumb, 84 bytes, Stack size 16 bytes, can1_fd.o(i.HAL_FDCAN_RxFifo0Callback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = HAL_FDCAN_RxFifo0Callback &rArr; HAL_FDCAN_GetRxMessage
 </UL>
 <BR>[Calls]<UL><LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FDCAN_GetRxMessage
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> stm32h7xx_hal_fdcan.o(i.HAL_FDCAN_Init)
 </UL>
-<P><STRONG><a name="[9c]"></a>HAL_FDCAN_RxFifo1Callback</STRONG> (Thumb, 88 bytes, Stack size 16 bytes, can1_fd.o(i.HAL_FDCAN_RxFifo1Callback))
+<P><STRONG><a name="[9c]"></a>HAL_FDCAN_RxFifo1Callback</STRONG> (Thumb, 84 bytes, Stack size 16 bytes, can1_fd.o(i.HAL_FDCAN_RxFifo1Callback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = HAL_FDCAN_RxFifo1Callback &rArr; HAL_FDCAN_GetRxMessage
 </UL>
 <BR>[Calls]<UL><LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FDCAN_GetRxMessage
@@ -1196,13 +1196,13 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 <LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Init
 <LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FDCAN_Init
-<LI><a href="#[160]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_WaitOnFlagUntilTimeout
-<LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_CheckIdleState
 <LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCCEx_PeriphCLKConfig
 <LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCCEx_PLL3_Config
 <LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCCEx_PLL2_Config
 <LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_OscConfig
 <LI><a href="#[132]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_ClockConfig
+<LI><a href="#[160]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_WaitOnFlagUntilTimeout
+<LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_CheckIdleState
 </UL>
 
 <P><STRONG><a name="[b4]"></a>HAL_I2C_AbortCpltCallback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32h7xx_hal_i2c.o(i.HAL_I2C_AbortCpltCallback))
@@ -1731,15 +1731,15 @@ Global Symbols
 
 <P><STRONG><a name="[1b1]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
 
-<P><STRONG><a name="[16c]"></a>can1_fd_get_msg</STRONG> (Thumb, 156 bytes, Stack size 16 bytes, can1_fd.o(i.can1_fd_get_msg))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = can1_fd_get_msg
+<P><STRONG><a name="[16c]"></a>can1_fd_get_msg</STRONG> (Thumb, 104 bytes, Stack size 8 bytes, can1_fd.o(i.can1_fd_get_msg))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = can1_fd_get_msg
 </UL>
 <BR>[Calls]<UL><LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[16d]"></a>can1_fd_init</STRONG> (Thumb, 448 bytes, Stack size 224 bytes, can1_fd.o(i.can1_fd_init))
+<P><STRONG><a name="[16d]"></a>can1_fd_init</STRONG> (Thumb, 446 bytes, Stack size 224 bytes, can1_fd.o(i.can1_fd_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 328<LI>Call Chain = can1_fd_init &rArr; HAL_FDCAN_Init &rArr; FDCAN_CalcultateRamBlockAddresses
 </UL>
 <BR>[Calls]<UL><LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
@@ -1968,8 +1968,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler (via Veneer)
 </UL>
 
-<P><STRONG><a name="[95]"></a>main</STRONG> (Thumb, 596 bytes, Stack size 16 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 616<LI>Call Chain = main &rArr; usart1_dma_init &rArr; HAL_UART_Init &rArr; UART_SetConfig &rArr; __aeabi_uldivmod
+<P><STRONG><a name="[95]"></a>main</STRONG> (Thumb, 546 bytes, Stack size 120 bytes, main.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 720<LI>Call Chain = main &rArr; usart1_dma_init &rArr; HAL_UART_Init &rArr; UART_SetConfig &rArr; __aeabi_uldivmod
 </UL>
 <BR>[Calls]<UL><LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
 <LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
@@ -2057,8 +2057,8 @@ Global Symbols
 <LI><a href="#[16f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_EnableIRQ
 <LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Init
 <LI><a href="#[16e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
-<LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Init
 <LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
