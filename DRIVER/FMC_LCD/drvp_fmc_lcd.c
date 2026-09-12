@@ -82,7 +82,7 @@ void drvp_fmc_lcd_readbuf(uint16_t* rbuf,uint32_t size)
 /* 清屏函数 */
 void drvp_fmc_lcd_clear(void)
 {
-	drvp_fmc_lcd_set_wid(0,DRVP_LCD_WIGTH,0,DRVP_LCD_LENGTH);
+	drvp_fmc_lcd_set_wid(0,(DRVP_LCD_WIGTH-1),0,(DRVP_LCD_LENGTH-1));
 	drvp_fmc_lcd_writesigle(RGB565_BLACK,(DRVP_LCD_WIGTH*DRVP_LCD_LENGTH));
 }
 
@@ -201,7 +201,7 @@ void drvp_fmc_lcd_init(void)
 	drv_lcd_pot->wcmd(0x29);
 	
 	/* 清屏 */
-	drvp_fmc_lcd_set_wid(0,DRVP_LCD_WIGTH,0,DRVP_LCD_LENGTH);
+	drvp_fmc_lcd_set_wid(0,(DRVP_LCD_WIGTH-1),0,(DRVP_LCD_LENGTH-1));
 	drvp_fmc_lcd_writesigle(RGB565_BLACK,(DRVP_LCD_WIGTH*DRVP_LCD_LENGTH));
 	
 	/* 重新打开背光 */

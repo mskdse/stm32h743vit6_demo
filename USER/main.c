@@ -50,40 +50,40 @@ int main(void)
 	lv_demo_benchmark();//‘ –ÌLVGLµƒ≤‚ ‘Demo
 #endif
   
-	can1_fd_init();
-	
-  RX_FIFO_TYPE rxfifo;
-	#define PDATA_SIZE    8
-	uint8_t pdata[PDATA_SIZE];
-	for(int i=0;i<PDATA_SIZE;i++) pdata[i]=i;
-	can1_fd_send_msg_std(0x100,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-	can1_fd_send_msg_std(0x101,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-	can1_fd_send_msg_std(0x102,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-	can1_fd_send_msg_std(0x103,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-	can1_fd_send_msg_std(0x104,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-	can1_fd_send_msg_std(0x105,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-	can1_fd_send_msg_std(0x106,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-	can1_fd_send_msg_std(0x107,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-	can1_fd_send_msg_std(0x108,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-	can1_fd_send_msg_std(0x109,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-	can1_fd_send_msg_std(0x10a,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-	can1_fd_send_msg_std(0x10b,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-	can1_fd_send_msg_std(0x10c,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-	can1_fd_send_msg_std(0x10d,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-	can1_fd_send_msg_std(0x10e,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-	can1_fd_send_msg_std(0x10f,FDCAN_DLC_BYTES_8,pdata,0x00,1);
+//	can1_fd_init();
+//	
+//  RX_FIFO_TYPE rxfifo;
+//	#define PDATA_SIZE    8
+//	uint8_t pdata[PDATA_SIZE];
+//	for(int i=0;i<PDATA_SIZE;i++) pdata[i]=i;
+//	can1_fd_send_msg_std(0x100,FDCAN_DLC_BYTES_8,pdata,0x00,1);
+//	can1_fd_send_msg_std(0x101,FDCAN_DLC_BYTES_8,pdata,0x00,1);
+//	can1_fd_send_msg_std(0x102,FDCAN_DLC_BYTES_8,pdata,0x00,1);
+//	can1_fd_send_msg_std(0x103,FDCAN_DLC_BYTES_8,pdata,0x00,1);
+//	can1_fd_send_msg_std(0x104,FDCAN_DLC_BYTES_8,pdata,0x00,1);
+//	can1_fd_send_msg_std(0x105,FDCAN_DLC_BYTES_8,pdata,0x00,1);
+//	can1_fd_send_msg_std(0x106,FDCAN_DLC_BYTES_8,pdata,0x00,1);
+//	can1_fd_send_msg_std(0x107,FDCAN_DLC_BYTES_8,pdata,0x00,1);
+//	can1_fd_send_msg_std(0x108,FDCAN_DLC_BYTES_8,pdata,0x00,1);
+//	can1_fd_send_msg_std(0x109,FDCAN_DLC_BYTES_8,pdata,0x00,1);
+//	can1_fd_send_msg_std(0x10a,FDCAN_DLC_BYTES_8,pdata,0x00,1);
+//	can1_fd_send_msg_std(0x10b,FDCAN_DLC_BYTES_8,pdata,0x00,1);
+//	can1_fd_send_msg_std(0x10c,FDCAN_DLC_BYTES_8,pdata,0x00,1);
+//	can1_fd_send_msg_std(0x10d,FDCAN_DLC_BYTES_8,pdata,0x00,1);
+//	can1_fd_send_msg_std(0x10e,FDCAN_DLC_BYTES_8,pdata,0x00,1);
+//	can1_fd_send_msg_std(0x10f,FDCAN_DLC_BYTES_8,pdata,0x00,1);
 	
 	usart1_my_printf("APP_TASK_RUN......\r\n");
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
 	for(;;)
 	{		
-		if(can1_fd_get_msg(&rxfifo))
-		{
-			usart1_my_printf("\r\n----fomat=%d------------------\r\n",rxfifo.RxHeader.FDFormat);
-			usart1_my_printf("id=0x%x\r\n",rxfifo.RxHeader.Identifier);
-			for(int j=0;j<PDATA_SIZE;j++) usart1_my_printf("rx=0x%x->",rxfifo.pdata[j]);
-			usart1_my_printf("\r\n----------------------\r\n");
-		}
+//		if(can1_fd_get_msg(&rxfifo))
+//		{
+//			usart1_my_printf("\r\n----fomat=%d------------------\r\n",rxfifo.RxHeader.FDFormat);
+//			usart1_my_printf("id=0x%x\r\n",rxfifo.RxHeader.Identifier);
+//			for(int j=0;j<PDATA_SIZE;j++) usart1_my_printf("rx=0x%x->",rxfifo.pdata[j]);
+//			usart1_my_printf("\r\n----------------------\r\n");
+//		}
 		
 #if USE_LVGL_RUN
     lv_task_handler();
