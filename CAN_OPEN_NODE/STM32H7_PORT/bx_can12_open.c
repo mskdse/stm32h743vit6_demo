@@ -237,7 +237,6 @@ bool bx_can12_send_msg_std(FDCAN_GlobalTypeDef *CANIndex,uint16_t id,uint32_t dl
 	if(FDCAN1==CANIndex)
 	{
 		FCAN1TxHeader_ST.DataLength=dlc;
-    FCAN1TxHeader_ST.TxFrameType=FDCAN_DATA_FRAME;
 		FCAN1TxHeader_ST.Identifier=id;
 		FCAN1TxHeader_ST.MessageMarker=msgid;
 		ret=HAL_FDCAN_AddMessageToTxFifoQ(&hfdcan1,&FCAN1TxHeader_ST,pdata);
@@ -245,7 +244,6 @@ bool bx_can12_send_msg_std(FDCAN_GlobalTypeDef *CANIndex,uint16_t id,uint32_t dl
 	else if(FDCAN2==CANIndex)
 	{
 		FCAN2TxHeader_ST.DataLength=dlc;
-    FCAN2TxHeader_ST.TxFrameType=FDCAN_DATA_FRAME;
 		FCAN2TxHeader_ST.Identifier=id;
 		FCAN2TxHeader_ST.MessageMarker=msgid;
 		ret=HAL_FDCAN_AddMessageToTxFifoQ(&hfdcan2,&FCAN2TxHeader_ST,pdata);

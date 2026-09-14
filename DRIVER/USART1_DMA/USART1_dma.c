@@ -66,7 +66,7 @@ void usart1_dma_init(uint32_t badue)
 	hdma_usart_tx.Init.Request=DMA_REQUEST_USART1_TX;
 	HAL_DMA_Init(&hdma_usart_tx);
 	
-	USART1_DMA_TX_COMPTLE=1;//放行第一次发送
+	USART1_DMA_TX_COMPTLE=0;
 	USART1->ICR|=(0x01<<6);//清空发送完成中断
 	USART1->CR3|=(0x01<<7);//使能串口发送DMA
 	DMA1_Stream2->CR|=(0x01<<4);//使能发送完成中断
@@ -109,10 +109,7 @@ void usart1_my_printf(const char *format, ...)
 {
 	va_list args;
 	int len;
-	
-	while(!USART1_DMA_TX_COMPTLE);
-	USART1_DMA_TX_COMPTLE=0;
-	
+
 	va_start(args, format);
 	len=vsnprintf((char *)USART1_DMA_TX_FIFO,USART1_DMA_TX_SIZE,format,args);
 	va_end(args);
@@ -121,6 +118,9 @@ void usart1_my_printf(const char *format, ...)
 	DMA1_Stream2->M0AR=(uint32_t)USART1_DMA_TX_FIFO;
 	DMA1_Stream2->PAR=(uint32_t)&USART1->TDR;
   DMA1_Stream2->CR|=(0x01<<0);
+	
+	while(!USART1_DMA_TX_COMPTLE);
+	USART1_DMA_TX_COMPTLE=0;
 }
 
 void DMA1_Stream2_IRQHandler(void)

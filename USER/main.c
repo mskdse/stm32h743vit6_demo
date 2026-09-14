@@ -9,8 +9,7 @@ static void CPU_CACHE_Enable(void);
 __attribute__((section(".RamVecTable")))static uint8_t RAM_VCTOR_TABLE[0x400];
 
 #define NMT_CONTROL \
-    (CO_NMT_STARTUP_TO_OPERATIONAL | \
-     CO_NMT_ERR_ON_ERR_REG | \
+    (CO_NMT_ERR_ON_ERR_REG | \
      CO_ERR_REG_GENERIC_ERR | \
      CO_ERR_REG_COMMUNICATION)
 
@@ -29,6 +28,10 @@ CO_ReturnError_t err;
 uint32_t errInfo = 0;
 uint32_t heapMemoryUsed = 0;
 volatile uint32_t canopen_1ms_tick = 0;
+
+static uint16_t uart1_size;
+static uint8_t  uart1_buf[256];
+RX_FIFO_TYPE    fdcan2_rsmg;
 
 int main(void)
 {
@@ -72,17 +75,16 @@ int main(void)
 	lv_demo_benchmark();//ÔÊÐíLVGLµÄ²âÊÔDemo
 #endif
   
-	bx_can12_init(true,false);
+	bx_can12_init(true,true);
+	
 	CO = CO_new(NULL, &heapMemoryUsed);
-	if(CO == NULL)
-			Error_Handler();
+	if(CO == NULL) Error_Handler();
 
 	CO_CANsetConfigurationMode(FDCAN1);
 	CO_CANmodule_disable(CO->CANmodule);
 
 	err = CO_CANinit(CO, FDCAN1, pendingBitRate);
-	if(err != CO_ERROR_NO)
-			Error_Handler();
+	if(err != CO_ERROR_NO) Error_Handler();
 
 	CO_LSS_address_t lssAddress = {
 			.identity = {
@@ -100,8 +102,7 @@ int main(void)
 			&pendingBitRate
 	);
 
-	if(err != CO_ERROR_NO)
-			Error_Handler();
+	if(err != CO_ERROR_NO) Error_Handler();
 
 	activeNodeId = pendingNodeId;
 
@@ -148,13 +149,26 @@ int main(void)
 	uint32_t last_tick = 0;
 	for(;;)
 	{		
+    if(usart1_fifo_out(uart1_buf,&uart1_size))
+    {
+       usart1_my_printf("---------CAN2_TX: ID=0x%x DLC=0X%X---\r\n",0x000,2);
+       for(int i=0;i<uart1_size;i++) usart1_my_printf("0x%x->\r\n",uart1_buf[i]);
+			 bx_can12_send_msg_std(FDCAN2,*(uint16_t *)&uart1_buf[0],uart1_buf[2],&uart1_buf[3],0);
+    }
+
+    if(bx_can12_get_msg(FDCAN2,&fdcan2_rsmg))
+    {
+       usart1_my_printf("---------CAN2_RX: ID=0x%x DLC=0X%X---\r\n",fdcan2_rsmg.RxHeader.Identifier,fdcan2_rsmg.RxHeader.DataLength);
+       for(int i=0;i<fdcan2_rsmg.RxHeader.DataLength;i++) usart1_my_printf("0x%x->\r\n",fdcan2_rsmg.pdata[i]);
+    }
+
     uint32_t now = canopen_1ms_tick;
-		if(now != last_tick)
-		{
-			uint32_t diff = now - last_tick;
-			last_tick = now;
-			CO_process(CO, (uint16_t)diff, NULL);
-		}
+    if(now != last_tick)
+    {
+      uint32_t diff = now - last_tick;
+      last_tick = now;
+      CO_process(CO, false, diff * 1000U, NULL);
+    }
 		
 #if USE_LVGL_RUN
     lv_task_handler();

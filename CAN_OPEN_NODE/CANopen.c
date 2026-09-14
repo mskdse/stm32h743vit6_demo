@@ -314,8 +314,8 @@
 #endif
 
 /* Allocate memory for number of elements, each of specific size Allocated memory must be reset to all zeros */
-#define CO_alloc(num, size) calloc((num), (size))
-#define CO_free(ptr)        free((ptr))
+#define CO_alloc(num, size) sram_d2_malloc((num)*(size))
+#define CO_free(ptr)        sram_d2_free(ptr)
 
 #endif
 

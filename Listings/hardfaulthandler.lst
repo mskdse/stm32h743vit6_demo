@@ -21,12 +21,11 @@ ARM Macro Assembler    Page 1
    15 00000014                 END
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M7.fp.dp --apcs=
 interwork --depend=.\outfiles\hardfaulthandler.d -o.\outfiles\hardfaulthandler.
-o -I.\RTE\Compiler -I.\RTE\_PROJECT -IC:\Users\EVC2-5\AppData\Local\Arm\Packs\K
-eil\ARM_Compiler\1.6.3\Include -IC:\Users\EVC2-5\AppData\Local\Arm\Packs\Keil\S
-TM32H7xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include --predefine="__MIC
-ROLIB SETA 1" --predefine="__UVISION_VERSION SETA 543" --predefine="STM32H743xx
- SETA 1" --predefine="_RTE_ SETA 1" --list=.\listings\hardfaulthandler.lst Hard
-FaultHandler\HardFaultHandler.s
+o -I.\RTE\Compiler -I.\RTE\_PROJECT -ID:\Keil5\ARM\PACK\Keil\ARM_Compiler\1.6.3
+\Include --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 53
+5" --predefine="_RTE_ SETA 1" --predefine="STM32H743xx SETA 1" --predefine="_RT
+E_ SETA 1" --list=.\listings\hardfaulthandler.lst HardFaultHandler\HardFaultHan
+dler.s
 
 
 

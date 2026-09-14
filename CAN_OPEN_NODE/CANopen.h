@@ -40,6 +40,7 @@
 #include "305/CO_LSSmaster.h"
 #include "309/CO_gateway_ascii.h"
 #include "extra/CO_trace.h"
+#include "sram_d2_malloc.h"
 
 #ifdef __cplusplus
 extern "C" {
