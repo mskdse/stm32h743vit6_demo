@@ -529,7 +529,7 @@ bool can12_fd_get_msg(FDCAN_GlobalTypeDef *CANIndex,RX_FIFO_TYPE* rmsg)
 	return false;
 }
 
-/* 接收消息回调，我们把它们接收到队列当中缓存起来 */
+/* 接收消息回调，我们把它们接收到队列当中缓存起来，一次性取完防止残留 */
 void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 {
   if((RxFifo0ITs & FDCAN_IT_RX_FIFO0_WATERMARK) != RESET)
@@ -537,19 +537,27 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 		__disable_irq();
 		if(FDCAN1==hfdcan->Instance)
 		{
-		  HAL_FDCAN_GetRxMessage(&hfdcan1,
-								             FDCAN_RX_FIFO0,
-								             &FACAN1_RX_FIFO.fifo[FACAN1_RX_FIFO.write].RxHeader,
-								             FACAN1_RX_FIFO.fifo[FACAN1_RX_FIFO.write].pdata);
-			FACAN1_RX_FIFO.write=(FACAN1_RX_FIFO.write+1)&(FDCAN_FIFO_SIZE-1);
+			 while(HAL_FDCAN_GetRxFifoFillLevel(&hfdcan1,FDCAN_RX_FIFO0))
+			{
+				if(((FACAN1_RX_FIFO.write+1)&(FDCAN_FIFO_SIZE-1))==FACAN1_RX_FIFO.read) break;
+				HAL_FDCAN_GetRxMessage(&hfdcan1,
+															 FDCAN_RX_FIFO0,
+															 &FACAN1_RX_FIFO.fifo[FACAN1_RX_FIFO.write].RxHeader,
+															 FACAN1_RX_FIFO.fifo[FACAN1_RX_FIFO.write].pdata);
+				FACAN1_RX_FIFO.write=(FACAN1_RX_FIFO.write+1)&(FDCAN_FIFO_SIZE-1);
+			}
 		}
 		else if(FDCAN2==hfdcan->Instance)
 		{
-			HAL_FDCAN_GetRxMessage(&hfdcan2,
-								             FDCAN_RX_FIFO0,
-								             &FACAN2_RX_FIFO.fifo[FACAN2_RX_FIFO.write].RxHeader,
-								             FACAN2_RX_FIFO.fifo[FACAN2_RX_FIFO.write].pdata);
-			FACAN2_RX_FIFO.write=(FACAN2_RX_FIFO.write+1)&(FDCAN_FIFO_SIZE-1);
+			 while(HAL_FDCAN_GetRxFifoFillLevel(&hfdcan2,FDCAN_RX_FIFO0))
+			{
+				if(((FACAN2_RX_FIFO.write+1)&(FDCAN_FIFO_SIZE-1))==FACAN2_RX_FIFO.read) break;
+				HAL_FDCAN_GetRxMessage(&hfdcan2,
+															 FDCAN_RX_FIFO0,
+															 &FACAN2_RX_FIFO.fifo[FACAN2_RX_FIFO.write].RxHeader,
+															 FACAN2_RX_FIFO.fifo[FACAN2_RX_FIFO.write].pdata);
+				FACAN2_RX_FIFO.write=(FACAN2_RX_FIFO.write+1)&(FDCAN_FIFO_SIZE-1);
+			}
 		}
 		__enable_irq();
   }
@@ -561,19 +569,27 @@ void HAL_FDCAN_RxFifo1Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo1ITs)
 		__disable_irq();
 		if(FDCAN1==hfdcan->Instance)
 		{
-			HAL_FDCAN_GetRxMessage(&hfdcan1,
-														 FDCAN_RX_FIFO1,
-														 &FACAN1_RX_FIFO.fifo[FACAN1_RX_FIFO.write].RxHeader,
-														 FACAN1_RX_FIFO.fifo[FACAN1_RX_FIFO.write].pdata);
-														 FACAN1_RX_FIFO.write=(FACAN1_RX_FIFO.write+1)&(FDCAN_FIFO_SIZE-1);
+			 while(HAL_FDCAN_GetRxFifoFillLevel(&hfdcan1,FDCAN_RX_FIFO1))
+			{
+				if(((FACAN1_RX_FIFO.write+1)&(FDCAN_FIFO_SIZE-1))==FACAN1_RX_FIFO.read) break;
+				HAL_FDCAN_GetRxMessage(&hfdcan1,
+															 FDCAN_RX_FIFO1,
+															 &FACAN1_RX_FIFO.fifo[FACAN1_RX_FIFO.write].RxHeader,
+															 FACAN1_RX_FIFO.fifo[FACAN1_RX_FIFO.write].pdata);
+				FACAN1_RX_FIFO.write=(FACAN1_RX_FIFO.write+1)&(FDCAN_FIFO_SIZE-1);
+			}
 		}
 		else if(FDCAN2==hfdcan->Instance)
 		{
-			HAL_FDCAN_GetRxMessage(&hfdcan2,
-														 FDCAN_RX_FIFO1,
-														 &FACAN2_RX_FIFO.fifo[FACAN2_RX_FIFO.write].RxHeader,
-														 FACAN2_RX_FIFO.fifo[FACAN2_RX_FIFO.write].pdata);
-														 FACAN2_RX_FIFO.write=(FACAN2_RX_FIFO.write+1)&(FDCAN_FIFO_SIZE-1);
+			while(HAL_FDCAN_GetRxFifoFillLevel(&hfdcan2,FDCAN_RX_FIFO1))
+			{
+				if(((FACAN2_RX_FIFO.write+1)&(FDCAN_FIFO_SIZE-1))==FACAN2_RX_FIFO.read) break;
+				HAL_FDCAN_GetRxMessage(&hfdcan2,
+															 FDCAN_RX_FIFO1,
+															 &FACAN2_RX_FIFO.fifo[FACAN2_RX_FIFO.write].RxHeader,
+															 FACAN2_RX_FIFO.fifo[FACAN2_RX_FIFO.write].pdata);
+				FACAN2_RX_FIFO.write=(FACAN2_RX_FIFO.write+1)&(FDCAN_FIFO_SIZE-1);
+			}
 		}
 		__enable_irq();
   }

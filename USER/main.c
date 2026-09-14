@@ -8,6 +8,28 @@ static void CPU_CACHE_Enable(void);
 /* 数组表格定义在 .RAM_RESET_VCTOR 段，这段空间用来存储中断向量表，不得再其他地方再定义这个节区 */
 __attribute__((section(".RamVecTable")))static uint8_t RAM_VCTOR_TABLE[0x400];
 
+#define NMT_CONTROL \
+    (CO_NMT_STARTUP_TO_OPERATIONAL | \
+     CO_NMT_ERR_ON_ERR_REG | \
+     CO_ERR_REG_GENERIC_ERR | \
+     CO_ERR_REG_COMMUNICATION)
+
+#define FIRST_HB_TIME        500
+#define SDO_SRV_TIMEOUT_TIME 1000
+#define SDO_CLI_TIMEOUT_TIME 500
+#define SDO_CLI_BLOCK        false
+#define OD_STATUS_BITS       NULL
+
+CO_t *CO = NULL;
+
+static uint8_t pendingNodeId = 10;
+static uint8_t activeNodeId = 10;
+static uint16_t pendingBitRate = 1000;
+CO_ReturnError_t err;
+uint32_t errInfo = 0;
+uint32_t heapMemoryUsed = 0;
+volatile uint32_t canopen_1ms_tick = 0;
+
 int main(void)
 {
 	/* 将中断向量表从FLASH的首地址拷贝到DTCM中然后设置中断向量表的偏移为DTCM首地址也就是数组地址 */
@@ -50,72 +72,88 @@ int main(void)
 	lv_demo_benchmark();//允许LVGL的测试Demo
 #endif
   
-	can12_fd_init(true,true);
-	
-  RX_FIFO_TYPE rxfifo;
-	#define PDATA_SIZE    8
-	uint8_t pdata[PDATA_SIZE];
-	uint16_t keyinfo;
-	for(int i=0;i<PDATA_SIZE;i++) pdata[i]=i;
+	bx_can12_init(true,false);
+	CO = CO_new(NULL, &heapMemoryUsed);
+	if(CO == NULL)
+			Error_Handler();
+
+	CO_CANsetConfigurationMode(FDCAN1);
+	CO_CANmodule_disable(CO->CANmodule);
+
+	err = CO_CANinit(CO, FDCAN1, pendingBitRate);
+	if(err != CO_ERROR_NO)
+			Error_Handler();
+
+	CO_LSS_address_t lssAddress = {
+			.identity = {
+					.vendorID = OD_PERSIST_COMM.x1018_identity.vendor_ID,
+					.productCode = OD_PERSIST_COMM.x1018_identity.productCode,
+					.revisionNumber = OD_PERSIST_COMM.x1018_identity.revisionNumber,
+					.serialNumber = OD_PERSIST_COMM.x1018_identity.serialNumber
+			}
+	};
+
+	err = CO_LSSinit(
+			CO,
+			&lssAddress,
+			&pendingNodeId,
+			&pendingBitRate
+	);
+
+	if(err != CO_ERROR_NO)
+			Error_Handler();
+
+	activeNodeId = pendingNodeId;
+
+	err = CO_CANopenInit(
+			CO,
+			NULL,
+			NULL,
+			OD,
+			OD_STATUS_BITS,
+			NMT_CONTROL,
+			FIRST_HB_TIME,
+			SDO_SRV_TIMEOUT_TIME,
+			SDO_CLI_TIMEOUT_TIME,
+			SDO_CLI_BLOCK,
+			activeNodeId,
+			&errInfo
+	);
+
+	if(err != CO_ERROR_NO &&
+		 err != CO_ERROR_NODE_ID_UNCONFIGURED_LSS)
+	{
+			Error_Handler();
+	}
+
+	err = CO_CANopenInitPDO(
+			CO,
+			CO->em,
+			OD,
+			activeNodeId,
+			&errInfo
+	);
+
+	if(err != CO_ERROR_NO &&
+		 err != CO_ERROR_NODE_ID_UNCONFIGURED_LSS)
+	{
+			Error_Handler();
+	}
+
+	CO_CANsetNormalMode(CO->CANmodule);
 	
 	usart1_my_printf("APP_TASK_RUN......\r\n");
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
+	
+	uint32_t last_tick = 0;
 	for(;;)
 	{		
-		keyinfo=drvp_key_rfifo();
-		if( (((keyinfo>>8)&0xff)==E_KEY_1) && ((keyinfo&0xff)==E_EVENT_PRESS) )
+    uint32_t now = canopen_1ms_tick;
+		if(now != last_tick)
 		{
-			can12_fd_send_msg_std(FDCAN1,0x100,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN1,0x101,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN1,0x102,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN1,0x103,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN1,0x104,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN1,0x105,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN1,0x106,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN1,0x107,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN1,0x108,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN1,0x109,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN1,0x10a,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN1,0x10b,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN1,0x10c,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN1,0x10d,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN1,0x10e,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN1,0x10f,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-		}
-		else if( (((keyinfo>>8)&0xff)==E_KEY_2) && ((keyinfo&0xff)==E_EVENT_PRESS) )
-		{
-			can12_fd_send_msg_std(FDCAN2,0x100,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN2,0x101,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN2,0x102,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN2,0x103,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN2,0x104,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN2,0x105,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN2,0x106,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN2,0x107,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN2,0x108,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN2,0x109,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN2,0x10a,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN2,0x10b,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN2,0x10c,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN2,0x10d,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN2,0x10e,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-			can12_fd_send_msg_std(FDCAN2,0x10f,FDCAN_DLC_BYTES_8,pdata,0x00,1);
-		}
-		
-		while(can12_fd_get_msg(FDCAN1,&rxfifo))
-		{
-			usart1_my_printf("\r\n----can1,fomat=%d------------------\r\n",rxfifo.RxHeader.FDFormat);
-			usart1_my_printf("id=0x%x\r\n",rxfifo.RxHeader.Identifier);
-			for(int j=0;j<PDATA_SIZE;j++) usart1_my_printf("rx=0x%x->",rxfifo.pdata[j]);
-			usart1_my_printf("\r\n----------------------\r\n");
-		}
-		
-		while(can12_fd_get_msg(FDCAN2,&rxfifo))
-		{
-			usart1_my_printf("\r\n----can2,fomat=%d------------------\r\n",rxfifo.RxHeader.FDFormat);
-			usart1_my_printf("id=0x%x\r\n",rxfifo.RxHeader.Identifier);
-			for(int j=0;j<PDATA_SIZE;j++) usart1_my_printf("rx=0x%x->",rxfifo.pdata[j]);
-			usart1_my_printf("\r\n----------------------\r\n");
+			uint32_t diff = now - last_tick;
+			last_tick = now;
+			CO_process(CO, (uint16_t)diff, NULL);
 		}
 		
 #if USE_LVGL_RUN
@@ -379,6 +417,8 @@ __attribute__((section(".ITCM_CODE"), used))void SysTick_Handler(void)
     eepromcnt=0;
     drvp_eeprom_prc_10ms();
   }
+	
+	canopen_1ms_tick++;
 	
 #if USE_LVGL_RUN
 	lv_tick_inc(1);

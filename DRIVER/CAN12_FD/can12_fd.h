@@ -29,6 +29,10 @@ typedef struct
 	RX_FIFO_TYPE  fifo[FDCAN_FIFO_SIZE];
 }FDCAN_FIFO_TYPE;
 
+/* CANIndex这个参数只需要给定FDCAN1/2即可 */
+//FDCAN1
+//FDCAN2
+
 /* dlc这个参数只能由下面这些宏定义来给注意如果是CAN2.0标准的报文只能给0-8之间的参数 */
 //#define FDCAN_DLC_BYTES_0  ((uint32_t)0x00000000U) /*!< 0 bytes data field  */
 //#define FDCAN_DLC_BYTES_1  ((uint32_t)0x00000001U) /*!< 1 bytes data field  */
