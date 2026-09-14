@@ -46,10 +46,9 @@ typedef struct
 //#define FDCAN_DLC_BYTES_32 ((uint32_t)0x0000000DU) /*!< 32 bytes data field */
 //#define FDCAN_DLC_BYTES_48 ((uint32_t)0x0000000EU) /*!< 48 bytes data field */
 //#define FDCAN_DLC_BYTES_64 ((uint32_t)0x0000000FU) /*!< 64 bytes data field */
-void can12_fd_init(void);
-bool can12_fd_get_msg(RX_FIFO_TYPE* rmsg);
-void can12_fd_send_msg_std(uint16_t id,uint32_t dlc,uint8_t* pdata,uint8_t msgid,bool is_data_frame);
-void can12_fd_send_msg_ext(uint32_t id,uint32_t dlc,uint8_t* pdata,uint8_t msgid,bool is_data_frame);
-
+void can12_fd_init(bool use_canfd1,bool use_canfd2);
+bool can12_fd_get_msg(FDCAN_GlobalTypeDef *CANIndex,RX_FIFO_TYPE* rmsg);
+void can12_fd_send_msg_std(FDCAN_GlobalTypeDef *CANIndex,uint16_t id,uint32_t dlc,uint8_t* pdata,uint8_t msgid,bool is_data_frame);
+void can12_fd_send_msg_ext(FDCAN_GlobalTypeDef *CANIndex,uint32_t id,uint32_t dlc,uint8_t* pdata,uint8_t msgid,bool is_data_frame);
 
 #endif

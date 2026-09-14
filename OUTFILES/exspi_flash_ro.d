@@ -265,4 +265,4 @@
 .\outfiles\exspi_flash_ro.o: .\DRIVER\DMA1MUX_PWM\dma1mux_pwm.h
 .\outfiles\exspi_flash_ro.o: .\DRIVER\USART1_DMA\usart1_dma.h
 .\outfiles\exspi_flash_ro.o: .\DRIVER\SPI_FLASH\spi_flash.h
-.\outfiles\exspi_flash_ro.o: .\DRIVER\CAN1_FD\can1_fd.h
+.\outfiles\exspi_flash_ro.o: .\DRIVER\CAN12_FD\can12_fd.h

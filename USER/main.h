@@ -5,7 +5,7 @@
 #define  MY_FLASH_IS_QSPI_FLASH      1
 
 /* 是否运行LVGL图形库 */
-#define USE_LVGL_RUN                 1
+#define USE_LVGL_RUN                 0
 
 #include "stm32h7xx.h"
 #include "SEGGER_RTT.h"
@@ -30,6 +30,6 @@
 #include "dma1mux_pwm.h"
 #include "usart1_dma.h"
 #include "spi_flash.h"
-#include "can1_fd.h"
+#include "can12_fd.h"
 
 #endif
