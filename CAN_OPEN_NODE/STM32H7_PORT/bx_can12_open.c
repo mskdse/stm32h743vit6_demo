@@ -73,6 +73,7 @@ static void can12_borad_init(bool use_canfd1,bool use_canfd2)
 	
 	if(use_canfd2)
 	{
+		GPIO_InitStruct.Alternate = GPIO_AF9_FDCAN2;
 		GPIO_InitStruct.Pin       = GPIO_PIN_12;
 		HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 		GPIO_InitStruct.Pin       = GPIO_PIN_13;
@@ -103,12 +104,12 @@ void bx_can12_init(bool use_canfd1,bool use_canfd2)
 	if(use_canfd1)
 	{
     /* CAN2.0标准格式不允许变速，我们必须统一给它500KBPS或者1MBPS，不得发生变速
-		   而且采样点保持一致，这里我们指定1MBPS，采样点=(1+18)/(1+18+6)=76%，注意不要
+		   而且采样点保持一致，这里我们指定500KBPS，采样点=(1+37)/(1+37+12)=76%，注意不要
   		超过它们各自的数据范围 */
     hfdcan1.Init.NominalPrescaler=8;
     hfdcan1.Init.NominalSyncJumpWidth=10;
-    hfdcan1.Init.NominalTimeSeg1=18;
-    hfdcan1.Init.NominalTimeSeg2=6;
+    hfdcan1.Init.NominalTimeSeg1=37;
+    hfdcan1.Init.NominalTimeSeg2=12;
 //    hfdcan1.Init.DataPrescaler=;不用给，反正没有变速机制会自动与仲裁段一致
 //    hfdcan1.Init.DataSyncJumpWidth=;
 //    hfdcan1.Init.DataTimeSeg1=;
@@ -139,7 +140,7 @@ void bx_can12_init(bool use_canfd1,bool use_canfd2)
 
     hfdcan1.Init.TxBuffersNbr=0;//发送缓冲区个数为0，不需要使用
     hfdcan1.Init.TxEventsNbr=0;//事件发送缓存个数为0不需要用
-    hfdcan1.Init.TxFifoQueueElmtsNbr=60;//60个发送FIFO或者发送队列的长度，选队列还是FIFO由下面控制
+    hfdcan1.Init.TxFifoQueueElmtsNbr=32;//32个发送FIFO或者发送队列的长度，选队列还是FIFO由下面控制
     hfdcan1.Init.TxFifoQueueMode=FDCAN_TX_FIFO_OPERATION;//选择FIFO模式
 	  HAL_FDCAN_Init(&hfdcan1);
 
@@ -159,12 +160,12 @@ void bx_can12_init(bool use_canfd1,bool use_canfd2)
 	if(use_canfd2)
 	{
     /* CAN2.0标准格式不允许变速，我们必须统一给它500KBPS或者1MBPS，不得发生变速
-		   而且采样点保持一致，这里我们指定1MBPS，采样点=(1+18)/(1+18+6)=76%，注意不要
+		   而且采样点保持一致，这里我们指定500KBPS，采样点=(1+37)/(1+37+12)=76%，注意不要
   		超过它们各自的数据范围 */
     hfdcan2.Init.NominalPrescaler=8;
     hfdcan2.Init.NominalSyncJumpWidth=10;
-    hfdcan2.Init.NominalTimeSeg1=18;
-    hfdcan2.Init.NominalTimeSeg2=6;
+    hfdcan2.Init.NominalTimeSeg1=37;
+    hfdcan2.Init.NominalTimeSeg2=12;
 //    hfdcan2.Init.DataPrescaler=;不用给，反正没有变速机制会自动与仲裁段一致
 //    hfdcan2.Init.DataSyncJumpWidth=;
 //    hfdcan2.Init.DataTimeSeg1=;
@@ -185,7 +186,7 @@ void bx_can12_init(bool use_canfd1,bool use_canfd2)
     	
     hfdcan2.Instance=FDCAN2;
 	  hfdcan2.Init.Mode=FDCAN_MODE_NORMAL;//工作模式，一般就关注正常模式和内外环回测试就行
-    hfdcan2.Init.MessageRAMOffset=((5*1024)/4);//FDCAN1占用的10KB的共享RAM的偏移量为0从头使用，FDCAN2可以设置为一半的位置
+    hfdcan2.Init.MessageRAMOffset=1280;//FDCAN1占用的10KB的共享RAM的偏移量为0从头使用，FDCAN2可以设置为一半的位置
     hfdcan2.Init.ProtocolException=ENABLE;//收到的报文协议异常则判定格式错误
     hfdcan2.Init.AutoRetransmission=ENABLE;//使能自动重传模式
     hfdcan2.Init.TransmitPause=ENABLE;//使能传输暂停机制，传输完成一帧之后让出一段时间，如果还是总线空闲则可以继续发送
@@ -195,7 +196,7 @@ void bx_can12_init(bool use_canfd1,bool use_canfd2)
 
     hfdcan2.Init.TxBuffersNbr=0;//发送缓冲区个数为0，不需要使用
     hfdcan2.Init.TxEventsNbr=0;//事件发送缓存个数为0不需要用
-    hfdcan2.Init.TxFifoQueueElmtsNbr=60;//60个发送FIFO或者发送队列的长度，选队列还是FIFO由下面控制
+    hfdcan2.Init.TxFifoQueueElmtsNbr=32;//32个发送FIFO或者发送队列的长度，选队列还是FIFO由下面控制
     hfdcan2.Init.TxFifoQueueMode=FDCAN_TX_FIFO_OPERATION;//选择FIFO模式
 	  HAL_FDCAN_Init(&hfdcan2);
 

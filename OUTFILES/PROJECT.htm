@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\OUTFILES\PROJECT.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\OUTFILES\PROJECT.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Mon Sep 14 20:36:09 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Tue Sep 15 16:55:19 2026
 <BR><P>
 <H3>Maximum Stack Usage =        648 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1005,7 +1005,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[118]"></a>CO_CANopenInitPDO</STRONG> (Thumb, 236 bytes, Stack size 80 bytes, canopen.o(i.CO_CANopenInitPDO))
+<P><STRONG><a name="[118]"></a>CO_CANopenInitPDO</STRONG> (Thumb, 240 bytes, Stack size 80 bytes, canopen.o(i.CO_CANopenInitPDO))
 <BR><BR>[Stack]<UL><LI>Max Depth = 332<LI>Call Chain = CO_CANopenInitPDO &rArr; CO_TPDO_init &rArr; PDO_initMapping &rArr; PDOconfigMap &rArr; OD_getSub
 </UL>
 <BR>[Calls]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CO_TPDO_init
@@ -1044,7 +1044,7 @@ Global Symbols
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[1e9]"></a>CO_CANsetNormalMode</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, co_driver.o(i.CO_CANsetNormalMode))
+<P><STRONG><a name="[1ea]"></a>CO_CANsetNormalMode</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, co_driver.o(i.CO_CANsetNormalMode))
 <BR><BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -2224,7 +2224,7 @@ Global Symbols
 <P><STRONG><a name="[1ee]"></a>vsnprintf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0vsnprintf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = vsnprintf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_my_printf
+<BR>[Called By]<UL><LI><a href="#[1e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_my_printf
 </UL>
 
 <P><STRONG><a name="[209]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
@@ -2242,8 +2242,8 @@ Global Symbols
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[1b9]"></a>bx_can12_init</STRONG> (Thumb, 288 bytes, Stack size 48 bytes, bx_can12_open.o(i.bx_can12_init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 360<LI>Call Chain = bx_can12_init &rArr; can12_borad_init &rArr; HAL_RCCEx_PeriphCLKConfig &rArr; RCCEx_PLL3_Config
+<P><STRONG><a name="[1b9]"></a>bx_can12_init</STRONG> (Thumb, 282 bytes, Stack size 48 bytes, bx_can12_open.o(i.bx_can12_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 368<LI>Call Chain = bx_can12_init &rArr; can12_borad_init &rArr; HAL_RCCEx_PeriphCLKConfig &rArr; RCCEx_PLL3_Config
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FDCAN_Start
 <LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FDCAN_Init
@@ -2501,14 +2501,14 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler (via Veneer)
 </UL>
 
-<P><STRONG><a name="[95]"></a>main</STRONG> (Thumb, 480 bytes, Stack size 48 bytes, main.o(i.main))
+<P><STRONG><a name="[95]"></a>main</STRONG> (Thumb, 500 bytes, Stack size 48 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 648<LI>Call Chain = main &rArr; usart1_dma_init &rArr; HAL_UART_Init &rArr; UART_SetConfig &rArr; __aeabi_uldivmod
 </UL>
 <BR>[Calls]<UL><LI><a href="#[174]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
 <LI><a href="#[13e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 <LI><a href="#[1df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drvp_key_init
 <LI><a href="#[1e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drvp_led_init
-<LI><a href="#[1ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_my_printf
+<LI><a href="#[1e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_my_printf
 <LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_fifo_out
 <LI><a href="#[1e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_dma_init
 <LI><a href="#[1e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drvp_fmc_lcd_set_axis_scan
@@ -2525,7 +2525,7 @@ Global Symbols
 <LI><a href="#[14d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CO_process
 <LI><a href="#[14b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CO_new
 <LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CO_LSSinit
-<LI><a href="#[1e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CO_CANsetNormalMode
+<LI><a href="#[1ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CO_CANsetNormalMode
 <LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CO_CANsetConfigurationMode
 <LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CO_CANopenInitPDO
 <LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CO_CANopenInit
@@ -2605,7 +2605,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[1ea]"></a>usart1_my_printf</STRONG> (Thumb, 56 bytes, Stack size 24 bytes, usart1_dma.o(i.usart1_my_printf))
+<P><STRONG><a name="[1e9]"></a>usart1_my_printf</STRONG> (Thumb, 56 bytes, Stack size 24 bytes, usart1_dma.o(i.usart1_my_printf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = usart1_my_printf &rArr; vsnprintf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vsnprintf
@@ -3362,8 +3362,8 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[1b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bx_can12_init
 </UL>
 
-<P><STRONG><a name="[1ba]"></a>can12_borad_init</STRONG> (Thumb, 284 bytes, Stack size 232 bytes, bx_can12_open.o(i.can12_borad_init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 312<LI>Call Chain = can12_borad_init &rArr; HAL_RCCEx_PeriphCLKConfig &rArr; RCCEx_PLL3_Config
+<P><STRONG><a name="[1ba]"></a>can12_borad_init</STRONG> (Thumb, 284 bytes, Stack size 240 bytes, bx_can12_open.o(i.can12_borad_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 320<LI>Call Chain = can12_borad_init &rArr; HAL_RCCEx_PeriphCLKConfig &rArr; RCCEx_PLL3_Config
 </UL>
 <BR>[Calls]<UL><LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
 <LI><a href="#[1c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_EnableIRQ

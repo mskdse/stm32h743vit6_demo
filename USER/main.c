@@ -120,6 +120,7 @@ int main(void)
 			activeNodeId,
 			&errInfo
 	);
+	usart1_my_printf("NMT state=%d\r\n", CO->NMT->operatingState);
 
 	if(err != CO_ERROR_NO &&
 		 err != CO_ERROR_NODE_ID_UNCONFIGURED_LSS)
@@ -147,11 +148,12 @@ int main(void)
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
 	
 	uint32_t last_tick = 0;
+	uint32_t now;
 	for(;;)
 	{		
     if(usart1_fifo_out(uart1_buf,&uart1_size))
     {
-       usart1_my_printf("---------CAN2_TX: ID=0x%x DLC=0X%X---\r\n",0x000,2);
+       usart1_my_printf("---------CAN2_TX: ID=0x%x DLC=0X%X---\r\n",0x000,uart1_buf[2]);
        for(int i=0;i<uart1_size;i++) usart1_my_printf("0x%x->\r\n",uart1_buf[i]);
 			 bx_can12_send_msg_std(FDCAN2,*(uint16_t *)&uart1_buf[0],uart1_buf[2],&uart1_buf[3],0);
     }
@@ -162,7 +164,7 @@ int main(void)
        for(int i=0;i<fdcan2_rsmg.RxHeader.DataLength;i++) usart1_my_printf("0x%x->\r\n",fdcan2_rsmg.pdata[i]);
     }
 
-    uint32_t now = canopen_1ms_tick;
+     now= canopen_1ms_tick;
     if(now != last_tick)
     {
       uint32_t diff = now - last_tick;
