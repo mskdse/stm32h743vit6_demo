@@ -31,8 +31,6 @@
 #include "usart1_dma.h"
 #include "spi_flash.h"
 //#include "can12_fd.h"
-#include "CANopen.h"
-#include "OD.h"
-#include "bx_can12_open.h"
+#include "bx_can12_open_app.h"
 
 #endif

@@ -265,6 +265,7 @@
 .\outfiles\main.o: .\DRIVER\DMA1MUX_PWM\dma1mux_pwm.h
 .\outfiles\main.o: .\DRIVER\USART1_DMA\usart1_dma.h
 .\outfiles\main.o: .\DRIVER\SPI_FLASH\spi_flash.h
+.\outfiles\main.o: .\CAN_OPEN_NODE\STM32H7_PORT\bx_can12_open_app.h
 .\outfiles\main.o: .\CAN_OPEN_NODE\CANopen.h
 .\outfiles\main.o: .\CAN_OPEN_NODE\301/CO_driver.h
 .\outfiles\main.o: .\CAN_OPEN_NODE\301/CO_config.h

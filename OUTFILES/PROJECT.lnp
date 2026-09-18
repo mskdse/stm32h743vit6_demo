@@ -172,6 +172,7 @@
 ".\outfiles\co_driver.o"
 ".\outfiles\od.o"
 ".\outfiles\bx_can12_open.o"
+".\outfiles\bx_can12_open_app.o"
 ".\outfiles\diskio.o"
 ".\outfiles\ff.o"
 ".\outfiles\ffsystem.o"

@@ -2869,6 +2869,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>CANOPEN_APP</GroupName>
+          <Files>
+            <File>
+              <FileName>bx_can12_open_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CAN_OPEN_NODE\STM32H7_PORT\bx_can12_open_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>bx_can12_open_app.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\CAN_OPEN_NODE\STM32H7_PORT\bx_can12_open_app.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>FATFS</GroupName>
           <Files>
             <File>

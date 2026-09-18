@@ -8,31 +8,6 @@ static void CPU_CACHE_Enable(void);
 /* 数组表格定义在 .RAM_RESET_VCTOR 段，这段空间用来存储中断向量表，不得再其他地方再定义这个节区 */
 __attribute__((section(".RamVecTable")))static uint8_t RAM_VCTOR_TABLE[0x400];
 
-#define NMT_CONTROL \
-    (CO_NMT_ERR_ON_ERR_REG | \
-     CO_ERR_REG_GENERIC_ERR | \
-     CO_ERR_REG_COMMUNICATION)
-
-#define FIRST_HB_TIME        500
-#define SDO_SRV_TIMEOUT_TIME 1000
-#define SDO_CLI_TIMEOUT_TIME 500
-#define SDO_CLI_BLOCK        false
-#define OD_STATUS_BITS       NULL
-
-CO_t *CO = NULL;
-
-static uint8_t pendingNodeId = 10;
-static uint8_t activeNodeId = 10;
-static uint16_t pendingBitRate = 1000;
-CO_ReturnError_t err;
-uint32_t errInfo = 0;
-uint32_t heapMemoryUsed = 0;
-volatile uint32_t canopen_1ms_tick = 0;
-
-static uint16_t uart1_size;
-static uint8_t  uart1_buf[256];
-RX_FIFO_TYPE    fdcan2_rsmg;
-
 int main(void)
 {
 	/* 将中断向量表从FLASH的首地址拷贝到DTCM中然后设置中断向量表的偏移为DTCM首地址也就是数组地址 */
@@ -75,102 +50,13 @@ int main(void)
 	lv_demo_benchmark();//允许LVGL的测试Demo
 #endif
   
-	bx_can12_init(true,true);
-	
-	CO = CO_new(NULL, &heapMemoryUsed);
-	if(CO == NULL) Error_Handler();
-
-	CO_CANsetConfigurationMode(FDCAN1);
-	CO_CANmodule_disable(CO->CANmodule);
-
-	err = CO_CANinit(CO, FDCAN1, pendingBitRate);
-	if(err != CO_ERROR_NO) Error_Handler();
-
-	CO_LSS_address_t lssAddress = {
-			.identity = {
-					.vendorID = OD_PERSIST_COMM.x1018_identity.vendor_ID,
-					.productCode = OD_PERSIST_COMM.x1018_identity.productCode,
-					.revisionNumber = OD_PERSIST_COMM.x1018_identity.revisionNumber,
-					.serialNumber = OD_PERSIST_COMM.x1018_identity.serialNumber
-			}
-	};
-
-	err = CO_LSSinit(
-			CO,
-			&lssAddress,
-			&pendingNodeId,
-			&pendingBitRate
-	);
-
-	if(err != CO_ERROR_NO) Error_Handler();
-
-	activeNodeId = pendingNodeId;
-
-	err = CO_CANopenInit(
-			CO,
-			NULL,
-			NULL,
-			OD,
-			OD_STATUS_BITS,
-			NMT_CONTROL,
-			FIRST_HB_TIME,
-			SDO_SRV_TIMEOUT_TIME,
-			SDO_CLI_TIMEOUT_TIME,
-			SDO_CLI_BLOCK,
-			activeNodeId,
-			&errInfo
-	);
-	usart1_my_printf("NMT state=%d\r\n", CO->NMT->operatingState);
-
-	if(err != CO_ERROR_NO &&
-		 err != CO_ERROR_NODE_ID_UNCONFIGURED_LSS)
-	{
-			Error_Handler();
-	}
-
-	err = CO_CANopenInitPDO(
-			CO,
-			CO->em,
-			OD,
-			activeNodeId,
-			&errInfo
-	);
-
-	if(err != CO_ERROR_NO &&
-		 err != CO_ERROR_NODE_ID_UNCONFIGURED_LSS)
-	{
-			Error_Handler();
-	}
-
-	CO_CANsetNormalMode(CO->CANmodule);
+	bx_can12_open_app_init();
 	
 	usart1_my_printf("APP_TASK_RUN......\r\n");
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
-	
-	uint32_t last_tick = 0;
-	uint32_t now;
 	for(;;)
 	{		
-    if(usart1_fifo_out(uart1_buf,&uart1_size))
-    {
-       usart1_my_printf("---------CAN2_TX: ID=0x%x DLC=0X%X---\r\n",0x000,uart1_buf[2]);
-       for(int i=0;i<uart1_size;i++) usart1_my_printf("0x%x->\r\n",uart1_buf[i]);
-			 bx_can12_send_msg_std(FDCAN2,*(uint16_t *)&uart1_buf[0],uart1_buf[2],&uart1_buf[3],0);
-    }
-
-    if(bx_can12_get_msg(FDCAN2,&fdcan2_rsmg))
-    {
-       usart1_my_printf("---------CAN2_RX: ID=0x%x DLC=0X%X---\r\n",fdcan2_rsmg.RxHeader.Identifier,fdcan2_rsmg.RxHeader.DataLength);
-       for(int i=0;i<fdcan2_rsmg.RxHeader.DataLength;i++) usart1_my_printf("0x%x->\r\n",fdcan2_rsmg.pdata[i]);
-    }
-
-     now= canopen_1ms_tick;
-    if(now != last_tick)
-    {
-      uint32_t diff = now - last_tick;
-      last_tick = now;
-      CO_process(CO, false, diff * 1000U, NULL);
-    }
+		bx_can12_open_app_prc();
 		
 #if USE_LVGL_RUN
     lv_task_handler();
@@ -434,7 +320,7 @@ __attribute__((section(".ITCM_CODE"), used))void SysTick_Handler(void)
     drvp_eeprom_prc_10ms();
   }
 	
-	canopen_1ms_tick++;
+  bx_can12_open_app_prc_1ms();
 	
 #if USE_LVGL_RUN
 	lv_tick_inc(1);

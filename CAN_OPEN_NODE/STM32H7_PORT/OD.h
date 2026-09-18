@@ -16,7 +16,7 @@
 
         Created:      2020-11-23 19:00:00
         Created By:   
-        Modified:     2026-09-15 16:55:50
+        Modified:     2026-09-18 9:21:33
         Modified By:  
 
     Device Info:
@@ -114,12 +114,6 @@ typedef struct {
         uint8_t numberOfMappedApplicationObjectsInPDO;
         uint32_t applicationObject1;
         uint32_t applicationObject2;
-        uint32_t applicationObject3;
-        uint32_t applicationObject4;
-        uint32_t applicationObject5;
-        uint32_t applicationObject6;
-        uint32_t applicationObject7;
-        uint32_t applicationObject8;
     } x1600_RPDOMappingParameter;
     struct {
         uint8_t numberOfMappedApplicationObjectsInPDO;
@@ -190,12 +184,6 @@ typedef struct {
         uint8_t numberOfMappedApplicationObjectsInPDO;
         uint32_t applicationObject1;
         uint32_t applicationObject2;
-        uint32_t applicationObject3;
-        uint32_t applicationObject4;
-        uint32_t applicationObject5;
-        uint32_t applicationObject6;
-        uint32_t applicationObject7;
-        uint32_t applicationObject8;
     } x1A00_TPDOMappingParameter;
     struct {
         uint8_t numberOfMappedApplicationObjectsInPDO;
@@ -243,6 +231,13 @@ typedef struct {
         uint32_t COB_IDClientToServerRx;
         uint32_t COB_IDServerToClientTx;
     } x1200_SDOServerParameter;
+    struct {
+        uint8_t highestSub_indexSupported;
+        uint8_t subObject1;
+        uint16_t subObject2;
+        uint8_t subObject3;
+        uint16_t subObject4;
+    } x2000_TPDO_MY_DATA;
 } OD_RAM_t;
 
 #ifndef OD_ATTR_PERSIST_COMM
@@ -298,6 +293,7 @@ extern OD_ATTR_OD OD_t *OD;
 #define OD_ENTRY_H1A01 &OD->list[31]
 #define OD_ENTRY_H1A02 &OD->list[32]
 #define OD_ENTRY_H1A03 &OD->list[33]
+#define OD_ENTRY_H2000 &OD->list[34]
 
 
 /*******************************************************************************
@@ -337,6 +333,7 @@ extern OD_ATTR_OD OD_t *OD;
 #define OD_ENTRY_H1A01_TPDOMappingParameter &OD->list[31]
 #define OD_ENTRY_H1A02_TPDOMappingParameter &OD->list[32]
 #define OD_ENTRY_H1A03_TPDOMappingParameter &OD->list[33]
+#define OD_ENTRY_H2000_TPDO_MY_DATA &OD->list[34]
 
 
 /*******************************************************************************

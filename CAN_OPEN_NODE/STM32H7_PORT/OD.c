@@ -23,13 +23,13 @@
 OD_ATTR_PERSIST_COMM OD_PERSIST_COMM_t OD_PERSIST_COMM = {
     .x1000_deviceType = 0x00000191,
     .x1005_COB_ID_SYNCMessage = 0x00000080,
-    .x1006_communicationCyclePeriod = 0x00000000,
+    .x1006_communicationCyclePeriod = 0x000186A0,
     .x1007_synchronousWindowLength = 0x00000000,
     .x1008_manufacturerDeviceName = {'s', 't', 'm', '3', '2', 'h', '7', '_', 'd', 'e', 'v', 'i', 'c', 'e', 0},
     .x1012_COB_IDTimeStampObject = 0x00000100,
     .x1014_COB_ID_EMCY = 0x00000080,
     .x1015_inhibitTimeEMCY = 0x0000,
-    .x1016_consumerHeartbeatTime_sub0 = 0x08,
+    .x1016_consumerHeartbeatTime_sub0 = 0x00,
     .x1016_consumerHeartbeatTime = {0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
     .x1017_producerHeartbeatTime = 0x07D0,
     .x1018_identity = {
@@ -48,7 +48,7 @@ OD_ATTR_PERSIST_COMM OD_PERSIST_COMM_t OD_PERSIST_COMM = {
     },
     .x1400_RPDOCommunicationParameter = {
         .highestSub_indexSupported = 0x05,
-        .COB_IDUsedByRPDO = 0x80000200,
+        .COB_IDUsedByRPDO = 0x0000020A,
         .transmissionType = 0xFE,
         .eventTimer = 0x0000
     },
@@ -71,15 +71,9 @@ OD_ATTR_PERSIST_COMM OD_PERSIST_COMM_t OD_PERSIST_COMM = {
         .eventTimer = 0x0000
     },
     .x1600_RPDOMappingParameter = {
-        .numberOfMappedApplicationObjectsInPDO = 0x00,
-        .applicationObject1 = 0x00000000,
-        .applicationObject2 = 0x00000000,
-        .applicationObject3 = 0x00000000,
-        .applicationObject4 = 0x00000000,
-        .applicationObject5 = 0x00000000,
-        .applicationObject6 = 0x00000000,
-        .applicationObject7 = 0x00000000,
-        .applicationObject8 = 0x00000000
+        .numberOfMappedApplicationObjectsInPDO = 0x02,
+        .applicationObject1 = 0x20000308,
+        .applicationObject2 = 0x20000410
     },
     .x1601_RPDOMappingParameter = {
         .numberOfMappedApplicationObjectsInPDO = 0x00,
@@ -116,8 +110,8 @@ OD_ATTR_PERSIST_COMM OD_PERSIST_COMM_t OD_PERSIST_COMM = {
     },
     .x1800_TPDOCommunicationParameter = {
         .highestSub_indexSupported = 0x06,
-        .COB_IDUsedByTPDO = 0xC0000180,
-        .transmissionType = 0xFE,
+        .COB_IDUsedByTPDO = 0x0000018A,
+        .transmissionType = 0x14,
         .inhibitTime = 0x0000,
         .eventTimer = 0x0000,
         .SYNCStartValue = 0x00
@@ -147,15 +141,9 @@ OD_ATTR_PERSIST_COMM OD_PERSIST_COMM_t OD_PERSIST_COMM = {
         .SYNCStartValue = 0x00
     },
     .x1A00_TPDOMappingParameter = {
-        .numberOfMappedApplicationObjectsInPDO = 0x00,
-        .applicationObject1 = 0x00000000,
-        .applicationObject2 = 0x00000000,
-        .applicationObject3 = 0x00000000,
-        .applicationObject4 = 0x00000000,
-        .applicationObject5 = 0x00000000,
-        .applicationObject6 = 0x00000000,
-        .applicationObject7 = 0x00000000,
-        .applicationObject8 = 0x00000000
+        .numberOfMappedApplicationObjectsInPDO = 0x02,
+        .applicationObject1 = 0x20000108,
+        .applicationObject2 = 0x20000210
     },
     .x1A01_TPDOMappingParameter = {
         .numberOfMappedApplicationObjectsInPDO = 0x00,
@@ -202,6 +190,13 @@ OD_ATTR_RAM OD_RAM_t OD_RAM = {
         .highestSub_indexSupported = 0x02,
         .COB_IDClientToServerRx = 0x00000600,
         .COB_IDServerToClientTx = 0x00000580
+    },
+    .x2000_TPDO_MY_DATA = {
+        .highestSub_indexSupported = 0x04,
+        .subObject1 = 0x00,
+        .subObject2 = 0x0000,
+        .subObject3 = 0x00,
+        .subObject4 = 0x0000
     }
 };
 
@@ -233,7 +228,7 @@ typedef struct {
     OD_obj_record_t o_1401_RPDOCommunicationParameter[4];
     OD_obj_record_t o_1402_RPDOCommunicationParameter[4];
     OD_obj_record_t o_1403_RPDOCommunicationParameter[4];
-    OD_obj_record_t o_1600_RPDOMappingParameter[9];
+    OD_obj_record_t o_1600_RPDOMappingParameter[3];
     OD_obj_record_t o_1601_RPDOMappingParameter[9];
     OD_obj_record_t o_1602_RPDOMappingParameter[9];
     OD_obj_record_t o_1603_RPDOMappingParameter[9];
@@ -241,10 +236,11 @@ typedef struct {
     OD_obj_record_t o_1801_TPDOCommunicationParameter[6];
     OD_obj_record_t o_1802_TPDOCommunicationParameter[6];
     OD_obj_record_t o_1803_TPDOCommunicationParameter[6];
-    OD_obj_record_t o_1A00_TPDOMappingParameter[9];
+    OD_obj_record_t o_1A00_TPDOMappingParameter[3];
     OD_obj_record_t o_1A01_TPDOMappingParameter[9];
     OD_obj_record_t o_1A02_TPDOMappingParameter[9];
     OD_obj_record_t o_1A03_TPDOMappingParameter[9];
+    OD_obj_record_t o_2000_TPDO_MY_DATA[5];
 } ODObjs_t;
 
 static CO_PROGMEM ODObjs_t ODObjs = {
@@ -533,42 +529,6 @@ static CO_PROGMEM ODObjs_t ODObjs = {
         {
             .dataOrig = &OD_PERSIST_COMM.x1600_RPDOMappingParameter.applicationObject2,
             .subIndex = 2,
-            .attribute = ODA_SDO_RW | ODA_MB,
-            .dataLength = 4
-        },
-        {
-            .dataOrig = &OD_PERSIST_COMM.x1600_RPDOMappingParameter.applicationObject3,
-            .subIndex = 3,
-            .attribute = ODA_SDO_RW | ODA_MB,
-            .dataLength = 4
-        },
-        {
-            .dataOrig = &OD_PERSIST_COMM.x1600_RPDOMappingParameter.applicationObject4,
-            .subIndex = 4,
-            .attribute = ODA_SDO_RW | ODA_MB,
-            .dataLength = 4
-        },
-        {
-            .dataOrig = &OD_PERSIST_COMM.x1600_RPDOMappingParameter.applicationObject5,
-            .subIndex = 5,
-            .attribute = ODA_SDO_RW | ODA_MB,
-            .dataLength = 4
-        },
-        {
-            .dataOrig = &OD_PERSIST_COMM.x1600_RPDOMappingParameter.applicationObject6,
-            .subIndex = 6,
-            .attribute = ODA_SDO_RW | ODA_MB,
-            .dataLength = 4
-        },
-        {
-            .dataOrig = &OD_PERSIST_COMM.x1600_RPDOMappingParameter.applicationObject7,
-            .subIndex = 7,
-            .attribute = ODA_SDO_RW | ODA_MB,
-            .dataLength = 4
-        },
-        {
-            .dataOrig = &OD_PERSIST_COMM.x1600_RPDOMappingParameter.applicationObject8,
-            .subIndex = 8,
             .attribute = ODA_SDO_RW | ODA_MB,
             .dataLength = 4
         }
@@ -911,42 +871,6 @@ static CO_PROGMEM ODObjs_t ODObjs = {
             .subIndex = 2,
             .attribute = ODA_SDO_RW | ODA_MB,
             .dataLength = 4
-        },
-        {
-            .dataOrig = &OD_PERSIST_COMM.x1A00_TPDOMappingParameter.applicationObject3,
-            .subIndex = 3,
-            .attribute = ODA_SDO_RW | ODA_MB,
-            .dataLength = 4
-        },
-        {
-            .dataOrig = &OD_PERSIST_COMM.x1A00_TPDOMappingParameter.applicationObject4,
-            .subIndex = 4,
-            .attribute = ODA_SDO_RW | ODA_MB,
-            .dataLength = 4
-        },
-        {
-            .dataOrig = &OD_PERSIST_COMM.x1A00_TPDOMappingParameter.applicationObject5,
-            .subIndex = 5,
-            .attribute = ODA_SDO_RW | ODA_MB,
-            .dataLength = 4
-        },
-        {
-            .dataOrig = &OD_PERSIST_COMM.x1A00_TPDOMappingParameter.applicationObject6,
-            .subIndex = 6,
-            .attribute = ODA_SDO_RW | ODA_MB,
-            .dataLength = 4
-        },
-        {
-            .dataOrig = &OD_PERSIST_COMM.x1A00_TPDOMappingParameter.applicationObject7,
-            .subIndex = 7,
-            .attribute = ODA_SDO_RW | ODA_MB,
-            .dataLength = 4
-        },
-        {
-            .dataOrig = &OD_PERSIST_COMM.x1A00_TPDOMappingParameter.applicationObject8,
-            .subIndex = 8,
-            .attribute = ODA_SDO_RW | ODA_MB,
-            .dataLength = 4
         }
     },
     .o_1A01_TPDOMappingParameter = {
@@ -1116,6 +1040,38 @@ static CO_PROGMEM ODObjs_t ODObjs = {
             .attribute = ODA_SDO_RW | ODA_MB,
             .dataLength = 4
         }
+    },
+    .o_2000_TPDO_MY_DATA = {
+        {
+            .dataOrig = &OD_RAM.x2000_TPDO_MY_DATA.highestSub_indexSupported,
+            .subIndex = 0,
+            .attribute = ODA_SDO_R,
+            .dataLength = 1
+        },
+        {
+            .dataOrig = &OD_RAM.x2000_TPDO_MY_DATA.subObject1,
+            .subIndex = 1,
+            .attribute = ODA_SDO_RW | ODA_TPDO,
+            .dataLength = 1
+        },
+        {
+            .dataOrig = &OD_RAM.x2000_TPDO_MY_DATA.subObject2,
+            .subIndex = 2,
+            .attribute = ODA_SDO_RW | ODA_TPDO | ODA_MB,
+            .dataLength = 2
+        },
+        {
+            .dataOrig = &OD_RAM.x2000_TPDO_MY_DATA.subObject3,
+            .subIndex = 3,
+            .attribute = ODA_SDO_RW | ODA_RPDO,
+            .dataLength = 1
+        },
+        {
+            .dataOrig = &OD_RAM.x2000_TPDO_MY_DATA.subObject4,
+            .subIndex = 4,
+            .attribute = ODA_SDO_RW | ODA_RPDO | ODA_MB,
+            .dataLength = 2
+        }
     }
 };
 
@@ -1146,7 +1102,7 @@ static OD_ATTR_OD OD_entry_t ODList[] = {
     {0x1401, 0x04, ODT_REC, &ODObjs.o_1401_RPDOCommunicationParameter, NULL},
     {0x1402, 0x04, ODT_REC, &ODObjs.o_1402_RPDOCommunicationParameter, NULL},
     {0x1403, 0x04, ODT_REC, &ODObjs.o_1403_RPDOCommunicationParameter, NULL},
-    {0x1600, 0x09, ODT_REC, &ODObjs.o_1600_RPDOMappingParameter, NULL},
+    {0x1600, 0x03, ODT_REC, &ODObjs.o_1600_RPDOMappingParameter, NULL},
     {0x1601, 0x09, ODT_REC, &ODObjs.o_1601_RPDOMappingParameter, NULL},
     {0x1602, 0x09, ODT_REC, &ODObjs.o_1602_RPDOMappingParameter, NULL},
     {0x1603, 0x09, ODT_REC, &ODObjs.o_1603_RPDOMappingParameter, NULL},
@@ -1154,10 +1110,11 @@ static OD_ATTR_OD OD_entry_t ODList[] = {
     {0x1801, 0x06, ODT_REC, &ODObjs.o_1801_TPDOCommunicationParameter, NULL},
     {0x1802, 0x06, ODT_REC, &ODObjs.o_1802_TPDOCommunicationParameter, NULL},
     {0x1803, 0x06, ODT_REC, &ODObjs.o_1803_TPDOCommunicationParameter, NULL},
-    {0x1A00, 0x09, ODT_REC, &ODObjs.o_1A00_TPDOMappingParameter, NULL},
+    {0x1A00, 0x03, ODT_REC, &ODObjs.o_1A00_TPDOMappingParameter, NULL},
     {0x1A01, 0x09, ODT_REC, &ODObjs.o_1A01_TPDOMappingParameter, NULL},
     {0x1A02, 0x09, ODT_REC, &ODObjs.o_1A02_TPDOMappingParameter, NULL},
     {0x1A03, 0x09, ODT_REC, &ODObjs.o_1A03_TPDOMappingParameter, NULL},
+    {0x2000, 0x05, ODT_REC, &ODObjs.o_2000_TPDO_MY_DATA, NULL},
     {0x0000, 0x00, 0, NULL, NULL}
 };
 
