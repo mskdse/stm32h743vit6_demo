@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\OUTFILES\PROJECT.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\OUTFILES\PROJECT.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sat Sep 19 14:28:12 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sat Sep 19 14:57:51 2026
 <BR><P>
 <H3>Maximum Stack Usage =        608 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1664,8 +1664,8 @@ Global Symbols
 <P><STRONG><a name="[18b]"></a>HAL_FDCAN_Init</STRONG> (Thumb, 810 bytes, Stack size 96 bytes, stm32h7xx_hal_fdcan.o(i.HAL_FDCAN_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = HAL_FDCAN_Init &rArr; FDCAN_CalcultateRamBlockAddresses
 </UL>
-<BR>[Calls]<UL><LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FDCAN_CalcultateRamBlockAddresses
-<LI><a href="#[183]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<BR>[Calls]<UL><LI><a href="#[183]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FDCAN_CalcultateRamBlockAddresses
 <LI><a href="#[146]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bx_can12_init
@@ -1753,9 +1753,9 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[183]"></a>HAL_GetTick</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32h7xx_hal.o(i.HAL_GetTick))
-<BR><BR>[Called By]<UL><LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FDCAN_Init
-<LI><a href="#[188]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
+<BR><BR>[Called By]<UL><LI><a href="#[188]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 <LI><a href="#[182]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Init
+<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FDCAN_Init
 <LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_I2C_Mem_Write
 <LI><a href="#[18f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_I2C_Mem_Read
 <LI><a href="#[196]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C_WaitOnTXISFlagUntilTimeout
@@ -2500,8 +2500,8 @@ Global Symbols
 <P><STRONG><a name="[f7]"></a>drv_fmc_lcd_rst</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, drv_fmc_lcd.o(i.drv_fmc_lcd_rst))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = drv_fmc_lcd_rst &rArr; HAL_Delay
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
-<LI><a href="#[188]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
+<BR>[Calls]<UL><LI><a href="#[188]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
+<LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> drvp_fmc_lcd.o(i.drvp_fmc_lcd_init)
 </UL>
@@ -2671,11 +2671,11 @@ Global Symbols
 <P><STRONG><a name="[1fe]"></a>spi_flash_w25q128_init</STRONG> (Thumb, 524 bytes, Stack size 32 bytes, spi_flash.o(i.spi_flash_w25q128_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = spi_flash_w25q128_init &rArr; HAL_NVIC_SetPriority &rArr; __NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
-<LI><a href="#[1e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
-<LI><a href="#[19d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
+<BR>[Calls]<UL><LI><a href="#[19d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
 <LI><a href="#[1e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_EnableIRQ
 <LI><a href="#[182]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Init
+<LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<LI><a href="#[1e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
 <LI><a href="#[1ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_Init
 <LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
@@ -2716,10 +2716,10 @@ Global Symbols
 <P><STRONG><a name="[1fd]"></a>usart1_dma_init</STRONG> (Thumb, 460 bytes, Stack size 480 bytes, usart1_dma.o(i.usart1_dma_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 600<LI>Call Chain = usart1_dma_init &rArr; HAL_UART_Init &rArr; UART_SetConfig &rArr; __aeabi_uldivmod
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
-<LI><a href="#[19d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
+<BR>[Calls]<UL><LI><a href="#[19d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
 <LI><a href="#[1e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_EnableIRQ
 <LI><a href="#[182]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Init
+<LI><a href="#[1e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
 <LI><a href="#[1af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Init
 <LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
@@ -3515,9 +3515,9 @@ Local Symbols
 <P><STRONG><a name="[1d8]"></a>can12_borad_init</STRONG> (Thumb, 306 bytes, Stack size 232 bytes, bx_can12_open.o(i.can12_borad_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 280<LI>Call Chain = can12_borad_init &rArr; HAL_NVIC_SetPriority &rArr; __NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
-<LI><a href="#[19d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
+<BR>[Calls]<UL><LI><a href="#[19d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
 <LI><a href="#[1e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_EnableIRQ
+<LI><a href="#[1e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
 <LI><a href="#[1a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCCEx_PeriphCLKConfig
 <LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
