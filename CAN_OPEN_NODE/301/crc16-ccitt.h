@@ -26,7 +26,7 @@
 
 /* default configuration, see CO_config.h */
 #ifndef CO_CONFIG_CRC16
-#define CO_CONFIG_CRC16 (0)
+#define CO_CONFIG_CRC16 (1)
 #endif
 
 #if (((CO_CONFIG_CRC16)&CO_CONFIG_CRC16_ENABLE) != 0) || defined CO_DOXYGEN

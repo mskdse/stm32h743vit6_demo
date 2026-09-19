@@ -314,7 +314,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>4</Optim>
+            <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>STM32H743xx,USE_HAL_DRIVER,USE_FULL_LL_DRIVER,DEBUG=1</Define>
               <Undefine></Undefine>
-              <IncludePath>.\USER;.\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc;.\STM32Cube_FW_H7_V1.12.0\Drivers\CMSIS\Include;.\STM32Cube_FW_H7_V1.12.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include;.\DRIVER;.\DRIVER\DRIVER_LED;.\DRIVER\DRIVER_KEY;.\SEGGER_RTT\Config;.\SEGGER_RTT\RTT;.\CIRCULAR_BUFFER\src;.\CIRCULAR_BUFFER\port;.\MEM_MANGE;.\DRIVER\BASE_TIMER6;.\DRIVER\PWM_TIMER2;.\DRIVER\PWM_IN_TIMER5;.\DRIVER\DRIVER_EEPROM;.\DRIVER\PWM_TIMER1;.\DRIVER\QSPI_FLASH;.\FATFS;.\DRIVER\LPTIMER;.\DRIVER\FMC_LCD;.\LVGL;.\LVGL\src;.\LVGL\examples\porting;.\LVGL\demos;.\LVGL\demos\benchmark;.\DRIVER\BDMAMUX_PWM;.\DRIVER\DMA1MUX_PWM;.\DRIVER\USART1_DMA;.\DRIVER\SPI_FLASH;.\DRIVER\CAN12_FD;.\CAN_OPEN_NODE;.\CAN_OPEN_NODE\301;.\CAN_OPEN_NODE\STM32H7_PORT</IncludePath>
+              <IncludePath>.\USER;.\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc;.\STM32Cube_FW_H7_V1.12.0\Drivers\CMSIS\Include;.\STM32Cube_FW_H7_V1.12.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include;.\DRIVER;.\DRIVER\DRIVER_LED;.\DRIVER\DRIVER_KEY;.\SEGGER_RTT\Config;.\SEGGER_RTT\RTT;.\CIRCULAR_BUFFER\src;.\CIRCULAR_BUFFER\port;.\MEM_MANGE;.\DRIVER\BASE_TIMER6;.\DRIVER\PWM_TIMER2;.\DRIVER\PWM_IN_TIMER5;.\DRIVER\DRIVER_EEPROM;.\DRIVER\PWM_TIMER1;.\DRIVER\QSPI_FLASH;.\FATFS;.\DRIVER\LPTIMER;.\DRIVER\FMC_LCD;.\LVGL;.\LVGL\src;.\LVGL\examples\porting;.\LVGL\demos;.\LVGL\demos\benchmark;.\DRIVER\BDMAMUX_PWM;.\DRIVER\DMA1MUX_PWM;.\DRIVER\USART1_DMA;.\DRIVER\SPI_FLASH;.\DRIVER\CAN12_FD;.\CAN_OPEN_NODE;.\CAN_OPEN_NODE\301;.\CAN_OPEN_NODE\STM32H7_PORT;.\CAN_OPEN_NODE\storage</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -2820,6 +2820,26 @@
               <FileName>CO_gateway_ascii.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\CAN_OPEN_NODE\309\CO_gateway_ascii.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>CANOPEN_EEPROM</GroupName>
+          <Files>
+            <File>
+              <FileName>CO_storage.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CAN_OPEN_NODE\storage\CO_storage.c</FilePath>
+            </File>
+            <File>
+              <FileName>CO_storageEeprom.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CAN_OPEN_NODE\storage\CO_storageEeprom.c</FilePath>
+            </File>
+            <File>
+              <FileName>bx_can12_open_eeprom.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CAN_OPEN_NODE\STM32H7_PORT\bx_can12_open_eeprom.c</FilePath>
             </File>
           </Files>
         </Group>

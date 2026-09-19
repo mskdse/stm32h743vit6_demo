@@ -291,3 +291,5 @@
 .\outfiles\main.o: .\CAN_OPEN_NODE\309/CO_gateway_ascii.h
 .\outfiles\main.o: .\CAN_OPEN_NODE\extra/CO_trace.h
 .\outfiles\main.o: .\CAN_OPEN_NODE\STM32H7_PORT\OD.h
+.\outfiles\main.o: .\CAN_OPEN_NODE\storage\CO_storageEeprom.h
+.\outfiles\main.o: .\CAN_OPEN_NODE\storage/CO_storage.h

@@ -34,10 +34,10 @@ OD_ATTR_PERSIST_COMM OD_PERSIST_COMM_t OD_PERSIST_COMM = {
     .x1017_producerHeartbeatTime = 0x07D0,
     .x1018_identity = {
         .highestSub_indexSupported = 0x04,
-        .vendor_ID = 0x00000000,
-        .productCode = 0x00000000,
-        .revisionNumber = 0x00000000,
-        .serialNumber = 0x00000000
+        .vendor_ID = 0x00001234,
+        .productCode = 0x00005678,
+        .revisionNumber = 0x12340000,
+        .serialNumber = 0x00000001
     },
     .x1019_synchronousCounterOverflowValue = 0x00,
     .x1280_SDOClientParameter = {
@@ -48,7 +48,7 @@ OD_ATTR_PERSIST_COMM OD_PERSIST_COMM_t OD_PERSIST_COMM = {
     },
     .x1400_RPDOCommunicationParameter = {
         .highestSub_indexSupported = 0x05,
-        .COB_IDUsedByRPDO = 0x0000020A,
+        .COB_IDUsedByRPDO = 0x00000200,
         .transmissionType = 0xFE,
         .eventTimer = 0x0000
     },
@@ -110,7 +110,7 @@ OD_ATTR_PERSIST_COMM OD_PERSIST_COMM_t OD_PERSIST_COMM = {
     },
     .x1800_TPDOCommunicationParameter = {
         .highestSub_indexSupported = 0x06,
-        .COB_IDUsedByTPDO = 0x0000018A,
+        .COB_IDUsedByTPDO = 0x00000180,
         .transmissionType = 0x14,
         .inhibitTime = 0x0000,
         .eventTimer = 0x0000,

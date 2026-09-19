@@ -17,7 +17,7 @@ typedef struct
    volatile uint32_t runtime;
 }drvp_led_type;
 
-const static drv_led_type drv_led=
+static drv_led_type drv_led=
 {
   .init=drv_led_init,
   .on=drv_led_on,

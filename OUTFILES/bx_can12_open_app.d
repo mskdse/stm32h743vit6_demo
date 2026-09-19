@@ -135,6 +135,8 @@
 .\outfiles\bx_can12_open_app.o: .\CAN_OPEN_NODE\extra/CO_trace.h
 .\outfiles\bx_can12_open_app.o: .\MEM_MANGE\sram_d2_malloc.h
 .\outfiles\bx_can12_open_app.o: CAN_OPEN_NODE\STM32H7_PORT\OD.h
+.\outfiles\bx_can12_open_app.o: .\CAN_OPEN_NODE\storage\CO_storageEeprom.h
+.\outfiles\bx_can12_open_app.o: .\CAN_OPEN_NODE\storage/CO_storage.h
 .\outfiles\bx_can12_open_app.o: .\DRIVER\USART1_DMA\usart1_dma.h
 .\outfiles\bx_can12_open_app.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\outfiles\bx_can12_open_app.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

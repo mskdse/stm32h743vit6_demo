@@ -36,7 +36,6 @@ storeEeprom(CO_storage_entry_t* entry, CO_CANmodule_t* CANmodule) {
     /* save data to the eeprom */
     writeOk = CO_eeprom_writeBlock(entry->storageModule, entry->addr, entry->eepromAddr, entry->len);
     entry->crc = crc16_ccitt(entry->addr, entry->len, 0);
-
     /* Verify, if data in eeprom are equal */
     uint16_t crc_read = CO_eeprom_getCrcBlock(entry->storageModule, entry->eepromAddr, entry->len);
     if ((entry->crc != crc_read) || !writeOk) {

@@ -38,7 +38,6 @@ int main(void)
 	sram_d2_init();//初始化D2域的SRAM2的最后的20KB的内存管理，用于我们动态使用	
 	drvp_led_init();//初始化led
   drvp_key_init();//初始化key
-	drvp_eeprom_init();//初始化eeprom
 	drvp_fmc_lcd_init();//初始化lcd
 	drvp_fmc_lcd_set_axis_scan(0,1,1,0,0);//设置LCD的坐标轴适配开发板以及显存扫描方向
   usart1_dma_init(115200);//串口初始化
@@ -302,7 +301,6 @@ static void CPU_CACHE_Enable(void)
 __attribute__((section(".ITCM_CODE"), used))void SysTick_Handler(void)
 {
   static uint8_t keycnt=0;
-  static uint8_t eepromcnt=0;
   
 	HAL_IncTick();
 	
@@ -312,12 +310,6 @@ __attribute__((section(".ITCM_CODE"), used))void SysTick_Handler(void)
   {
     keycnt=0;
     drvp_key_prc_10ms();
-  }
-	
-	if(++eepromcnt>=10)
-  {
-    eepromcnt=0;
-    drvp_eeprom_prc_10ms();
   }
 	
   bx_can12_open_app_prc_1ms();

@@ -44,7 +44,7 @@ typedef struct
     uint32_t        keymask;
 } drvp_key_type;
 
-const static drv_key_type drv_key=
+static drv_key_type drv_key=
 {
     .init=drv_key_init,
     .readmask=drv_key_readmask

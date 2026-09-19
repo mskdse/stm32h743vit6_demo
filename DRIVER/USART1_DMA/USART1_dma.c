@@ -72,7 +72,7 @@ void usart1_dma_init(uint32_t badue)
 	DMA1_Stream2->CR|=(0x01<<4);//使能发送完成中断
 	DMA1_Stream2->CR&=~(0x01<<0);//关闭发送DMA，按需开启
 	
-	HAL_NVIC_SetPriority(DMA1_Stream2_IRQn,14,0);
+	HAL_NVIC_SetPriority(DMA1_Stream2_IRQn,10,0);
 	HAL_NVIC_EnableIRQ(DMA1_Stream2_IRQn);
 	
 	/* 配置串口IDLE中断+DMA+循环队列，实现不定长接收 */
@@ -103,6 +103,14 @@ void usart1_dma_init(uint32_t badue)
 	DMA1_Stream3->M0AR=(uint32_t)USART1_DMA_RX_FIFO.FIFO;
 	DMA1_Stream3->PAR=(uint32_t)&USART1->RDR;
 	DMA1_Stream3->CR|=(0x01<<0);//开启DMA，配合循环模式一直接收
+}
+
+int fputc (int c, FILE * stream)
+{
+	USART1->TDR=(uint8_t)c;
+	while(!(USART1->ISR&(0x01<<6)));
+	USART1->ISR|=(0x01<<6);
+	return (uint8_t)c;
 }
 
 void usart1_my_printf(const char *format, ...)
