@@ -49,13 +49,17 @@ int main(void)
 	lv_demo_benchmark();//‘ –ÌLVGLµƒ≤‚ ‘Demo
 #endif
   
+#if USE_CAN_OPEN_RUN
 	bx_can12_open_app_init();
+#endif
 	
 	usart1_my_printf("APP_TASK_RUN......\r\n");
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
 	for(;;)
 	{		
+#if USE_CAN_OPEN_RUN
 		bx_can12_open_app_prc();
+#endif
 		
 #if USE_LVGL_RUN
     lv_task_handler();
@@ -312,7 +316,9 @@ __attribute__((section(".ITCM_CODE"), used))void SysTick_Handler(void)
     drvp_key_prc_10ms();
   }
 	
+#if USE_CAN_OPEN_RUN
   bx_can12_open_app_prc_1ms();
+#endif
 	
 #if USE_LVGL_RUN
 	lv_tick_inc(1);

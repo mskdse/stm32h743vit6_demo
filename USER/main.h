@@ -7,6 +7,9 @@
 /* 是否运行LVGL图形库 */
 #define USE_LVGL_RUN                 0
 
+/* 是否运行CAN OPEN协议栈 */
+#define USE_CAN_OPEN_RUN             0
+
 #include "stm32h7xx.h"
 #include "SEGGER_RTT.h"
 #include "EventRecorder.h"
