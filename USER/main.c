@@ -8,21 +8,6 @@ static void CPU_CACHE_Enable(void);
 /* 数组表格定义在 .RAM_RESET_VCTOR 段，这段空间用来存储中断向量表，不得再其他地方再定义这个节区 */
 __attribute__((section(".RamVecTable")))static uint8_t RAM_VCTOR_TABLE[0x400];
 
-/* 用户自己实现的热插拔处理 */
-static void my_sd_event_handler(sdio_sd_event_t event)
-{
-    if (event == SDIO_SD_EVENT_REMOVE)
-    {
-        printf("SD removed\r\n");
-			  sdio_sd_card_reset();
-    }
-    else if (event == SDIO_SD_EVENT_INSERT)
-    {
-        printf("SD inserted\r\n");
-        sdio_sd_card_init();             /* 重新初始化 */
-    }
-}
-
 int main(void)
 {
 	/* 将中断向量表从FLASH的首地址拷贝到DTCM中然后设置中断向量表的偏移为DTCM首地址也就是数组地址 */
@@ -51,15 +36,18 @@ int main(void)
 	SystemClock_Config();//配置系统时钟为400MHZ
 	
 	sram_d2_init();//初始化D2域的SRAM2的最后的20KB的内存管理，用于我们动态使用	
+  usart1_dma_init(115200);//串口初始化
+  ltdc_lcd_init();//LTDC的LCD初始化
+  ltdc_lcd_bl_set(20000,99);//打开背光显示,屏幕20KHZ,占空比99%
+
+#if USE_BORAD_RUN
 	drvp_led_init();//初始化led
   drvp_key_init();//初始化key
-	drvp_fmc_lcd_init();//初始化lcd
-	drvp_fmc_lcd_set_axis_scan(0,1,1,0,0);//设置LCD的坐标轴适配开发板以及显存扫描方向
-  usart1_dma_init(115200);//串口初始化
-	
-	sdio_sd_card_register_cb(my_sd_event_handler);
-	
+#endif
+
 #if USE_LVGL_RUN
+  drvp_fmc_lcd_init();//初始化lcd
+	drvp_fmc_lcd_set_axis_scan(0,1,1,0,0);//设置LCD的坐标轴适配开发板以及显存扫描方向
 	lv_init();//LVGL初始化
 	lv_port_disp_init();//LVGL底层支持初始化
 	lv_demo_benchmark();//允许LVGL的测试Demo
@@ -72,14 +60,7 @@ int main(void)
 	usart1_my_printf("APP_TASK_RUN......\r\n");
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
 	for(;;)
-	{
-    static uint32_t last_scan = 0;
-		if (HAL_GetTick() - last_scan >= 100)
-		{
-				last_scan = HAL_GetTick();
-				sdio_sd_card_prc_100ms();
-		}
-     		
+	{		
 #if USE_CAN_OPEN_RUN
 		bx_can12_open_app_prc();
 #endif
@@ -331,17 +312,17 @@ static void CPU_CACHE_Enable(void)
   */
 __attribute__((section(".ITCM_CODE"), used))void SysTick_Handler(void)
 {
-  static uint8_t keycnt=0;
-  
 	HAL_IncTick();
-	
+
+#if USE_BORAD_RUN
+	static uint8_t keycnt=0;
   drvp_led_prc_1ms();
-	
   if(++keycnt>=10)
   {
     keycnt=0;
     drvp_key_prc_10ms();
   }
+#endif
 	
 #if USE_CAN_OPEN_RUN
   bx_can12_open_app_prc_1ms();

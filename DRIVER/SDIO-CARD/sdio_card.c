@@ -4,7 +4,6 @@
 __attribute__((section (".RAM_D2")))static SD_HandleTypeDef       SDHandle;
 __attribute__((section (".RAM_D2")))static HAL_SD_CardInfoTypeDef pCardInfo;
 __attribute__((section (".RAM_D2")))static volatile uint8_t       RxCplt,TxCplt;
-__attribute__((section (".RAM_D2")))static volatile bool          sd_initialized;
 
 #define SD_TIMEOUT             ((uint32_t)0x00100000U)
 
@@ -120,19 +119,6 @@ static void sdio_sd_card_borad_init(void)
   HAL_NVIC_EnableIRQ(SDMMC1_IRQn);
 }
 
-void sdio_sd_card_reset(void)
-{
-    HAL_SD_DeInit(&SDHandle);
-    __HAL_RCC_SDMMC1_FORCE_RESET();
-    for(volatile int i=0;i<100;i++);
-    __HAL_RCC_SDMMC1_RELEASE_RESET();
-    memset(&SDHandle,0,sizeof(SD_HandleTypeDef));
-    memset(&pCardInfo,0,sizeof(HAL_SD_CardInfoTypeDef));
-    RxCplt=0;
-    TxCplt=0;
-	  sd_initialized=false;
-}
-
 void sdio_sd_card_init(void)
 {
 	sdio_sd_card_borad_init();
@@ -147,7 +133,7 @@ void sdio_sd_card_init(void)
   SDHandle.Init.ClockPowerSave      = SDMMC_CLOCK_POWER_SAVE_DISABLE;
   SDHandle.Init.BusWide             = SDMMC_BUS_WIDE_4B;
   SDHandle.Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_DISABLE;
-  SDHandle.Init.ClockDiv            = 2;
+  SDHandle.Init.ClockDiv            = 4;
   
   if(HAL_SD_Init(&SDHandle) != HAL_OK)
   {
@@ -163,8 +149,6 @@ void sdio_sd_card_init(void)
   {
     Error_Handler(3);
   }
-	
-	sd_initialized=true;
 }
 
 bool sdio_sd_card_write(uint32_t start_block_num,const uint8_t* buf,uint32_t block_num)
@@ -215,63 +199,6 @@ HAL_SD_CardInfoTypeDef sdio_sd_card_info(void)
 {
 	return pCardInfo;
 }
-
-/* ---------------- SD 卡热插拔状态机，由于我没有CD热插拔引脚所以只能通过软件来实现热插拔 ---------------- */
-#define SD_SCAN_DEBOUNCE_CNT   5      /* 连续 5 次(即500ms)检测到同状态才确认变化 */
-
-__attribute__((section (".RAM_D2")))static sdio_sd_event_cb_t s_sd_event_cb;
-__attribute__((section (".RAM_D2")))static bool               s_sd_present;   /* 当前确认的在位状态 */
-__attribute__((section (".RAM_D2")))static bool               s_sd_last_raw;  /* 上一次原始检测结果 */
-__attribute__((section (".RAM_D2")))static uint8_t            s_sd_debounce;  /* 去抖计数 */
-
-/* 注册回调 */
-void sdio_sd_card_register_cb(sdio_sd_event_cb_t cb)
-{
-	  s_sd_present=false;
-	  s_sd_last_raw=false;
-	  s_sd_debounce=0;
-    s_sd_event_cb=cb;
-}
-
-/* 非阻塞检测卡是否在位：发 CMD13，短超时 */
-static bool sdio_sd_card_check_present(void)
-{
-	  if(!sd_initialized)                                      return false;    
-    if(HAL_SD_CARD_TRANSFER==HAL_SD_GetCardState(&SDHandle)) return true;
-    return false;
-}
-
-/* 100ms 周期调用：非阻塞状态机 + 事件回调 */
-void sdio_sd_card_prc_100ms(void)
-{
-	  if(!sd_initialized)
-    {
-        sdio_sd_card_init();
-        return;
-    }
-	  
-    bool raw = sdio_sd_card_check_present();
-
-    /* 原始状态和上次不同，重置去抖计数 */
-    if (raw != s_sd_last_raw)
-    {
-        s_sd_last_raw = raw;
-        s_sd_debounce = 0;
-        return;   /* 等下一次扫描再确认 */
-    }
-
-    /* 原始状态稳定，累计去抖 */
-    if (++s_sd_debounce < SD_SCAN_DEBOUNCE_CNT) return;
-
-    /* 去抖完成，判断是否真的变化 */
-    if (raw == s_sd_present) return;   /* 状态没变 */
-        
-    /* 状态确认变化，更新并触发事件 */
-    s_sd_present = raw;
-
-    if (s_sd_event_cb) s_sd_event_cb(raw ? SDIO_SD_EVENT_INSERT : SDIO_SD_EVENT_REMOVE);
-}
-
 
 /**
   * @brief  This function handles SD interrupt request.

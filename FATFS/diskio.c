@@ -220,7 +220,7 @@ DWORD get_fattime(void)
 }
 
 /* 文件系统测试函数，测试通过可以关闭以下代码 */
-#define USE_FILESYS_DEBUG    1
+#define USE_FILESYS_DEBUG    0
 #if USE_FILESYS_DEBUG
 #include <string.h>
 #include <stdbool.h>
