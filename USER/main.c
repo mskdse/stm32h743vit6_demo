@@ -8,6 +8,21 @@ static void CPU_CACHE_Enable(void);
 /* 数组表格定义在 .RAM_RESET_VCTOR 段，这段空间用来存储中断向量表，不得再其他地方再定义这个节区 */
 __attribute__((section(".RamVecTable")))static uint8_t RAM_VCTOR_TABLE[0x400];
 
+/* 用户自己实现的热插拔处理 */
+static void my_sd_event_handler(sdio_sd_event_t event)
+{
+    if (event == SDIO_SD_EVENT_REMOVE)
+    {
+        printf("SD removed\r\n");
+			  sdio_sd_card_reset();
+    }
+    else if (event == SDIO_SD_EVENT_INSERT)
+    {
+        printf("SD inserted\r\n");
+        sdio_sd_card_init();             /* 重新初始化 */
+    }
+}
+
 int main(void)
 {
 	/* 将中断向量表从FLASH的首地址拷贝到DTCM中然后设置中断向量表的偏移为DTCM首地址也就是数组地址 */
@@ -41,8 +56,9 @@ int main(void)
 	drvp_fmc_lcd_init();//初始化lcd
 	drvp_fmc_lcd_set_axis_scan(0,1,1,0,0);//设置LCD的坐标轴适配开发板以及显存扫描方向
   usart1_dma_init(115200);//串口初始化
-	spi_flash_w25q128_init();//W25Q128初始化
-
+	
+	sdio_sd_card_register_cb(my_sd_event_handler);
+	
 #if USE_LVGL_RUN
 	lv_init();//LVGL初始化
 	lv_port_disp_init();//LVGL底层支持初始化
@@ -56,14 +72,25 @@ int main(void)
 	usart1_my_printf("APP_TASK_RUN......\r\n");
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
 	for(;;)
-	{		
+	{
+    static uint32_t last_scan = 0;
+		if (HAL_GetTick() - last_scan >= 100)
+		{
+				last_scan = HAL_GetTick();
+				sdio_sd_card_prc_100ms();
+		}
+     		
 #if USE_CAN_OPEN_RUN
 		bx_can12_open_app_prc();
 #endif
 		
 #if USE_LVGL_RUN
-    lv_task_handler();
-		HAL_Delay(10);
+		static uint32_t lv_last_scan = 0;
+		if (HAL_GetTick() - lv_last_scan >= 10)
+		{
+		  lv_last_scan = HAL_GetTick();
+      lv_task_handler();
+	  }
 #endif
 	}
 }

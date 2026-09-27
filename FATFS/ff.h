@@ -147,7 +147,7 @@ typedef struct {
 
 /* Filesystem object structure (FATFS) */
 
-typedef struct __attribute__((aligned(4)))
+typedef struct
 {
 	BYTE	fs_type;	/* Filesystem type (0:not mounted) */
 	BYTE	pdrv;		/* Physical drive that holds this volume */
@@ -193,7 +193,7 @@ typedef struct __attribute__((aligned(4)))
 
 /* Object ID and allocation information (FFOBJID) */
 
-typedef struct __attribute__((aligned(4)))
+typedef struct
 {
 	FATFS*	fs;			/* Pointer to the volume holding this object */
 	WORD	id;			/* Volume mount ID when this object was opened */
@@ -217,7 +217,7 @@ typedef struct __attribute__((aligned(4)))
 
 /* File object structure (FIL) */
 
-typedef struct __attribute__((aligned(4)))
+typedef struct
 {
 	FFOBJID	obj;		/* Object identifier (must be the 1st member to detect invalid object pointer) */
 	BYTE	flag;		/* File status flags */
@@ -241,7 +241,7 @@ typedef struct __attribute__((aligned(4)))
 
 /* Directory object structure (DIR) */
 
-typedef struct __attribute__((aligned(4)))
+typedef struct
 {
 	FFOBJID	obj;		/* Object identifier (must be the 1st member to detect invalid object pointer) */
 	DWORD	dptr;		/* Current read/write offset */
@@ -261,7 +261,7 @@ typedef struct __attribute__((aligned(4)))
 
 /* File/directory information structure (FILINFO) */
 
-typedef struct __attribute__((aligned(4)))
+typedef struct
 {
 	FSIZE_t	fsize;			/* File size (invalid for directory) */
 	WORD	fdate;			/* Date of file modification or directory creation */
@@ -283,7 +283,7 @@ typedef struct __attribute__((aligned(4)))
 
 /* Format parameter structure (MKFS_PARM) used for f_mkfs() */
 
-typedef struct __attribute__((aligned(4)))
+typedef struct
 {
 	BYTE fmt;			/* Format option (FM_FAT, FM_FAT32, FM_EXFAT and FM_SFD) */
 	BYTE n_fat;			/* Number of FATs */

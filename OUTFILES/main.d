@@ -293,3 +293,4 @@
 .\outfiles\main.o: .\CAN_OPEN_NODE\STM32H7_PORT\OD.h
 .\outfiles\main.o: .\CAN_OPEN_NODE\storage\CO_storageEeprom.h
 .\outfiles\main.o: .\CAN_OPEN_NODE\storage/CO_storage.h
+.\outfiles\main.o: .\DRIVER\SDIO-CARD\sdio_card.h

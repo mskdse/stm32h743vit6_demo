@@ -35,5 +35,6 @@
 #include "spi_flash.h"
 //#include "can12_fd.h"
 #include "bx_can12_open_app.h"
+#include "sdio_card.h"
 
 #endif

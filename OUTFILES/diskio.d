@@ -111,3 +111,9 @@
 .\outfiles\diskio.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_pcd_ex.h
 .\outfiles\diskio.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_hcd.h
 .\outfiles\diskio.o: .\DRIVER\SPI_FLASH\spi_flash.h
+.\outfiles\diskio.o: .\DRIVER\SDIO-CARD\sdio_card.h
+.\outfiles\diskio.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\diskio.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\outfiles\diskio.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\diskio.o: .\DRIVER\USART1_DMA\usart1_dma.h
+.\outfiles\diskio.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h

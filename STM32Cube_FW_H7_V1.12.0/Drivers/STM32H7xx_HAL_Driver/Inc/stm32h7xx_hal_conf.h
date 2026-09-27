@@ -200,9 +200,9 @@
 #define  USE_HAL_IRDA_REGISTER_CALLBACKS    0U /* IRDA register callback disabled    */
 #define  USE_HAL_JPEG_REGISTER_CALLBACKS    0U /* JPEG register callback disabled    */
 #define  USE_HAL_LPTIM_REGISTER_CALLBACKS   1U /* LPTIM register callback disabled   */
-#define  USE_HAL_LTDC_REGISTER_CALLBACKS    0U /* LTDC register callback disabled    */
+#define  USE_HAL_LTDC_REGISTER_CALLBACKS    1U /* LTDC register callback disabled    */
 #define  USE_HAL_MDIOS_REGISTER_CALLBACKS   0U /* MDIO register callback disabled    */
-#define  USE_HAL_MMC_REGISTER_CALLBACKS     0U /* MMC register callback disabled     */
+#define  USE_HAL_MMC_REGISTER_CALLBACKS     1U /* MMC register callback disabled     */
 #define  USE_HAL_OPAMP_REGISTER_CALLBACKS   0U /* MDIO register callback disabled    */
 #define  USE_HAL_OSPI_REGISTER_CALLBACKS    0U /* OSPI register callback disabled    */
 #define  USE_HAL_OTFDEC_REGISTER_CALLBACKS  0U /* OTFDEC register callback disabled  */
@@ -211,8 +211,8 @@
 #define  USE_HAL_RNG_REGISTER_CALLBACKS     0U /* RNG register callback disabled     */
 #define  USE_HAL_RTC_REGISTER_CALLBACKS     0U /* RTC register callback disabled     */
 #define  USE_HAL_SAI_REGISTER_CALLBACKS     0U /* SAI register callback disabled     */
-#define  USE_HAL_SD_REGISTER_CALLBACKS      0U /* SD register callback disabled      */
-#define  USE_HAL_SDIO_REGISTER_CALLBACKS    0U /* SDIO register callback disabled      */
+#define  USE_HAL_SD_REGISTER_CALLBACKS      1U /* SD register callback disabled      */
+#define  USE_HAL_SDIO_REGISTER_CALLBACKS    1U /* SDIO register callback disabled      */
 #define  USE_HAL_SMARTCARD_REGISTER_CALLBACKS  0U /* SMARTCARD register callback disabled */
 #define  USE_HAL_SPDIFRX_REGISTER_CALLBACKS 0U /* SPDIFRX register callback disabled */
 #define  USE_HAL_SMBUS_REGISTER_CALLBACKS   0U /* SMBUS register callback disabled   */

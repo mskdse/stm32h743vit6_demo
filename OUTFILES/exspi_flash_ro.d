@@ -293,3 +293,4 @@
 .\outfiles\exspi_flash_ro.o: .\CAN_OPEN_NODE\STM32H7_PORT\OD.h
 .\outfiles\exspi_flash_ro.o: .\CAN_OPEN_NODE\storage\CO_storageEeprom.h
 .\outfiles\exspi_flash_ro.o: .\CAN_OPEN_NODE\storage/CO_storage.h
+.\outfiles\exspi_flash_ro.o: .\DRIVER\SDIO-CARD\sdio_card.h
