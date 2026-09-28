@@ -53,6 +53,7 @@ void ltdc_lcd_borad_init(void)
   memset(&bl_htim4,0,sizeof(TIM_HandleTypeDef));
   memset(&bl_pwm_Config,0,sizeof(TIM_OC_InitTypeDef));
 	memset(LTDC_DISPLAY,0,sizeof(LTDC_DISPLAY));
+	for(int i=0;i<(640*400);i++) LTDC_DISPLAY[i]=0x0000;
 
   /*##-1- Reset peripherals ##################################################*/
   /* Enable LTDC reset state */
@@ -79,7 +80,7 @@ void ltdc_lcd_borad_init(void)
   /*** LTDC Pins configuration ***/
   GPIO_Init_Structure.Pin       = GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6; 
   GPIO_Init_Structure.Mode      = GPIO_MODE_AF_PP;
-  GPIO_Init_Structure.Pull      = GPIO_NOPULL;
+  GPIO_Init_Structure.Pull      = GPIO_PULLUP;
   GPIO_Init_Structure.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
   GPIO_Init_Structure.Alternate = GPIO_AF14_LTDC;  
   HAL_GPIO_Init(GPIOA, &GPIO_Init_Structure);
@@ -121,8 +122,8 @@ void ltdc_lcd_borad_init(void)
   /* AMPIRE640480 LCD clock configuration */
   /* PLL3_VCO Input = HSE_VALUE/PLL3M = 5 Mhz */
   /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 800 Mhz */
-  /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 800/32 = 25Mhz */
-  /* LTDC clock frequency = PLLLCDCLK = 25 Mhz */    
+  /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 800/80 = 10Mhz */
+  /* LTDC clock frequency = PLLLCDCLK = 10 Mhz */    
   RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
   PeriphClkInitStruct.PLL3.PLL3M = 5;    
@@ -130,7 +131,7 @@ void ltdc_lcd_borad_init(void)
   PeriphClkInitStruct.PLL3.PLL3FRACN = 0;
   PeriphClkInitStruct.PLL3.PLL3P = 2;
   PeriphClkInitStruct.PLL3.PLL3Q = 2;
-  PeriphClkInitStruct.PLL3.PLL3R = 32;
+  PeriphClkInitStruct.PLL3.PLL3R = 80;
   PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
   PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_2;
   if(HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct)!=HAL_OK) Error_Handler();
@@ -184,35 +185,35 @@ void ltdc_lcd_init(void)
   LtdcHandle.Init.AccumulatedVBP=(VSYNC_LEN+VBP_LEN-1);
 	LtdcHandle.Init.HorizontalSync=(HSYNC_LEN-1);
 	LtdcHandle.Init.VerticalSync=(VSYNC_LEN-1);
-  LtdcHandle.Init.Backcolor.Red=0x00;
-  LtdcHandle.Init.Backcolor.Green=0x00;
-  LtdcHandle.Init.Backcolor.Blue=0x00;
+  LtdcHandle.Init.Backcolor.Red=0xFF;
+  LtdcHandle.Init.Backcolor.Green=0xFF;
+  LtdcHandle.Init.Backcolor.Blue=0xFF;
   LtdcHandle.Init.DEPolarity=LTDC_DEPOLARITY_AL;//手册中DE信号高电平有效,但是实测要低电平
   LtdcHandle.Init.HSPolarity=LTDC_HSPOLARITY_AL;//手册中HSYNC信号低电平有效
-  LtdcHandle.Init.PCPolarity=LTDC_PCPOLARITY_IPC;//手册中PCLK信号下降沿即低电平有效
+  LtdcHandle.Init.PCPolarity=LTDC_PCPOLARITY_IIPC;//手册中PCLK信号下降沿的时候传输数据，实测需要给IIPC，高电平的时候数据有效时序正确
   LtdcHandle.Init.VSPolarity=LTDC_VSPOLARITY_AL;//手册中VSYNC信号低电平有效
   if(HAL_LTDC_Init(&LtdcHandle)!=HAL_OK) Error_Handler(); 
 	
-		/* 图层1设置，该图层在背景层之上，在顶层之下 */
-	LTDC_LayerCfgTypeDef  ltdc_layer1_cfg;
-	memset(&ltdc_layer1_cfg,0,sizeof(LTDC_LayerCfgTypeDef));
-	ltdc_layer1_cfg.Alpha=0xFF;//常数alpha，0xFF/255=100%,也就是说当前层和它的下面一层的融合数据取它当前层(不考虑和alpha0相乘的情况下)
-	ltdc_layer1_cfg.Alpha0=0x00;//随便给，我们不使用ARGB格式所以该参数无效,该参数是默认alpha，假设我窗口没有完全覆盖下面的一层
-	                            //那我ARGB的数据必须指定一个默认ARGB的A的值作为alpha0默认参数，不然窗口以外图形融合就不确切
-	ltdc_layer1_cfg.Backcolor.Blue=0x00;
-	ltdc_layer1_cfg.Backcolor.Green=0x00;
-	ltdc_layer1_cfg.Backcolor.Red=0x00;
-	ltdc_layer1_cfg.BlendingFactor1=LTDC_BLENDING_FACTOR1_CA;//不使用ARGB的apha和常数alpha融合，所以选择这个
-	ltdc_layer1_cfg.BlendingFactor2=LTDC_BLENDING_FACTOR2_CA;//不使用ARGB的apha和常数alpha融合，所以选择这个
-	ltdc_layer1_cfg.FBStartAdress=(uint32_t)LTDC_DISPLAY;
-	ltdc_layer1_cfg.ImageHeight=(LCD_WIN_Y1-LCD_WIN_Y0);
-	ltdc_layer1_cfg.ImageWidth=(LCD_WIN_X1-LCD_WIN_X0);
-	ltdc_layer1_cfg.PixelFormat=LTDC_PIXEL_FORMAT_RGB565;//使用RGB565格式
-	ltdc_layer1_cfg.WindowX0=LCD_WIN_X0;
-	ltdc_layer1_cfg.WindowX1=LCD_WIN_X1;
-	ltdc_layer1_cfg.WindowY0=LCD_WIN_Y0;
-	ltdc_layer1_cfg.WindowY1=LCD_WIN_Y1;
-	if(HAL_LTDC_ConfigLayer(&LtdcHandle,&ltdc_layer1_cfg,LTDC_LAYER_1)!=HAL_OK)        Error_Handler();
+	/* 图层1设置，该图层在背景层之上，在顶层之下 */
+//	LTDC_LayerCfgTypeDef  ltdc_layer1_cfg;
+//	memset(&ltdc_layer1_cfg,0,sizeof(LTDC_LayerCfgTypeDef));
+//	ltdc_layer1_cfg.Alpha=0xFF;//常数alpha，0xFF/255=100%,也就是说当前层和它的下面一层的融合数据取它当前层(不考虑和alpha0相乘的情况下)
+//	ltdc_layer1_cfg.Alpha0=0x00;//随便给，我们不使用ARGB格式所以该参数无效,该参数是默认alpha，假设我窗口没有完全覆盖下面的一层
+//	                            //那我ARGB的数据必须指定一个默认ARGB的A的值作为alpha0默认参数，不然窗口以外图形融合就不确切
+//	ltdc_layer1_cfg.Backcolor.Blue=0x00;
+//	ltdc_layer1_cfg.Backcolor.Green=0x00;
+//	ltdc_layer1_cfg.Backcolor.Red=0x00;
+//	ltdc_layer1_cfg.BlendingFactor1=LTDC_BLENDING_FACTOR1_CA;//不使用ARGB的apha和常数alpha融合，所以选择这个
+//	ltdc_layer1_cfg.BlendingFactor2=LTDC_BLENDING_FACTOR2_CA;//不使用ARGB的apha和常数alpha融合，所以选择这个
+//	ltdc_layer1_cfg.FBStartAdress=(uint32_t)LTDC_DISPLAY;
+//	ltdc_layer1_cfg.ImageHeight=(LCD_WIN_Y1-LCD_WIN_Y0);
+//	ltdc_layer1_cfg.ImageWidth=(LCD_WIN_X1-LCD_WIN_X0);
+//	ltdc_layer1_cfg.PixelFormat=LTDC_PIXEL_FORMAT_RGB565;//使用RGB565格式
+//	ltdc_layer1_cfg.WindowX0=LCD_WIN_X0;
+//	ltdc_layer1_cfg.WindowX1=LCD_WIN_X1;
+//	ltdc_layer1_cfg.WindowY0=LCD_WIN_Y0;
+//	ltdc_layer1_cfg.WindowY1=LCD_WIN_Y1;
+//	if(HAL_LTDC_ConfigLayer(&LtdcHandle,&ltdc_layer1_cfg,LTDC_LAYER_1)!=HAL_OK)        Error_Handler();
 }
 
 /**
