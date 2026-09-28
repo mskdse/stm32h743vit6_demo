@@ -38,7 +38,7 @@ int main(void)
 	sram_d2_init();//初始化D2域的SRAM2的最后的20KB的内存管理，用于我们动态使用	
   usart1_dma_init(115200);//串口初始化
   ltdc_lcd_init();//LTDC的LCD初始化
-  ltdc_lcd_bl_set(20000,99);//打开背光显示,屏幕20KHZ,占空比99%
+  ltdc_lcd_bl_set(2000,90);//打开背光显示,屏幕2KHZ,占空比90%
 
 #if USE_BORAD_RUN
 	drvp_led_init();//初始化led

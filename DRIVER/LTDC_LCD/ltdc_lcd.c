@@ -29,9 +29,22 @@
 
   BL-PB7 TIM4_CH2_PWM调光通道
 */
-__attribute__((section (".RAM_D2")))static LTDC_HandleTypeDef LtdcHandle;
-__attribute__((section (".RAM_D2")))static TIM_HandleTypeDef  bl_htim4;
-__attribute__((section (".RAM_D2")))static TIM_OC_InitTypeDef bl_pwm_Config;
+__attribute__((section (".RAM_D2")))static LTDC_HandleTypeDef  LtdcHandle;
+__attribute__((section (".RAM_D2")))static TIM_HandleTypeDef   bl_htim4;
+__attribute__((section (".RAM_D2")))static TIM_OC_InitTypeDef  bl_pwm_Config;
+__attribute__((section(".RAM_D1"), aligned(4)))static uint16_t LTDC_DISPLAY[(LCD_WIN_X1-LCD_WIN_X0)*(LCD_WIN_Y1-LCD_WIN_Y0)];
+
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @param  None
+  * @retval None
+  */
+static void Error_Handler(void)
+{
+    while(1)
+    {
+    }
+}
 
 /* 初始化所有的时钟和GPIO，摘抄SDK源码实例 */
 void ltdc_lcd_borad_init(void)
@@ -39,6 +52,7 @@ void ltdc_lcd_borad_init(void)
   memset(&LtdcHandle,0,sizeof(LTDC_HandleTypeDef));
   memset(&bl_htim4,0,sizeof(TIM_HandleTypeDef));
   memset(&bl_pwm_Config,0,sizeof(TIM_OC_InitTypeDef));
+	memset(LTDC_DISPLAY,0,sizeof(LTDC_DISPLAY));
 
   /*##-1- Reset peripherals ##################################################*/
   /* Enable LTDC reset state */
@@ -91,9 +105,6 @@ void ltdc_lcd_borad_init(void)
   HAL_GPIO_Init(GPIOE, &GPIO_Init_Structure);
 
   GPIO_Init_Structure.Pin       = GPIO_PIN_7; 
-  GPIO_Init_Structure.Mode      = GPIO_MODE_AF_PP;
-  GPIO_Init_Structure.Pull      = GPIO_PULLUP;
-  GPIO_Init_Structure.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
   GPIO_Init_Structure.Alternate = GPIO_AF2_TIM4;
   HAL_GPIO_Init(GPIOB, &GPIO_Init_Structure);
   HAL_GPIO_WritePin(GPIOB,GPIO_PIN_7,GPIO_PIN_RESET);
@@ -122,7 +133,7 @@ void ltdc_lcd_borad_init(void)
   PeriphClkInitStruct.PLL3.PLL3R = 32;
   PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
   PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_2;
-  HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
+  if(HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct)!=HAL_OK) Error_Handler();
 
   /* 初始化PWM信号 */
   bl_htim4.Instance=TIM4;
@@ -162,24 +173,46 @@ void ltdc_lcd_bl_set(uint32_t freq,uint8_t paluse)
 void ltdc_lcd_init(void)
 {
   ltdc_lcd_borad_init();
-
+	
+		/* 时序参数按照手册中填写，另外不同HSYNC/VSYNC极性下时序宽度是不一样的 */
   LtdcHandle.Instance=LTDC;
-  LtdcHandle.Init.AccumulatedActiveH=(3+32+13-1);
-  LtdcHandle.Init.AccumulatedActiveW=(48+88+40-1);
-  LtdcHandle.Init.AccumulatedHBP=(48+88-1);
-  LtdcHandle.Init.AccumulatedVBP=(3+32-1);
-  LtdcHandle.Init.Backcolor.Red=0xFF;
+	LtdcHandle.Init.TotalHeigh=(VSYNC_LEN+VBP_LEN+LCD_HEIGH+VFP_LEN-1);
+  LtdcHandle.Init.TotalWidth=(HSYNC_LEN+HBP_LEN+LCD_WIDTH+HFP_LEN-1);
+  LtdcHandle.Init.AccumulatedActiveH=(VSYNC_LEN+VBP_LEN+LCD_HEIGH-1);
+  LtdcHandle.Init.AccumulatedActiveW=(HSYNC_LEN+HBP_LEN+LCD_WIDTH-1);
+  LtdcHandle.Init.AccumulatedHBP=(HSYNC_LEN+HBP_LEN-1);
+  LtdcHandle.Init.AccumulatedVBP=(VSYNC_LEN+VBP_LEN-1);
+	LtdcHandle.Init.HorizontalSync=(HSYNC_LEN-1);
+	LtdcHandle.Init.VerticalSync=(VSYNC_LEN-1);
+  LtdcHandle.Init.Backcolor.Red=0x00;
   LtdcHandle.Init.Backcolor.Green=0x00;
   LtdcHandle.Init.Backcolor.Blue=0x00;
-  LtdcHandle.Init.DEPolarity=LTDC_DEPOLARITY_AH;//手册中DE信号高电平有效
-  LtdcHandle.Init.HorizontalSync=(48-1);
+  LtdcHandle.Init.DEPolarity=LTDC_DEPOLARITY_AL;//手册中DE信号高电平有效,但是实测要低电平
   LtdcHandle.Init.HSPolarity=LTDC_HSPOLARITY_AL;//手册中HSYNC信号低电平有效
   LtdcHandle.Init.PCPolarity=LTDC_PCPOLARITY_IPC;//手册中PCLK信号下降沿即低电平有效
-  LtdcHandle.Init.TotalHeigh=(3+32+13+480-1);
-  LtdcHandle.Init.TotalWidth=(48+88+40+800-1);
-  LtdcHandle.Init.VerticalSync=(3-1);
   LtdcHandle.Init.VSPolarity=LTDC_VSPOLARITY_AL;//手册中VSYNC信号低电平有效
-  HAL_LTDC_Init(&LtdcHandle);
+  if(HAL_LTDC_Init(&LtdcHandle)!=HAL_OK) Error_Handler(); 
+	
+		/* 图层1设置，该图层在背景层之上，在顶层之下 */
+	LTDC_LayerCfgTypeDef  ltdc_layer1_cfg;
+	memset(&ltdc_layer1_cfg,0,sizeof(LTDC_LayerCfgTypeDef));
+	ltdc_layer1_cfg.Alpha=0xFF;//常数alpha，0xFF/255=100%,也就是说当前层和它的下面一层的融合数据取它当前层(不考虑和alpha0相乘的情况下)
+	ltdc_layer1_cfg.Alpha0=0x00;//随便给，我们不使用ARGB格式所以该参数无效,该参数是默认alpha，假设我窗口没有完全覆盖下面的一层
+	                            //那我ARGB的数据必须指定一个默认ARGB的A的值作为alpha0默认参数，不然窗口以外图形融合就不确切
+	ltdc_layer1_cfg.Backcolor.Blue=0x00;
+	ltdc_layer1_cfg.Backcolor.Green=0x00;
+	ltdc_layer1_cfg.Backcolor.Red=0x00;
+	ltdc_layer1_cfg.BlendingFactor1=LTDC_BLENDING_FACTOR1_CA;//不使用ARGB的apha和常数alpha融合，所以选择这个
+	ltdc_layer1_cfg.BlendingFactor2=LTDC_BLENDING_FACTOR2_CA;//不使用ARGB的apha和常数alpha融合，所以选择这个
+	ltdc_layer1_cfg.FBStartAdress=(uint32_t)LTDC_DISPLAY;
+	ltdc_layer1_cfg.ImageHeight=(LCD_WIN_Y1-LCD_WIN_Y0);
+	ltdc_layer1_cfg.ImageWidth=(LCD_WIN_X1-LCD_WIN_X0);
+	ltdc_layer1_cfg.PixelFormat=LTDC_PIXEL_FORMAT_RGB565;//使用RGB565格式
+	ltdc_layer1_cfg.WindowX0=LCD_WIN_X0;
+	ltdc_layer1_cfg.WindowX1=LCD_WIN_X1;
+	ltdc_layer1_cfg.WindowY0=LCD_WIN_Y0;
+	ltdc_layer1_cfg.WindowY1=LCD_WIN_Y1;
+	if(HAL_LTDC_ConfigLayer(&LtdcHandle,&ltdc_layer1_cfg,LTDC_LAYER_1)!=HAL_OK)        Error_Handler();
 }
 
 /**
