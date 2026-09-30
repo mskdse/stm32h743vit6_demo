@@ -142,6 +142,7 @@
 ".\outfiles\usart1_dma.o"
 ".\outfiles\sdio_card.o"
 ".\outfiles\ltdc_lcd.o"
+".\outfiles\ltdc_lcd_disp.o"
 ".\outfiles\port.o"
 ".\outfiles\circular_buffer.o"
 ".\outfiles\sram_d2_malloc.o"

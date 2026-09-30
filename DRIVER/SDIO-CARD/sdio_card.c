@@ -4,6 +4,7 @@
 __attribute__((section (".RAM_D2")))static SD_HandleTypeDef       SDHandle;
 __attribute__((section (".RAM_D2")))static HAL_SD_CardInfoTypeDef pCardInfo;
 __attribute__((section (".RAM_D2")))static volatile uint8_t       RxCplt,TxCplt;
+__attribute__((section (".RAM_D2")))static sdio_sd_card_callback  SD_Card_Calk;
 
 #define SD_TIMEOUT             ((uint32_t)0x00100000U)
 
@@ -14,7 +15,7 @@ __attribute__((section (".RAM_D2")))static volatile uint8_t       RxCplt,TxCplt;
   */
 static void Error_Handler(uint8_t errno)
 {
-	printf("sd_error:%d\r\n",errno);
+	//printf("sd_error:%d\r\n",errno);
 }
 
 /**
@@ -119,7 +120,7 @@ static void sdio_sd_card_borad_init(void)
   HAL_NVIC_EnableIRQ(SDMMC1_IRQn);
 }
 
-void sdio_sd_card_init(void)
+static void sdio_sd_card_init(void)
 {
 	sdio_sd_card_borad_init();
 	
@@ -128,26 +129,29 @@ void sdio_sd_card_init(void)
     
   /* if CLKDIV = 0 then SDMMC Clock frequency = SDMMC Kernel Clock
      else SDMMC Clock frequency = SDMMC Kernel Clock / [2 * CLKDIV]. 
-     SDMMC Kernel Clock = 200MHz, SDMMC Clock frequency = 50MHz  */
+     SDMMC Kernel Clock = 200MHz, SDMMC Clock frequency = 10MHz  */
   SDHandle.Init.ClockEdge           = SDMMC_CLOCK_EDGE_FALLING;
   SDHandle.Init.ClockPowerSave      = SDMMC_CLOCK_POWER_SAVE_DISABLE;
   SDHandle.Init.BusWide             = SDMMC_BUS_WIDE_4B;
   SDHandle.Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_DISABLE;
-  SDHandle.Init.ClockDiv            = 4;
+  SDHandle.Init.ClockDiv            = 10;
   
   if(HAL_SD_Init(&SDHandle) != HAL_OK)
   {
     Error_Handler(1);
+		return;
   }
 	
 	if(Wait_SDCARD_Ready() != HAL_OK)
   {
     Error_Handler(2);
+		return;
   }
 	
 	if(HAL_SD_GetCardInfo(&SDHandle,&pCardInfo) != HAL_OK)
   {
     Error_Handler(3);
+		return;
   }
 }
 
@@ -199,6 +203,51 @@ HAL_SD_CardInfoTypeDef sdio_sd_card_info(void)
 {
 	return pCardInfo;
 }
+
+void sdio_sd_card_register_clk(sdio_sd_card_callback clk)
+{
+	SD_Card_Calk=clk;
+}
+
+void sdio_sd_card_prc_200ms(void)
+{
+    static bool     s_present  = false;//是否在位
+    static uint8_t  s_debounce = 0;
+    static bool     s_last_raw = false;
+    bool            s_raw;
+
+		if(!s_present) sdio_sd_card_init();//SD卡不在位尝试初始化
+		s_raw=(HAL_SD_CARD_TRANSFER==HAL_SD_GetCardState(&SDHandle));//发送一次CMD13命令探测一次
+
+    /* 去抖 */
+    if (s_raw != s_last_raw)
+    { 
+		  s_last_raw = s_raw; 
+		  s_debounce = 0; 
+		  return; 
+		}
+		
+    if (++s_debounce < 3) return;
+    s_debounce = 0;
+
+    if (s_raw == s_present) return;
+
+    s_present = s_raw;
+
+    if (s_raw)
+    {
+        /* 插入：此时 sdio_sd_card_init 已经成功，取容量 */
+        HAL_SD_GetCardInfo(&SDHandle, &pCardInfo);   // 更新全局
+        if(SD_Card_Calk) SD_Card_Calk(INSERT);
+    }
+    else
+    {
+        /* 拔出：反初始化，清缓存 */
+        HAL_SD_DeInit(&SDHandle);
+        if(SD_Card_Calk) SD_Card_Calk(PULL);
+    }
+}
+
 
 /**
   * @brief  This function handles SD interrupt request.

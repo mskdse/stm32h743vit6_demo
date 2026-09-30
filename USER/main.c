@@ -8,6 +8,26 @@ static void CPU_CACHE_Enable(void);
 /* 数组表格定义在 .RAM_RESET_VCTOR 段，这段空间用来存储中断向量表，不得再其他地方再定义这个节区 */
 __attribute__((section(".RamVecTable")))static uint8_t RAM_VCTOR_TABLE[0x400];
 
+__attribute__((section (".RAM_D1"))) FATFS   fs;
+
+void sdio_sd_card_calk(SDCARD_EVENT enm)
+{
+	if(PULL==enm)
+	{
+		printf("sd pull ent\r\n");
+	}
+	else if(INSERT==enm)
+	{
+		printf("sd insert ent\r\n");
+		f_mount(&fs, "1:", 1);
+		int ret = ltdc_lcd_disp_bmp("1:SYSTEM/APP/COMMON/unselect.bmp");
+		if (ret != 0) printf("1show bmp failed: %d\r\n", ret);
+		ret = ltdc_lcd_disp_bmp("1:Pictures/test.bmp");
+		if (ret != 0) printf("2show bmp failed: %d\r\n", ret);
+		f_mount(&fs, "1:", 0);
+	}
+}
+
 int main(void)
 {
 	/* 将中断向量表从FLASH的首地址拷贝到DTCM中然后设置中断向量表的偏移为DTCM首地址也就是数组地址 */
@@ -38,8 +58,14 @@ int main(void)
 	sram_d2_init();//初始化D2域的SRAM2的最后的20KB的内存管理，用于我们动态使用	
   usart1_dma_init(115200);//串口初始化
   ltdc_lcd_init();//LTDC的LCD初始化
-  ltdc_lcd_bl_set(2000,90);//打开背光显示,屏幕2KHZ,占空比90%
+  ltdc_lcd_bl_set(2000,100);//打开背光显示,屏幕2KHZ,占空比100%
 
+	sdio_sd_card_register_clk(sdio_sd_card_calk);
+	
+	ltdc_lcd_disp_print(0,0,ASCLL_6X12,0xF800,0xFF00,"hello world %d",1234);
+	ltdc_lcd_disp_print(40,13,ASCLL_8X16,0xF800,0xFF00,"hello world %x",0x17);
+	ltdc_lcd_disp_print(80,30,ASCLL_12X24,0xF800,0xFF00,"hello world %s","hehe");
+	ltdc_lcd_disp_print(120,55,ASCLL_16X32,0xF800,0xFF00,"hello world %d",565161);
 #if USE_BORAD_RUN
 	drvp_led_init();//初始化led
   drvp_key_init();//初始化key
@@ -61,6 +87,13 @@ int main(void)
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
 	for(;;)
 	{		
+		static uint32_t last_scan = 0;
+		if (HAL_GetTick() - last_scan >= 200)
+		{
+				last_scan = HAL_GetTick();
+				sdio_sd_card_prc_200ms();
+		}
+
 #if USE_CAN_OPEN_RUN
 		bx_can12_open_app_prc();
 #endif

@@ -9,8 +9,8 @@
 #define VSYNC_LEN      3
 
 /* 手册中的水平后廊和垂直后廊长度 */
-#define HBP_LEN       88
-#define VBP_LEN       32
+#define HBP_LEN       40
+#define VBP_LEN       29
 
 /* 手册中的水平前廊和垂直前廊长度 */
 #define HFP_LEN       40
@@ -22,9 +22,9 @@
 
 /* 受限于内存限制，所以最大只能显示这么点 */
 #define LCD_WIN_X0      0
-#define LCD_WIN_X1    640
+#define LCD_WIN_X1    530
 #define LCD_WIN_Y0      0
-#define LCD_WIN_Y1    400
+#define LCD_WIN_Y1    480
 
 void ltdc_lcd_init(void);
 void ltdc_lcd_bl_set(uint32_t freq,uint8_t paluse);

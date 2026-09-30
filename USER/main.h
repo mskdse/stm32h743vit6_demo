@@ -40,5 +40,6 @@
 #include "bx_can12_open_app.h"
 #include "sdio_card.h"
 #include "ltdc_lcd.h"
+#include "ltdc_lcd_disp.h"
 
 #endif

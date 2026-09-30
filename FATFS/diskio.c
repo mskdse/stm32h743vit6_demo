@@ -80,7 +80,6 @@ DSTATUS disk_initialize (
 		}
 		case DEV_SDIO_CARD :
 		{
-			sdio_sd_card_init();
 			stat=disk_status(DEV_SDIO_CARD);
 			return stat;
 		}
