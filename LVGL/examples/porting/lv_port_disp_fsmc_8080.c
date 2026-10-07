@@ -25,7 +25,7 @@
  * kept <= DMA_MAX_TRANSFER_LEN, so a flush always fits in ONE DMA burst and no
  * chunking / window-splitting is required.
  */
-#if 1
+#if 0
 
 /*********************
  *      INCLUDES

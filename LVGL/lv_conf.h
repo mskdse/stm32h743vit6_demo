@@ -23,8 +23,8 @@
 /*====================
    COLOR SETTINGS
  *====================*/
-#define MY_DISP_HOR_RES    DRVP_LCD_LENGTH
-#define MY_DISP_VER_RES    DRVP_LCD_WIGTH
+//#define MY_DISP_HOR_RES //不在这指定行列直接在对应的Port文件里面指定
+//#define MY_DISP_VER_RES
 
 /*Color depth: 1 (1 byte per pixel), 8 (RGB332), 16 (RGB565), 32 (ARGB8888)*/
 #define LV_COLOR_DEPTH 16
@@ -52,7 +52,7 @@
 #define LV_MEM_CUSTOM 0
 #if LV_MEM_CUSTOM == 0
     /*Size of the memory available for `lv_mem_alloc()` in bytes (>= 2kB)*/
-    #define LV_MEM_SIZE (48U * 1024U)          /*[bytes]*/
+    #define LV_MEM_SIZE (25U * 1024U)          /*[bytes]*/
 
     /*Set an address for the memory pool instead of allocating it as a normal array. Can be in external SRAM too.*/
     #define LV_MEM_ADR 0     /*0: unused*/

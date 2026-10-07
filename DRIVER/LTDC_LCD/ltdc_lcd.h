@@ -22,9 +22,9 @@
 
 /* 受限于内存限制，所以最大只能显示这么点 */
 #define LCD_WIN_X0      0
-#define LCD_WIN_X1    530
+#define LCD_WIN_X1    540
 #define LCD_WIN_Y0      0
-#define LCD_WIN_Y1    480
+#define LCD_WIN_Y1    430
 
 void ltdc_lcd_init(void);
 void ltdc_lcd_bl_set(uint32_t freq,uint8_t paluse);
