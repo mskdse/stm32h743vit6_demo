@@ -10,8 +10,28 @@
 
 extern uint16_t LTDC_DISPLAY[(LCD_WIN_X1 * LCD_WIN_Y1)]; 
 
+/* 文件指针 */
 __attribute__((section(".RAM_D1"), aligned(4))) static FIL  fil;
+
+/* 可变参函数的缓冲区地址 */
 __attribute__((section(".RAM_D1")))             static char lcd_print_buf[512];
+
+/* 常量数组，用来挂载各类字库
+   front_index_add表示显示一行后数组索引的单位内需要偏移几个字节
+   disp_rows表示行数
+   disp_colums表示列数
+*/
+const ltdc_front_postion_type ltdc_front_postion[FRONT_COUNT]=
+{
+	{.front=ASCLL_6X12_FORNT,    .front_index_add=1, .disp_rows=12, .disp_colums=6},
+	{.front=ASCLL_8X16_FORNT,    .front_index_add=1, .disp_rows=16, .disp_colums=8},
+	{.front=ASCLL_12X24_FORNT,   .front_index_add=2, .disp_rows=24, .disp_colums=12},
+	{.front=ASCLL_16X32_FORNT,   .front_index_add=2, .disp_rows=32, .disp_colums=16},
+	{.front=CHINSES_11X12_FORNT, .front_index_add=2, .disp_rows=12, .disp_colums=11},
+	{.front=CHINSES_15X16_FORNT, .front_index_add=2, .disp_rows=16, .disp_colums=15},
+	{.front=CHINSES_24X24_FORNT, .front_index_add=3, .disp_rows=24, .disp_colums=24},
+	{.front=CHINSES_32X32_FORNT, .front_index_add=4, .disp_rows=32, .disp_colums=32},
+};
 
 /* 计算 BMP 一行占用的字节数（4 字节对齐） */
 static int bmp_row_bytes(int bpp, int width)
@@ -184,60 +204,78 @@ int ltdc_lcd_disp_bmp(const char *path)
     return 0;
 }
 
-void ltdc_lcd_disp_ch(uint16_t xp,uint16_t yp,
+static void ltdc_lcd_disp_ch(uint16_t xp,uint16_t yp,
 	                    char ch,ltdc_front_type front,
 										  uint16_t defalut_color,uint16_t disp_color)
 {
-    ltdc_lcd_ch_type lcd_ch;
+    ltdc_lcd_ch_type               lcd_ch;
+	const ltdc_front_postion_type* lcd_pos=&ltdc_front_postion[front];
+	uint8_t                        byte;
 
     switch (front)
     {
-        case ASCLL_6X12:
-            lcd_ch.front           = ASCLL_6X12_FORNT;
-            lcd_ch.front_index     = (uint32_t)(ch - 1) * (12 * 1 + 1) + 1;
-            lcd_ch.front_index_add = 1;
-            lcd_ch.disp_rows       = 12;
-            lcd_ch.disp_colums     = 6;
+        case ASCLL_6X12:  lcd_ch.front_index=(uint32_t)(ch-1)*(12*1+1)+1; break;
+        case ASCLL_8X16:  lcd_ch.front_index=(uint32_t)(ch-1)*(16*1+1)+1; break;
+        case ASCLL_12X24: lcd_ch.front_index=(uint32_t)(ch-1)*(24*2+1)+1; break;
+        case ASCLL_16X32: lcd_ch.front_index=(uint32_t)(ch-1)*(32*2+1)+1; break;
+    }
+
+    lcd_ch.disp=yp*DISP_W + xp;
+
+    for (int i = 0; i < lcd_pos->disp_rows; i++)
+    {
+        for (int j = 0; j < lcd_pos->disp_colums; j++)
+        {
+            byte = lcd_pos->front[lcd_ch.front_index + (j >> 3)];
+            if (byte & (0x80 >> (j & 7))) LTDC_DISPLAY[lcd_ch.disp] = disp_color;
+            else                          LTDC_DISPLAY[lcd_ch.disp] = defalut_color;
+            lcd_ch.disp++;
+        }
+        lcd_ch.front_index += lcd_pos->front_index_add;
+        lcd_ch.disp        += (DISP_W - lcd_pos->disp_colums);
+    }
+}
+
+static void ltdc_lcd_disp_chinse(uint16_t xp,uint16_t yp,
+	                    uint16_t chinse,ltdc_front_type front,
+										  uint16_t defalut_color,uint16_t disp_color)
+{
+    ltdc_lcd_ch_type               lcd_ch;
+	const ltdc_front_postion_type* lcd_pos=&ltdc_front_postion[front];
+	uint8_t                        byte;
+
+    switch (front)
+    {
+        case CHINSES_11X12:
+            lcd_ch.front_index     = ;
             break;
 
-        case ASCLL_8X16:
-            lcd_ch.front           = ASCLL_8X16_FORNT;
-            lcd_ch.front_index     = (uint32_t)(ch - 1) * (16 * 1 + 1) + 1;
-            lcd_ch.front_index_add = 1;
-            lcd_ch.disp_rows       = 16;
-            lcd_ch.disp_colums     = 8;
+        case CHINSES_15X16:
+            lcd_ch.front_index     = ;
             break;
 
-        case ASCLL_12X24:
-            lcd_ch.front           = ASCLL_12X24_FORNT;
-            lcd_ch.front_index     = (uint32_t)(ch - 1) * (24 * 2 + 1) + 1;
-            lcd_ch.front_index_add = 2;
-            lcd_ch.disp_rows       = 24;
-            lcd_ch.disp_colums     = 12;
+        case CHINSES_24X24:
+            lcd_ch.front_index     = ;
             break;
 
-        case ASCLL_16X32:
-            lcd_ch.front           = ASCLL_16X32_FORNT;
-            lcd_ch.front_index     = (uint32_t)(ch - 1) * (32 * 2 + 1) + 1;
-            lcd_ch.front_index_add = 2;
-            lcd_ch.disp_rows       = 32;
-            lcd_ch.disp_colums     = 16;
+        case CHINSES_32X32:
+            lcd_ch.front_index     = ;
             break;
     }
 
     lcd_ch.disp=yp*DISP_W + xp;
 
-    for (int i = 0; i < lcd_ch.disp_rows; i++)
+    for (int i = 0; i < lcd_pos->disp_rows; i++)
     {
-        for (int j = 0; j < lcd_ch.disp_colums; j++)
+        for (int j = 0; j < lcd_pos->disp_colums; j++)
         {
-            uint8_t byte = lcd_ch.front[lcd_ch.front_index + (j >> 3)];
+            byte = lcd_pos->front[lcd_ch.front_index + (j >> 3)];
             if (byte & (0x80 >> (j & 7))) LTDC_DISPLAY[lcd_ch.disp] = disp_color;
             else                          LTDC_DISPLAY[lcd_ch.disp] = defalut_color;
             lcd_ch.disp++;
         }
-        lcd_ch.front_index += lcd_ch.front_index_add;
-        lcd_ch.disp        += (DISP_W - lcd_ch.disp_colums);
+        lcd_ch.front_index += lcd_pos->front_index_add;
+        lcd_ch.disp        += (DISP_W - lcd_pos->disp_colums);
     }
 }
 

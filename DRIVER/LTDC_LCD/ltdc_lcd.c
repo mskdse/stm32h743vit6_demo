@@ -27,8 +27,7 @@
   DE-PE13
   HSYNC-PC6
   VSYNC-PA4
-	
-	RST-PE0
+
   BL-PB7 TIM4_CH2_PWM调光通道
 */
 __attribute__((section (".RAM_D2")))static LTDC_HandleTypeDef  LtdcHandle;
@@ -124,14 +123,6 @@ void ltdc_lcd_borad_init(void)
   GPIO_Init_Structure.Alternate = GPIO_AF2_TIM4;
   HAL_GPIO_Init(GPIOB, &GPIO_Init_Structure);
   HAL_GPIO_WritePin(GPIOB,GPIO_PIN_7,GPIO_PIN_RESET);
-	
-	GPIO_Init_Structure.Pin       = GPIO_PIN_0; 
-  GPIO_Init_Structure.Mode      = GPIO_MODE_OUTPUT_PP;
-  GPIO_Init_Structure.Pull      = GPIO_PULLUP;
-  GPIO_Init_Structure.Speed     = GPIO_SPEED_FREQ_MEDIUM;  
-  HAL_GPIO_Init(GPIOE, &GPIO_Init_Structure);
-	HAL_GPIO_WritePin(GPIOE,GPIO_PIN_0,GPIO_PIN_SET);
-  for(int i=0;i<0xFFF;i++) __nop();
 
   /* Set LTDC Interrupt to the lowest priority */
   HAL_NVIC_SetPriority(LTDC_IRQn, 0xF, 0);   
@@ -239,14 +230,7 @@ void ltdc_lcd_init(void)
 	ltdc_layer1_cfg.WindowX1=LCD_WIN_X1;
 	ltdc_layer1_cfg.WindowY0=LCD_WIN_Y0;
 	ltdc_layer1_cfg.WindowY1=LCD_WIN_Y1;
-	if(HAL_LTDC_ConfigLayer(&LtdcHandle,&ltdc_layer1_cfg,LTDC_LAYER_1)!=HAL_OK)        Error_Handler();
-
-  HAL_GPIO_WritePin(GPIOE,GPIO_PIN_0,GPIO_PIN_SET);
-  HAL_Delay(10);
-  HAL_GPIO_WritePin(GPIOE,GPIO_PIN_0,GPIO_PIN_RESET);
-  HAL_Delay(50);
-  HAL_GPIO_WritePin(GPIOE,GPIO_PIN_0,GPIO_PIN_SET);
-  HAL_Delay(200);	 
+	if(HAL_LTDC_ConfigLayer(&LtdcHandle,&ltdc_layer1_cfg,LTDC_LAYER_1)!=HAL_OK)        Error_Handler();	 
 }
 
 /**
