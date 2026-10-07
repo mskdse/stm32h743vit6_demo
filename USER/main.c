@@ -37,6 +37,8 @@ int main(void)
 	
 	sram_d2_init();//初始化D2域的SRAM2的最后的20KB的内存管理，用于我们动态使用	
   usart1_dma_init(115200);//串口初始化
+//  drvp_fmc_lcd_init();//初始化lcd
+//	drvp_fmc_lcd_set_axis_scan(0,1,1,0,0);//设置LCD的坐标轴适配开发板以及显存扫描方向
   ltdc_lcd_init();//LTDC的LCD初始化
   ltdc_lcd_bl_set(2000,100);//打开背光显示,屏幕2KHZ,占空比100%
 	
@@ -46,8 +48,6 @@ int main(void)
 #endif
 
 #if USE_LVGL_RUN
-//  drvp_fmc_lcd_init();//初始化lcd
-//	drvp_fmc_lcd_set_axis_scan(0,1,1,0,0);//设置LCD的坐标轴适配开发板以及显存扫描方向
 	lv_init();//LVGL初始化
 	lv_port_disp_init();//LVGL底层支持初始化
 	lv_demo_benchmark();//允许LVGL的测试Demo

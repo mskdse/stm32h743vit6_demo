@@ -217,9 +217,9 @@ void ltdc_lcd_init(void)
 	ltdc_layer1_cfg.Alpha=0xFF;//常数alpha，0xFF/255=100%,也就是说当前层和它的下面一层的融合数据取它当前层(不考虑和alpha0相乘的情况下)
 	ltdc_layer1_cfg.Alpha0=0x00;//随便给，我们不使用ARGB格式所以该参数无效,该参数是默认alpha，假设我窗口没有完全覆盖下面的一层
 	                            //那我ARGB的数据必须指定一个默认ARGB的A的值作为alpha0默认参数，不然窗口以外图形融合就不确切
-	ltdc_layer1_cfg.Backcolor.Blue=0xFF;
-	ltdc_layer1_cfg.Backcolor.Green=0xFF;
-	ltdc_layer1_cfg.Backcolor.Red=0xFF;
+	ltdc_layer1_cfg.Backcolor.Blue=0x00;
+	ltdc_layer1_cfg.Backcolor.Green=0x00;
+	ltdc_layer1_cfg.Backcolor.Red=0x00;
 	ltdc_layer1_cfg.BlendingFactor1=LTDC_BLENDING_FACTOR1_CA;//不使用ARGB的apha和常数alpha融合，所以选择这个
 	ltdc_layer1_cfg.BlendingFactor2=LTDC_BLENDING_FACTOR2_CA;//不使用ARGB的apha和常数alpha融合，所以选择这个
 	ltdc_layer1_cfg.FBStartAdress=(uint32_t)LTDC_DISPLAY;

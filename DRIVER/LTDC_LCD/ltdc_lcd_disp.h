@@ -57,6 +57,8 @@ typedef struct
 	uint8_t  front_index_add;//字库数组的索引递增个数
 	uint8_t  disp_rows;//显示行数
 	uint8_t  disp_colums;//显示列数
+	uint32_t bytes_per_char;   // 每字总字节数（含前缀）
+  uint32_t front_size;       // 字库总字节数
 }ltdc_front_postion_type;
 
 typedef struct
@@ -66,12 +68,12 @@ typedef struct
 }ltdc_lcd_ch_type;
 
 /* 函数声明 */							
-void ltdc_lcd_disp_str(uint16_t xp,uint16_t yp,
-	                     const char* str,ltdc_front_type front,
+void ltdc_lcd_disp_str(uint16_t xp,uint16_t yp,const char* str,
+	                     ltdc_front_type asc_front,ltdc_front_type ch_front,
 										   uint16_t defalut_color,uint16_t disp_color);
 											 
 void ltdc_lcd_disp_print(uint16_t xp, uint16_t yp,
-                         ltdc_front_type front,
+                         ltdc_front_type asc_front,ltdc_front_type ch_front,
                          uint16_t defalut_color, uint16_t disp_color,
                          const char* fmt, ...);
 

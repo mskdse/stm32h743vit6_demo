@@ -34,7 +34,7 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
  *  STATIC VARIABLES
  **********************/
 static lv_disp_draw_buf_t draw_buf_dsc_1;
-__attribute__((section(".RAM_D1")))static lv_color_t buf_1_1[MY_DISP_HOR_RES * 10];   // 10 行缓冲区
+__attribute__((section(".RAM_D1")))static lv_color_t buf_1_1[MY_DISP_HOR_RES*30];
 static lv_disp_drv_t disp_drv;
 
 /**********************
@@ -55,8 +55,8 @@ void lv_port_disp_init(void)
     /* 1. 初始化绘制缓冲区 */
     lv_disp_draw_buf_init(&draw_buf_dsc_1,
                           buf_1_1,      // buf1
-                          NULL,         // buf2（不用双缓冲）
-                          MY_DISP_HOR_RES * 10);
+                          NULL,         // buf2
+                          MY_DISP_HOR_RES * 30);
 
     /* 2. 初始化显示驱动 */
     lv_disp_drv_init(&disp_drv);
