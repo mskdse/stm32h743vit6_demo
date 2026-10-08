@@ -33,7 +33,8 @@
 __attribute__((section (".RAM_D2")))static LTDC_HandleTypeDef  LtdcHandle;
 __attribute__((section (".RAM_D2")))static TIM_HandleTypeDef   bl_htim4;
 __attribute__((section (".RAM_D2")))static TIM_OC_InitTypeDef  bl_pwm_Config;
-__attribute__((section(".RAM_D1"), aligned(4)))uint16_t        LTDC_DISPLAY[(LCD_WIN_X1*LCD_WIN_Y1)];
+__attribute__((section(".RAM_D1"), aligned(4)))uint16_t        LTDC_DISPLAY[((LCD_WIN_X1-LCD_WIN_X0)*(LCD_WIN_Y1-LCD_WIN_Y0))];
+__attribute__((section (".RAM_D2")))static volatile uint8_t    dma2d_tran_copmtle;
 
 /**
   * @brief  This function is executed in case of error occurrence.
@@ -54,6 +55,22 @@ void ltdc_lcd_borad_init(void)
   memset(&bl_htim4,0,sizeof(TIM_HandleTypeDef));
   memset(&bl_pwm_Config,0,sizeof(TIM_OC_InitTypeDef));
 	memset(LTDC_DISPLAY,0,sizeof(LTDC_DISPLAY));
+	dma2d_tran_copmtle=0;
+	
+	/*##-1- Reset peripherals ##################################################*/
+  /* Enable DMA2D reset state */
+  __HAL_RCC_DMA2D_FORCE_RESET();
+  
+  /* Release DMA2D from reset state */ 
+  __HAL_RCC_DMA2D_RELEASE_RESET();
+	
+	/*##-1- Enable peripherals and GPIO Clocks #################################*/
+  __HAL_RCC_DMA2D_CLK_ENABLE();
+
+  /*##-2- NVIC configuration  ################################################*/  
+  /* NVIC configuration for DMA2D transfer complete interrupt */
+  HAL_NVIC_SetPriority(DMA2D_IRQn, 0xE, 0);
+  HAL_NVIC_EnableIRQ(DMA2D_IRQn);   
 
   /*##-1- Reset peripherals ##################################################*/
   /* Enable LTDC reset state */
@@ -231,6 +248,78 @@ void ltdc_lcd_init(void)
 	ltdc_layer1_cfg.WindowY0=LCD_WIN_Y0;
 	ltdc_layer1_cfg.WindowY1=LCD_WIN_Y1;
 	if(HAL_LTDC_ConfigLayer(&LtdcHandle,&ltdc_layer1_cfg,LTDC_LAYER_1)!=HAL_OK)        Error_Handler();	 
+	
+	/* 配置DMA2D */
+	DMA2D->CR|=(0x01<<9);//使能传输完成中断
+	DMA2D->CR&=~(0x01<<0);//禁止开始传输
+}
+
+/* DMA2D刷色块 */
+void ltdc_lcd_dma2d_fill(uint16_t x,uint16_t xsize,uint16_t y,uint16_t ysize,uint16_t color)
+{
+	DMA2D->CR|=(0x01<<17);//寄存器到存储器格式
+	DMA2D->CR|=(0x01<<16);
+	DMA2D->OPFCCR=2;//RGB565格式
+	DMA2D->OCOLR=color;//填充颜色寄存器
+	DMA2D->OMAR=(uint32_t)(LTDC_DISPLAY+y*(LCD_WIN_X1-LCD_WIN_X0)+x);//输出地址,坐标处的地址
+	DMA2D->OOR=(LCD_WIN_X1-LCD_WIN_X0)-xsize;//行偏移，数值为行末尾到下一行开头的那段距离，即窗口宽度减去行长度
+	DMA2D->NLR=(uint32_t)((xsize<<16)|ysize);//要填充的行长度和列长度
+	DMA2D->CR|=(0x01<<0);//开始传输
+	while(!dma2d_tran_copmtle);//等待传输完成
+	dma2d_tran_copmtle=0;
+}
+
+/* DMA2D图像拷贝，这里假定图像缓冲区截取全部区域，即行偏移为0并且行列大小等于图像大小 */
+void ltdc_lcd_dma2d_data_copy(const uint16_t* data_src,uint16_t x,uint16_t xsize,uint16_t y,uint16_t ysize)
+{
+	DMA2D->CR&=~(0x01<<17);//存储器到存储器格式
+	DMA2D->CR&=~(0x01<<16);
+	DMA2D->FGMAR=(uint32_t)data_src;//前景层源地址，这里假定图像缓冲区截取全部，所以偏移等于源地址
+	DMA2D->FGOR=0;//前景层行偏移为0，因为截取全部
+	DMA2D->FGPFCCR=2;//RGB565格式
+	DMA2D->OPFCCR=2;//RGB565格式
+	DMA2D->OMAR=(uint32_t)(LTDC_DISPLAY+y*(LCD_WIN_X1-LCD_WIN_X0)+x);//输出地址,坐标处的地址
+	DMA2D->OOR=(LCD_WIN_X1-LCD_WIN_X0)-xsize;//行偏移，数值为行末尾到下一行开头的那段距离，即窗口宽度减去行长度
+	DMA2D->NLR=(uint32_t)((xsize<<16)|ysize);//要填充的行长度和列长度
+	DMA2D->CR|=(0x01<<0);//开始传输
+	while(!dma2d_tran_copmtle);//等待传输完成
+	dma2d_tran_copmtle=0;
+}
+
+/* DMA2D图像融合，这里假定图像缓冲区截取全部区域，即行偏移为0并且行列大小等于图像大小,将原图像直接与lcd的显存进行融合最后显示出融合图像 */
+void ltdc_lcd_dma2d_data_fusion(const uint16_t* data_src,uint16_t x,uint16_t xsize,uint16_t y,uint16_t ysize,uint8_t fusion)
+{
+	DMA2D->CR|=(0x01<<17);//存储器到存储器格式，并执行融合
+	DMA2D->CR&=~(0x01<<16);
+	DMA2D->FGMAR=(uint32_t)data_src;//前景层源地址，这里假定图像缓冲区截取全部，所以偏移等于源地址
+	DMA2D->BGMAR=(uint32_t)(LTDC_DISPLAY+y*(LCD_WIN_X1-LCD_WIN_X0)+x);//背景层和最终输出层都认为是lcd显存
+	DMA2D->FGOR=0;//前景层行偏移为0，因为截取全部
+	DMA2D->BGOR=(LCD_WIN_X1-LCD_WIN_X0)-xsize;//背景层和最终输出层都认为是lcd显存
+	DMA2D->FGPFCCR=2;//RGB565格式
+	DMA2D->FGPFCCR|=(0x01<<16);//使用该寄存器的AHPHA
+	DMA2D->FGPFCCR|=(uint32_t)(fusion<<24);//ahpha系数
+	DMA2D->OPFCCR=2;//RGB565格式
+	DMA2D->BGPFCCR=2;
+	DMA2D->OMAR=(uint32_t)(LTDC_DISPLAY+y*(LCD_WIN_X1-LCD_WIN_X0)+x);//输出地址,坐标处的地址
+	DMA2D->OOR=(LCD_WIN_X1-LCD_WIN_X0)-xsize;//行偏移，数值为行末尾到下一行开头的那段距离，即窗口宽度减去行长度
+	DMA2D->NLR=(uint32_t)((xsize<<16)|ysize);//要填充的行长度和列长度
+	DMA2D->CR|=(0x01<<0);//开始传输
+	while(!dma2d_tran_copmtle);//等待传输完成
+	dma2d_tran_copmtle=0;
+}
+
+/**
+  * @brief  This function handles DMA2D Handler.
+  * @param  None
+  * @retval None
+  */
+void DMA2D_IRQHandler(void)
+{
+	if(DMA2D->ISR&(0x01<<1))
+	{
+		DMA2D->IFCR=(0x01<<1);
+		dma2d_tran_copmtle=1;
+	}
 }
 
 /**

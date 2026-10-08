@@ -11,17 +11,17 @@
 #include <stdbool.h>
 #include "ltdc_lcd.h"
 
-extern uint16_t LTDC_DISPLAY[(LCD_WIN_X1 * LCD_WIN_Y1)];
+extern uint16_t LTDC_DISPLAY[((LCD_WIN_X1-LCD_WIN_X0)*(LCD_WIN_Y1-LCD_WIN_Y0))];
 
 /*********************
  *      DEFINES
  *********************/
 #ifndef MY_DISP_HOR_RES
-    #define MY_DISP_HOR_RES    LCD_WIN_X1
+    #define MY_DISP_HOR_RES    (LCD_WIN_X1-LCD_WIN_X0)
 #endif
 
 #ifndef MY_DISP_VER_RES
-    #define MY_DISP_VER_RES    LCD_WIN_Y1
+    #define MY_DISP_VER_RES    (LCD_WIN_Y1-LCD_WIN_Y0)
 #endif
 
 /**********************

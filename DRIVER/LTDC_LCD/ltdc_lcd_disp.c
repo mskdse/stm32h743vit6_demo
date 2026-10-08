@@ -8,7 +8,7 @@
 #define DISP_W   (LCD_WIN_X1 - LCD_WIN_X0)
 #define DISP_H   (LCD_WIN_Y1 - LCD_WIN_Y0)
 
-extern uint16_t LTDC_DISPLAY[(LCD_WIN_X1 * LCD_WIN_Y1)]; 
+extern uint16_t LTDC_DISPLAY[((LCD_WIN_X1-LCD_WIN_X0)*(LCD_WIN_Y1-LCD_WIN_Y0))]; 
 
 /* ÎÄ¼þÖ¸Õë */
 __attribute__((section(".RAM_D1"), aligned(4))) static FIL  fil;
