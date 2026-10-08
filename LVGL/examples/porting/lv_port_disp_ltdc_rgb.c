@@ -101,17 +101,22 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
 {
     if (disp_flush_enabled)
     {
-        int32_t x;
-        int32_t y;
+/* 1.阻塞式写buffer，速度比较慢 */
+//        int32_t x;
+//        int32_t y;
 
-        for (y = area->y1; y <= area->y2; y++)
-        {
-            for (x = area->x1; x <= area->x2; x++)
-            {
-                LTDC_DISPLAY[y * LCD_WIN_X1 + x] = color_p->full;
-                color_p++;
-            }
-        }
+//        for (y = area->y1; y <= area->y2; y++)
+//        {
+//            for (x = area->x1; x <= area->x2; x++)
+//            {
+//                LTDC_DISPLAY[y * LCD_WIN_X1 + x] = color_p->full;
+//                color_p++;
+//            }
+//        }
+			
+/* 2.使用DMA2D进行渲染，虽然也是阻塞式但是速度快 */
+				ltdc_lcd_dma2d_data_copy((const uint16_t *)color_p,area->x1,(area->x2-area->x1+1),
+					                                                 area->y1,(area->y2-area->y1+1));
     }
 
     lv_disp_flush_ready(disp_drv);

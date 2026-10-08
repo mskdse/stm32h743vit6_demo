@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\OUTFILES\PROJECT.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\OUTFILES\PROJECT.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Thu Oct 08 11:35:08 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Thu Oct 08 17:55:17 2026
 <BR><P>
 <H3>Maximum Stack Usage =        600 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -53,7 +53,7 @@ Function Pointers
  <LI><a href="#[1a]">DMA1_Stream5_IRQHandler</a> from spi_flash.o(i.DMA1_Stream5_IRQHandler) referenced from startup_stm32h743xx.o(RESET)
  <LI><a href="#[1b]">DMA1_Stream6_IRQHandler</a> from startup_stm32h743xx.o(.text) referenced from startup_stm32h743xx.o(RESET)
  <LI><a href="#[38]">DMA1_Stream7_IRQHandler</a> from startup_stm32h743xx.o(.text) referenced from startup_stm32h743xx.o(RESET)
- <LI><a href="#[5e]">DMA2D_IRQHandler</a> from startup_stm32h743xx.o(.text) referenced from startup_stm32h743xx.o(RESET)
+ <LI><a href="#[5e]">DMA2D_IRQHandler</a> from ltdc_lcd.o(i.DMA2D_IRQHandler) referenced from startup_stm32h743xx.o(RESET)
  <LI><a href="#[41]">DMA2_Stream0_IRQHandler</a> from startup_stm32h743xx.o(.text) referenced from startup_stm32h743xx.o(RESET)
  <LI><a href="#[42]">DMA2_Stream1_IRQHandler</a> from startup_stm32h743xx.o(.text) referenced from startup_stm32h743xx.o(RESET)
  <LI><a href="#[43]">DMA2_Stream2_IRQHandler</a> from startup_stm32h743xx.o(.text) referenced from startup_stm32h743xx.o(RESET)
@@ -338,9 +338,6 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32h743xx.o(RESET)
 </UL>
 <P><STRONG><a name="[38]"></a>DMA1_Stream7_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32h743xx.o(.text))
-<BR>[Address Reference Count : 1]<UL><LI> startup_stm32h743xx.o(RESET)
-</UL>
-<P><STRONG><a name="[5e]"></a>DMA2D_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32h743xx.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32h743xx.o(RESET)
 </UL>
 <P><STRONG><a name="[41]"></a>DMA2_Stream0_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32h743xx.o(.text))
@@ -709,9 +706,9 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[db]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ltdc_lcd_borad_init
-<LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_dma_init
+<BR><BR>[Called By]<UL><LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_dma_init
 <LI><a href="#[13e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ltdc_lcd_init
+<LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ltdc_lcd_borad_init
 <LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_DoInit
 <LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventRecorderInitialize
 </UL>
@@ -866,6 +863,9 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32h743xx.o(RESET)
 </UL>
+<P><STRONG><a name="[5e]"></a>DMA2D_IRQHandler</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, ltdc_lcd.o(i.DMA2D_IRQHandler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_stm32h743xx.o(RESET)
+</UL>
 <P><STRONG><a name="[7]"></a>DebugMon_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32h7xx_it.o(i.DebugMon_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32h743xx.o(RESET)
 </UL>
@@ -947,11 +947,11 @@ Global Symbols
 <P><STRONG><a name="[e0]"></a>HAL_DMA_Init</STRONG> (Thumb, 926 bytes, Stack size 40 bytes, stm32h7xx_hal_dma.o(i.HAL_DMA_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = HAL_DMA_Init &rArr; DMA_CalcDMAMUXChannelBaseAndMask
 </UL>
-<BR>[Calls]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_CheckFifoParam
+<BR>[Calls]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_CheckFifoParam
 <LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_CalcDMAMUXRequestGenBaseAndMask
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_CalcDMAMUXChannelBaseAndMask
 <LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_CalcBaseAndBitshift
-<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
 <BR>[Called By]<UL><LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_dma_init
 </UL>
@@ -968,14 +968,14 @@ Global Symbols
 <LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FDCAN1_IT0_IRQHandler
 </UL>
 
-<P><STRONG><a name="[13b]"></a>HAL_GPIO_Init</STRONG> (Thumb, 506 bytes, Stack size 40 bytes, stm32h7xx_hal_gpio.o(i.HAL_GPIO_Init))
+<P><STRONG><a name="[13c]"></a>HAL_GPIO_Init</STRONG> (Thumb, 506 bytes, Stack size 40 bytes, stm32h7xx_hal_gpio.o(i.HAL_GPIO_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = HAL_GPIO_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ltdc_lcd_borad_init
-<LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_dma_init
+<BR>[Called By]<UL><LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_dma_init
+<LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ltdc_lcd_borad_init
 </UL>
 
-<P><STRONG><a name="[13c]"></a>HAL_GPIO_WritePin</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32h7xx_hal_gpio.o(i.HAL_GPIO_WritePin))
+<P><STRONG><a name="[13d]"></a>HAL_GPIO_WritePin</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32h7xx_hal_gpio.o(i.HAL_GPIO_WritePin))
 <BR><BR>[Called By]<UL><LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ltdc_lcd_borad_init
 </UL>
 
@@ -1068,9 +1068,9 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
 </UL>
 
-<P><STRONG><a name="[13d]"></a>HAL_NVIC_EnableIRQ</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32h7xx_hal_cortex.o(i.HAL_NVIC_EnableIRQ))
-<BR><BR>[Called By]<UL><LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ltdc_lcd_borad_init
-<LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_dma_init
+<P><STRONG><a name="[13b]"></a>HAL_NVIC_EnableIRQ</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32h7xx_hal_cortex.o(i.HAL_NVIC_EnableIRQ))
+<BR><BR>[Called By]<UL><LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_dma_init
+<LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ltdc_lcd_borad_init
 </UL>
 
 <P><STRONG><a name="[ec]"></a>HAL_NVIC_SetPriority</STRONG> (Thumb, 60 bytes, Stack size 16 bytes, stm32h7xx_hal_cortex.o(i.HAL_NVIC_SetPriority))
@@ -1079,8 +1079,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_SetPriority
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
-<LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ltdc_lcd_borad_init
 <LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_dma_init
+<LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ltdc_lcd_borad_init
 </UL>
 
 <P><STRONG><a name="[e7]"></a>HAL_NVIC_SetPriorityGrouping</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, stm32h7xx_hal_cortex.o(i.HAL_NVIC_SetPriorityGrouping))
@@ -1624,13 +1624,13 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[13a]"></a>ltdc_lcd_borad_init</STRONG> (Thumb, 512 bytes, Stack size 248 bytes, ltdc_lcd.o(i.ltdc_lcd_borad_init))
+<P><STRONG><a name="[13a]"></a>ltdc_lcd_borad_init</STRONG> (Thumb, 574 bytes, Stack size 248 bytes, ltdc_lcd.o(i.ltdc_lcd_borad_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 328<LI>Call Chain = ltdc_lcd_borad_init &rArr; HAL_RCCEx_PeriphCLKConfig &rArr; RCCEx_PLL3_Config
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_EnableIRQ
-<LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
-<LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
+<LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_EnableIRQ
+<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
 <LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCCEx_PeriphCLKConfig
 <LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Stop
 <LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Init
@@ -1640,7 +1640,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[13e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ltdc_lcd_init
 </UL>
 
-<P><STRONG><a name="[13e]"></a>ltdc_lcd_init</STRONG> (Thumb, 172 bytes, Stack size 72 bytes, ltdc_lcd.o(i.ltdc_lcd_init))
+<P><STRONG><a name="[13e]"></a>ltdc_lcd_init</STRONG> (Thumb, 188 bytes, Stack size 72 bytes, ltdc_lcd.o(i.ltdc_lcd_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 400<LI>Call Chain = ltdc_lcd_init &rArr; ltdc_lcd_borad_init &rArr; HAL_RCCEx_PeriphCLKConfig &rArr; RCCEx_PLL3_Config
 </UL>
 <BR>[Calls]<UL><LI><a href="#[13f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_LTDC_Init
@@ -1655,7 +1655,6 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 600<LI>Call Chain = main &rArr; usart1_dma_init &rArr; HAL_UART_Init &rArr; UART_SetConfig &rArr; __aeabi_uldivmod
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
-<LI><a href="#[138]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ltdc_lcd_bl_set
 <LI><a href="#[143]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_my_printf
 <LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_dma_init
 <LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
@@ -1663,6 +1662,7 @@ Global Symbols
 <LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CPU_CACHE_Enable
 <LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_d2_init
 <LI><a href="#[13e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ltdc_lcd_init
+<LI><a href="#[138]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ltdc_lcd_bl_set
 <LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SEGGER_RTT_printf
 <LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SEGGER_RTT_Init
 <LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventRecorderStart
@@ -1682,10 +1682,10 @@ Global Symbols
 <P><STRONG><a name="[142]"></a>usart1_dma_init</STRONG> (Thumb, 372 bytes, Stack size 496 bytes, usart1_dma.o(i.usart1_dma_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 600<LI>Call Chain = usart1_dma_init &rArr; HAL_UART_Init &rArr; UART_SetConfig &rArr; __aeabi_uldivmod
 </UL>
-<BR>[Calls]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Init
-<LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_EnableIRQ
-<LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
+<BR>[Calls]<UL><LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
+<LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_EnableIRQ
+<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Init
+<LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
 <LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Init
 <LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
