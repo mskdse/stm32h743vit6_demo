@@ -1,0 +1,13 @@
+.\outfiles\rdcolmap.o: LIBJPEG\rdcolmap.c
+.\outfiles\rdcolmap.o: LIBJPEG\cdjpeg.h
+.\outfiles\rdcolmap.o: LIBJPEG\jinclude.h
+.\outfiles\rdcolmap.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\rdcolmap.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\rdcolmap.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\rdcolmap.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\rdcolmap.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\rdcolmap.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\rdcolmap.o: LIBJPEG\jpeglib.h
+.\outfiles\rdcolmap.o: LIBJPEG\jmorecfg.h
+.\outfiles\rdcolmap.o: LIBJPEG\jerror.h
+.\outfiles\rdcolmap.o: LIBJPEG\cderror.h

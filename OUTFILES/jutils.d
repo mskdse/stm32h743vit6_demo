@@ -1,0 +1,12 @@
+.\outfiles\jutils.o: LIBJPEG\jutils.c
+.\outfiles\jutils.o: LIBJPEG\jinclude.h
+.\outfiles\jutils.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jutils.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jutils.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jutils.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jutils.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jutils.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jutils.o: LIBJPEG\jpeglib.h
+.\outfiles\jutils.o: LIBJPEG\jmorecfg.h
+.\outfiles\jutils.o: LIBJPEG\jpegint.h
+.\outfiles\jutils.o: LIBJPEG\jerror.h

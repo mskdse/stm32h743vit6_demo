@@ -1,0 +1,9 @@
+.\outfiles\strtest.o: LIBJPEG\strtest.c
+.\outfiles\strtest.o: LIBJPEG\jinclude.h
+.\outfiles\strtest.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\strtest.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\strtest.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\strtest.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\strtest.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\strtest.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\strtest.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\errno.h

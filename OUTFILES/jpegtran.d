@@ -1,0 +1,14 @@
+.\outfiles\jpegtran.o: LIBJPEG\jpegtran.c
+.\outfiles\jpegtran.o: LIBJPEG\cdjpeg.h
+.\outfiles\jpegtran.o: LIBJPEG\jinclude.h
+.\outfiles\jpegtran.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jpegtran.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jpegtran.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jpegtran.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jpegtran.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jpegtran.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jpegtran.o: LIBJPEG\jpeglib.h
+.\outfiles\jpegtran.o: LIBJPEG\jmorecfg.h
+.\outfiles\jpegtran.o: LIBJPEG\jerror.h
+.\outfiles\jpegtran.o: LIBJPEG\cderror.h
+.\outfiles\jpegtran.o: LIBJPEG\transupp.h

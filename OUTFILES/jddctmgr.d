@@ -1,0 +1,15 @@
+.\outfiles\jddctmgr.o: LIBJPEG\jddctmgr.c
+.\outfiles\jddctmgr.o: LIBJPEG\jinclude.h
+.\outfiles\jddctmgr.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jddctmgr.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jddctmgr.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jddctmgr.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jddctmgr.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jddctmgr.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jddctmgr.o: LIBJPEG\jpeglib.h
+.\outfiles\jddctmgr.o: LIBJPEG\jmorecfg.h
+.\outfiles\jddctmgr.o: LIBJPEG\jpegint.h
+.\outfiles\jddctmgr.o: LIBJPEG\jerror.h
+.\outfiles\jddctmgr.o: LIBJPEG\jdct.h
+.\outfiles\jddctmgr.o: LIBJPEG\jsimddct.h
+.\outfiles\jddctmgr.o: LIBJPEG\jpegcomp.h

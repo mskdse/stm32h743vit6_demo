@@ -1,0 +1,15 @@
+.\outfiles\transupp.o: LIBJPEG\transupp.c
+.\outfiles\transupp.o: LIBJPEG\jinclude.h
+.\outfiles\transupp.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\transupp.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\transupp.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\transupp.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\transupp.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\transupp.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\transupp.o: LIBJPEG\jpeglib.h
+.\outfiles\transupp.o: LIBJPEG\jmorecfg.h
+.\outfiles\transupp.o: LIBJPEG\jpegint.h
+.\outfiles\transupp.o: LIBJPEG\jerror.h
+.\outfiles\transupp.o: LIBJPEG\transupp.h
+.\outfiles\transupp.o: LIBJPEG\jpegcomp.h
+.\outfiles\transupp.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\ctype.h

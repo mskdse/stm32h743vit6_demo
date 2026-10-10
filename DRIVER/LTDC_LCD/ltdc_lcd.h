@@ -32,5 +32,6 @@ void ltdc_lcd_bl_set(uint32_t freq,uint8_t paluse);
 void ltdc_lcd_dma2d_fill(uint16_t x,uint16_t xsize,uint16_t y,uint16_t ysize,uint16_t color);
 void ltdc_lcd_dma2d_data_copy(const uint16_t* data_src,uint16_t x,uint16_t xsize,uint16_t y,uint16_t ysize);
 void ltdc_lcd_dma2d_data_fusion(const uint16_t* data_src,uint16_t x,uint16_t xsize,uint16_t y,uint16_t ysize,uint8_t fusion);
+void ltdc_lcd_dma2d_ycbcr_rgb565(const uint16_t* data_src,uint16_t x,uint16_t xsize,uint16_t y,uint16_t ysize,uint32_t ChromaSampling);
 
 #endif

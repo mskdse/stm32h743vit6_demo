@@ -1,0 +1,13 @@
+.\outfiles\jdicc.o: LIBJPEG\jdicc.c
+.\outfiles\jdicc.o: LIBJPEG\jinclude.h
+.\outfiles\jdicc.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jdicc.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jdicc.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jdicc.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jdicc.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jdicc.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jdicc.o: LIBJPEG\jpeglib.h
+.\outfiles\jdicc.o: LIBJPEG\jmorecfg.h
+.\outfiles\jdicc.o: LIBJPEG\jpegint.h
+.\outfiles\jdicc.o: LIBJPEG\jerror.h
+.\outfiles\jdicc.o: LIBJPEG\jerror.h

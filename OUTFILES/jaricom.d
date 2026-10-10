@@ -1,0 +1,12 @@
+.\outfiles\jaricom.o: LIBJPEG\jaricom.c
+.\outfiles\jaricom.o: LIBJPEG\jinclude.h
+.\outfiles\jaricom.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jaricom.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jaricom.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jaricom.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jaricom.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jaricom.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jaricom.o: LIBJPEG\jpeglib.h
+.\outfiles\jaricom.o: LIBJPEG\jmorecfg.h
+.\outfiles\jaricom.o: LIBJPEG\jpegint.h
+.\outfiles\jaricom.o: LIBJPEG\jerror.h

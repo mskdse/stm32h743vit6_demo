@@ -1,0 +1,15 @@
+.\outfiles\jmemmgr.o: LIBJPEG\jmemmgr.c
+.\outfiles\jmemmgr.o: LIBJPEG\jinclude.h
+.\outfiles\jmemmgr.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jmemmgr.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jmemmgr.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jmemmgr.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jmemmgr.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jmemmgr.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jmemmgr.o: LIBJPEG\jpeglib.h
+.\outfiles\jmemmgr.o: LIBJPEG\jmorecfg.h
+.\outfiles\jmemmgr.o: LIBJPEG\jpegint.h
+.\outfiles\jmemmgr.o: LIBJPEG\jerror.h
+.\outfiles\jmemmgr.o: LIBJPEG\jmemsys.h
+.\outfiles\jmemmgr.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\outfiles\jmemmgr.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h

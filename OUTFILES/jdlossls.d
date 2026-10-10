@@ -1,0 +1,13 @@
+.\outfiles\jdlossls.o: LIBJPEG\src\jdlossls.c
+.\outfiles\jdlossls.o: LIBJPEG\src\jinclude.h
+.\outfiles\jdlossls.o: .\LIBJPEG\jconfig.h
+.\outfiles\jdlossls.o: .\LIBJPEG\jconfigint.h
+.\outfiles\jdlossls.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jdlossls.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jdlossls.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jdlossls.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jdlossls.o: LIBJPEG\src\jpeglib.h
+.\outfiles\jdlossls.o: LIBJPEG\src\jmorecfg.h
+.\outfiles\jdlossls.o: LIBJPEG\src\jpegint.h
+.\outfiles\jdlossls.o: LIBJPEG\src\jerror.h
+.\outfiles\jdlossls.o: LIBJPEG\src\jlossls.h

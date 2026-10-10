@@ -1,0 +1,11 @@
+.\outfiles\jdatasrc-tj.o: LIBJPEG\jdatasrc-tj.c
+.\outfiles\jdatasrc-tj.o: LIBJPEG\jinclude.h
+.\outfiles\jdatasrc-tj.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jdatasrc-tj.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jdatasrc-tj.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jdatasrc-tj.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jdatasrc-tj.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jdatasrc-tj.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jdatasrc-tj.o: LIBJPEG\jpeglib.h
+.\outfiles\jdatasrc-tj.o: LIBJPEG\jmorecfg.h
+.\outfiles\jdatasrc-tj.o: LIBJPEG\jerror.h

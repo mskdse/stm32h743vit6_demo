@@ -1,0 +1,12 @@
+.\outfiles\jcapistd.o: LIBJPEG\jcapistd.c
+.\outfiles\jcapistd.o: LIBJPEG\jinclude.h
+.\outfiles\jcapistd.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jcapistd.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jcapistd.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jcapistd.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jcapistd.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jcapistd.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jcapistd.o: LIBJPEG\jpeglib.h
+.\outfiles\jcapistd.o: LIBJPEG\jmorecfg.h
+.\outfiles\jcapistd.o: LIBJPEG\jpegint.h
+.\outfiles\jcapistd.o: LIBJPEG\jerror.h

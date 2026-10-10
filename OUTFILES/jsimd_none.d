@@ -1,0 +1,16 @@
+.\outfiles\jsimd_none.o: LIBJPEG\jsimd_none.c
+.\outfiles\jsimd_none.o: LIBJPEG\jinclude.h
+.\outfiles\jsimd_none.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jsimd_none.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jsimd_none.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jsimd_none.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jsimd_none.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jsimd_none.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jsimd_none.o: LIBJPEG\jpeglib.h
+.\outfiles\jsimd_none.o: LIBJPEG\jmorecfg.h
+.\outfiles\jsimd_none.o: LIBJPEG\jpegint.h
+.\outfiles\jsimd_none.o: LIBJPEG\jerror.h
+.\outfiles\jsimd_none.o: LIBJPEG\jsimd.h
+.\outfiles\jsimd_none.o: LIBJPEG\jchuff.h
+.\outfiles\jsimd_none.o: LIBJPEG\jdct.h
+.\outfiles\jsimd_none.o: LIBJPEG\jsimddct.h

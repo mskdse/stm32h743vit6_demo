@@ -1,0 +1,16 @@
+.\outfiles\jcphuff.o: LIBJPEG\jcphuff.c
+.\outfiles\jcphuff.o: LIBJPEG\jinclude.h
+.\outfiles\jcphuff.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jcphuff.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jcphuff.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jcphuff.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jcphuff.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jcphuff.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jcphuff.o: LIBJPEG\jpeglib.h
+.\outfiles\jcphuff.o: LIBJPEG\jmorecfg.h
+.\outfiles\jcphuff.o: LIBJPEG\jpegint.h
+.\outfiles\jcphuff.o: LIBJPEG\jerror.h
+.\outfiles\jcphuff.o: LIBJPEG\jsimd.h
+.\outfiles\jcphuff.o: LIBJPEG\jchuff.h
+.\outfiles\jcphuff.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
+.\outfiles\jcphuff.o: LIBJPEG\jpeg_nbits_table.h

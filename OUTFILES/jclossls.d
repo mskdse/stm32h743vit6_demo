@@ -1,0 +1,13 @@
+.\outfiles\jclossls.o: LIBJPEG\src\jclossls.c
+.\outfiles\jclossls.o: LIBJPEG\src\jinclude.h
+.\outfiles\jclossls.o: .\LIBJPEG\jconfig.h
+.\outfiles\jclossls.o: .\LIBJPEG\jconfigint.h
+.\outfiles\jclossls.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jclossls.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jclossls.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jclossls.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jclossls.o: LIBJPEG\src\jpeglib.h
+.\outfiles\jclossls.o: LIBJPEG\src\jmorecfg.h
+.\outfiles\jclossls.o: LIBJPEG\src\jpegint.h
+.\outfiles\jclossls.o: LIBJPEG\src\jerror.h
+.\outfiles\jclossls.o: LIBJPEG\src\jlossls.h

@@ -1,0 +1,16 @@
+.\outfiles\jdsample.o: LIBJPEG\jdsample.c
+.\outfiles\jdsample.o: LIBJPEG\jinclude.h
+.\outfiles\jdsample.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jdsample.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jdsample.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jdsample.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jdsample.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jdsample.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jdsample.o: LIBJPEG\jdsample.h
+.\outfiles\jdsample.o: LIBJPEG\jpeglib.h
+.\outfiles\jdsample.o: LIBJPEG\jmorecfg.h
+.\outfiles\jdsample.o: LIBJPEG\jpegint.h
+.\outfiles\jdsample.o: LIBJPEG\jerror.h
+.\outfiles\jdsample.o: LIBJPEG\jsimd.h
+.\outfiles\jdsample.o: LIBJPEG\jchuff.h
+.\outfiles\jdsample.o: LIBJPEG\jpegcomp.h

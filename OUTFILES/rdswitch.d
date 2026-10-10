@@ -1,0 +1,14 @@
+.\outfiles\rdswitch.o: LIBJPEG\rdswitch.c
+.\outfiles\rdswitch.o: LIBJPEG\cdjpeg.h
+.\outfiles\rdswitch.o: LIBJPEG\jinclude.h
+.\outfiles\rdswitch.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\rdswitch.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\rdswitch.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\rdswitch.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\rdswitch.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\rdswitch.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\rdswitch.o: LIBJPEG\jpeglib.h
+.\outfiles\rdswitch.o: LIBJPEG\jmorecfg.h
+.\outfiles\rdswitch.o: LIBJPEG\jerror.h
+.\outfiles\rdswitch.o: LIBJPEG\cderror.h
+.\outfiles\rdswitch.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\ctype.h

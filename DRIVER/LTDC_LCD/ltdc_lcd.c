@@ -308,6 +308,44 @@ void ltdc_lcd_dma2d_data_fusion(const uint16_t* data_src,uint16_t x,uint16_t xsi
 	dma2d_tran_copmtle=0;
 }
 
+/* DMA2D图像拷贝格式转换，专用于ycbcr->rgb565 */
+void ltdc_lcd_dma2d_ycbcr_rgb565(const uint16_t* data_src,uint16_t x,uint16_t xsize,uint16_t y,uint16_t ysize,uint32_t ChromaSampling)
+{
+	uint32_t cssMode=DMA2D_CSS_420,inputLineOffset=0;
+	if(ChromaSampling == JPEG_420_SUBSAMPLING)
+  {
+    cssMode = DMA2D_CSS_420;
+    inputLineOffset = xsize & (16-1);
+    if(inputLineOffset != 0) inputLineOffset = 16 - inputLineOffset;   
+  }
+  else if(ChromaSampling == JPEG_444_SUBSAMPLING)
+  {
+    cssMode = DMA2D_NO_CSS;
+    inputLineOffset = xsize & (8-1);
+    if(inputLineOffset != 0) inputLineOffset = 8 - inputLineOffset;   
+  }
+  else if(ChromaSampling == JPEG_422_SUBSAMPLING)
+  {
+    cssMode = DMA2D_CSS_422;
+    inputLineOffset = xsize & (16-1);
+    if(inputLineOffset != 0) inputLineOffset = 16 - inputLineOffset;    
+  }
+	
+	DMA2D->CR&=~(0x01<<17);//存储器到存储器并执行格式转换
+	DMA2D->CR|=(0x01<<16);
+	DMA2D->FGMAR=(uint32_t)data_src;//前景层源地址，这里假定图像缓冲区截取全部，所以偏移等于源地址
+	DMA2D->FGOR=inputLineOffset;//前景层行偏移设置，因为我是Ycbcr格式所以要设定，除以二是因为RGB565是两个字节
+	DMA2D->FGPFCCR=11;//ycbcr格式
+	DMA2D->FGPFCCR|=(cssMode<<18);//设置ycbcr格式
+	DMA2D->OPFCCR=2;//RGB565格式
+	DMA2D->OMAR=(uint32_t)(LTDC_DISPLAY+y*(LCD_WIN_X1-LCD_WIN_X0)+x);//输出地址,坐标处的地址
+	DMA2D->OOR=(LCD_WIN_X1-LCD_WIN_X0)-xsize;//行偏移，数值为行末尾到下一行开头的那段距离，即窗口宽度减去行长度
+	DMA2D->NLR=(uint32_t)((xsize<<16)|ysize);//要填充的行长度和列长度
+	DMA2D->CR|=(0x01<<0);//开始传输
+	while(!dma2d_tran_copmtle);//等待传输完成
+	dma2d_tran_copmtle=0;
+}
+
 /**
   * @brief  This function handles DMA2D Handler.
   * @param  None

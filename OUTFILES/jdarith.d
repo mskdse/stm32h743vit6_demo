@@ -1,0 +1,12 @@
+.\outfiles\jdarith.o: LIBJPEG\jdarith.c
+.\outfiles\jdarith.o: LIBJPEG\jinclude.h
+.\outfiles\jdarith.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jdarith.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jdarith.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jdarith.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jdarith.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jdarith.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jdarith.o: LIBJPEG\jpeglib.h
+.\outfiles\jdarith.o: LIBJPEG\jmorecfg.h
+.\outfiles\jdarith.o: LIBJPEG\jpegint.h
+.\outfiles\jdarith.o: LIBJPEG\jerror.h

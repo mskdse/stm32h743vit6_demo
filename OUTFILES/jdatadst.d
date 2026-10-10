@@ -1,0 +1,11 @@
+.\outfiles\jdatadst.o: LIBJPEG\jdatadst.c
+.\outfiles\jdatadst.o: LIBJPEG\jinclude.h
+.\outfiles\jdatadst.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jdatadst.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jdatadst.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jdatadst.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jdatadst.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jdatadst.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jdatadst.o: LIBJPEG\jpeglib.h
+.\outfiles\jdatadst.o: LIBJPEG\jmorecfg.h
+.\outfiles\jdatadst.o: LIBJPEG\jerror.h

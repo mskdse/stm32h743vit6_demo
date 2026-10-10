@@ -1,0 +1,12 @@
+.\outfiles\jquant1.o: LIBJPEG\jquant1.c
+.\outfiles\jquant1.o: LIBJPEG\jinclude.h
+.\outfiles\jquant1.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jquant1.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jquant1.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jquant1.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jquant1.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jquant1.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jquant1.o: LIBJPEG\jpeglib.h
+.\outfiles\jquant1.o: LIBJPEG\jmorecfg.h
+.\outfiles\jquant1.o: LIBJPEG\jpegint.h
+.\outfiles\jquant1.o: LIBJPEG\jerror.h

@@ -1,0 +1,13 @@
+.\outfiles\jdtrans.o: LIBJPEG\jdtrans.c
+.\outfiles\jdtrans.o: LIBJPEG\jinclude.h
+.\outfiles\jdtrans.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jdtrans.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jdtrans.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jdtrans.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jdtrans.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jdtrans.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jdtrans.o: LIBJPEG\jpeglib.h
+.\outfiles\jdtrans.o: LIBJPEG\jmorecfg.h
+.\outfiles\jdtrans.o: LIBJPEG\jpegint.h
+.\outfiles\jdtrans.o: LIBJPEG\jerror.h
+.\outfiles\jdtrans.o: LIBJPEG\jpegcomp.h

@@ -1,0 +1,13 @@
+.\outfiles\jcmarker.o: LIBJPEG\jcmarker.c
+.\outfiles\jcmarker.o: LIBJPEG\jinclude.h
+.\outfiles\jcmarker.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jcmarker.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jcmarker.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jcmarker.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jcmarker.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jcmarker.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jcmarker.o: LIBJPEG\jpeglib.h
+.\outfiles\jcmarker.o: LIBJPEG\jmorecfg.h
+.\outfiles\jcmarker.o: LIBJPEG\jpegint.h
+.\outfiles\jcmarker.o: LIBJPEG\jerror.h
+.\outfiles\jcmarker.o: LIBJPEG\jpegcomp.h

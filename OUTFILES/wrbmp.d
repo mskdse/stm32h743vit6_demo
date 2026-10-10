@@ -1,0 +1,16 @@
+.\outfiles\wrbmp.o: LIBJPEG\wrbmp.c
+.\outfiles\wrbmp.o: LIBJPEG\cmyk.h
+.\outfiles\wrbmp.o: .\LIBJPEG\jinclude.h
+.\outfiles\wrbmp.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\wrbmp.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\wrbmp.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\wrbmp.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\wrbmp.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\wrbmp.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\wrbmp.o: .\LIBJPEG\jpeglib.h
+.\outfiles\wrbmp.o: .\LIBJPEG\jmorecfg.h
+.\outfiles\wrbmp.o: .\LIBJPEG\jpegint.h
+.\outfiles\wrbmp.o: .\LIBJPEG\jerror.h
+.\outfiles\wrbmp.o: LIBJPEG\cdjpeg.h
+.\outfiles\wrbmp.o: LIBJPEG\jerror.h
+.\outfiles\wrbmp.o: LIBJPEG\cderror.h

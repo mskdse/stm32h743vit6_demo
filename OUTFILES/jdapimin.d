@@ -1,0 +1,13 @@
+.\outfiles\jdapimin.o: LIBJPEG\jdapimin.c
+.\outfiles\jdapimin.o: LIBJPEG\jinclude.h
+.\outfiles\jdapimin.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jdapimin.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jdapimin.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jdapimin.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jdapimin.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jdapimin.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jdapimin.o: LIBJPEG\jpeglib.h
+.\outfiles\jdapimin.o: LIBJPEG\jmorecfg.h
+.\outfiles\jdapimin.o: LIBJPEG\jpegint.h
+.\outfiles\jdapimin.o: LIBJPEG\jerror.h
+.\outfiles\jdapimin.o: LIBJPEG\jdmaster.h

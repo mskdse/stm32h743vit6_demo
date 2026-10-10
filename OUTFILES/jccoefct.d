@@ -1,0 +1,12 @@
+.\outfiles\jccoefct.o: LIBJPEG\jccoefct.c
+.\outfiles\jccoefct.o: LIBJPEG\jinclude.h
+.\outfiles\jccoefct.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jccoefct.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jccoefct.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jccoefct.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jccoefct.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jccoefct.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jccoefct.o: LIBJPEG\jpeglib.h
+.\outfiles\jccoefct.o: LIBJPEG\jmorecfg.h
+.\outfiles\jccoefct.o: LIBJPEG\jpegint.h
+.\outfiles\jccoefct.o: LIBJPEG\jerror.h

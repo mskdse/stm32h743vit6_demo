@@ -1,0 +1,12 @@
+.\outfiles\jcprepct.o: LIBJPEG\jcprepct.c
+.\outfiles\jcprepct.o: LIBJPEG\jinclude.h
+.\outfiles\jcprepct.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jcprepct.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jcprepct.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jcprepct.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jcprepct.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jcprepct.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jcprepct.o: LIBJPEG\jpeglib.h
+.\outfiles\jcprepct.o: LIBJPEG\jmorecfg.h
+.\outfiles\jcprepct.o: LIBJPEG\jpegint.h
+.\outfiles\jcprepct.o: LIBJPEG\jerror.h

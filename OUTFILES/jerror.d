@@ -1,0 +1,13 @@
+.\outfiles\jerror.o: LIBJPEG\jerror.c
+.\outfiles\jerror.o: LIBJPEG\jinclude.h
+.\outfiles\jerror.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jerror.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jerror.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jerror.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jerror.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jerror.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jerror.o: LIBJPEG\jpeglib.h
+.\outfiles\jerror.o: LIBJPEG\jmorecfg.h
+.\outfiles\jerror.o: .\LIBJPEG\port\jversion.h
+.\outfiles\jerror.o: LIBJPEG\jerror.h
+.\outfiles\jerror.o: LIBJPEG\jerror.h

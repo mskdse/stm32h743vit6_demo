@@ -41,5 +41,8 @@
 #include "sdio_card.h"
 #include "ltdc_lcd.h"
 #include "ltdc_lcd_disp.h"
+#include "ltdc_lcd_disp_bmp.h"
+#include "ltdc_lcd_disp_jpeg.h"
+
 
 #endif

@@ -1,0 +1,13 @@
+.\outfiles\rdtarga.o: LIBJPEG\rdtarga.c
+.\outfiles\rdtarga.o: LIBJPEG\cdjpeg.h
+.\outfiles\rdtarga.o: LIBJPEG\jinclude.h
+.\outfiles\rdtarga.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\rdtarga.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\rdtarga.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\rdtarga.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\rdtarga.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\rdtarga.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\rdtarga.o: LIBJPEG\jpeglib.h
+.\outfiles\rdtarga.o: LIBJPEG\jmorecfg.h
+.\outfiles\rdtarga.o: LIBJPEG\jerror.h
+.\outfiles\rdtarga.o: LIBJPEG\cderror.h

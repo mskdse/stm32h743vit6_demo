@@ -1,0 +1,14 @@
+.\outfiles\jdmaster.o: LIBJPEG\jdmaster.c
+.\outfiles\jdmaster.o: LIBJPEG\jinclude.h
+.\outfiles\jdmaster.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\jdmaster.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\jdmaster.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jdmaster.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jdmaster.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jdmaster.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jdmaster.o: LIBJPEG\jpeglib.h
+.\outfiles\jdmaster.o: LIBJPEG\jmorecfg.h
+.\outfiles\jdmaster.o: LIBJPEG\jpegint.h
+.\outfiles\jdmaster.o: LIBJPEG\jerror.h
+.\outfiles\jdmaster.o: LIBJPEG\jpegcomp.h
+.\outfiles\jdmaster.o: LIBJPEG\jdmaster.h

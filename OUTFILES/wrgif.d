@@ -1,0 +1,13 @@
+.\outfiles\wrgif.o: LIBJPEG\wrgif.c
+.\outfiles\wrgif.o: LIBJPEG\cdjpeg.h
+.\outfiles\wrgif.o: LIBJPEG\jinclude.h
+.\outfiles\wrgif.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\wrgif.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\wrgif.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\wrgif.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\wrgif.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\wrgif.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\wrgif.o: LIBJPEG\jpeglib.h
+.\outfiles\wrgif.o: LIBJPEG\jmorecfg.h
+.\outfiles\wrgif.o: LIBJPEG\jerror.h
+.\outfiles\wrgif.o: LIBJPEG\cderror.h

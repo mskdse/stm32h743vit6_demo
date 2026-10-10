@@ -1,0 +1,10 @@
+.\outfiles\rdjpgcom.o: LIBJPEG\rdjpgcom.c
+.\outfiles\rdjpgcom.o: LIBJPEG\jinclude.h
+.\outfiles\rdjpgcom.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\rdjpgcom.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\rdjpgcom.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\rdjpgcom.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\rdjpgcom.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\rdjpgcom.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\rdjpgcom.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\locale.h
+.\outfiles\rdjpgcom.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\ctype.h

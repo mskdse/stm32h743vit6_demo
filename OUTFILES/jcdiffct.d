@@ -1,0 +1,13 @@
+.\outfiles\jcdiffct.o: LIBJPEG\src\jcdiffct.c
+.\outfiles\jcdiffct.o: LIBJPEG\src\jinclude.h
+.\outfiles\jcdiffct.o: .\LIBJPEG\jconfig.h
+.\outfiles\jcdiffct.o: .\LIBJPEG\jconfigint.h
+.\outfiles\jcdiffct.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\jcdiffct.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jcdiffct.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jcdiffct.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jcdiffct.o: LIBJPEG\src\jpeglib.h
+.\outfiles\jcdiffct.o: LIBJPEG\src\jmorecfg.h
+.\outfiles\jcdiffct.o: LIBJPEG\src\jpegint.h
+.\outfiles\jcdiffct.o: LIBJPEG\src\jerror.h
+.\outfiles\jcdiffct.o: LIBJPEG\src\jlossls.h

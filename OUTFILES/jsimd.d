@@ -1,0 +1,11 @@
+.\outfiles\jsimd.o: LIBJPEG\simd\jsimd.c
+.\outfiles\jsimd.o: LIBJPEG\simd\jsimddct.h
+.\outfiles\jsimd.o: LIBJPEG\simd\../src/jdct.h
+.\outfiles\jsimd.o: LIBJPEG\simd\jsimdconst.h
+.\outfiles\jsimd.o: LIBJPEG\simd\jsimd.h
+.\outfiles\jsimd.o: LIBJPEG\simd\../src/jchuff.h
+.\outfiles\jsimd.o: LIBJPEG\simd\jsimdconst.h
+.\outfiles\jsimd.o: LIBJPEG\simd\jsimdint.h
+.\outfiles\jsimd.o: LIBJPEG\simd\../src/jdct.h
+.\outfiles\jsimd.o: LIBJPEG\simd\../src/jchuff.h
+.\outfiles\jsimd.o: LIBJPEG\simd\jsimdconst.h

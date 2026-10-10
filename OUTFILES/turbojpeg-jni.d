@@ -1,0 +1,10 @@
+.\outfiles\turbojpeg-jni.o: LIBJPEG\turbojpeg-jni.c
+.\outfiles\turbojpeg-jni.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
+.\outfiles\turbojpeg-jni.o: LIBJPEG\turbojpeg.h
+.\outfiles\turbojpeg-jni.o: LIBJPEG\jinclude.h
+.\outfiles\turbojpeg-jni.o: .\LIBJPEG\port\jconfig.h
+.\outfiles\turbojpeg-jni.o: .\LIBJPEG\port\jconfigint.h
+.\outfiles\turbojpeg-jni.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\turbojpeg-jni.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\turbojpeg-jni.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\turbojpeg-jni.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
