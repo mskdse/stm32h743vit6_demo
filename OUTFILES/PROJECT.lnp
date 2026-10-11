@@ -143,7 +143,6 @@
 ".\outfiles\sdio_card.o"
 ".\outfiles\ltdc_lcd.o"
 ".\outfiles\ltdc_lcd_disp.o"
-".\outfiles\ltdc_lcd_disp_bmp.o"
 ".\outfiles\ltdc_lcd_disp_jpeg.o"
 ".\outfiles\port.o"
 ".\outfiles\circular_buffer.o"

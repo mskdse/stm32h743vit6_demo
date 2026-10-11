@@ -15,7 +15,7 @@ __attribute__((section (".RAM_D2")))static sdio_sd_card_callback  SD_Card_Calk;
   */
 static void Error_Handler(uint8_t errno)
 {
-	//printf("sd_error:%d\r\n",errno);
+	printf("sd_error:%d\r\n",errno);
 }
 
 /**
@@ -65,6 +65,8 @@ void HAL_SD_TxCpltCallback(SD_HandleTypeDef *hsd)
 void HAL_SD_ErrorCallback(SD_HandleTypeDef *hsd)
 {
   Error_Handler(8);
+  printf("sd error code=0x%x\r\n",hsd->ErrorCode);
+	printf("sdmmc sta=0x%x\r\n",SDMMC1->STA);
 }
 
 static void sdio_sd_card_borad_init(void)
@@ -134,7 +136,7 @@ static void sdio_sd_card_init(void)
   SDHandle.Init.ClockPowerSave      = SDMMC_CLOCK_POWER_SAVE_DISABLE;
   SDHandle.Init.BusWide             = SDMMC_BUS_WIDE_4B;
   SDHandle.Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_DISABLE;
-  SDHandle.Init.ClockDiv            = 10;
+  SDHandle.Init.ClockDiv            = 5;
   
   if(HAL_SD_Init(&SDHandle) != HAL_OK)
   {
@@ -157,46 +159,46 @@ static void sdio_sd_card_init(void)
 
 bool sdio_sd_card_write(uint32_t start_block_num,const uint8_t* buf,uint32_t block_num)
 {
-	uint32_t loop = SD_TIMEOUT;
 	TxCplt = 0;
+
 	if(Wait_SDCARD_Ready() != HAL_OK)
 	{
+    printf("sd_write wait error\r\n");
 		Error_Handler(4);
 		return false;
 	}
+  
 	if(HAL_SD_WriteBlocks_DMA(&SDHandle, buf, start_block_num, block_num) != HAL_OK)
 	{
+    printf("sd_write error\r\n");
 		Error_Handler(5);
 		return false;
 	}
-  while(loop > 0)
-  {
-    loop--;
-    if(TxCplt) return true;
-  }
-  return false;
+
+  while(!TxCplt);
+  return true;
 }
 
 bool sdio_sd_card_read(uint32_t start_block_num,uint8_t* buf,uint32_t block_num)
 {
-	uint32_t loop = SD_TIMEOUT;
 	if(Wait_SDCARD_Ready() != HAL_OK)
 	{
+    printf("sd_read wait error\r\n");
 		Error_Handler(6);
 		return false;
 	}
+
 	RxCplt = 0;
+  
 	if(HAL_SD_ReadBlocks_DMA(&SDHandle, buf, start_block_num, block_num) != HAL_OK)
 	{
+    printf("sd_read error\r\n");
 		Error_Handler(7);
 		return false;
 	}
-	while(loop > 0)
-  {
-    loop--;
-    if(RxCplt) return true;
-  }
-	return false;
+
+	while(!RxCplt);
+	return true;
 }
 
 HAL_SD_CardInfoTypeDef sdio_sd_card_info(void)

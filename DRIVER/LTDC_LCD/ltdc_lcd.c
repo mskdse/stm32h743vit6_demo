@@ -309,7 +309,7 @@ void ltdc_lcd_dma2d_data_fusion(const uint16_t* data_src,uint16_t x,uint16_t xsi
 }
 
 /* DMA2D图像拷贝格式转换，专用于ycbcr->rgb565 */
-void ltdc_lcd_dma2d_ycbcr_rgb565(const uint16_t* data_src,uint16_t x,uint16_t xsize,uint16_t y,uint16_t ysize,uint32_t ChromaSampling)
+void ltdc_lcd_dma2d_ycbcr_rgb565(const uint32_t* data_src,uint16_t x,uint16_t xsize,uint16_t y,uint16_t ysize,uint32_t ChromaSampling)
 {
 	uint32_t cssMode=DMA2D_CSS_420,inputLineOffset=0;
 	if(ChromaSampling == JPEG_420_SUBSAMPLING)
