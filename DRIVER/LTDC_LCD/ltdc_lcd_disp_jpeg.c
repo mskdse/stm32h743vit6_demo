@@ -11,6 +11,7 @@ extern uint16_t LTDC_DISPLAY[(LCD_WIN_X1-LCD_WIN_X0)*(LCD_WIN_Y1-LCD_WIN_Y0)];
 #define JPEG_POS_Y      50U
 
 __attribute__((section(".RAM_D1"), aligned(4)))  static FIL                jpeg_file;
+
 __attribute__((section(".RAM_D2"), aligned(32))) static JPEG_HandleTypeDef JPEG_Handle;
 __attribute__((section(".RAM_D2"))) static JPEG_ConfTypeDef                JPEG_Info;
 __attribute__((section(".RAM_D2"), aligned(32))) static uint8_t            JPEG_InBuffer[JPEG_CHUNK_IN];
@@ -25,68 +26,55 @@ static uint32_t jpeg_mcu_rows;
 static uint32_t jpeg_mcu_index;
 static uint32_t jpeg_draw_x;
 static uint32_t jpeg_draw_y;
-static volatile uint8_t jpeg_info_ready;
 static volatile uint8_t jpeg_decode_done;
 static volatile uint8_t jpeg_error;
 
 static HAL_StatusTypeDef jpeg_decode_to_ltdc(const char *filename)
 {
-    FRESULT fr;
-    UINT bytes_read = 0;
-    HAL_StatusTypeDef status = HAL_ERROR;
-
-    if (filename == NULL) return HAL_ERROR;
+    FRESULT           fr;
+    UINT              bytes_read;
+    HAL_StatusTypeDef status;
 
     fr = f_open(&jpeg_file, filename, FA_READ);
-	printf("f_open ret=%d\r\n",fr);
     if (fr != FR_OK) return HAL_ERROR;
 
     jpeg_input_len = 0;
-    jpeg_mcu_size = 0;
-    jpeg_mcu_w = 0;
-    jpeg_mcu_h = 0;
-    jpeg_mcu_cols = 0;
-    jpeg_mcu_rows = 0;
     jpeg_mcu_index = 0;
-    jpeg_draw_x = 0;
-    jpeg_draw_y = 0;
-    jpeg_info_ready = 0;
     jpeg_decode_done = 0;
     jpeg_error = 0;
     memset(&JPEG_Info, 0, sizeof(JPEG_Info));
 
     fr = f_read(&jpeg_file, JPEG_InBuffer, sizeof(JPEG_InBuffer), &bytes_read);
-	printf("f_read ret=%d\r\n",fr);
     if (fr != FR_OK || bytes_read == 0U) goto exit;
 
     jpeg_input_len = bytes_read;
 
-    status = HAL_JPEG_Decode(&JPEG_Handle,
-                             JPEG_InBuffer,
-                             jpeg_input_len,
-                             JPEG_OutBuffer,
-                             sizeof(JPEG_OutBuffer),
-                             10000U);
+    status = HAL_JPEG_Decode_IT(&JPEG_Handle,
+															  JPEG_InBuffer,
+															  jpeg_input_len,
+															  JPEG_OutBuffer,
+															  sizeof(JPEG_OutBuffer));
+		while(!jpeg_decode_done && !jpeg_error);
+		jpeg_decode_done=0;
 
-    if (status != HAL_OK || jpeg_error ||
-        !jpeg_info_ready || !jpeg_decode_done ||
-        jpeg_mcu_index != jpeg_mcu_cols * jpeg_mcu_rows)
-        status = HAL_ERROR;
-
+    if(status!=HAL_OK || jpeg_error) status=HAL_ERROR;
+        
 exit:
-    if (f_close(&jpeg_file) != FR_OK) status = HAL_ERROR;
+    if(f_close(&jpeg_file)!=FR_OK)   status=HAL_ERROR;
 
     return status;
 }
 
 void ltdc_lcd_disp_jpeg_init(void)
 {
-    __HAL_RCC_JPGDECEN_CLK_ENABLE();
-    memset(&JPEG_Handle, 0, sizeof(JPEG_Handle));
-    memset(&JPEG_Info, 0, sizeof(JPEG_Info));
+	__HAL_RCC_JPGDECEN_CLK_ENABLE();
+	memset(&JPEG_Handle, 0, sizeof(JPEG_Handle));
+	memset(&JPEG_Info, 0, sizeof(JPEG_Info));
 	memset(&jpeg_file,0,sizeof(FIL));
-    JPEG_Handle.Instance = JPEG;
-    HAL_JPEG_Init(&JPEG_Handle);
+	JPEG_Handle.Instance = JPEG;
+	HAL_JPEG_Init(&JPEG_Handle);
+	HAL_NVIC_SetPriority(JPEG_IRQn, 0x0E, 0);
+  HAL_NVIC_EnableIRQ(JPEG_IRQn); 
 }
 
 HAL_StatusTypeDef ltdc_lcd_disp_jpeg_show(const char *filename)
@@ -100,7 +88,7 @@ void HAL_JPEG_InfoReadyCallback(JPEG_HandleTypeDef *hjpeg,
     JPEG_Info = *pInfo;
 
     switch (JPEG_Info.ChromaSubsampling) 
-	{
+	 {
     case JPEG_420_SUBSAMPLING:
         jpeg_mcu_w = 16U;
         jpeg_mcu_h = 16U;
@@ -127,20 +115,20 @@ void HAL_JPEG_InfoReadyCallback(JPEG_HandleTypeDef *hjpeg,
         JPEG_POS_X > DISP_W ||
         JPEG_POS_Y > DISP_H ||
         JPEG_Info.ImageWidth > DISP_W - JPEG_POS_X ||
-        JPEG_Info.ImageHeight > DISP_H - JPEG_POS_Y ||
-        JPEG_Info.ImageWidth % jpeg_mcu_w != 0U ||
-        JPEG_Info.ImageHeight % jpeg_mcu_h != 0U) 
+        JPEG_Info.ImageHeight > DISP_H - JPEG_POS_Y) 
     {
         jpeg_error = 1;
         return;
     }
-
-    jpeg_mcu_cols = JPEG_Info.ImageWidth / jpeg_mcu_w;
-    jpeg_mcu_rows = JPEG_Info.ImageHeight / jpeg_mcu_h;
+		
+    /* MCU格式的缓冲区格式长宽向上取整，比如说227×149的图片，它转换为MCU缓冲区的格式，单个块16x16
+		   假如按传统的除法那它必然是227/16=14.18,149/16=9.31,很明显无法整除所以需要向上对齐于是MCU缓冲区格式为15x10
+		*/
+    jpeg_mcu_cols=(JPEG_Info.ImageWidth+jpeg_mcu_w-1U)/jpeg_mcu_w;
+    jpeg_mcu_rows=(JPEG_Info.ImageHeight+jpeg_mcu_h-1U)/jpeg_mcu_h;
 
     jpeg_draw_x = JPEG_POS_X;
     jpeg_draw_y = JPEG_POS_Y;
-    jpeg_info_ready = 1;
 }
 
 void HAL_JPEG_GetDataCallback(JPEG_HandleTypeDef *hjpeg,
@@ -184,10 +172,9 @@ void HAL_JPEG_GetDataCallback(JPEG_HandleTypeDef *hjpeg,
 
     if (fr != FR_OK || bytes_read == 0U) 
     {
-        jpeg_error = 1;
-        jpeg_input_len = 0U;
-        HAL_JPEG_ConfigInputBuffer(hjpeg, JPEG_InBuffer, 0U);
-        return;
+			jpeg_input_len = 0U;
+			HAL_JPEG_ConfigInputBuffer(hjpeg, JPEG_InBuffer, 0U);
+			return;
     }
 
     jpeg_input_len = bytes_read;
@@ -201,45 +188,49 @@ void HAL_JPEG_DataReadyCallback(JPEG_HandleTypeDef *hjpeg,
     uint32_t offset;
     uint32_t col;
     uint32_t row;
+    uint32_t img_x;
+    uint32_t img_y;
     uint32_t x;
     uint32_t y;
+    uint32_t valid_w;
+    uint32_t valid_h;
 
-    if (!jpeg_error && jpeg_info_ready) 
-    {
-        if (jpeg_mcu_size == 0U || OutDataLength % jpeg_mcu_size != 0U) jpeg_error = 1;
-        else 
-        {
-            for (offset = 0; offset < OutDataLength;offset += jpeg_mcu_size) 
-            {
-                if (jpeg_mcu_index >= jpeg_mcu_cols * jpeg_mcu_rows)
-                {
-                    jpeg_error = 1;
-                    break;
-                }
+    if (!jpeg_error && jpeg_input_len) 
+		{
+				for (offset = 0; offset < OutDataLength; offset += jpeg_mcu_size) 
+			 {
+					if(jpeg_mcu_index>=(jpeg_mcu_cols*jpeg_mcu_rows)) break;
 
-                col = jpeg_mcu_index % jpeg_mcu_cols;
-                row = jpeg_mcu_index / jpeg_mcu_cols;
+					col = jpeg_mcu_index % jpeg_mcu_cols;
+					row = jpeg_mcu_index / jpeg_mcu_cols;
 
-                x = jpeg_draw_x + col * jpeg_mcu_w;
-                y = jpeg_draw_y + row * jpeg_mcu_h;
+					img_x = col * jpeg_mcu_w;
+					img_y = row * jpeg_mcu_h;
 
-                ltdc_lcd_dma2d_ycbcr_rgb565
-                (
-                    (const uint32_t *)(pDataOut + offset),
-                    (uint16_t)x,
-                    (uint16_t)jpeg_mcu_w,
-                    (uint16_t)y,
-                    (uint16_t)jpeg_mcu_h,
-                    JPEG_Info.ChromaSubsampling
-                );
+					/* 计算图片边缘 MCU 中真正属于图像的像素数，假如剩余长度大于一个mcu块的长宽则取整一块的mcu长宽 */
+					valid_w = JPEG_Info.ImageWidth - img_x;
+					valid_h = JPEG_Info.ImageHeight - img_y;
+					if (valid_w > jpeg_mcu_w) valid_w = jpeg_mcu_w;
+					if (valid_h > jpeg_mcu_h) valid_h = jpeg_mcu_h;
 
-                jpeg_mcu_index++;
-            }
-        }
+					x = jpeg_draw_x + img_x;
+					y = jpeg_draw_y + img_y;
+
+					ltdc_lcd_dma2d_ycbcr_rgb565
+					(
+						(const uint32_t *)(pDataOut + offset),
+						(uint16_t)x,
+						(uint16_t)valid_w,
+						(uint16_t)y,
+						(uint16_t)valid_h,
+						JPEG_Info.ChromaSubsampling
+					);
+
+					jpeg_mcu_index++;
+			}
     }
 
-    /* 当前输出块处理完成后，继续使用同一块缓冲区 */
-    HAL_JPEG_ConfigOutputBuffer(hjpeg, JPEG_OutBuffer, sizeof(JPEG_OutBuffer));
+    HAL_JPEG_ConfigOutputBuffer(hjpeg, JPEG_OutBuffer,sizeof(JPEG_OutBuffer));
 }
 
 void HAL_JPEG_DecodeCpltCallback(JPEG_HandleTypeDef *hjpeg)
@@ -250,4 +241,15 @@ void HAL_JPEG_DecodeCpltCallback(JPEG_HandleTypeDef *hjpeg)
 void HAL_JPEG_ErrorCallback(JPEG_HandleTypeDef *hjpeg)
 {
     jpeg_error = 1;
+}
+
+/**
+  * @brief  This function handles JPEG interrupt request.
+  * @param  None
+  * @retval None
+  */
+
+void JPEG_IRQHandler(void)
+{
+  HAL_JPEG_IRQHandler(&JPEG_Handle);
 }

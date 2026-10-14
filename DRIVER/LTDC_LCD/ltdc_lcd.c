@@ -69,7 +69,7 @@ void ltdc_lcd_borad_init(void)
 
   /*##-2- NVIC configuration  ################################################*/  
   /* NVIC configuration for DMA2D transfer complete interrupt */
-  HAL_NVIC_SetPriority(DMA2D_IRQn, 0xE, 0);
+  HAL_NVIC_SetPriority(DMA2D_IRQn, 0xA, 0);
   HAL_NVIC_EnableIRQ(DMA2D_IRQn);   
 
   /*##-1- Reset peripherals ##################################################*/

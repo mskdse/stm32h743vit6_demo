@@ -13,15 +13,11 @@ void sdio_sd_card_clk(SDCARD_EVENT enm)
 {
    if(INSERT==enm)
    {
-		  memset(&fs,0,sizeof(FATFS));
-		 
-			FRESULT ret=f_mount(&fs,"1:",1);
-			printf("f_mount ret=%d\r\n",ret);
-		 
-			ltdc_lcd_disp_jpeg_show("1:SYSTEM/APP/AUDIO/a_320296.jpg");
-		 
-			ret=f_mount(&fs,"1:",0);
-			printf("f_unmount ret=%d\r\n",ret);
+			f_mount(&fs,"1:",1);
+		  printf("1 jpeg show ret=%d\r\n",ltdc_lcd_disp_jpeg_show("1:SYSTEM/APP/AUDIO/a_240164.jpg"));
+		  HAL_Delay(1000);
+		  printf("2 jpeg show ret=%d\r\n",ltdc_lcd_disp_jpeg_show("1:SYSTEM/APP/AUDIO/a_320296.jpg"));
+			f_mount(&fs,"1:",0);
    }
 }
 

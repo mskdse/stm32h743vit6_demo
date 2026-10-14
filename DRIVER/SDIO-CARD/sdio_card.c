@@ -3,7 +3,6 @@
 
 __attribute__((section (".RAM_D2")))static SD_HandleTypeDef       SDHandle;
 __attribute__((section (".RAM_D2")))static HAL_SD_CardInfoTypeDef pCardInfo;
-__attribute__((section (".RAM_D2")))static volatile uint8_t       RxCplt,TxCplt;
 __attribute__((section (".RAM_D2")))static sdio_sd_card_callback  SD_Card_Calk;
 
 #define SD_TIMEOUT             ((uint32_t)0x00100000U)
@@ -37,46 +36,12 @@ static uint8_t Wait_SDCARD_Ready(void)
   return HAL_ERROR;
 }
 
-/**
-  * @brief Rx Transfer completed callbacks
-  * @param hsd: SD handle
-  * @retval None
-  */
-void HAL_SD_RxCpltCallback(SD_HandleTypeDef *hsd)
-{
-  RxCplt=1;
-}
-
-/**
-  * @brief Tx Transfer completed callbacks
-  * @param hsd: SD handle
-  * @retval None
-  */
-void HAL_SD_TxCpltCallback(SD_HandleTypeDef *hsd)
-{
-  TxCplt=1;
-}
-
-/**
-  * @brief SD error callbacks
-  * @param hsd: SD handle
-  * @retval None
-  */
-void HAL_SD_ErrorCallback(SD_HandleTypeDef *hsd)
-{
-  Error_Handler(8);
-  printf("sd error code=0x%x\r\n",hsd->ErrorCode);
-	printf("sdmmc sta=0x%x\r\n",SDMMC1->STA);
-}
-
 static void sdio_sd_card_borad_init(void)
 {
 	 /* DeInit GPIO pins can be done in the application 
   (by surcharging this __weak function) */
 	memset(&SDHandle,0,sizeof(SD_HandleTypeDef));
 	memset(&pCardInfo,0,sizeof(HAL_SD_CardInfoTypeDef));
-	RxCplt=0;
-	TxCplt=0;
   
     /* Enable GPIOs clock */
   __HAL_RCC_GPIOB_CLK_DISABLE();
@@ -116,10 +81,6 @@ static void sdio_sd_card_borad_init(void)
 
   __HAL_RCC_SDMMC1_FORCE_RESET();
   __HAL_RCC_SDMMC1_RELEASE_RESET();
-
-  /* NVIC configuration for SDIO interrupts */
-  HAL_NVIC_SetPriority(SDMMC1_IRQn, 8, 0);
-  HAL_NVIC_EnableIRQ(SDMMC1_IRQn);
 }
 
 static void sdio_sd_card_init(void)
@@ -131,7 +92,7 @@ static void sdio_sd_card_init(void)
     
   /* if CLKDIV = 0 then SDMMC Clock frequency = SDMMC Kernel Clock
      else SDMMC Clock frequency = SDMMC Kernel Clock / [2 * CLKDIV]. 
-     SDMMC Kernel Clock = 200MHz, SDMMC Clock frequency = 10MHz  */
+     SDMMC Kernel Clock = 200MHz, SDMMC Clock frequency = 20MHz  */
   SDHandle.Init.ClockEdge           = SDMMC_CLOCK_EDGE_FALLING;
   SDHandle.Init.ClockPowerSave      = SDMMC_CLOCK_POWER_SAVE_DISABLE;
   SDHandle.Init.BusWide             = SDMMC_BUS_WIDE_4B;
@@ -159,8 +120,6 @@ static void sdio_sd_card_init(void)
 
 bool sdio_sd_card_write(uint32_t start_block_num,const uint8_t* buf,uint32_t block_num)
 {
-	TxCplt = 0;
-
 	if(Wait_SDCARD_Ready() != HAL_OK)
 	{
     printf("sd_write wait error\r\n");
@@ -168,14 +127,13 @@ bool sdio_sd_card_write(uint32_t start_block_num,const uint8_t* buf,uint32_t blo
 		return false;
 	}
   
-	if(HAL_SD_WriteBlocks_DMA(&SDHandle, buf, start_block_num, block_num) != HAL_OK)
+	if(HAL_SD_WriteBlocks(&SDHandle, buf, start_block_num, block_num,2000) != HAL_OK)
 	{
     printf("sd_write error\r\n");
 		Error_Handler(5);
 		return false;
 	}
 
-  while(!TxCplt);
   return true;
 }
 
@@ -188,16 +146,13 @@ bool sdio_sd_card_read(uint32_t start_block_num,uint8_t* buf,uint32_t block_num)
 		return false;
 	}
 
-	RxCplt = 0;
-  
-	if(HAL_SD_ReadBlocks_DMA(&SDHandle, buf, start_block_num, block_num) != HAL_OK)
+	if(HAL_SD_ReadBlocks(&SDHandle, buf, start_block_num, block_num,2000) != HAL_OK)
 	{
     printf("sd_read error\r\n");
 		Error_Handler(7);
 		return false;
 	}
 
-	while(!RxCplt);
 	return true;
 }
 
@@ -248,15 +203,4 @@ void sdio_sd_card_prc_200ms(void)
         HAL_SD_DeInit(&SDHandle);
         if(SD_Card_Calk) SD_Card_Calk(PULL);
     }
-}
-
-
-/**
-  * @brief  This function handles SD interrupt request.
-  * @param  None
-  * @retval None
-  */
-void SDMMC1_IRQHandler(void)
-{
-  HAL_SD_IRQHandler(&SDHandle);
 }
