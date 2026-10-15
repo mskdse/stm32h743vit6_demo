@@ -17,17 +17,17 @@ __attribute__((section(".RAM_D2"))) static JPEG_ConfTypeDef                JPEG_
 __attribute__((section(".RAM_D2"), aligned(32))) static uint8_t            JPEG_InBuffer[JPEG_CHUNK_IN];
 __attribute__((section(".RAM_D2"), aligned(32))) static uint8_t            JPEG_OutBuffer[JPEG_CHUNK_OUT];
 
-static uint32_t jpeg_input_len;
-static uint32_t jpeg_mcu_size;
-static uint32_t jpeg_mcu_w;
-static uint32_t jpeg_mcu_h;
-static uint32_t jpeg_mcu_cols;
-static uint32_t jpeg_mcu_rows;
-static uint32_t jpeg_mcu_index;
-static uint32_t jpeg_draw_x;
-static uint32_t jpeg_draw_y;
-static volatile uint8_t jpeg_decode_done;
-static volatile uint8_t jpeg_error;
+__attribute__((section(".RAM_D2"))) static uint32_t jpeg_input_len;
+__attribute__((section(".RAM_D2"))) static uint32_t jpeg_mcu_size;
+__attribute__((section(".RAM_D2"))) static uint32_t jpeg_mcu_w;
+__attribute__((section(".RAM_D2"))) static uint32_t jpeg_mcu_h;
+__attribute__((section(".RAM_D2"))) static uint32_t jpeg_mcu_cols;
+__attribute__((section(".RAM_D2"))) static uint32_t jpeg_mcu_rows;
+__attribute__((section(".RAM_D2"))) static uint32_t jpeg_mcu_index;
+__attribute__((section(".RAM_D2"))) static uint32_t jpeg_draw_x;
+__attribute__((section(".RAM_D2"))) static uint32_t jpeg_draw_y;
+__attribute__((section(".RAM_D2"))) static volatile uint8_t jpeg_decode_done;
+__attribute__((section(".RAM_D2"))) static volatile uint8_t jpeg_error;
 
 static HAL_StatusTypeDef jpeg_decode_to_ltdc(const char *filename)
 {
@@ -49,7 +49,7 @@ static HAL_StatusTypeDef jpeg_decode_to_ltdc(const char *filename)
 
     jpeg_input_len = bytes_read;
 
-    status = HAL_JPEG_Decode_IT(&JPEG_Handle,
+    status = HAL_JPEG_Decode_DMA(&JPEG_Handle,
 															  JPEG_InBuffer,
 															  jpeg_input_len,
 															  JPEG_OutBuffer,
@@ -67,14 +67,63 @@ exit:
 
 void ltdc_lcd_disp_jpeg_init(void)
 {
+  static MDMA_HandleTypeDef   hmdmaIn;
+  static MDMA_HandleTypeDef   hmdmaOut;  
+	
 	__HAL_RCC_JPGDECEN_CLK_ENABLE();
+	__HAL_RCC_MDMA_CLK_ENABLE();
+	
 	memset(&JPEG_Handle, 0, sizeof(JPEG_Handle));
 	memset(&JPEG_Info, 0, sizeof(JPEG_Info));
 	memset(&jpeg_file,0,sizeof(FIL));
+	memset(&hmdmaIn, 0, sizeof(MDMA_HandleTypeDef));
+	memset(&hmdmaOut, 0, sizeof(MDMA_HandleTypeDef));
+	
+	hmdmaIn.Init.Priority           = MDMA_PRIORITY_HIGH;//高优先级
+  hmdmaIn.Init.Endianness         = MDMA_LITTLE_ENDIANNESS_PRESERVE;//数据传输模式，正常的小端模式
+  hmdmaIn.Init.SourceInc          = MDMA_SRC_INC_BYTE;//源数据以字节递增,该值必须>=MDMA_SRC_DATASIZE_BYTE否则无法预测
+  hmdmaIn.Init.DestinationInc     = MDMA_DEST_INC_DISABLE;//目标禁止递增
+  hmdmaIn.Init.SourceDataSize     = MDMA_SRC_DATASIZE_BYTE;//源地址字节为单位
+  hmdmaIn.Init.DestDataSize       = MDMA_DEST_DATASIZE_WORD;//目标地址字为单位
+  hmdmaIn.Init.DataAlignment      = MDMA_DATAALIGN_PACKENABLE;//目标数据右对齐，将源数据拆析为目标数据的单位大小，字节->字
+  hmdmaIn.Init.SourceBurst        = MDMA_SOURCE_BURST_32BEATS;//源地址突发32节拍，不得超过BufferTransferLength单次传输大小，本例子为1字节*32=32字节
+  hmdmaIn.Init.DestBurst          = MDMA_DEST_BURST_16BEATS;//目标地址突发16节拍
+  hmdmaIn.Init.SourceBlockAddressOffset = 0;
+  hmdmaIn.Init.DestBlockAddressOffset  = 0;
+	hmdmaIn.Init.Request = MDMA_REQUEST_JPEG_INFIFO_TH;//请求通道
+  hmdmaIn.Init.TransferTriggerMode = MDMA_BUFFER_TRANSFER;//传输模式，buffer模式
+  hmdmaIn.Init.BufferTransferLength = 32;//单次传输32字节
+  hmdmaIn.Instance = MDMA_Channel7;
+	__HAL_LINKDMA(&JPEG_Handle, hdmain, hmdmaIn);
+	HAL_MDMA_DeInit(&hmdmaIn); 
+	HAL_MDMA_Init(&hmdmaIn);
+	
+	hmdmaOut.Init.Priority        = MDMA_PRIORITY_VERY_HIGH;
+  hmdmaOut.Init.Endianness      = MDMA_LITTLE_ENDIANNESS_PRESERVE;
+  hmdmaOut.Init.SourceInc       = MDMA_SRC_INC_DISABLE;
+  hmdmaOut.Init.DestinationInc  = MDMA_DEST_INC_WORD;
+  hmdmaOut.Init.SourceDataSize  = MDMA_SRC_DATASIZE_WORD;
+  hmdmaOut.Init.DestDataSize    = MDMA_DEST_DATASIZE_WORD;
+  hmdmaOut.Init.DataAlignment   = MDMA_DATAALIGN_PACKENABLE;
+  hmdmaOut.Init.SourceBurst     = MDMA_SOURCE_BURST_32BEATS;
+  hmdmaOut.Init.DestBurst       = MDMA_DEST_BURST_32BEATS;  
+  hmdmaOut.Init.SourceBlockAddressOffset = 0;
+  hmdmaOut.Init.DestBlockAddressOffset  = 0;
+	hmdmaOut.Init.Request              = MDMA_REQUEST_JPEG_OUTFIFO_TH; 
+  hmdmaOut.Init.TransferTriggerMode  = MDMA_BUFFER_TRANSFER;    
+  hmdmaOut.Init.BufferTransferLength = 32;
+	hmdmaOut.Instance = MDMA_Channel6;
+	HAL_MDMA_DeInit(&hmdmaOut);  
+	HAL_MDMA_Init(&hmdmaOut);
+	__HAL_LINKDMA(&JPEG_Handle, hdmaout, hmdmaOut);
+	
 	JPEG_Handle.Instance = JPEG;
 	HAL_JPEG_Init(&JPEG_Handle);
+	
 	HAL_NVIC_SetPriority(JPEG_IRQn, 0x0E, 0);
   HAL_NVIC_EnableIRQ(JPEG_IRQn); 
+	HAL_NVIC_SetPriority(MDMA_IRQn, 0x0D, 0);
+  HAL_NVIC_EnableIRQ(MDMA_IRQn);
 }
 
 HAL_StatusTypeDef ltdc_lcd_disp_jpeg_show(const char *filename)
@@ -252,4 +301,11 @@ void HAL_JPEG_ErrorCallback(JPEG_HandleTypeDef *hjpeg)
 void JPEG_IRQHandler(void)
 {
   HAL_JPEG_IRQHandler(&JPEG_Handle);
+}
+
+void MDMA_IRQHandler()
+{
+  /* Check the interrupt and clear flag */
+  HAL_MDMA_IRQHandler(JPEG_Handle.hdmain);
+  HAL_MDMA_IRQHandler(JPEG_Handle.hdmaout);  
 }
