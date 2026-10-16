@@ -42,6 +42,7 @@
 #include "ltdc_lcd.h"
 #include "ltdc_lcd_disp.h"
 #include "ltdc_lcd_disp_jpeg.h"
+#include "ov2640.h"
 
 
 #endif
