@@ -131,6 +131,22 @@ void usart1_my_printf(const char *format, ...)
 	USART1_DMA_TX_COMPTLE=0;
 }
 
+void usart1_put_buf(const uint8_t* buf,uint16_t len)
+{
+	if(len<USART1_DMA_TX_SIZE)
+	{
+		memcpy(&USART1_DMA_TX_FIFO,buf,len);
+		
+		DMA1_Stream2->NDTR=len;
+		DMA1_Stream2->M0AR=(uint32_t)USART1_DMA_TX_FIFO;
+		DMA1_Stream2->PAR=(uint32_t)&USART1->TDR;
+		DMA1_Stream2->CR|=(0x01<<0);
+		
+		while(!USART1_DMA_TX_COMPTLE);
+		USART1_DMA_TX_COMPTLE=0;
+	}
+}
+
 void DMA1_Stream2_IRQHandler(void)
 {
 	if(DMA1->LISR&(0x01<<21))

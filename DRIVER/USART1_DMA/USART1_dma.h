@@ -9,6 +9,7 @@
 
 void usart1_dma_init(uint32_t badue);
 void usart1_my_printf(const char *format, ...);
+void usart1_put_buf(const uint8_t* buf,uint16_t len);
 bool usart1_fifo_out(uint8_t* buf,uint16_t* size);
 
 #endif

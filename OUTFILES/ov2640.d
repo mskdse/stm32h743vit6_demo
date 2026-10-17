@@ -107,5 +107,10 @@
 .\outfiles\ov2640.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_ll_usb.h
 .\outfiles\ov2640.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_pcd_ex.h
 .\outfiles\ov2640.o: .\STM32Cube_FW_H7_V1.12.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_hcd.h
+.\outfiles\ov2640.o: .\DRIVER\FMC_LCD\drvp_fmc_lcd.h
+.\outfiles\ov2640.o: .\DRIVER\FMC_LCD\drv_fmc_lcd.h
+.\outfiles\ov2640.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\outfiles\ov2640.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\ov2640.o: .\DRIVER\USART1_DMA\usart1_dma.h
+.\outfiles\ov2640.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\outfiles\ov2640.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
