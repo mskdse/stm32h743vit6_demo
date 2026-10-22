@@ -133,7 +133,7 @@ void usart1_my_printf(const char *format, ...)
 
 void usart1_put_buf(const uint8_t* buf,uint16_t len)
 {
-	if(len<USART1_DMA_TX_SIZE)
+	if(len<=USART1_DMA_TX_SIZE)
 	{
 		memcpy(&USART1_DMA_TX_FIFO,buf,len);
 		

@@ -114,3 +114,7 @@
 .\outfiles\ov2640.o: .\DRIVER\USART1_DMA\usart1_dma.h
 .\outfiles\ov2640.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\outfiles\ov2640.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\ov2640.o: .\FATFS\ff.h
+.\outfiles\ov2640.o: .\FATFS\ffconf.h
+.\outfiles\ov2640.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\ov2640.o: .\MEM_MANGE\sram_d2_malloc.h

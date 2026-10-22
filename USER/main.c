@@ -43,7 +43,7 @@ int main(void)
 //  ltdc_lcd_bl_set(2000,100);//打开背光显示,屏幕2KHZ,占空比100%
 
   ov2640_init();
-	//printf("ov2640 pid=0x%x\r\n",ov2640_read_pid());
+	printf("ov2640 pid=0x%x\r\n",ov2640_read_pid());
 	ov2640_uxga_config();
 	ov2640_dma_transfer_start();
 	
@@ -62,11 +62,8 @@ int main(void)
 	bx_can12_open_app_init();
 #endif
 	
-	//usart1_my_printf("APP_TASK_RUN......\r\n");
+	usart1_my_printf("APP_TASK_RUN......\r\n");
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
-	
-	ov2640_frame_fire_init();
-	ov2640_frame_fire_prc();
 	for(;;)
 	{		
 		ov2640_display_frame_prc();

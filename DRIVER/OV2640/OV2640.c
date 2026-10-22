@@ -2,6 +2,10 @@
 #include "drvp_fmc_lcd.h"
 #include <string.h>
 #include "usart1_dma.h"
+#include "ff.h"     // 引入 FatFs 头文件
+#include <stdio.h>
+#include <stdlib.h>
+#include "sram_d2_malloc.h"
 
 __attribute__((section (".RAM_D2")))static I2C_HandleTypeDef  ov2640_sccb_i2c;
 
@@ -525,147 +529,4 @@ void DCMI_IRQHandler(void)
 	{
 		DCMI->ICR|=(0x01<<0);
 	}
-}
-
-
-
-
-
-
-
-
-
-
-/* 下面是与野火多功能调试助手之间的通信过程，使用串口协议 */
-// 协议常量定义
-/* 下面是与野火多功能调试助手之间的通信过程，使用串口协议 */
-// 协议常量定义
-#define PROTOCOL_HEADER     0x59485A53  // 包头："SZXH"
-#define DEVICE_ADDR         0x00        // 设备地址
-#define CMD_SET_FORMAT      0x01        // 设置图像格式指令
-#define CMD_SEND_IMAGE      0x02        // 发送图像数据指令
-#define FORMAT_RGB565       0x02        // 【修改】野火的 RGB565 格式码是 0x02
-
-// 校验和计算函数（累加和）
-static uint16_t calculate_checksum(uint8_t *data, uint32_t len) {
-    uint16_t sum = 0;
-    for (uint32_t i = 0; i < len; i++) {
-        sum += data[i];
-    }
-    return sum;
-}
-
-/* 分片发送函数，解决单次只能发送 1024 字节的限制 */
-static void send_data_fragmented(const uint8_t *data, uint32_t total_len)
-{
-    uint32_t sent = 0;
-    while (sent < total_len) {
-        uint16_t chunk = (total_len - sent) > 1024 ? 1024 : (uint16_t)(total_len - sent);
-        usart1_put_buf(data + sent, chunk);
-        sent += chunk;
-    }
-}
-
-/**
- * @brief 封装“设置图像格式”指令到缓冲区
- */
-static uint16_t pack_camera_format_cmd(uint8_t *tx_buf) {
-    uint16_t index = 0;
-    uint32_t header = PROTOCOL_HEADER;
-    
-    // 1. 包头 (4字节，小端)
-    tx_buf[index++] = (uint8_t)(header & 0xFF);
-    tx_buf[index++] = (uint8_t)((header >> 8) & 0xFF);
-    tx_buf[index++] = (uint8_t)((header >> 16) & 0xFF);
-    tx_buf[index++] = (uint8_t)((header >> 24) & 0xFF);
-
-    // 2. 设备地址 (1字节)
-    tx_buf[index++] = DEVICE_ADDR;
-
-    // 3. 包长度 (4字节，小端)
-    uint32_t payload_len = 8; 
-    tx_buf[index++] = (uint8_t)(payload_len & 0xFF);
-    tx_buf[index++] = (uint8_t)((payload_len >> 8) & 0xFF);
-    tx_buf[index++] = (uint8_t)((payload_len >> 16) & 0xFF);
-    tx_buf[index++] = (uint8_t)((payload_len >> 24) & 0xFF);
-
-    uint16_t check_start_idx = index; 
-
-    // 4. 指令 (1字节)
-    tx_buf[index++] = CMD_SET_FORMAT;
-
-    // 5. 图像格式 (1字节)
-    tx_buf[index++] = FORMAT_RGB565;
-
-    // 6. 图像宽度 (2字节，小端)
-    uint16_t width = (uint16_t)CAM_WIDTH; // 此时是 320
-    tx_buf[index++] = (uint8_t)(width & 0xFF);
-    tx_buf[index++] = (uint8_t)((width >> 8) & 0xFF);
-
-    // 7. 图像高度 (2字节，小端)
-    uint16_t height = (uint16_t)CAM_HEIGHT; // 此时是 240
-    tx_buf[index++] = (uint8_t)(height & 0xFF);
-    tx_buf[index++] = (uint8_t)((height >> 8) & 0xFF);
-
-    // 8. 校验位 (2字节，小端)
-    uint16_t checksum = calculate_checksum(&tx_buf[check_start_idx], index - check_start_idx);
-    tx_buf[index++] = (uint8_t)(checksum & 0xFF);
-    tx_buf[index++] = (uint8_t)((checksum >> 8) & 0xFF);
-
-    return index; // 总长度 17
-}
-
-/* 向野火上位机发送信息，建立摄像头的通信 */
-void ov2640_frame_fire_init(void)
-{
-    uint8_t format_cmd_buf[32]; 
-    uint16_t cmd_len;
-    cmd_len = pack_camera_format_cmd(format_cmd_buf);
-    
-    // 用分片发送的方式把初始化包发出去
-		send_data_fragmented(format_cmd_buf,cmd_len);
-}
-
-/* 发送缓冲区中的数据，主循环里面一直发 */
-void ov2640_frame_fire_prc(void)
-{
-	 // 1. 计算数据实际字节数：字数 * 4
-    uint32_t data_len = CAM_DMA_WORDS * 4; 
-    
-    // 2. 定义包头缓冲(9字节) 和 校验位缓冲(2字节)
-    uint8_t header_buf[9];
-    uint8_t checksum_buf[2] = {0x00, 0x00}; 
-    
-    // 3. 计算包长度 = 指令(1) + 图像数据(N) + 校验(2)
-    uint32_t total_len = 1 + data_len + 2; 
-    
-    // 4. 封装包头
-    uint32_t pkt_header = PROTOCOL_HEADER;
-    header_buf[0] = (uint8_t)(pkt_header & 0xFF);
-    header_buf[1] = (uint8_t)((pkt_header >> 8) & 0xFF);
-    header_buf[2] = (uint8_t)((pkt_header >> 16) & 0xFF);
-    header_buf[3] = (uint8_t)((pkt_header >> 24) & 0xFF);
-    
-    header_buf[4] = DEVICE_ADDR; // 设备地址
-    
-    // 包长度 (4字节，小端)
-    header_buf[5] = (uint8_t)(total_len & 0xFF);
-    header_buf[6] = (uint8_t)((total_len >> 8) & 0xFF);
-    header_buf[7] = (uint8_t)((total_len >> 16) & 0xFF);
-    header_buf[8] = (uint8_t)((total_len >> 24) & 0xFF);
-    
-    // === 开始分片发送 ===
-    
-    // 1. 发送包头 (9字节)
-    send_data_fragmented(header_buf, 9);
-    
-    // 2. 发送指令 0x02 (1字节)
-    uint8_t cmd = CMD_SEND_IMAGE;
-    send_data_fragmented(&cmd, 1);
-    
-    // 3. 发送图像数据 (将 uint32_t 数组强转为 uint8_t* 指针传入)
-    send_data_fragmented((const uint8_t *)ov2640_frame_buf, data_len);
-    
-    // 4. 发送校验位 (2字节)
-    send_data_fragmented(checksum_buf, 2);
 }
