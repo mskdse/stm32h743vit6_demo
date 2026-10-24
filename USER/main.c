@@ -36,16 +36,13 @@ int main(void)
 	SystemClock_Config();//配置系统时钟为400MHZ
 	
 	sram_d2_init();//初始化D2域的SRAM2的最后的20KB的内存管理，用于我们动态使用	
-  usart1_dma_init(256000);//串口初始化
-  drvp_fmc_lcd_init();//初始化lcd
-	drvp_fmc_lcd_set_axis_scan(0,1,1,0,0);//设置LCD的坐标轴适配开发板以及显存扫描方向
+  usart1_dma_init(115200);//串口初始化
+//  drvp_fmc_lcd_init();//初始化lcd
+//	drvp_fmc_lcd_set_axis_scan(0,1,1,0,0);//设置LCD的坐标轴适配开发板以及显存扫描方向
 //  ltdc_lcd_init();//LTDC的LCD初始化
 //  ltdc_lcd_bl_set(2000,100);//打开背光显示,屏幕2KHZ,占空比100%
-
-  ov2640_init();
-	printf("ov2640 pid=0x%x\r\n",ov2640_read_pid());
-	ov2640_uxga_config();
-	ov2640_dma_transfer_start();
+  
+	dac_ch12_init();
 	
 #if USE_BORAD_RUN
 	drvp_led_init();//初始化led
@@ -66,7 +63,6 @@ int main(void)
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
 	for(;;)
 	{		
-		ov2640_display_frame_prc();
 		
 #if USE_CAN_OPEN_RUN
 		bx_can12_open_app_prc();

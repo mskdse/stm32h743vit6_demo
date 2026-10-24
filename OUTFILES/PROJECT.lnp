@@ -145,6 +145,7 @@
 ".\outfiles\ltdc_lcd_disp.o"
 ".\outfiles\ltdc_lcd_disp_jpeg.o"
 ".\outfiles\ov2640.o"
+".\outfiles\dac_ch12.o"
 ".\outfiles\port.o"
 ".\outfiles\circular_buffer.o"
 ".\outfiles\sram_d2_malloc.o"

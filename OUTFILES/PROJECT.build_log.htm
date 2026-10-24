@@ -22,18 +22,16 @@ Dialog DLL:      TCM.DLL V1.56.6.0
  
 <h2>Project:</h2>
 C:\Users\EVC2-5\Desktop\stm32h743vit6_demo\PROJECT.uvprojx
-Project File Date:  10/16/2026
+Project File Date:  10/24/2026
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin'
 Build target 'PROJECT'
-compiling OV2640.c...
-compiling EXSPI_FLASH_RO.c...
-compiling main.c...
+compiling dac_ch12.c...
 linking...
 .\OUTFILES\PROJECT.sct(98): warning: L6314W: No section matches pattern *(.RAM_D2_EXTRA).
 .\OUTFILES\PROJECT.sct(110): warning: L6314W: No section matches pattern *(.spi_flash_ro).
-Program Size: Code=26796 RO-data=1960 RW-data=192488 ZI-data=5580  
+Program Size: Code=24004 RO-data=1520 RW-data=47052 ZI-data=5576  
 Finished: 0 information, 2 warning and 0 error messages.
 FromELF: creating hex file...
 ".\OUTFILES\PROJECT.axf" - 0 Error(s), 2 Warning(s).
@@ -61,9 +59,9 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: Keil::Compiler&ARM Compiler:Event Recorder&DAP@1.4.0
-      Include file:  Include/EventRecorder.h
       Include file:  Config/EventRecorderConf.h
       Source file:   Source/EventRecorder.c
+      Include file:  Include/EventRecorder.h
 
    * Component: Keil::Compiler&ARM Compiler:I/O:STDOUT&Breakpoint@1.2.0
       Source file:   Source/retarget_io.c

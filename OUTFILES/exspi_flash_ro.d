@@ -298,3 +298,4 @@
 .\outfiles\exspi_flash_ro.o: .\DRIVER\LTDC_LCD\ltdc_lcd_disp.h
 .\outfiles\exspi_flash_ro.o: .\DRIVER\LTDC_LCD\ltdc_lcd_disp_jpeg.h
 .\outfiles\exspi_flash_ro.o: .\DRIVER\OV2640\ov2640.h
+.\outfiles\exspi_flash_ro.o: .\DRIVER\DAC_CH12\dac_ch12.h
