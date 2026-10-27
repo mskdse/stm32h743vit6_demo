@@ -1,0 +1,13 @@
+.\outfiles\djpegalt.o: LIBJPEG\djpegalt.c
+.\outfiles\djpegalt.o: LIBJPEG\cdjpeg.h
+.\outfiles\djpegalt.o: LIBJPEG\jinclude.h
+.\outfiles\djpegalt.o: LIBJPEG\jconfig.h
+.\outfiles\djpegalt.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\djpegalt.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\djpegalt.o: LIBJPEG\jpeglib.h
+.\outfiles\djpegalt.o: LIBJPEG\jmorecfg.h
+.\outfiles\djpegalt.o: LIBJPEG\jerror.h
+.\outfiles\djpegalt.o: LIBJPEG\cderror.h
+.\outfiles\djpegalt.o: LIBJPEG\jversion.h
+.\outfiles\djpegalt.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\ctype.h
+.\outfiles\djpegalt.o: LIBJPEG\cderror.h

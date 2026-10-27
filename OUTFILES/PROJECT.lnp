@@ -160,6 +160,8 @@
 ".\outfiles\ff.o"
 ".\outfiles\ffsystem.o"
 ".\outfiles\ffunicode.o"
+".\outfiles\tjpgd_1.o"
+".\outfiles\tjpeg_test.o"
 ".\outfiles\eventrecorder.o"
 ".\outfiles\retarget_io.o"
 --library_type=microlib --strict --scatter ".\OUTFILES\PROJECT.sct"

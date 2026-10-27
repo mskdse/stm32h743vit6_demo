@@ -8,6 +8,18 @@ static void CPU_CACHE_Enable(void);
 /* 数组表格定义在 .RAM_RESET_VCTOR 段，这段空间用来存储中断向量表，不得再其他地方再定义这个节区 */
 __attribute__((section(".RamVecTable")))static uint8_t RAM_VCTOR_TABLE[0x400];
 
+__attribute__((section(".RAM_D1"), aligned(4)))static FATFS fs;
+static void sdio_sd_card_clk(SDCARD_EVENT enm)
+{
+	if(enm==INSERT)
+	{
+		memset(&fs,0,sizeof(FATFS));
+		f_mount(&fs,"1:",1);
+		TJpeg_Dec_Test("1:SYSTEM/APP/AUDIO/a_240164.jpg");
+		f_mount(&fs,"1:",0);
+	}
+}
+
 int main(void)
 {
 	/* 将中断向量表从FLASH的首地址拷贝到DTCM中然后设置中断向量表的偏移为DTCM首地址也就是数组地址 */
@@ -37,12 +49,12 @@ int main(void)
 	
 	sram_d2_init();//初始化D2域的SRAM2的最后的20KB的内存管理，用于我们动态使用	
   usart1_dma_init(115200);//串口初始化
-//  drvp_fmc_lcd_init();//初始化lcd
-//	drvp_fmc_lcd_set_axis_scan(0,1,1,0,0);//设置LCD的坐标轴适配开发板以及显存扫描方向
+  drvp_fmc_lcd_init();//初始化lcd
+	drvp_fmc_lcd_set_axis_scan(0,1,1,0,0);//设置LCD的坐标轴适配开发板以及显存扫描方向
 //  ltdc_lcd_init();//LTDC的LCD初始化
 //  ltdc_lcd_bl_set(2000,100);//打开背光显示,屏幕2KHZ,占空比100%
   
-	dac_ch12_init();
+	sdio_sd_card_register_clk(sdio_sd_card_clk);
 	
 #if USE_BORAD_RUN
 	drvp_led_init();//初始化led
@@ -63,6 +75,12 @@ int main(void)
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
 	for(;;)
 	{		
+		static uint32_t sd_last_scan = 0;
+		if (HAL_GetTick() - sd_last_scan >= 200)
+		{
+		  sd_last_scan = HAL_GetTick();
+      sdio_sd_card_prc_200ms();
+	  }
 		
 #if USE_CAN_OPEN_RUN
 		bx_can12_open_app_prc();

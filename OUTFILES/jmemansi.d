@@ -1,0 +1,10 @@
+.\outfiles\jmemansi.o: LIBJPEG\jmemansi.c
+.\outfiles\jmemansi.o: LIBJPEG\jinclude.h
+.\outfiles\jmemansi.o: LIBJPEG\jconfig.h
+.\outfiles\jmemansi.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jmemansi.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jmemansi.o: LIBJPEG\jpeglib.h
+.\outfiles\jmemansi.o: LIBJPEG\jmorecfg.h
+.\outfiles\jmemansi.o: LIBJPEG\jpegint.h
+.\outfiles\jmemansi.o: LIBJPEG\jerror.h
+.\outfiles\jmemansi.o: LIBJPEG\jmemsys.h

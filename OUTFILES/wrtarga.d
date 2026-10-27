@@ -1,10 +1,7 @@
 .\outfiles\wrtarga.o: LIBJPEG\wrtarga.c
 .\outfiles\wrtarga.o: LIBJPEG\cdjpeg.h
 .\outfiles\wrtarga.o: LIBJPEG\jinclude.h
-.\outfiles\wrtarga.o: .\LIBJPEG\port\jconfig.h
-.\outfiles\wrtarga.o: .\LIBJPEG\port\jconfigint.h
-.\outfiles\wrtarga.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\outfiles\wrtarga.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\wrtarga.o: LIBJPEG\jconfig.h
 .\outfiles\wrtarga.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\outfiles\wrtarga.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\outfiles\wrtarga.o: LIBJPEG\jpeglib.h

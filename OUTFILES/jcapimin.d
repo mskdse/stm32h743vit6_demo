@@ -1,9 +1,6 @@
 .\outfiles\jcapimin.o: LIBJPEG\jcapimin.c
 .\outfiles\jcapimin.o: LIBJPEG\jinclude.h
-.\outfiles\jcapimin.o: .\LIBJPEG\port\jconfig.h
-.\outfiles\jcapimin.o: .\LIBJPEG\port\jconfigint.h
-.\outfiles\jcapimin.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\outfiles\jcapimin.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jcapimin.o: LIBJPEG\jconfig.h
 .\outfiles\jcapimin.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\outfiles\jcapimin.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\outfiles\jcapimin.o: LIBJPEG\jpeglib.h

@@ -1,9 +1,6 @@
 .\outfiles\jdatasrc.o: LIBJPEG\jdatasrc.c
 .\outfiles\jdatasrc.o: LIBJPEG\jinclude.h
-.\outfiles\jdatasrc.o: .\LIBJPEG\port\jconfig.h
-.\outfiles\jdatasrc.o: .\LIBJPEG\port\jconfigint.h
-.\outfiles\jdatasrc.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\outfiles\jdatasrc.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jdatasrc.o: LIBJPEG\jconfig.h
 .\outfiles\jdatasrc.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\outfiles\jdatasrc.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\outfiles\jdatasrc.o: LIBJPEG\jpeglib.h

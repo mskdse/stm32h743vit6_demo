@@ -16,20 +16,56 @@ static void dac_ch12_borad_init(void)
 	memset(&tim7_handle,0,sizeof(tim7_handle));
 	DAC_CH12_USE_BUF_INDEX=0;
 	
-	for(int i=0;i<100;i++)     DAC_CH12_DMA_BUF[0][i]=0;
-	for(int i=100;i<200;i++)   DAC_CH12_DMA_BUF[0][i]=(4095<<16)|4095;
-	
-	for(int i=200;i<300;i++)   DAC_CH12_DMA_BUF[0][i]=0;
-	for(int i=300;i<400;i++)   DAC_CH12_DMA_BUF[0][i]=(4095<<16)|4095;
-	
-	for(int i=400;i<500;i++)   DAC_CH12_DMA_BUF[0][i]=0;
-	for(int i=500;i<600;i++)   DAC_CH12_DMA_BUF[0][i]=(4095<<16)|4095;
-	
-	for(int i=600;i<700;i++)   DAC_CH12_DMA_BUF[0][i]=0;
-	for(int i=700;i<800;i++)   DAC_CH12_DMA_BUF[0][i]=(4095<<16)|4095;
-	
-	for(int i=800;i<900;i++)   DAC_CH12_DMA_BUF[0][i]=0;
-	for(int i=900;i<1000;i++)  DAC_CH12_DMA_BUF[0][i]=(4095<<16)|4095;
+	for(int i=0;i<100;i++)     
+	{
+		DAC_CH12_DMA_BUF[0][i]=(4095<<16);
+		DAC_CH12_DMA_BUF[1][i]=4095;
+	}
+	for(int i=100;i<200;i++)
+	{
+		DAC_CH12_DMA_BUF[0][i]=0;
+		DAC_CH12_DMA_BUF[1][i]=0;
+	}
+	for(int i=200;i<300;i++)
+	{
+		DAC_CH12_DMA_BUF[0][i]=(4095<<16);
+		DAC_CH12_DMA_BUF[1][i]=4095;
+	}
+	for(int i=300;i<400;i++)
+	{
+		DAC_CH12_DMA_BUF[0][i]=0;
+		DAC_CH12_DMA_BUF[1][i]=0;
+	}
+	for(int i=400;i<500;i++)
+	{
+		DAC_CH12_DMA_BUF[0][i]=(4095<<16);
+		DAC_CH12_DMA_BUF[1][i]=4095;
+	}
+	for(int i=500;i<600;i++)
+	{
+		DAC_CH12_DMA_BUF[0][i]=0;
+		DAC_CH12_DMA_BUF[1][i]=0;
+	}
+	for(int i=600;i<700;i++)
+	{
+		DAC_CH12_DMA_BUF[0][i]=(4095<<16);
+		DAC_CH12_DMA_BUF[1][i]=4095;
+	}
+	for(int i=700;i<800;i++)
+	{
+		DAC_CH12_DMA_BUF[0][i]=0;
+		DAC_CH12_DMA_BUF[1][i]=0;
+	}
+	for(int i=800;i<900;i++)
+	{
+		DAC_CH12_DMA_BUF[0][i]=(4095<<16);
+		DAC_CH12_DMA_BUF[1][i]=4095;
+	}
+	for(int i=900;i<1000;i++)
+	{
+		DAC_CH12_DMA_BUF[0][i]=0;
+		DAC_CH12_DMA_BUF[1][i]=0;
+	}
 
   /*##-1- Enable peripherals and GPIO Clocks #################################*/
   /* Enable GPIO clock ****************************************/

@@ -1,9 +1,6 @@
 .\outfiles\jdmarker.o: LIBJPEG\jdmarker.c
 .\outfiles\jdmarker.o: LIBJPEG\jinclude.h
-.\outfiles\jdmarker.o: .\LIBJPEG\port\jconfig.h
-.\outfiles\jdmarker.o: .\LIBJPEG\port\jconfigint.h
-.\outfiles\jdmarker.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\outfiles\jdmarker.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jdmarker.o: LIBJPEG\jconfig.h
 .\outfiles\jdmarker.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\outfiles\jdmarker.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\outfiles\jdmarker.o: LIBJPEG\jpeglib.h

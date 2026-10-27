@@ -1,9 +1,6 @@
 .\outfiles\jmemnobs.o: LIBJPEG\jmemnobs.c
 .\outfiles\jmemnobs.o: LIBJPEG\jinclude.h
-.\outfiles\jmemnobs.o: .\LIBJPEG\port\jconfig.h
-.\outfiles\jmemnobs.o: .\LIBJPEG\port\jconfigint.h
-.\outfiles\jmemnobs.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\outfiles\jmemnobs.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jmemnobs.o: LIBJPEG\jconfig.h
 .\outfiles\jmemnobs.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\outfiles\jmemnobs.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\outfiles\jmemnobs.o: LIBJPEG\jpeglib.h
@@ -11,3 +8,6 @@
 .\outfiles\jmemnobs.o: LIBJPEG\jpegint.h
 .\outfiles\jmemnobs.o: LIBJPEG\jerror.h
 .\outfiles\jmemnobs.o: LIBJPEG\jmemsys.h
+.\outfiles\jmemnobs.o: .\MEM_MANGE\sram_d2_malloc.h
+.\outfiles\jmemnobs.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\outfiles\jmemnobs.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h

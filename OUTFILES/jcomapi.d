@@ -1,9 +1,6 @@
 .\outfiles\jcomapi.o: LIBJPEG\jcomapi.c
 .\outfiles\jcomapi.o: LIBJPEG\jinclude.h
-.\outfiles\jcomapi.o: .\LIBJPEG\port\jconfig.h
-.\outfiles\jcomapi.o: .\LIBJPEG\port\jconfigint.h
-.\outfiles\jcomapi.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\outfiles\jcomapi.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jcomapi.o: LIBJPEG\jconfig.h
 .\outfiles\jcomapi.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\outfiles\jcomapi.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\outfiles\jcomapi.o: LIBJPEG\jpeglib.h

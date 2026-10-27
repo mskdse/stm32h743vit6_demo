@@ -1,9 +1,9 @@
 .\outfiles\wrjpgcom.o: LIBJPEG\wrjpgcom.c
 .\outfiles\wrjpgcom.o: LIBJPEG\jinclude.h
-.\outfiles\wrjpgcom.o: .\LIBJPEG\port\jconfig.h
-.\outfiles\wrjpgcom.o: .\LIBJPEG\port\jconfigint.h
-.\outfiles\wrjpgcom.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\outfiles\wrjpgcom.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\wrjpgcom.o: LIBJPEG\jconfig.h
 .\outfiles\wrjpgcom.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\outfiles\wrjpgcom.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\wrjpgcom.o: .\MEM_MANGE\sram_d2_malloc.h
+.\outfiles\wrjpgcom.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\outfiles\wrjpgcom.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\outfiles\wrjpgcom.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\ctype.h

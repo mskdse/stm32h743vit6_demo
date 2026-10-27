@@ -1,0 +1,10 @@
+.\outfiles\jmemmac.o: LIBJPEG\jmemmac.c
+.\outfiles\jmemmac.o: LIBJPEG\jinclude.h
+.\outfiles\jmemmac.o: LIBJPEG\jconfig.h
+.\outfiles\jmemmac.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\jmemmac.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\jmemmac.o: LIBJPEG\jpeglib.h
+.\outfiles\jmemmac.o: LIBJPEG\jmorecfg.h
+.\outfiles\jmemmac.o: LIBJPEG\jpegint.h
+.\outfiles\jmemmac.o: LIBJPEG\jerror.h
+.\outfiles\jmemmac.o: LIBJPEG\jmemsys.h

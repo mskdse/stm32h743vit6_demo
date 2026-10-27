@@ -1,9 +1,6 @@
 .\outfiles\jcarith.o: LIBJPEG\jcarith.c
 .\outfiles\jcarith.o: LIBJPEG\jinclude.h
-.\outfiles\jcarith.o: .\LIBJPEG\port\jconfig.h
-.\outfiles\jcarith.o: .\LIBJPEG\port\jconfigint.h
-.\outfiles\jcarith.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\outfiles\jcarith.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jcarith.o: LIBJPEG\jconfig.h
 .\outfiles\jcarith.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\outfiles\jcarith.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\outfiles\jcarith.o: LIBJPEG\jpeglib.h

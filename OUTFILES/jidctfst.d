@@ -1,9 +1,6 @@
 .\outfiles\jidctfst.o: LIBJPEG\jidctfst.c
 .\outfiles\jidctfst.o: LIBJPEG\jinclude.h
-.\outfiles\jidctfst.o: .\LIBJPEG\port\jconfig.h
-.\outfiles\jidctfst.o: .\LIBJPEG\port\jconfigint.h
-.\outfiles\jidctfst.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\outfiles\jidctfst.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jidctfst.o: LIBJPEG\jconfig.h
 .\outfiles\jidctfst.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\outfiles\jidctfst.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\outfiles\jidctfst.o: LIBJPEG\jpeglib.h

@@ -1,0 +1,10 @@
+.\outfiles\wrrle.o: LIBJPEG\wrrle.c
+.\outfiles\wrrle.o: LIBJPEG\cdjpeg.h
+.\outfiles\wrrle.o: LIBJPEG\jinclude.h
+.\outfiles\wrrle.o: LIBJPEG\jconfig.h
+.\outfiles\wrrle.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\wrrle.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\wrrle.o: LIBJPEG\jpeglib.h
+.\outfiles\wrrle.o: LIBJPEG\jmorecfg.h
+.\outfiles\wrrle.o: LIBJPEG\jerror.h
+.\outfiles\wrrle.o: LIBJPEG\cderror.h

@@ -2,10 +2,6 @@
 #include "drvp_fmc_lcd.h"
 #include <string.h>
 #include "usart1_dma.h"
-#include "ff.h"     // 引入 FatFs 头文件
-#include <stdio.h>
-#include <stdlib.h>
-#include "sram_d2_malloc.h"
 
 __attribute__((section (".RAM_D2")))static I2C_HandleTypeDef  ov2640_sccb_i2c;
 

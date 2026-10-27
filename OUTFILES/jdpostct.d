@@ -1,9 +1,6 @@
 .\outfiles\jdpostct.o: LIBJPEG\jdpostct.c
 .\outfiles\jdpostct.o: LIBJPEG\jinclude.h
-.\outfiles\jdpostct.o: .\LIBJPEG\port\jconfig.h
-.\outfiles\jdpostct.o: .\LIBJPEG\port\jconfigint.h
-.\outfiles\jdpostct.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\outfiles\jdpostct.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\jdpostct.o: LIBJPEG\jconfig.h
 .\outfiles\jdpostct.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\outfiles\jdpostct.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\outfiles\jdpostct.o: LIBJPEG\jpeglib.h

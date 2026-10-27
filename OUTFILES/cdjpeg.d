@@ -1,10 +1,7 @@
 .\outfiles\cdjpeg.o: LIBJPEG\cdjpeg.c
 .\outfiles\cdjpeg.o: LIBJPEG\cdjpeg.h
 .\outfiles\cdjpeg.o: LIBJPEG\jinclude.h
-.\outfiles\cdjpeg.o: .\LIBJPEG\port\jconfig.h
-.\outfiles\cdjpeg.o: .\LIBJPEG\port\jconfigint.h
-.\outfiles\cdjpeg.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\outfiles\cdjpeg.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\cdjpeg.o: LIBJPEG\jconfig.h
 .\outfiles\cdjpeg.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\outfiles\cdjpeg.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\outfiles\cdjpeg.o: LIBJPEG\jpeglib.h

@@ -299,3 +299,6 @@
 .\outfiles\main.o: .\DRIVER\LTDC_LCD\ltdc_lcd_disp_jpeg.h
 .\outfiles\main.o: .\DRIVER\OV2640\ov2640.h
 .\outfiles\main.o: .\DRIVER\DAC_CH12\dac_ch12.h
+.\outfiles\main.o: .\TJpegDec\TJpeg_test.h
+.\outfiles\main.o: .\TJpegDec\src\tjpgd.h
+.\outfiles\main.o: .\TJpegDec\src\tjpgdcnf.h

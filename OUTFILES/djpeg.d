@@ -1,13 +1,13 @@
 .\outfiles\djpeg.o: LIBJPEG\djpeg.c
 .\outfiles\djpeg.o: LIBJPEG\cdjpeg.h
 .\outfiles\djpeg.o: LIBJPEG\jinclude.h
-.\outfiles\djpeg.o: .\LIBJPEG\port\jconfig.h
-.\outfiles\djpeg.o: .\LIBJPEG\port\jconfigint.h
-.\outfiles\djpeg.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\outfiles\djpeg.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\djpeg.o: LIBJPEG\jconfig.h
 .\outfiles\djpeg.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\outfiles\djpeg.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\outfiles\djpeg.o: LIBJPEG\jpeglib.h
 .\outfiles\djpeg.o: LIBJPEG\jmorecfg.h
 .\outfiles\djpeg.o: LIBJPEG\jerror.h
+.\outfiles\djpeg.o: LIBJPEG\cderror.h
+.\outfiles\djpeg.o: LIBJPEG\jversion.h
+.\outfiles\djpeg.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\ctype.h
 .\outfiles\djpeg.o: LIBJPEG\cderror.h
