@@ -139,12 +139,12 @@ void dac_ch12_init(void)
 	HAL_NVIC_SetPriority(DMA1_Stream7_IRQn, 0x07, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream7_IRQn); 
 	
-	tim7_handle.Instance=TIM7;//生成10MHZ的触发信号，实测触发信号不得高于这个太多，25MHZ就很大了
+	tim7_handle.Instance=TIM7;//生成50KHZ的触发信号，实测触发信号不得高于这个太多，25MHZ就很大了
 	tim7_handle.Init.AutoReloadPreload=TIM_AUTORELOAD_PRELOAD_ENABLE;
 	tim7_handle.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;
 	tim7_handle.Init.CounterMode=TIM_COUNTERMODE_UP;
 	tim7_handle.Init.Period=20-1;
-	tim7_handle.Init.Prescaler=1-1;
+	tim7_handle.Init.Prescaler=200-1;
 	tim7_handle.Init.RepetitionCounter=0;
 	HAL_TIM_Base_Init(&tim7_handle);
 	
