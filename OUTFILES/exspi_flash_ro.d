@@ -303,3 +303,12 @@
 .\outfiles\exspi_flash_ro.o: .\TJpegDec\TJpeg_test.h
 .\outfiles\exspi_flash_ro.o: .\TJpegDec\src\tjpgd.h
 .\outfiles\exspi_flash_ro.o: .\TJpegDec\src\tjpgdcnf.h
+.\outfiles\exspi_flash_ro.o: .\FreeRTOS\Source\include\FreeRTOS.h
+.\outfiles\exspi_flash_ro.o: .\FreeRTOS\Source\include\FreeRTOSConfig.h
+.\outfiles\exspi_flash_ro.o: .\FreeRTOS\Source\include\projdefs.h
+.\outfiles\exspi_flash_ro.o: .\FreeRTOS\Source\include\portable.h
+.\outfiles\exspi_flash_ro.o: .\FreeRTOS\Source\include\deprecated_definitions.h
+.\outfiles\exspi_flash_ro.o: .\FreeRTOS\Source\portable\RVDS\ARM_CM7\r0p1\portmacro.h
+.\outfiles\exspi_flash_ro.o: .\FreeRTOS\Source\include\mpu_wrappers.h
+.\outfiles\exspi_flash_ro.o: .\FreeRTOS\Source\include\task.h
+.\outfiles\exspi_flash_ro.o: .\FreeRTOS\Source\include\list.h

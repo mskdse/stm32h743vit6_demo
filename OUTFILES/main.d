@@ -303,3 +303,12 @@
 .\outfiles\main.o: .\TJpegDec\TJpeg_test.h
 .\outfiles\main.o: .\TJpegDec\src\tjpgd.h
 .\outfiles\main.o: .\TJpegDec\src\tjpgdcnf.h
+.\outfiles\main.o: .\FreeRTOS\Source\include\FreeRTOS.h
+.\outfiles\main.o: .\FreeRTOS\Source\include\FreeRTOSConfig.h
+.\outfiles\main.o: .\FreeRTOS\Source\include\projdefs.h
+.\outfiles\main.o: .\FreeRTOS\Source\include\portable.h
+.\outfiles\main.o: .\FreeRTOS\Source\include\deprecated_definitions.h
+.\outfiles\main.o: .\FreeRTOS\Source\portable\RVDS\ARM_CM7\r0p1\portmacro.h
+.\outfiles\main.o: .\FreeRTOS\Source\include\mpu_wrappers.h
+.\outfiles\main.o: .\FreeRTOS\Source\include\task.h
+.\outfiles\main.o: .\FreeRTOS\Source\include\list.h

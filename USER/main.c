@@ -8,6 +8,9 @@ static void CPU_CACHE_Enable(void);
 /* 数组表格定义在 .RAM_RESET_VCTOR 段，这段空间用来存储中断向量表，不得再其他地方再定义这个节区 */
 __attribute__((section(".RamVecTable")))static uint8_t RAM_VCTOR_TABLE[0x400];
 
+/* 用来标记FreeRTOS是否应该运行开启调度 */
+__attribute__((section(".RAM_D2")))static volatile bool RTOS_START_SCH_FLAG;
+
 __attribute__((section(".RAM_D1"), aligned(4)))static FATFS fs;
 static void sdio_sd_card_clk(SDCARD_EVENT enm)
 {
@@ -17,6 +20,61 @@ static void sdio_sd_card_clk(SDCARD_EVENT enm)
 		f_mount(&fs,"1:",1);
 		TJpeg_Dec_Test("1:SYSTEM/APP/AUDIO/a_240164.jpg");
 		f_mount(&fs,"1:",0);
+	}
+}
+
+/* 完成所有任务的初始化工作 */
+static void FREERTOS_MAIN_TASK(void * pvParameters)
+{
+	taskENTER_CRITICAL();
+	
+	taskEXIT_CRITICAL();
+	
+	usart1_my_printf("APP_TASK_RUN......\r\n");
+	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
+  for(;;)
+	{
+		{
+			#if USE_BORAD_RUN
+				static uint8_t keycnt=0;
+				drvp_led_prc_1ms();
+				if(++keycnt>=10)
+				{
+					keycnt=0;
+					drvp_key_prc_10ms();
+				}
+			#endif
+				
+			#if USE_CAN_OPEN_RUN
+				bx_can12_open_app_prc_1ms();
+			#endif
+				
+			#if USE_LVGL_RUN
+				lv_tick_inc(1);
+			#endif
+			vTaskDelay(1);//非实时任务，软件定时器都不需要，直接在这延时就行
+		}
+		{
+			#if USE_CAN_OPEN_RUN
+					bx_can12_open_app_prc();
+			#endif
+					
+			#if USE_LVGL_RUN
+					static uint32_t lv_last_scan = 0;
+					if (HAL_GetTick() - lv_last_scan >= 10)
+					{
+						lv_last_scan = HAL_GetTick();
+						lv_task_handler();
+					}
+			#endif
+		}
+	
+		static uint32_t sd_last_scan = 0;
+		if (HAL_GetTick() - sd_last_scan >= 200)
+		{
+		  sd_last_scan = HAL_GetTick();
+      sdio_sd_card_prc_200ms();
+	  }
 	}
 }
 
@@ -55,7 +113,6 @@ int main(void)
 //  ltdc_lcd_bl_set(2000,100);//打开背光显示,屏幕2KHZ,占空比100%
   
   sdio_sd_card_register_clk(sdio_sd_card_clk);
-   
 	
 #if USE_BORAD_RUN
 	drvp_led_init();//初始化led
@@ -72,30 +129,29 @@ int main(void)
 	bx_can12_open_app_init();
 #endif
 	
-	usart1_my_printf("APP_TASK_RUN......\r\n");
-	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
-	for(;;)
-	{		
-		static uint32_t sd_last_scan = 0;
-		if (HAL_GetTick() - sd_last_scan >= 200)
-		{
-		  sd_last_scan = HAL_GetTick();
-      sdio_sd_card_prc_200ms();
-	  }
-		
-#if USE_CAN_OPEN_RUN
-		bx_can12_open_app_prc();
-#endif
-		
-#if USE_LVGL_RUN
-		static uint32_t lv_last_scan = 0;
-		if (HAL_GetTick() - lv_last_scan >= 10)
-		{
-		  lv_last_scan = HAL_GetTick();
-      lv_task_handler();
-	  }
-#endif
+	/* 创建第一个任务，该任务会初始化完全部的线程然后把他当作MAIN线程 */
+	RTOS_START_SCH_FLAG=false;
+
+	/* Create the task, storing the handle. */
+	BaseType_t xReturned = xTaskCreate(
+																			FREERTOS_MAIN_TASK,       /* Function that implements the task. */
+																			"MAIN_TASK",          /* Text name for the task. */
+																			512,      /* Stack size in words, not bytes. */
+																			NULL,    /* Parameter passed into the task. */
+																			tskIDLE_PRIORITY,/* Priority at which the task is created. */
+																			NULL
+																		);      /* Used to pass out the created task's handle. */
+  if(xReturned!=pdPASS) printf("FREERTOS MAIN TASK CREATE ERR\r\n");
+	else
+	{
+		taskDISABLE_INTERRUPTS(); 
+		RTOS_START_SCH_FLAG=true;/* 关闭中断来保护这个变量不要被systick中断扫到，vTaskStartScheduler
+		                            内部会自己关闭开启中断不需要手动再次开启，另外的话还有个点就是选用
+                                taskDISABLE_INTERRUPTS而不是进入临界区，因为进入临界区函数内部有调度器计数
+                                那样的话必须成对调用才行而这个关闭中断函数非常干净没有这个计数匹配机制 */
+		vTaskStartScheduler();
 	}
+	for(;;);
 }
 
 /**
@@ -332,25 +388,9 @@ static void CPU_CACHE_Enable(void)
   * @param  None
   * @retval None
   */
+extern void xPortSysTickHandler(void);
 __attribute__((section(".ITCM_CODE"), used))void SysTick_Handler(void)
 {
 	HAL_IncTick();
-
-#if USE_BORAD_RUN
-	static uint8_t keycnt=0;
-  drvp_led_prc_1ms();
-  if(++keycnt>=10)
-  {
-    keycnt=0;
-    drvp_key_prc_10ms();
-  }
-#endif
-	
-#if USE_CAN_OPEN_RUN
-  bx_can12_open_app_prc_1ms();
-#endif
-	
-#if USE_LVGL_RUN
-	lv_tick_inc(1);
-#endif
+	if(RTOS_START_SCH_FLAG) xPortSysTickHandler();
 }

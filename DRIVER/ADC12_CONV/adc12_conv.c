@@ -46,8 +46,7 @@ static void adc12_conv_borad_init(void)
     
     /* 使能 ADC 外设时钟 */
     ADCx_CLK_ENABLE();
-    /* ADC 外设接口时钟配置：选择 PCLK 作为 ADC 的时钟源 */
-    __HAL_RCC_ADC_CONFIG(RCC_ADCCLKSOURCE_CLKP);
+
     /* 使能 DMA 时钟 */
     DMAx_CHANNELx_CLK_ENABLE();
   
@@ -110,8 +109,8 @@ void adc12_conv_init(void)
     adc12_handle.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_RISING;
     // 数据左移：无 (即不对转换结果进行移位)
     adc12_handle.Init.LeftBitShift = ADC_LEFTBITSHIFT_NONE;
-    // 低功耗自动等待：使能 (ADC 在空闲时会自动进入低功耗状态，有触发时唤醒)
-    adc12_handle.Init.LowPowerAutoWait = ENABLE;
+    // 低功耗自动等待：禁止 (ADC 在空闲时不会自动进入低功耗状态)
+    adc12_handle.Init.LowPowerAutoWait = DISABLE;
     // 规则序列转换数量：1 个 (双重 ADC 每个各转换 1 个通道，只要配置 1 即可)
     adc12_handle.Init.NbrOfConversion = 1;
     // 溢出处理：数据溢出时覆盖旧数据
@@ -123,6 +122,9 @@ void adc12_conv_init(void)
     // 扫描模式：禁止 (每个 ADC 只转换一个通道，不需要扫描)
     adc12_handle.Init.ScanConvMode = ADC_SCAN_DISABLE;
     HAL_ADC_Init(&adc12_handle);
+		
+		/* 开启偏移校准 */
+		HAL_ADCEx_Calibration_Start(&adc12_handle, ADC_CALIB_OFFSET, ADC_SINGLE_ENDED);
     
     /* ==================== 配置 ADC1 的通道 ==================== */
     ADC_ChannelConfTypeDef adc_ch_cfg;
@@ -132,7 +134,7 @@ void adc12_conv_init(void)
     adc_ch_cfg.OffsetRightShift = DISABLE;            // 偏移右移：禁止
     adc_ch_cfg.OffsetSignedSaturation = DISABLE;      // 偏移有符号饱和：禁止
     adc_ch_cfg.Rank = ADC_REGULAR_RANK_1;             // 规则序列中排第 1 个 (即唯一的那个)
-    adc_ch_cfg.SamplingTime = ADC_SAMPLETIME_8CYCLES_5; // 采样时间
+    adc_ch_cfg.SamplingTime = ADC_SAMPLETIME_1CYCLE_5; // 采样时间
     adc_ch_cfg.SingleDiff = ADC_SINGLE_ENDED;         // 单端输入模式 (非差分)
     HAL_ADC_ConfigChannel(&adc12_handle, &adc_ch_cfg);
     
@@ -147,7 +149,7 @@ void adc12_conv_init(void)
     adc_ch_cfg.OffsetRightShift = DISABLE;            // 偏移右移：禁止
     adc_ch_cfg.OffsetSignedSaturation = DISABLE;      // 偏移有符号饱和：禁止
     adc_ch_cfg.Rank = ADC_REGULAR_RANK_1;             // 规则序列中排第 1 个
-    adc_ch_cfg.SamplingTime = ADC_SAMPLETIME_8CYCLES_5; // 采样时间
+    adc_ch_cfg.SamplingTime = ADC_SAMPLETIME_1CYCLE_5; // 采样时间
     adc_ch_cfg.SingleDiff = ADC_SINGLE_ENDED;         // 单端输入模式
     HAL_ADC_ConfigChannel(&adc12_handle, &adc_ch_cfg);
     

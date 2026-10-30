@@ -1,0 +1,17 @@
+.\outfiles\netdb.o: LWIP2.2.1\src\api\netdb.c
+.\outfiles\netdb.o: .\LWIP2.2.1\src\include\lwip/netdb.h
+.\outfiles\netdb.o: .\LWIP2.2.1\src\include\lwip/opt.h
+.\outfiles\netdb.o: .\LWIP2.2.1\STM32H7_PORT\lwipopts.h
+.\outfiles\netdb.o: .\FreeRTOS\Source\include\FreeRTOSConfig.h
+.\outfiles\netdb.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\outfiles\netdb.o: .\LWIP2.2.1\src\include\lwip/debug.h
+.\outfiles\netdb.o: .\LWIP2.2.1\src\include\lwip/arch.h
+.\outfiles\netdb.o: .\LWIP2.2.1\STM32H7_PORT\arch/cc.h
+.\outfiles\netdb.o: .\LWIP2.2.1\STM32H7_PORT\arch/cpu.h
+.\outfiles\netdb.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\netdb.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\netdb.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\netdb.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\inttypes.h
+.\outfiles\netdb.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
+.\outfiles\netdb.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\ctype.h
+.\outfiles\netdb.o: .\LWIP2.2.1\src\include\lwip/opt.h

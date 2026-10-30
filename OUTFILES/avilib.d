@@ -1,0 +1,9 @@
+.\outfiles\avilib.o: AVILIB\avilib.c
+.\outfiles\avilib.o: AVILIB\avilib.h
+.\outfiles\avilib.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\outfiles\avilib.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outfiles\avilib.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\avilib.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
+.\outfiles\avilib.o: .\FATFS\ff.h
+.\outfiles\avilib.o: .\FATFS\ffconf.h
+.\outfiles\avilib.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\ctype.h

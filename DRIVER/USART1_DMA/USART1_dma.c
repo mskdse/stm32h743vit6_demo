@@ -108,8 +108,7 @@ void usart1_dma_init(uint32_t badue)
 int fputc (int c, FILE * stream)
 {
 	USART1->TDR=(uint8_t)c;
-	while(!(USART1->ISR&(0x01<<6)));
-	USART1->ISR|=(0x01<<6);
+	while(!(USART1->ISR&(0x01<<7)));
 	return (uint8_t)c;
 }
 

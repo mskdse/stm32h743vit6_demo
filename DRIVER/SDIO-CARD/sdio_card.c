@@ -92,12 +92,12 @@ static void sdio_sd_card_init(void)
     
   /* if CLKDIV = 0 then SDMMC Clock frequency = SDMMC Kernel Clock
      else SDMMC Clock frequency = SDMMC Kernel Clock / [2 * CLKDIV]. 
-     SDMMC Kernel Clock = 200MHz, SDMMC Clock frequency = 20MHz  */
+     SDMMC Kernel Clock = 200MHz, SDMMC Clock frequency = 5MHz  */
   SDHandle.Init.ClockEdge           = SDMMC_CLOCK_EDGE_FALLING;
   SDHandle.Init.ClockPowerSave      = SDMMC_CLOCK_POWER_SAVE_DISABLE;
   SDHandle.Init.BusWide             = SDMMC_BUS_WIDE_4B;
   SDHandle.Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_DISABLE;
-  SDHandle.Init.ClockDiv            = 5;
+  SDHandle.Init.ClockDiv            = 20;
   
   if(HAL_SD_Init(&SDHandle) != HAL_OK)
   {
@@ -127,7 +127,7 @@ bool sdio_sd_card_write(uint32_t start_block_num,const uint8_t* buf,uint32_t blo
 		return false;
 	}
   
-	if(HAL_SD_WriteBlocks(&SDHandle, buf, start_block_num, block_num,2000) != HAL_OK)
+	if(HAL_SD_WriteBlocks(&SDHandle, buf, start_block_num, block_num,1000) != HAL_OK)
 	{
     printf("sd_write error\r\n");
 		Error_Handler(5);
@@ -146,7 +146,7 @@ bool sdio_sd_card_read(uint32_t start_block_num,uint8_t* buf,uint32_t block_num)
 		return false;
 	}
 
-	if(HAL_SD_ReadBlocks(&SDHandle, buf, start_block_num, block_num,2000) != HAL_OK)
+	if(HAL_SD_ReadBlocks(&SDHandle, buf, start_block_num, block_num,1000) != HAL_OK)
 	{
     printf("sd_read error\r\n");
 		Error_Handler(7);

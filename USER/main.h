@@ -46,5 +46,7 @@
 #include "dac_ch12.h"
 #include "adc12_conv.h"
 #include "TJpeg_test.h"
+#include "FreeRTOS.h"
+#include "task.h"
 
 #endif
