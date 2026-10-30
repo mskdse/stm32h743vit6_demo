@@ -1,5 +1,4 @@
 #include "ETH_PHY.h"
-#include <string.h>
 #include "FreeRTOS.h"
 #include "task.h"
 
@@ -96,55 +95,73 @@ static int32_t ETH_PHY_IO_WriteReg(uint32_t DevAddr, uint32_t RegAddr, uint32_t 
 /* 下面是真正的移植层，通过枚举来区分不同的PHY完成移植，自行翻阅相关PHY手册，引脚定义的话也是 */
 static void ETH_PHY_BORAD_Init(ETH_PHY_TYPE PHY)
 {
-	memset(&EthHandle,0,sizeof(ETH_HandleTypeDef));
-	
 	if(ETH_PHY_DP83848==PHY)
 	{
 	  GPIO_InitTypeDef GPIO_InitStructure = {0};
 	  /* Ethernett MSP init: RMII Mode
 
-	  RX_CLK  --------------> PA1
-	  TXD0    --------------> PB12
-	  TXD1    --------------> PB13
-	  RXD0    --------------> PC4
-	  RXD1    --------------> PC5
-	  TX_EN   --------------> PB11
-	  RX_DV   --------------> PA7
+				RX_CLK  --------------> PA1
+				TXD0    --------------> PB12
+				TXD1    --------------> PB13
+				RXD0    --------------> PC4
+				RXD1    --------------> PC5
+				TX_EN   --------------> PB11
+				RX_DV   --------------> PA7
 
-	  MDC     --------------> PC1
-	  MDIO    --------------> PA2
-
+				MDC     --------------> PC1
+				MDIO    --------------> PA2
+		
+        RST     --------------> PA5
 	  */
 
 	  /* Enable GPIOs clocks */
 	  __HAL_RCC_GPIOA_CLK_ENABLE();
+		__HAL_RCC_GPIOB_CLK_ENABLE();
 	  __HAL_RCC_GPIOC_CLK_ENABLE();
 	  __HAL_RCC_GPIOG_CLK_ENABLE();
 
 	  /* Configure PA1, PA2 , PA7 */
 	  GPIO_InitStructure.Pin =  GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_7;
-	  GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_HIGH;
+	  GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
 	  GPIO_InitStructure.Mode = GPIO_MODE_AF_PP;
 	  GPIO_InitStructure.Pull = GPIO_NOPULL ;
 	  GPIO_InitStructure.Alternate = GPIO_AF11_ETH;
 	  HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-	  /* Configure PG11, PG12 and PG13 */
+	  /* Configure PB11, PG12 and PG13 */
 	  GPIO_InitStructure.Pin = GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13;
-	  HAL_GPIO_Init(GPIOG, &GPIO_InitStructure);
+	  HAL_GPIO_Init(GPIOB, &GPIO_InitStructure);
 
 	  /* Configure PC1, PC4 and PC5 */
 	  GPIO_InitStructure.Pin = GPIO_PIN_1 | GPIO_PIN_4 | GPIO_PIN_5;
 	  HAL_GPIO_Init(GPIOC, &GPIO_InitStructure);
 
+	  GPIO_InitStructure.Pin =  GPIO_PIN_5;
+	  GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_HIGH;
+	  GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
+	  GPIO_InitStructure.Pull = GPIO_PULLUP ;
+	  HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+	  HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_RESET);
+	  vTaskDelay(100);
+	  HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_SET);
+	  vTaskDelay(100);
+
 	  /* Enable the Ethernet global Interrupt */
-	  HAL_NVIC_SetPriority(ETH_IRQn, 0x7, 0);
+	  HAL_NVIC_SetPriority(ETH_IRQn, 0x5, 0);
 	  HAL_NVIC_EnableIRQ(ETH_IRQn);
 
 	  /* Enable Ethernet clocks */
 	  __HAL_RCC_ETH1MAC_CLK_ENABLE();
 	  __HAL_RCC_ETH1TX_CLK_ENABLE();
 	  __HAL_RCC_ETH1RX_CLK_ENABLE();
+
+	  /* 显式选择 RMII 模式 */
+		__HAL_RCC_SYSCFG_CLK_ENABLE(); // 确保 SYSCFG 时钟开启
+		SYSCFG->PMCR &= ~SYSCFG_PMCR_EPIS_SEL;
+		SYSCFG->PMCR |= SYSCFG_PMCR_EPIS_SEL_2;
+		/* 关键：虚读一次，确保配置同步到 ETH 外设 */
+		(void)SYSCFG->PMCR;
 	}
 	else if(ETH_PHY_LAN8720A==PHY)
 	{
@@ -253,46 +270,24 @@ int32_t ETH_PHY_StartAutoNego(ETH_PHY_TYPE PHY)
 void ETH_PHY_SetLinkState(ETH_PHY_TYPE PHY,uint32_t LinkState)
 {
   uint32_t bcrvalue = 0;
-  int32_t status = LAN8742_STATUS_OK;
+  int32_t status = ETH_PHY_STATUS_OK;
 
-  if(pObj->IO.ReadReg(pObj->DevAddr, LAN8742_BCR, &bcrvalue) >= 0)
+  if(ETH_PHY_IO_ReadReg(ETH_PHY_DRIVER[PHY].phy_addr, ETH_PHY_DRIVER[PHY].phy_bcr_reg, &bcrvalue) >= 0)
   {
-    /* Disable link config (Auto nego, speed and duplex) */
-    bcrvalue &= ~(LAN8742_BCR_AUTONEGO_EN | LAN8742_BCR_SPEED_SELECT | LAN8742_BCR_DUPLEX_MODE);
+    /* 自动协商失败关闭自动协商然后清空速度和双工模式的掩码，然后根据或操作设置四种工作模式 */
+    bcrvalue &= ~((0x01<<12) | (0x01<<13) | (0x01<<8));
 
-    if(LinkState == LAN8742_STATUS_100MBITS_FULLDUPLEX)
-    {
-      bcrvalue |= (LAN8742_BCR_SPEED_SELECT | LAN8742_BCR_DUPLEX_MODE);
-    }
-    else if (LinkState == LAN8742_STATUS_100MBITS_HALFDUPLEX)
-    {
-      bcrvalue |= LAN8742_BCR_SPEED_SELECT;
-    }
-    else if (LinkState == LAN8742_STATUS_10MBITS_FULLDUPLEX)
-    {
-      bcrvalue |= LAN8742_BCR_DUPLEX_MODE;
-    }
-    else
-    {
-      /* Wrong link status parameter */
-      status = LAN8742_STATUS_ERROR;
-    }
+    if(LinkState == ETH_PHY_STATUS_100MBITS_FULLDUPLEX)      bcrvalue |= ((0x01<<13) | (0x01<<8));
+    else if(LinkState == ETH_PHY_STATUS_100MBITS_HALFDUPLEX) bcrvalue |= (0x01<<13);
+    else if(LinkState == ETH_PHY_STATUS_10MBITS_FULLDUPLEX)  bcrvalue |= (0x01<<8);
+    else status = ETH_PHY_STATUS_ERROR;
   }
-  else
+  else status = ETH_PHY_STATUS_READ_ERROR;
+
+  if(status == ETH_PHY_STATUS_OK)
   {
-    status = LAN8742_STATUS_READ_ERROR;
+    if(ETH_PHY_IO_WriteReg(ETH_PHY_DRIVER[PHY].phy_addr, ETH_PHY_DRIVER[PHY].phy_bcr_reg, bcrvalue) < 0) status = ETH_PHY_STATUS_WRITE_ERROR;
   }
-
-  if(status == LAN8742_STATUS_OK)
-  {
-    /* Apply configuration */
-    if(pObj->IO.WriteReg(pObj->DevAddr, LAN8742_BCR, bcrvalue) < 0)
-    {
-      status = LAN8742_STATUS_WRITE_ERROR;
-    }
-  }
-
-  return status;
 }
 
 /**

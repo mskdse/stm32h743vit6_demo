@@ -48,5 +48,6 @@
 #include "TJpeg_test.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "LWIP_APP.h"
 
 #endif

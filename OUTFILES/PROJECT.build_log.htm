@@ -3,141 +3,69 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: ¦ÌVision V5.43.1.0
-Copyright (C) 2025 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: 11 11, 11, LIC=GMZI6-DNH8Z-2ZLW4-F4GS1-C4LUG-L7S79
+IDE-Version: ¦ÌVision V5.35.0.0
+Copyright (C) 2021 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 11 11, 11, LIC=IK1BF-6WSCX-II95V-PVULD-TC5LM-SRJ9B
  
 Tool Versions:
-Toolchain:       MDK-ARM Plus  Version: 5.43.0.0
-Toolchain Path:  C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin
+Toolchain:       MDK-ARM Plus  Version: 5.35.0.2
+Toolchain Path:  D:\Keil5\ARM\ARMCC\Bin
 C Compiler:      Armcc.exe V5.06 update 7 (build 960)
 Assembler:       Armasm.exe V5.06 update 7 (build 960)
 Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
 Library Manager: ArmAr.exe V5.06 update 7 (build 960)
 Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
-CPU DLL:         SARMCM3.DLL V5.43.0.0
-Dialog DLL:      DCM.DLL V1.17.5.0
-Target DLL:      Segger\JL2CM3.dll V2.99.45.0
-Dialog DLL:      TCM.DLL V1.56.6.0
+CPU DLL:         SARMCM3.DLL V5.35.0.2
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      Segger\JL2CM3.dll V2.99.40.0
+Dialog DLL:      TCM.DLL V1.53.0.0
  
 <h2>Project:</h2>
-C:\Users\EVC2-5\Desktop\stm32h743vit6_demo\PROJECT.uvprojx
+D:\stm32project\STM32H743VIT6\PROJECT.uvprojx
 Project File Date:  10/30/2026
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin'
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil5\ARM\ARMCC\Bin'
 Build target 'PROJECT'
 Note: source file '.\TJpegDec\src\tjpgd.c' - object file renamed from '.\OUTFILES\tjpgd.o' to '.\OUTFILES\tjpgd_1.o'.
 Note: source file '.\FreeRTOS\Source\portable\RVDS\ARM_CM7\r0p1\port.c' - object file renamed from '.\OUTFILES\port.o' to '.\OUTFILES\port_1.o'.
 compiling ethernetif.c...
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(103): error:  #20: identifier "osSemaphoreId" is undefined
-  osSemaphoreId RxPktSemaphore = NULL; /* Semaphore to signal incoming packets */
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(105): error:  #20: identifier "TaskHandle_t" is undefined
-  TaskHandle_t EthIfThread;       /* Handle of the interface thread */
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(106): error:  #20: identifier "osSemaphoreId" is undefined
-  osSemaphoreId TxPktSemaphore = NULL;   /* Semaphore to signal transmit packet complete */
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(174): warning:  #223-D: function "xSemaphoreCreateBinary" declared implicitly
-    RxPktSemaphore = xSemaphoreCreateBinary();
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(180): warning:  #223-D: function "osThreadDef" declared implicitly
-    osThreadDef(EthIf, ethernetif_input, osPriorityRealtime, 0, INTERFACE_THREAD_STACK_SIZE);
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(180): error:  #20: identifier "EthIf" is undefined
-    osThreadDef(EthIf, ethernetif_input, osPriorityRealtime, 0, INTERFACE_THREAD_STACK_SIZE);
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(180): error:  #20: identifier "osPriorityRealtime" is undefined
-    osThreadDef(EthIf, ethernetif_input, osPriorityRealtime, 0, INTERFACE_THREAD_STACK_SIZE);
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(181): warning:  #223-D: function "osThreadCreate" declared implicitly
-    osThreadCreate (osThread(EthIf), netif);
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(181): warning:  #223-D: function "osThread" declared implicitly
-    osThreadCreate (osThread(EthIf), netif);
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(184): warning:  #223-D: function "LAN8742_RegisterBusIO" declared implicitly
-    LAN8742_RegisterBusIO(&LAN8742, &LAN8742_IOCtx);
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(184): error:  #20: identifier "LAN8742" is undefined
-    LAN8742_RegisterBusIO(&LAN8742, &LAN8742_IOCtx);
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(184): error:  #20: identifier "LAN8742_IOCtx" is undefined
-    LAN8742_RegisterBusIO(&LAN8742, &LAN8742_IOCtx);
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(187): warning:  #223-D: function "LAN8742_Init" declared implicitly
-    if(LAN8742_Init(&LAN8742) != LAN8742_STATUS_OK)
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(187): error:  #20: identifier "LAN8742_STATUS_OK" is undefined
-    if(LAN8742_Init(&LAN8742) != LAN8742_STATUS_OK)
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(194): warning:  #223-D: function "LAN8742_GetLinkState" declared implicitly
-    PHYLinkState = LAN8742_GetLinkState(&LAN8742);
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(197): error:  #20: identifier "LAN8742_STATUS_LINK_DOWN" is undefined
-    if(PHYLinkState <= LAN8742_STATUS_LINK_DOWN)
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(206): error:  #20: identifier "LAN8742_STATUS_100MBITS_FULLDUPLEX" is undefined
-      case LAN8742_STATUS_100MBITS_FULLDUPLEX:
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(210): error:  #20: identifier "LAN8742_STATUS_100MBITS_HALFDUPLEX" is undefined
-      case LAN8742_STATUS_100MBITS_HALFDUPLEX:
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(214): error:  #20: identifier "LAN8742_STATUS_10MBITS_FULLDUPLEX" is undefined
-      case LAN8742_STATUS_10MBITS_FULLDUPLEX:
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(218): error:  #20: identifier "LAN8742_STATUS_10MBITS_HALFDUPLEX" is undefined
-      case LAN8742_STATUS_10MBITS_HALFDUPLEX:
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(299): warning:  #223-D: function "osSemaphoreWait" declared implicitly
-          osSemaphoreWait( TxPktSemaphore, ETHIF_TX_TIMEOUT);
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(348): warning:  #223-D: function "osSemaphoreWait" declared implicitly
-      if (osSemaphoreWait( RxPktSemaphore, TIME_WAITING_FOR_INPUT)==osOK)
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(348): error:  #20: identifier "osWaitForever" is undefined
-      if (osSemaphoreWait( RxPktSemaphore, TIME_WAITING_FOR_INPUT)==osOK)
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(348): error:  #20: identifier "osOK" is undefined
-      if (osSemaphoreWait( RxPktSemaphore, TIME_WAITING_FOR_INPUT)==osOK)
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(423): warning:  #223-D: function "osSemaphoreRelease" declared implicitly
-      osSemaphoreRelease(RxPktSemaphore);
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(448): warning:  #223-D: function "osSemaphoreRelease" declared implicitly
-    osSemaphoreRelease(RxPktSemaphore);
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(458): warning:  #223-D: function "osSemaphoreRelease" declared implicitly
-    osSemaphoreRelease(TxPktSemaphore);
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(470): warning:  #223-D: function "osSemaphoreRelease" declared implicitly
-      osSemaphoreRelease(RxPktSemaphore);
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(475): warning:  #223-D: function "osSemaphoreRelease" declared implicitly
-      osSemaphoreRelease(TxPktSemaphore);
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(494): warning:  #223-D: function "LAN8742_GetLinkState" declared implicitly
-      PHYLinkState = LAN8742_GetLinkState(&LAN8742);
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(494): error:  #20: identifier "LAN8742" is undefined
-      PHYLinkState = LAN8742_GetLinkState(&LAN8742);
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(496): error:  #20: identifier "LAN8742_STATUS_LINK_DOWN" is undefined
-      if(netif_is_link_up(netif) && (PHYLinkState <= LAN8742_STATUS_LINK_DOWN))
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(506): error:  #20: identifier "LAN8742_STATUS_100MBITS_FULLDUPLEX" is undefined
-        case LAN8742_STATUS_100MBITS_FULLDUPLEX:
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(511): error:  #20: identifier "LAN8742_STATUS_100MBITS_HALFDUPLEX" is undefined
-        case LAN8742_STATUS_100MBITS_HALFDUPLEX:
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(516): error:  #20: identifier "LAN8742_STATUS_10MBITS_FULLDUPLEX" is undefined
-        case LAN8742_STATUS_10MBITS_FULLDUPLEX:
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(521): error:  #20: identifier "LAN8742_STATUS_10MBITS_HALFDUPLEX" is undefined
-        case LAN8742_STATUS_10MBITS_HALFDUPLEX:
-LWIP2.2.1\STM32H7_PORT\ethernetif.c(543): warning:  #223-D: function "osDelay" declared implicitly
-      osDelay(100);
-LWIP2.2.1\STM32H7_PORT\ethernetif.c: 16 warnings, 21 errors
-".\OUTFILES\PROJECT.axf" - 21 Error(s), 16 Warning(s).
+linking...
+.\OUTFILES\PROJECT.sct(110): warning: L6314W: No section matches pattern *(.spi_flash_ro).
+Program Size: Code=93600 RO-data=3356 RW-data=74136 ZI-data=65224  
+Finished: 0 information, 1 warning and 0 error messages.
+FromELF: creating hex file...
+".\OUTFILES\PROJECT.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
 Package Vendor: Keil
                 http://www.keil.com/pack/Keil.ARM_Compiler.1.6.3.pack
-                Keil::ARM_Compiler@1.6.3
+                Keil.ARM_Compiler.1.6.3
                 Keil ARM Compiler extensions for ARM Compiler 5 and ARM Compiler 6
    * Component: Event Recorder Variant: DAP Version: 1.4.0
    * Component: STDOUT Variant: Breakpoint Version: 1.2.0
 
 Package Vendor: Keil
-                http://www.keil.com/pack/Keil.STM32H7xx_DFP.2.7.0.pack
-                Keil::STM32H7xx_DFP@2.7.0
-                STMicroelectronics STM32H7 Series Device Support and Examples
+                https://www.keil.com/pack/Keil.STM32H7xx_DFP.4.1.3.pack
+                Keil.STM32H7xx_DFP.4.1.3
+                STMicroelectronics STM32H7 Series Device Support
 
 <h2>Collection of Component include folders:</h2>
-  ./RTE/Compiler
-  ./RTE/_PROJECT
-  C:/Users/EVC2-5/AppData/Local/Arm/Packs/Keil/ARM_Compiler/1.6.3/Include
-  C:/Users/EVC2-5/AppData/Local/Arm/Packs/Keil/STM32H7xx_DFP/2.7.0/Drivers/CMSIS/Device/ST/STM32H7xx/Include
+  .\RTE\Compiler
+  .\RTE\_PROJECT
+  D:\Keil5\ARM\PACK\Keil\ARM_Compiler\1.6.3\Include
 
 <h2>Collection of Component Files used:</h2>
 
-   * Component: Keil::Compiler&ARM Compiler:Event Recorder&DAP@1.4.0
-      Include file:  Include/EventRecorder.h
-      Include file:  Config/EventRecorderConf.h
-      Source file:   Source/EventRecorder.c
+   * Component: Keil.ARM Compiler::Compiler:Event Recorder:DAP:1.4.0
+      Source file:   Source\EventRecorder.c
+      Include file:  Config\EventRecorderConf.h
+      Include file:  Include\EventRecorder.h
 
-   * Component: Keil::Compiler&ARM Compiler:I/O:STDOUT&Breakpoint@1.2.0
-      Source file:   Source/retarget_io.c
-Target not created.
-Build Time Elapsed:  00:00:35
+   * Component: Keil.ARM Compiler::Compiler:I/O:STDOUT:Breakpoint:1.2.0
+      Source file:   Source\retarget_io.c
+Build Time Elapsed:  00:00:05
 </pre>
 </body>
 </html>

@@ -11,11 +11,11 @@
 #include "ETH_PHY.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "semphr.h"
+#include <string.h>
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-/* The time to block waiting for input. */
-#define TIME_WAITING_FOR_INPUT                 ( osWaitForever )
 /* Time to block waiting for transmissions to finish */
 #define ETHIF_TX_TIMEOUT                       (2000U)
 /* Stack size of the interface thread */
@@ -74,8 +74,8 @@ ETH_DMADescTypeDef  DMATxDscrTab[ETH_TX_DESC_CNT]; /* Ethernet Tx DMA Descriptor
 
 #elif defined ( __CC_ARM )  /* MDK ARM Compiler */
 
-__attribute__((section(".RxDescripSection"))) ETH_DMADescTypeDef  DMARxDscrTab[ETH_RX_DESC_CNT]; /* Ethernet Rx DMA Descriptors */
-__attribute__((section(".TxDescripSection"))) ETH_DMADescTypeDef  DMATxDscrTab[ETH_TX_DESC_CNT]; /* Ethernet Tx DMA Descriptors */
+__attribute__((section(".RAM_D2"))) ETH_DMADescTypeDef  DMARxDscrTab[ETH_RX_DESC_CNT]; /* Ethernet Rx DMA Descriptors */
+__attribute__((section(".RAM_D2"))) ETH_DMADescTypeDef  DMATxDscrTab[ETH_TX_DESC_CNT]; /* Ethernet Tx DMA Descriptors */
 
 #elif defined ( __GNUC__ ) /* GNU Compiler */
 
@@ -92,7 +92,7 @@ LWIP_MEMPOOL_DECLARE(RX_POOL, ETH_RX_BUFFER_CNT, sizeof(RxBuff_t), "Zero-copy RX
 extern u8_t memp_memory_RX_POOL_base[];
 
 #elif defined ( __CC_ARM )  /* MDK ARM Compiler */
-__attribute__((section(".Rx_PoolSection"))) extern u8_t memp_memory_RX_POOL_base[];
+__attribute__((section(".RAM_D2"))) extern u8_t memp_memory_RX_POOL_base[];
 
 #elif defined ( __GNUC__ ) /* GNU Compiler */
 __attribute__((section(".Rx_PoolSection"))) extern u8_t memp_memory_RX_POOL_base[];
@@ -102,10 +102,9 @@ __attribute__((section(".Rx_PoolSection"))) extern u8_t memp_memory_RX_POOL_base
 /* Variable Definitions */
 static RxAllocStatusTypeDef RxAllocStatus;
 
-osSemaphoreId RxPktSemaphore = NULL; /* Semaphore to signal incoming packets */
-
-TaskHandle_t EthIfThread;       /* Handle of the interface thread */
-osSemaphoreId TxPktSemaphore = NULL;   /* Semaphore to signal transmit packet complete */
+TaskHandle_t      EthIfThread = NULL;
+SemaphoreHandle_t RxPktSemaphore = NULL;
+SemaphoreHandle_t TxPktSemaphore = NULL;
 
 /* Global Ethernet handle */
 ETH_TxPacketConfig TxConfig;
@@ -113,7 +112,7 @@ ETH_TxPacketConfig TxConfig;
 
 /* Private function prototypes -----------------------------------------------*/
 extern void Error_Handler(void);
-static void ethernetif_input( void const * argument );
+static void ethernetif_input( void * argument );
 
 /* Private functions ---------------------------------------------------------*/
 void pbuf_free_custom(struct pbuf *p);
@@ -133,7 +132,8 @@ static void low_level_init(struct netif *netif)
   int32_t PHYLinkState = 0U;
   ETH_MACConfigTypeDef MACConf = {0};
   uint8_t macaddress[6]= {ETH_MAC_ADDR0, ETH_MAC_ADDR1, ETH_MAC_ADDR2, ETH_MAC_ADDR3, ETH_MAC_ADDR4, ETH_MAC_ADDR5};
-
+  
+  memset(&EthHandle,0,sizeof(ETH_HandleTypeDef));
   EthHandle.Instance = ETH;
   EthHandle.Init.MACAddr = macaddress;
   EthHandle.Init.MediaInterface = HAL_ETH_RMII_MODE;
@@ -172,15 +172,17 @@ static void low_level_init(struct netif *netif)
   TxConfig.ChecksumCtrl = ETH_CHECKSUM_IPHDR_PAYLOAD_INSERT_PHDR_CALC;
   TxConfig.CRCPadCtrl = ETH_CRC_PAD_INSERT;
 
-  /* create a binary semaphore used for informing ethernetif of frame reception */
   RxPktSemaphore = xSemaphoreCreateBinary();
-
-  /* create a binary semaphore used for informing ethernetif of frame transmission */
   TxPktSemaphore = xSemaphoreCreateBinary();
 
+
   /* create the task that handles the ETH_MAC */
-  osThreadDef(EthIf, ethernetif_input, osPriorityRealtime, 0, INTERFACE_THREAD_STACK_SIZE);
-  osThreadCreate (osThread(EthIf), netif);
+  xTaskCreate(ethernetif_input,           /* 任务入口函数 */
+              "EthIf",                    /* 任务名字 */
+              INTERFACE_THREAD_STACK_SIZE,/* 栈大小 (注意：原生 FreeRTOS 单位是 Word，即 4字节) */
+              (void *)netif,              /* 传给任务的参数 */
+              configMAX_PRIORITIES - 1,   /* 任务优先级 (osPriorityRealtime 对应最高优先级) */
+              &EthIfThread);              /* 任务句柄 */
 
   /* Initialize the LAN8742 ETH PHY */
   if(ETH_PHY_Init(ETH_PHY_DP83848) != ETH_PHY_STATUS_OK)//初始化PHY介质
@@ -193,7 +195,7 @@ static void low_level_init(struct netif *netif)
 	
 	if(ETH_PHY_StartAutoNego(ETH_PHY_DP83848) != ETH_PHY_STATUS_OK)//自动协商超时失败必须手动设定寄存器
 	{
-		ETH_PHY_SetLinkState(ETH_PHY_DP83848,);
+		ETH_PHY_SetLinkState(ETH_PHY_DP83848,ETH_PHY_STATUS_100MBITS_FULLDUPLEX);
 		printf("auto nego error\r\n");
 	}
 
@@ -301,8 +303,8 @@ static err_t low_level_output(struct netif *netif, struct pbuf *p)
 
       if(HAL_ETH_GetError(&EthHandle) & HAL_ETH_ERROR_BUSY)
       {
-        /* Wait for descriptors to become available */
-        osSemaphoreWait( TxPktSemaphore, ETHIF_TX_TIMEOUT);
+        /* 等待发送完成信号量，单位是 tick */
+        xSemaphoreTake(TxPktSemaphore, pdMS_TO_TICKS(ETHIF_TX_TIMEOUT));  
         HAL_ETH_ReleaseTxPacket(&EthHandle);
         errval = ERR_BUF;
       }
@@ -344,14 +346,14 @@ static struct pbuf * low_level_input(struct netif *netif)
  *
  * @param argument the lwip network interface structure for this ethernetif
  */
-static void ethernetif_input( void const * argument )
+static void ethernetif_input( void * argument )
 {
   struct pbuf *p = NULL;
   struct netif *netif = (struct netif *) argument;
 
   for( ;; )
   {
-    if (osSemaphoreWait( RxPktSemaphore, TIME_WAITING_FOR_INPUT)==osOK)
+    if (xSemaphoreTake(RxPktSemaphore, portMAX_DELAY) == pdTRUE)
     {
       do
       {
@@ -426,19 +428,8 @@ void pbuf_free_custom(struct pbuf *p)
   if (RxAllocStatus == RX_ALLOC_ERROR)
   {
     RxAllocStatus = RX_ALLOC_OK;
-    osSemaphoreRelease(RxPktSemaphore);
+    xSemaphoreGive(RxPktSemaphore);
   }
-}
-
-/**
-  * @brief  Returns the current time in milliseconds
-  *         when LWIP_TIMERS == 1 and NO_SYS == 1
-  * @param  None
-  * @retval Current Time value
-  */
-u32_t sys_now(void)
-{
-  return HAL_GetTick();
 }
 
 /*******************************************************************************
@@ -451,7 +442,11 @@ u32_t sys_now(void)
   */
 void HAL_ETH_RxCpltCallback(ETH_HandleTypeDef *heth)
 {
-  osSemaphoreRelease(RxPktSemaphore);
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+    /* 必须在中断里使用 FromISR 版本 */
+    xSemaphoreGiveFromISR(RxPktSemaphore, &xHigherPriorityTaskWoken);
+    /* 触发任务切换 (必须) */
+    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
 
 /**
@@ -461,7 +456,9 @@ void HAL_ETH_RxCpltCallback(ETH_HandleTypeDef *heth)
   */
 void HAL_ETH_TxCpltCallback(ETH_HandleTypeDef *heth)
 {
-  osSemaphoreRelease(TxPktSemaphore);
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+    xSemaphoreGiveFromISR(TxPktSemaphore, &xHigherPriorityTaskWoken);
+    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
 
 /**
@@ -471,15 +468,19 @@ void HAL_ETH_TxCpltCallback(ETH_HandleTypeDef *heth)
   */
 void HAL_ETH_ErrorCallback(ETH_HandleTypeDef *heth)
 {
+  BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+
   if((HAL_ETH_GetDMAError(heth) & ETH_DMACSR_RBU) == ETH_DMACSR_RBU)
   {
-    osSemaphoreRelease(RxPktSemaphore);
+    xSemaphoreGiveFromISR(RxPktSemaphore, &xHigherPriorityTaskWoken);
   }
 
   if((HAL_ETH_GetDMAError(heth) & ETH_DMACSR_TBU) == ETH_DMACSR_TBU)
   {
-    osSemaphoreRelease(TxPktSemaphore);
+    xSemaphoreGiveFromISR(TxPktSemaphore, &xHigherPriorityTaskWoken);
   }
+  
+  portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
 
 /**
@@ -487,7 +488,7 @@ void HAL_ETH_ErrorCallback(ETH_HandleTypeDef *heth)
   * @param  argument: netif
   * @retval None
   */
-void ethernet_link_thread( void const * argument )
+void ethernet_link_thread( void * argument )
 {
   ETH_MACConfigTypeDef MACConf = {0};
   int32_t PHYLinkState = 0U;
@@ -545,7 +546,7 @@ void ethernet_link_thread( void const * argument )
       }
     }
 
-    vTaskDelay(100);
+    vTaskDelay(200);
   }
 }
 
@@ -600,9 +601,6 @@ void HAL_ETH_RxLinkCallback(void **pStart, void **pEnd, uint8_t *buff, uint16_t 
   {
     p->tot_len += Length;
   }
-
-  /* Invalidate data cache because Rx DMA's writing to physical memory makes it stale. */
-  SCB_InvalidateDCache_by_Addr((uint32_t *)buff, Length);
 }
 
 void HAL_ETH_TxFreeCallback(uint32_t * buff)

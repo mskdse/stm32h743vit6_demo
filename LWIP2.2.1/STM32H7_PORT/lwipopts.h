@@ -36,6 +36,31 @@
 
 #include "FreeRTOSConfig.h"
 
+/*Static IP ADDRESS*/
+#define IP_ADDR0   ((uint8_t)169U)
+#define IP_ADDR1   ((uint8_t)254U)
+#define IP_ADDR2   ((uint8_t)231U)
+#define IP_ADDR3   ((uint8_t)10U)
+
+/*NETMASK*/
+#define NETMASK_ADDR0   ((uint8_t)255U)
+#define NETMASK_ADDR1   ((uint8_t)255U)
+#define NETMASK_ADDR2   ((uint8_t)0U)
+#define NETMASK_ADDR3   ((uint8_t)0U)
+
+/*Gateway Address*/
+#define GW_ADDR0   ((uint8_t)169U)
+#define GW_ADDR1   ((uint8_t)254U)
+#define GW_ADDR2   ((uint8_t)231U)
+#define GW_ADDR3   ((uint8_t)203U)
+
+#define ETH_MAC_ADDR0    (0x04UL)
+#define ETH_MAC_ADDR1    (0xBFUL)
+#define ETH_MAC_ADDR2    (0x1BUL)
+#define ETH_MAC_ADDR3    (0x11UL)
+#define ETH_MAC_ADDR4    (0x22UL)
+#define ETH_MAC_ADDR5    (0x33UL)
+
 /**
  * NO_SYS==1: Provides VERY minimal functionality. Otherwise,
  * use lwIP facilities.
@@ -50,10 +75,10 @@
 
 /* MEM_SIZE: the size of the heap memory. If the application will send
 a lot of data that needs to be copied, this should be set high. */
-#define MEM_SIZE                (14*1024)
+#define MEM_SIZE                (20*1024)//不得超过22KB因为这片SRAM3我还要给USB缓冲区用，USB缓冲区用10KB就行
 
 /* Relocate the LwIP RAM heap pointer */
-#define LWIP_RAM_HEAP_POINTER    (0x30004000)
+#define LWIP_RAM_HEAP_POINTER    (0x30040000)
 
 /* MEMP_NUM_TCP_PCB: the number of simultaneously active TCP
    connections. */

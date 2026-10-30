@@ -27,7 +27,7 @@ static void sdio_sd_card_clk(SDCARD_EVENT enm)
 static void FREERTOS_MAIN_TASK(void * pvParameters)
 {
 	taskENTER_CRITICAL();
-	
+	LWIP_2_2_1_INIT();//初始化LWIP协议栈
 	taskEXIT_CRITICAL();
 	
 	usart1_my_printf("APP_TASK_RUN......\r\n");
@@ -364,6 +364,20 @@ static void MPU_Config(void)
 	MPU_InitStruct.SubRegionDisable = 0x00;
 	MPU_InitStruct.DisableExec      = MPU_INSTRUCTION_ACCESS_DISABLE;
 	HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /* 配置LWIP的内存堆的缓冲区的Cache属性，至于说描述符放SRAM1+2的区域即可。然后这个LWIP堆内存打算占20KB，这片SRAM最大32KB */
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = 0x30040000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_32KB;
+  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER6;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL1;
+  MPU_InitStruct.SubRegionDisable = 0x00;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
   /* Enable the MPU */
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);

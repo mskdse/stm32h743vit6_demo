@@ -184,7 +184,7 @@
 #define  USE_HAL_DMA2D_REGISTER_CALLBACKS   0U /* DMA2D register callback disabled   */
 #define  USE_HAL_DSI_REGISTER_CALLBACKS     0U /* DSI register callback disabled     */
 #define  USE_HAL_DTS_REGISTER_CALLBACKS     0U /* DTS register callback disabled     */
-#define  USE_HAL_ETH_REGISTER_CALLBACKS     0U /* ETH register callback disabled     */
+#define  USE_HAL_ETH_REGISTER_CALLBACKS     1U /* ETH register callback disabled     */
 #define  USE_HAL_FDCAN_REGISTER_CALLBACKS   1U /* FDCAN register callback disabled   */
 #define  USE_HAL_FMAC_REGISTER_CALLBACKS    0U /* FMAC register callback disabled  */ 
 #define  USE_HAL_NAND_REGISTER_CALLBACKS    0U /* NAND register callback disabled    */
@@ -226,13 +226,6 @@
 /* ########################### Ethernet Configuration ######################### */
 #define ETH_TX_DESC_CNT         4U  /* number of Ethernet Tx DMA descriptors */
 #define ETH_RX_DESC_CNT         4U  /* number of Ethernet Rx DMA descriptors */
-
-#define ETH_MAC_ADDR0    (0x02UL)
-#define ETH_MAC_ADDR1    (0x00UL)
-#define ETH_MAC_ADDR2    (0x00UL)
-#define ETH_MAC_ADDR3    (0x00UL)
-#define ETH_MAC_ADDR4    (0x00UL)
-#define ETH_MAC_ADDR5    (0x00UL)
 
 /* ########################## Assert Selection ############################## */
 /**
