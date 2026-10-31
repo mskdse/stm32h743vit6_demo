@@ -37,26 +37,26 @@
 #include "FreeRTOSConfig.h"
 
 /*Static IP ADDRESS*/
-#define IP_ADDR0   ((uint8_t)169U)
-#define IP_ADDR1   ((uint8_t)254U)
-#define IP_ADDR2   ((uint8_t)231U)
-#define IP_ADDR3   ((uint8_t)10U)
+#define IP_ADDR0   ((uint8_t)192U)
+#define IP_ADDR1   ((uint8_t)168U)
+#define IP_ADDR2   ((uint8_t)137U)
+#define IP_ADDR3   ((uint8_t)200U)
 
 /*NETMASK*/
 #define NETMASK_ADDR0   ((uint8_t)255U)
 #define NETMASK_ADDR1   ((uint8_t)255U)
-#define NETMASK_ADDR2   ((uint8_t)0U)
+#define NETMASK_ADDR2   ((uint8_t)255U)
 #define NETMASK_ADDR3   ((uint8_t)0U)
 
 /*Gateway Address*/
-#define GW_ADDR0   ((uint8_t)169U)
-#define GW_ADDR1   ((uint8_t)254U)
-#define GW_ADDR2   ((uint8_t)231U)
-#define GW_ADDR3   ((uint8_t)203U)
+#define GW_ADDR0   ((uint8_t)192U)
+#define GW_ADDR1   ((uint8_t)168U)
+#define GW_ADDR2   ((uint8_t)137U)
+#define GW_ADDR3   ((uint8_t)50U)
 
-#define ETH_MAC_ADDR0    (0x04UL)
-#define ETH_MAC_ADDR1    (0xBFUL)
-#define ETH_MAC_ADDR2    (0x1BUL)
+#define ETH_MAC_ADDR0    (0x00UL)
+#define ETH_MAC_ADDR1    (0xE0UL)
+#define ETH_MAC_ADDR2    (0x00UL)
 #define ETH_MAC_ADDR3    (0x11UL)
 #define ETH_MAC_ADDR4    (0x22UL)
 #define ETH_MAC_ADDR5    (0x33UL)
@@ -73,9 +73,15 @@
    byte alignment -> define MEM_ALIGNMENT to 2. */
 #define MEM_ALIGNMENT           4
 
+/**
+ * LWIP_NETIF_HOSTNAME==1: use DHCP_OPTION_HOSTNAME with netif's hostname
+ * field.
+ */
+#define LWIP_NETIF_HOSTNAME     1
+
 /* MEM_SIZE: the size of the heap memory. If the application will send
 a lot of data that needs to be copied, this should be set high. */
-#define MEM_SIZE                (20*1024)//不得超过22KB因为这片SRAM3我还要给USB缓冲区用，USB缓冲区用10KB就行
+#define MEM_SIZE                (20*1024)//不得超过22KB因为这片SRAM3我还要给USB缓冲区用，USB缓冲区用10KB就行，起始位置在22KB处防止冲突
 
 /* Relocate the LwIP RAM heap pointer */
 #define LWIP_RAM_HEAP_POINTER    (0x30040000)
@@ -113,24 +119,29 @@ a lot of data that needs to be copied, this should be set high. */
 #define TCP_MSS                 (1500 - 40)	  /* TCP_MSS = (Ethernet MTU - IP header size - TCP header size) */
 
 /* TCP sender buffer space (bytes). */
-#define TCP_SND_BUF             (4*TCP_MSS)
-
+#define TCP_SND_BUF             (5*TCP_MSS)
 
 /* TCP receive window. */
-#define TCP_WND                 (4*TCP_MSS)
+#define TCP_WND                 (5*TCP_MSS)            
 
 
 /* ---------- ICMP options ---------- */
-#define LWIP_ICMP                       1
+#define LWIP_ICMP                      1
+
+/* ---------- IGMP options ---------- */
+#define LWIP_IGMP                      1
+
+/* ---------- DNS options ---------- */
+#define LWIP_DNS                       1
 
 
 /* ---------- DHCP options ---------- */
-#define LWIP_DHCP               0
+#define LWIP_DHCP                      1
 
 
 /* ---------- UDP options ---------- */
-#define LWIP_UDP                1
-#define UDP_TTL                 255
+#define LWIP_UDP                       1
+#define UDP_TTL                      255
 
 
 /* ---------- Statistics options ---------- */

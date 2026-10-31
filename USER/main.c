@@ -8,8 +8,8 @@ static void CPU_CACHE_Enable(void);
 /* 数组表格定义在 .RAM_RESET_VCTOR 段，这段空间用来存储中断向量表，不得再其他地方再定义这个节区 */
 __attribute__((section(".RamVecTable")))static uint8_t RAM_VCTOR_TABLE[0x400];
 
-/* 用来标记FreeRTOS是否应该运行开启调度 */
-__attribute__((section(".RAM_D2")))static volatile bool RTOS_START_SCH_FLAG;
+/* 用来标记FreeRTOS是否应该运行开启调度，这个变量千万不要放在其他地方，一定确保初始值为false */
+static volatile bool RTOS_START_SCH_FLAG=false;
 
 __attribute__((section(".RAM_D1"), aligned(4)))static FATFS fs;
 static void sdio_sd_card_clk(SDCARD_EVENT enm)
@@ -26,9 +26,8 @@ static void sdio_sd_card_clk(SDCARD_EVENT enm)
 /* 完成所有任务的初始化工作 */
 static void FREERTOS_MAIN_TASK(void * pvParameters)
 {
-	taskENTER_CRITICAL();
 	LWIP_2_2_1_INIT();//初始化LWIP协议栈
-	taskEXIT_CRITICAL();
+	LWIP_2_2_1_PERFORM_TEST();//启用网速测试
 	
 	usart1_my_printf("APP_TASK_RUN......\r\n");
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
@@ -128,9 +127,6 @@ int main(void)
 #if USE_CAN_OPEN_RUN
 	bx_can12_open_app_init();
 #endif
-	
-	/* 创建第一个任务，该任务会初始化完全部的线程然后把他当作MAIN线程 */
-	RTOS_START_SCH_FLAG=false;
 
 	/* Create the task, storing the handle. */
 	BaseType_t xReturned = xTaskCreate(

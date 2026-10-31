@@ -1,8 +1,8 @@
 .\outfiles\event_groups.o: FreeRTOS\Source\event_groups.c
-.\outfiles\event_groups.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\outfiles\event_groups.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\outfiles\event_groups.o: .\FreeRTOS\Source\include\FreeRTOS.h
-.\outfiles\event_groups.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
-.\outfiles\event_groups.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
+.\outfiles\event_groups.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\event_groups.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\outfiles\event_groups.o: .\FreeRTOS\Source\include\FreeRTOSConfig.h
 .\outfiles\event_groups.o: .\FreeRTOS\Source\include\projdefs.h
 .\outfiles\event_groups.o: .\FreeRTOS\Source\include\portable.h

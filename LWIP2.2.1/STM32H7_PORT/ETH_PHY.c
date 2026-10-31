@@ -93,7 +93,7 @@ static int32_t ETH_PHY_IO_WriteReg(uint32_t DevAddr, uint32_t RegAddr, uint32_t 
 }
 
 /* 下面是真正的移植层，通过枚举来区分不同的PHY完成移植，自行翻阅相关PHY手册，引脚定义的话也是 */
-static void ETH_PHY_BORAD_Init(ETH_PHY_TYPE PHY)
+void ETH_PHY_BORAD_Init(ETH_PHY_TYPE PHY)
 {
 	if(ETH_PHY_DP83848==PHY)
 	{
@@ -155,13 +155,6 @@ static void ETH_PHY_BORAD_Init(ETH_PHY_TYPE PHY)
 	  __HAL_RCC_ETH1MAC_CLK_ENABLE();
 	  __HAL_RCC_ETH1TX_CLK_ENABLE();
 	  __HAL_RCC_ETH1RX_CLK_ENABLE();
-
-	  /* 显式选择 RMII 模式 */
-		__HAL_RCC_SYSCFG_CLK_ENABLE(); // 确保 SYSCFG 时钟开启
-		SYSCFG->PMCR &= ~SYSCFG_PMCR_EPIS_SEL;
-		SYSCFG->PMCR |= SYSCFG_PMCR_EPIS_SEL_2;
-		/* 关键：虚读一次，确保配置同步到 ETH 外设 */
-		(void)SYSCFG->PMCR;
 	}
 	else if(ETH_PHY_LAN8720A==PHY)
 	{
@@ -171,10 +164,8 @@ static void ETH_PHY_BORAD_Init(ETH_PHY_TYPE PHY)
 /* 初始化函数，完成底层PHY的初始化工作以及找到指定PHY的物理地址 */
 int32_t ETH_PHY_Init(ETH_PHY_TYPE PHY)
 {
-    uint32_t regvalue = 0, addr = 0;
-    int32_t status = ETH_PHY_STATUS_ERROR;
-
-	 ETH_PHY_BORAD_Init(PHY);
+	 uint32_t regvalue = 0, addr = 0;
+	 int32_t status = ETH_PHY_STATUS_ERROR;
 	 
 	 ETH_PHY_IO_Init();
 	 
@@ -188,7 +179,7 @@ int32_t ETH_PHY_Init(ETH_PHY_TYPE PHY)
 			 continue;
 	   }
 
-	   if((regvalue & 0x3) == addr)//一旦读取成功，此时的addr就是我的PHY芯片的物理地址，regvalue里面存储的PHY地址值也是，但是为了保险起见需要再次对比
+	   if((regvalue & 0x1F) == addr)//一旦读取成功，此时的addr就是我的PHY芯片的物理地址，regvalue里面存储的PHY地址值也是，但是为了保险起见需要再次对比
 	   {
 			 ETH_PHY_DRIVER[PHY].phy_addr = addr;/* 对比成功，将这个值存储起来，这里的&3是因为PHY的物理地址本身就没多少，拿这个单片机来说
 																							顶多就双网口0/1，并且我发现这种寄存器存储他物理地址的位都是低位所以不需要专门设定掩码 */
@@ -205,66 +196,62 @@ int32_t ETH_PHY_Init(ETH_PHY_TYPE PHY)
 /* 获取链路状态，既能检查双工状态又能检查是否插拔因为会读取link指示的位 */
 int32_t ETH_PHY_GetLinkState(ETH_PHY_TYPE PHY)
 {
-  uint32_t readval = 0;
+    uint32_t readval = 0;
+    uint32_t bcrvalue = 0;
 
-  /* 读取一下PHY的基础通用状态寄存器看一下是否能读出来  */
-  if(ETH_PHY_IO_ReadReg(ETH_PHY_DRIVER[PHY].phy_addr, ETH_PHY_DRIVER[PHY].phy_bsr_reg, &readval) < 0) return ETH_PHY_STATUS_READ_ERROR;
-  
-  /* 通用状态寄存器的第2位存储PHY的链路状态，这个都是通用的位置，看一下是down还是up */
-  if((readval & 0x04) == 0)                                                                           return ETH_PHY_STATUS_LINK_DOWN;
+    /* DP83848 直接读取 PHYSTS，避免 BMSR 的 Latch Low 问题 */
+    if(PHY == ETH_PHY_DP83848)
+    {
+        if(ETH_PHY_IO_ReadReg(ETH_PHY_DRIVER[PHY].phy_addr,ETH_PHY_DRIVER[PHY].phy_pscsr_reg,&readval) < 0) return ETH_PHY_STATUS_READ_ERROR;
+        if(!(readval & 0x01)) return ETH_PHY_STATUS_LINK_DOWN;
+    }
+    else
+    {
+        /* 其他 PHY 仍然通过 BMSR 判断链路，连续读取两次 */
+        if(ETH_PHY_IO_ReadReg(ETH_PHY_DRIVER[PHY].phy_addr,ETH_PHY_DRIVER[PHY].phy_bsr_reg,&readval) < 0)   return ETH_PHY_STATUS_READ_ERROR;
 
-  /* 确定是up之后读取一下通用控制寄存器看一下是否能读出来 */
-  if(ETH_PHY_IO_ReadReg(ETH_PHY_DRIVER[PHY].phy_addr, ETH_PHY_DRIVER[PHY].phy_bcr_reg, &readval) < 0) return ETH_PHY_STATUS_READ_ERROR;
-  
-  /* 检查一下是否开启了自动协商，这个bcr寄存器也是通用寄存器，第12位固定是自动协商使能标志位 */
-  if(!(readval & (0x01<<12)))
-  {
-	//这种通用寄存器的定义都是标准的，第13位标志速度，第8位标志双工模式 
-    if((readval&(0x01<<13))&&(readval&(0x01<<8))) return ETH_PHY_STATUS_100MBITS_FULLDUPLEX;
-    else if (readval&(0x01<<13))                  return ETH_PHY_STATUS_100MBITS_HALFDUPLEX;
-    else if (readval&(0x01<<8))                   return ETH_PHY_STATUS_10MBITS_FULLDUPLEX;
-    else                                          return ETH_PHY_STATUS_10MBITS_HALFDUPLEX;
-  }
-  else /* 如果开启了自动协商那么直接读取各个厂家自定义的一些状态读取的寄存器能迅速分辨速度和双工模式以及自动协商是否完成 */
-  {
-    if(ETH_PHY_IO_ReadReg(ETH_PHY_DRIVER[PHY].phy_addr, ETH_PHY_DRIVER[PHY].phy_pscsr_reg, &readval) < 0)               return ETH_PHY_STATUS_READ_ERROR;
+        if(ETH_PHY_IO_ReadReg(ETH_PHY_DRIVER[PHY].phy_addr,ETH_PHY_DRIVER[PHY].phy_bsr_reg,&readval) < 0)   return ETH_PHY_STATUS_READ_ERROR;
 
-    /* 检查一下自动协商是否完成 */
-    if(!(readval & ETH_PHY_DRIVER[PHY].phy_pscsr_reg_auto_neg_complte_mask))                                            return ETH_PHY_STATUS_AUTONEGO_NOTDONE;
+        if(!(readval & 0x04)) return ETH_PHY_STATUS_LINK_DOWN;
 
-    if(!(readval&(ETH_PHY_DRIVER[PHY].phy_pscsr_reg_speed_mask))&&(ETH_PHY_DRIVER[PHY].phy_pscsr_reg_duplex_mask))      return ETH_PHY_STATUS_100MBITS_FULLDUPLEX;
-    else if(!(readval&(ETH_PHY_DRIVER[PHY].phy_pscsr_reg_speed_mask))&&!(ETH_PHY_DRIVER[PHY].phy_pscsr_reg_duplex_mask))return ETH_PHY_STATUS_100MBITS_HALFDUPLEX;
-    else if((readval&(ETH_PHY_DRIVER[PHY].phy_pscsr_reg_speed_mask))&&(ETH_PHY_DRIVER[PHY].phy_pscsr_reg_duplex_mask))  return ETH_PHY_STATUS_10MBITS_FULLDUPLEX;
-    else if((readval&(ETH_PHY_DRIVER[PHY].phy_pscsr_reg_speed_mask))&&!(ETH_PHY_DRIVER[PHY].phy_pscsr_reg_duplex_mask)) return ETH_PHY_STATUS_10MBITS_HALFDUPLEX;
-  }
-	
-	return ETH_PHY_STATUS_10MBITS_HALFDUPLEX;
+        if(ETH_PHY_IO_ReadReg(ETH_PHY_DRIVER[PHY].phy_addr,ETH_PHY_DRIVER[PHY].phy_pscsr_reg,&readval) < 0) return ETH_PHY_STATUS_READ_ERROR;
+    }
+
+    /* 读取基础控制寄存器 */
+    if(ETH_PHY_IO_ReadReg(ETH_PHY_DRIVER[PHY].phy_addr,ETH_PHY_DRIVER[PHY].phy_bcr_reg,&bcrvalue) < 0)      return ETH_PHY_STATUS_READ_ERROR;
+
+    /* 开启了自动协商，但还没有完成 */
+    if((bcrvalue & (1U << 12)) &&!(readval & ETH_PHY_DRIVER[PHY].phy_pscsr_reg_auto_neg_complte_mask))      return ETH_PHY_STATUS_AUTONEGO_NOTDONE;
+
+    /* Bit 1：1=10Mbps，0=100Mbps */
+    /* Bit 2：1=全双工，0=半双工 */
+    if(readval & ETH_PHY_DRIVER[PHY].phy_pscsr_reg_speed_mask) return (readval & ETH_PHY_DRIVER[PHY].phy_pscsr_reg_duplex_mask) ? ETH_PHY_STATUS_10MBITS_FULLDUPLEX :ETH_PHY_STATUS_10MBITS_HALFDUPLEX;
+    else                                                       return (readval & ETH_PHY_DRIVER[PHY].phy_pscsr_reg_duplex_mask) ?ETH_PHY_STATUS_100MBITS_FULLDUPLEX :ETH_PHY_STATUS_100MBITS_HALFDUPLEX;
 }
 
 int32_t ETH_PHY_StartAutoNego(ETH_PHY_TYPE PHY)
 {
-  uint32_t readval = 0;
-  int32_t  status = ETH_PHY_STATUS_OK;
-	uint32_t count=1000;
+    uint32_t readval = 0;
+    uint32_t count;
 
-  if(ETH_PHY_IO_ReadReg(ETH_PHY_DRIVER[PHY].phy_addr, ETH_PHY_DRIVER[PHY].phy_bcr_reg, &readval) >= 0)
-  {
-    readval |= (0x01<<12);//第12位固定为开启自动协商的意思，因为是通用的寄存器
-    if(ETH_PHY_IO_WriteReg(ETH_PHY_DRIVER[PHY].phy_addr, ETH_PHY_DRIVER[PHY].phy_bcr_reg, readval) < 0) status=ETH_PHY_STATUS_WRITE_ERROR;
-		
-		while(count--)
-		{
-			if(ETH_PHY_IO_ReadReg(ETH_PHY_DRIVER[PHY].phy_addr, ETH_PHY_DRIVER[PHY].phy_pscsr_reg, &readval) >= 0)
+    if(ETH_PHY_IO_ReadReg(ETH_PHY_DRIVER[PHY].phy_addr,ETH_PHY_DRIVER[PHY].phy_bcr_reg,&readval) < 0) return ETH_PHY_STATUS_READ_ERROR;
+
+    /* 开启自动协商，同时重新启动自动协商 */
+    readval |= (1U << 12) | (1U << 9);
+
+    if(ETH_PHY_IO_WriteReg(ETH_PHY_DRIVER[PHY].phy_addr,ETH_PHY_DRIVER[PHY].phy_bcr_reg,readval) < 0) return ETH_PHY_STATUS_WRITE_ERROR;
+
+    for(count = 0; count < 5000; count++)
+    {
+			if(ETH_PHY_IO_ReadReg(ETH_PHY_DRIVER[PHY].phy_addr,ETH_PHY_DRIVER[PHY].phy_pscsr_reg,&readval) >= 0)
 			{
-				if(readval & ETH_PHY_DRIVER[PHY].phy_pscsr_reg_auto_neg_complte_mask) break;
+					if(readval & ETH_PHY_DRIVER[PHY].phy_pscsr_reg_auto_neg_complte_mask) return ETH_PHY_STATUS_OK;
 			}
-			vTaskDelay(1);
-		}
-		if(!count) status=ETH_PHY_STATUS_AUTONEGO_NOTDONE;
-  }
-  else status = ETH_PHY_STATUS_READ_ERROR;
 
-  return status;
+			vTaskDelay(1);
+    }
+
+    return ETH_PHY_STATUS_AUTONEGO_NOTDONE;
 }
 
 void ETH_PHY_SetLinkState(ETH_PHY_TYPE PHY,uint32_t LinkState)
@@ -297,5 +284,5 @@ void ETH_PHY_SetLinkState(ETH_PHY_TYPE PHY,uint32_t LinkState)
   */
 void ETH_IRQHandler(void)
 {
-  HAL_ETH_IRQHandler(&EthHandle);
+   HAL_ETH_IRQHandler(&EthHandle);
 }

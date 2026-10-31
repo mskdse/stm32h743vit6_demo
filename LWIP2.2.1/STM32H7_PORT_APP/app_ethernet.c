@@ -81,15 +81,15 @@ void DHCP_Thread(void * argument)
           DHCP_state = DHCP_ADDRESS_ASSIGNED;
 
           taskENTER_CRITICAL();
-          printf("======================================\r\n");
-          printf("\r\n[DHCP] Success! Network Info:\r\n");
+          printf("========================\r\n");
+          printf("\r\n[DHCP] OK Network Info:\r\n");
           printf("  IP Address : %s\r\n", ipaddr_ntoa(&netif->ip_addr));
           printf("  Subnet Mask: %s\r\n", ipaddr_ntoa(&netif->netmask));
           printf("  Gateway    : %s\r\n", ipaddr_ntoa(&netif->gw));
           printf("  MAC Address: %02X:%02X:%02X:%02X:%02X:%02X\r\n",
                  netif->hwaddr[0], netif->hwaddr[1], netif->hwaddr[2],
                  netif->hwaddr[3], netif->hwaddr[4], netif->hwaddr[5]);
-          printf("======================================\r\n");
+          printf("========================\r\n");
           taskEXIT_CRITICAL();
         }
         else
@@ -108,15 +108,15 @@ void DHCP_Thread(void * argument)
             netifapi_netif_set_addr(netif, ip_2_ip4(&ipaddr), ip_2_ip4(&netmask), ip_2_ip4(&gw));
 
             taskENTER_CRITICAL();
-            printf("======================================\r\n");
-            printf("\r\n[DHCP] TIMER OUT,USE STARTIC IP\r\n");
+            printf("====================\r\n");
+            printf("\r\n[DHCP] TIMER OUT USE STATIC IP\r\n");
             printf("  IP Address : %s\r\n", ipaddr_ntoa(&netif->ip_addr));
             printf("  Subnet Mask: %s\r\n", ipaddr_ntoa(&netif->netmask));
             printf("  Gateway    : %s\r\n", ipaddr_ntoa(&netif->gw));
             printf("  MAC Address: %02X:%02X:%02X:%02X:%02X:%02X\r\n",
                   netif->hwaddr[0], netif->hwaddr[1], netif->hwaddr[2],
                   netif->hwaddr[3], netif->hwaddr[4], netif->hwaddr[5]);
-            printf("======================================\r\n");
+            printf("====================\r\n");
             taskEXIT_CRITICAL();
           }
         }

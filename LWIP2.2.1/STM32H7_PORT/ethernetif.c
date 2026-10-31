@@ -74,8 +74,8 @@ ETH_DMADescTypeDef  DMATxDscrTab[ETH_TX_DESC_CNT]; /* Ethernet Tx DMA Descriptor
 
 #elif defined ( __CC_ARM )  /* MDK ARM Compiler */
 
-__attribute__((section(".RAM_D2"))) ETH_DMADescTypeDef  DMARxDscrTab[ETH_RX_DESC_CNT]; /* Ethernet Rx DMA Descriptors */
-__attribute__((section(".RAM_D2"))) ETH_DMADescTypeDef  DMATxDscrTab[ETH_TX_DESC_CNT]; /* Ethernet Tx DMA Descriptors */
+__attribute__((section(".RAM_D2"), aligned(32)))ETH_DMADescTypeDef DMARxDscrTab[ETH_RX_DESC_CNT];
+__attribute__((section(".RAM_D2"), aligned(32)))ETH_DMADescTypeDef DMATxDscrTab[ETH_TX_DESC_CNT];
 
 #elif defined ( __GNUC__ ) /* GNU Compiler */
 
@@ -92,7 +92,7 @@ LWIP_MEMPOOL_DECLARE(RX_POOL, ETH_RX_BUFFER_CNT, sizeof(RxBuff_t), "Zero-copy RX
 extern u8_t memp_memory_RX_POOL_base[];
 
 #elif defined ( __CC_ARM )  /* MDK ARM Compiler */
-__attribute__((section(".RAM_D2"))) extern u8_t memp_memory_RX_POOL_base[];
+__attribute__((section(".RAM_D2"), aligned(32)))extern u8_t memp_memory_RX_POOL_base[];
 
 #elif defined ( __GNUC__ ) /* GNU Compiler */
 __attribute__((section(".Rx_PoolSection"))) extern u8_t memp_memory_RX_POOL_base[];
@@ -134,6 +134,12 @@ static void low_level_init(struct netif *netif)
   uint8_t macaddress[6]= {ETH_MAC_ADDR0, ETH_MAC_ADDR1, ETH_MAC_ADDR2, ETH_MAC_ADDR3, ETH_MAC_ADDR4, ETH_MAC_ADDR5};
   
   memset(&EthHandle,0,sizeof(ETH_HandleTypeDef));
+	memset(DMARxDscrTab,0,sizeof(DMARxDscrTab));
+	memset(DMATxDscrTab,0,sizeof(DMATxDscrTab));
+	memset(memp_memory_RX_POOL_base,0,sizeof(memp_memory_RX_POOL_base));
+	
+	ETH_PHY_BORAD_Init(ETH_PHY_DP83848);
+	
   EthHandle.Instance = ETH;
   EthHandle.Init.MACAddr = macaddress;
   EthHandle.Init.MediaInterface = HAL_ETH_RMII_MODE;
@@ -162,7 +168,6 @@ static void low_level_init(struct netif *netif)
   /* don't set NETIF_FLAG_ETHARP if this device is not an ethernet one */
   netif->flags |= NETIF_FLAG_BROADCAST | NETIF_FLAG_ETHARP;
 
-
   /* Initialize the RX POOL */
   LWIP_MEMPOOL_INIT(RX_POOL);
 
@@ -174,7 +179,6 @@ static void low_level_init(struct netif *netif)
 
   RxPktSemaphore = xSemaphoreCreateBinary();
   TxPktSemaphore = xSemaphoreCreateBinary();
-
 
   /* create the task that handles the ETH_MAC */
   xTaskCreate(ethernetif_input,           /* 任务入口函数 */
@@ -189,17 +193,18 @@ static void low_level_init(struct netif *netif)
   {
     netif_set_link_down(netif);
     netif_set_down(netif);
-		printf("phy init error\r\n");
+		printf("low_level phy init error\r\n");
     return;
   }
 	
 	if(ETH_PHY_StartAutoNego(ETH_PHY_DP83848) != ETH_PHY_STATUS_OK)//自动协商超时失败必须手动设定寄存器
 	{
 		ETH_PHY_SetLinkState(ETH_PHY_DP83848,ETH_PHY_STATUS_100MBITS_FULLDUPLEX);
-		printf("auto nego error\r\n");
+		printf("low_level auto nego error\r\n");
 	}
 
   PHYLinkState = ETH_PHY_GetLinkState(ETH_PHY_DP83848);
+	printf("low_level phy link state %d\r\n",PHYLinkState);
 
   /* Get link state */
   if(PHYLinkState <= ETH_PHY_STATUS_LINK_DOWN)
@@ -300,7 +305,6 @@ static err_t low_level_output(struct netif *netif, struct pbuf *p)
     }
     else
     {
-
       if(HAL_ETH_GetError(&EthHandle) & HAL_ETH_ERROR_BUSY)
       {
         /* 等待发送完成信号量，单位是 tick */
@@ -443,9 +447,7 @@ void pbuf_free_custom(struct pbuf *p)
 void HAL_ETH_RxCpltCallback(ETH_HandleTypeDef *heth)
 {
     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-    /* 必须在中断里使用 FromISR 版本 */
     xSemaphoreGiveFromISR(RxPktSemaphore, &xHigherPriorityTaskWoken);
-    /* 触发任务切换 (必须) */
     portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
 

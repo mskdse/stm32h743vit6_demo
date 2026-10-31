@@ -2,6 +2,7 @@
 
 static struct netif gnetif; /* network interface structure */
 
+/* 初始化LWIP的协议栈完成所有线程的初始化工作，创建好可选的热插拔任务和DHCP任务 */
 void LWIP_2_2_1_INIT(void)
 {
   tcpip_init(NULL, NULL);
@@ -14,28 +15,10 @@ void LWIP_2_2_1_INIT(void)
   ip_addr_set_zero_ip4(&ipaddr);
   ip_addr_set_zero_ip4(&netmask);
   ip_addr_set_zero_ip4(&gw);
-  
-  taskENTER_CRITICAL();
-  printf("======================================\r\n");
-  printf("\r\n[INIT] USE DHCP\r\n");
-  printf("======================================\r\n");
-  taskEXIT_CRITICAL();
 #else
   IP_ADDR4(&ipaddr,IP_ADDR0,IP_ADDR1,IP_ADDR2,IP_ADDR3);
   IP_ADDR4(&netmask,NETMASK_ADDR0,NETMASK_ADDR1,NETMASK_ADDR2,NETMASK_ADDR3);
   IP_ADDR4(&gw,GW_ADDR0,GW_ADDR1,GW_ADDR2,GW_ADDR3);
-
-//  taskENTER_CRITICAL();
-//  printf("======================================\r\n");
-//  printf("\r\n[INIT] USE STARTIC IP\r\n");
-//  printf("  IP Address : %s\r\n", ipaddr_ntoa(&netif->ip_addr));
-//  printf("  Subnet Mask: %s\r\n", ipaddr_ntoa(&netif->netmask));
-//  printf("  Gateway    : %s\r\n", ipaddr_ntoa(&netif->gw));
-//  printf("  MAC Address: %02X:%02X:%02X:%02X:%02X:%02X\r\n",
-//          netif->hwaddr[0], netif->hwaddr[1], netif->hwaddr[2],
-//          netif->hwaddr[3], netif->hwaddr[4], netif->hwaddr[5]);
-//  printf("======================================\r\n");
-//  taskEXIT_CRITICAL();
 #endif /* LWIP_DHCP */
 
   /* add the network interface */
@@ -45,6 +28,28 @@ void LWIP_2_2_1_INIT(void)
   netif_set_default(&gnetif);
 
   ethernet_link_status_updated(&gnetif);
+	
+	
+#if LWIP_DHCP
+    taskENTER_CRITICAL();
+    printf("===============\r\n");
+    printf("[INIT] USE DHCP\r\n");
+    printf("===============\r\n");
+    taskEXIT_CRITICAL();
+#else
+    taskENTER_CRITICAL(); 
+	  printf("========================\r\n");
+	  printf("\r\n[INIT] USE STATIC IP\r\n");
+	  printf("  IP Address : %s\r\n", ipaddr_ntoa(&gnetif.ip_addr)); 
+	  printf("  Subnet Mask: %s\r\n", ipaddr_ntoa(&gnetif.netmask));
+	  printf("  Gateway    : %s\r\n", ipaddr_ntoa(&gnetif.gw)); 
+	  printf("  MAC Address: %02X:%02X:%02X:%02X:%02X:%02X\r\n",
+				      gnetif.hwaddr[0], gnetif.hwaddr[1], gnetif.hwaddr[2],
+				      gnetif.hwaddr[3], gnetif.hwaddr[4], gnetif.hwaddr[5]);
+	  printf("========================\r\n");
+	  taskEXIT_CRITICAL();	
+#endif
+
 
 #if LWIP_NETIF_LINK_CALLBACK
   netif_set_link_callback(&gnetif, ethernet_link_status_updated);
@@ -65,6 +70,20 @@ void LWIP_2_2_1_INIT(void)
               configMINIMAL_STACK_SIZE * 2,   /* 栈大小 (单位：Word) */
               (void *)&gnetif,                /* 传递给任务的参数：网卡结构体指针 */
               tskIDLE_PRIORITY + 2,           /* 任务优先级 (对应 osPriorityBelowNormal) */
-              NULL);                          /* 任务句柄 */
-#endif
+              NULL);                          /* 任务句柄 */			
+#endif				
+}
+
+/* 利用iperf工具测试以太网网速 */
+void LWIP_2_2_1_PERFORM_TEST(void)
+{
+	while(1)
+	{
+			if(dhcp_supplied_address(&gnetif))
+			{
+				lwiperf_start_tcp_server_default(NULL, NULL); 
+				return;
+			}
+			else vTaskDelay(pdMS_TO_TICKS(500));
+	}
 }

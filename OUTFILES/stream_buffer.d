@@ -1,8 +1,8 @@
 .\outfiles\stream_buffer.o: FreeRTOS\Source\stream_buffer.c
-.\outfiles\stream_buffer.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
-.\outfiles\stream_buffer.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h
+.\outfiles\stream_buffer.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\outfiles\stream_buffer.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\outfiles\stream_buffer.o: .\FreeRTOS\Source\include\FreeRTOS.h
-.\outfiles\stream_buffer.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\stream_buffer.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\outfiles\stream_buffer.o: .\FreeRTOS\Source\include\FreeRTOSConfig.h
 .\outfiles\stream_buffer.o: .\FreeRTOS\Source\include\projdefs.h
 .\outfiles\stream_buffer.o: .\FreeRTOS\Source\include\portable.h
