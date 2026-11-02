@@ -153,13 +153,6 @@
         </SetRegEntry>
       </TargetDriverDllRegistry>
       <Breakpoint/>
-      <WatchWindow1>
-        <Ww>
-          <count>0</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>RTOS_START_SCH_FLAG</ItemText>
-        </Ww>
-      </WatchWindow1>
       <ScvdPack>
         <Filename>C:\Users\EVC2-5\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.6.3\EventRecorder.scvd</Filename>
         <Type>Keil::ARM_Compiler@1.6.3</Type>
@@ -5987,7 +5980,7 @@
 
   <Group>
     <GroupName>LWIP_PORT</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -6219,7 +6212,7 @@
 
   <Group>
     <GroupName>LWIP_APP</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

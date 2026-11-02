@@ -26,8 +26,9 @@ static void sdio_sd_card_clk(SDCARD_EVENT enm)
 /* 完成所有任务的初始化工作 */
 static void FREERTOS_MAIN_TASK(void * pvParameters)
 {
+	#if USE_LWIP_2_2_1_RUN
 	LWIP_2_2_1_INIT();//初始化LWIP协议栈
-	LWIP_2_2_1_PERFORM_TEST();//启用网速测试
+	#endif
 	
 	usart1_my_printf("APP_TASK_RUN......\r\n");
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");

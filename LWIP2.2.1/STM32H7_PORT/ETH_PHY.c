@@ -23,6 +23,19 @@ static ETH_PHY_DRIVER_TYPE ETH_PHY_DRIVER[ETH_PHY_COUNT]=
 		.phy_pscsr_reg_duplex_mask=(0x01<<4)//指示半/全双工的位
 	},
 	{
+		.phy=ETH_PHY_LAN8742,
+		
+		.phy_addr_reg=0x12,
+		
+		.phy_bsr_reg=0x01,
+		.phy_bcr_reg=0x00,
+		
+		.phy_pscsr_reg=0x1F,
+		.phy_pscsr_reg_auto_neg_complte_mask=(0x01<<12),
+		.phy_pscsr_reg_speed_mask=(0x01<<2),
+		.phy_pscsr_reg_duplex_mask=(0x01<<4)
+	},
+	{
 		.phy=ETH_PHY_DP83848,
 		
 		.phy_addr_reg=0x19,
@@ -158,6 +171,53 @@ void ETH_PHY_BORAD_Init(ETH_PHY_TYPE PHY)
 	}
 	else if(ETH_PHY_LAN8720A==PHY)
 	{
+		GPIO_InitTypeDef GPIO_InitStructure = {0};
+	  /* Ethernett MSP init: RMII Mode
+
+				RX_CLK  --------------> PA1
+				TXD0    --------------> PB12
+				TXD1    --------------> PB13
+				RXD0    --------------> PC4
+				RXD1    --------------> PC5
+				TX_EN   --------------> PB11
+				RX_DV   --------------> PA7
+
+				MDC     --------------> PC1
+				MDIO    --------------> PA2
+		     
+		    我用的LAN8720A是用的模块，所以说没有复位引脚
+	  */
+
+	  /* Enable GPIOs clocks */
+	  __HAL_RCC_GPIOA_CLK_ENABLE();
+		__HAL_RCC_GPIOB_CLK_ENABLE();
+	  __HAL_RCC_GPIOC_CLK_ENABLE();
+	  __HAL_RCC_GPIOG_CLK_ENABLE();
+
+	  /* Configure PA1, PA2 , PA7 */
+	  GPIO_InitStructure.Pin =  GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_7;
+	  GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+	  GPIO_InitStructure.Mode = GPIO_MODE_AF_PP;
+	  GPIO_InitStructure.Pull = GPIO_NOPULL ;
+	  GPIO_InitStructure.Alternate = GPIO_AF11_ETH;
+	  HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+	  /* Configure PB11, PG12 and PG13 */
+	  GPIO_InitStructure.Pin = GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13;
+	  HAL_GPIO_Init(GPIOB, &GPIO_InitStructure);
+
+	  /* Configure PC1, PC4 and PC5 */
+	  GPIO_InitStructure.Pin = GPIO_PIN_1 | GPIO_PIN_4 | GPIO_PIN_5;
+	  HAL_GPIO_Init(GPIOC, &GPIO_InitStructure);
+
+	  /* Enable the Ethernet global Interrupt */
+	  HAL_NVIC_SetPriority(ETH_IRQn, 0x5, 0);
+	  HAL_NVIC_EnableIRQ(ETH_IRQn);
+
+	  /* Enable Ethernet clocks */
+	  __HAL_RCC_ETH1MAC_CLK_ENABLE();
+	  __HAL_RCC_ETH1TX_CLK_ENABLE();
+	  __HAL_RCC_ETH1RX_CLK_ENABLE();
 	}
 }
 
@@ -189,7 +249,19 @@ int32_t ETH_PHY_Init(ETH_PHY_TYPE PHY)
 	 }
 	 
 	 if(ETH_PHY_DRIVER[PHY].phy_addr==ETH_PHY_MAX_DEV_ADDR) status = ETH_PHY_STATUS_ERROR;//没有找到PHY芯片的物理地址，那么返回错误
-
+	 
+	 /* 对于没有复位引脚的PHY必须进行软件复位 */
+	 if(ETH_PHY_IO_WriteReg(ETH_PHY_DRIVER[PHY].phy_addr,ETH_PHY_DRIVER[PHY].phy_bcr_reg,(0x01<<15)) < 0) return ETH_PHY_STATUS_WRITE_ERROR;
+	 for(int count=0;count<1000;count++)
+	 {
+		if(ETH_PHY_IO_ReadReg(ETH_PHY_DRIVER[PHY].phy_addr,ETH_PHY_DRIVER[PHY].phy_bcr_reg,&regvalue) >= 0)
+		{
+				if(!(regvalue&(0x01<<15))) return ETH_PHY_STATUS_OK;
+		}
+		else                           status=ETH_PHY_STATUS_READ_ERROR;
+		vTaskDelay(1);
+	 }
+	 
    return status;
 }
 

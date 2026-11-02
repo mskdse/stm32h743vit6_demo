@@ -74,7 +74,8 @@ void LWIP_2_2_1_INIT(void)
 #endif				
 }
 
-/* 利用iperf工具测试以太网网速 */
+/* 利用iperf工具测试以太网网速,该函数暂时写死了，需要等待DHCP成功才能用 */
+#if LWIP_DHCP
 void LWIP_2_2_1_PERFORM_TEST(void)
 {
 	while(1)
@@ -87,3 +88,4 @@ void LWIP_2_2_1_PERFORM_TEST(void)
 			else vTaskDelay(pdMS_TO_TICKS(500));
 	}
 }
+#endif

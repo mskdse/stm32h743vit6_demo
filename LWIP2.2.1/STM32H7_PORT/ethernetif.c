@@ -14,6 +14,9 @@
 #include "semphr.h"
 #include <string.h>
 
+/* 当前接口层文件使用的PHY型号 */
+#define ETHIF_USE_PHY       ETH_PHY_DP83848
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Time to block waiting for transmissions to finish */
@@ -138,7 +141,7 @@ static void low_level_init(struct netif *netif)
 	memset(DMATxDscrTab,0,sizeof(DMATxDscrTab));
 	memset(memp_memory_RX_POOL_base,0,sizeof(memp_memory_RX_POOL_base));
 	
-	ETH_PHY_BORAD_Init(ETH_PHY_DP83848);
+	ETH_PHY_BORAD_Init(ETHIF_USE_PHY);
 	
   EthHandle.Instance = ETH;
   EthHandle.Init.MACAddr = macaddress;
@@ -188,8 +191,8 @@ static void low_level_init(struct netif *netif)
               configMAX_PRIORITIES - 1,   /* 任务优先级 (osPriorityRealtime 对应最高优先级) */
               &EthIfThread);              /* 任务句柄 */
 
-  /* Initialize the LAN8742 ETH PHY */
-  if(ETH_PHY_Init(ETH_PHY_DP83848) != ETH_PHY_STATUS_OK)//初始化PHY介质
+  /* Initialize ETH PHY */
+  if(ETH_PHY_Init(ETHIF_USE_PHY) != ETH_PHY_STATUS_OK)//初始化PHY介质
   {
     netif_set_link_down(netif);
     netif_set_down(netif);
@@ -197,13 +200,13 @@ static void low_level_init(struct netif *netif)
     return;
   }
 	
-	if(ETH_PHY_StartAutoNego(ETH_PHY_DP83848) != ETH_PHY_STATUS_OK)//自动协商超时失败必须手动设定寄存器
+	if(ETH_PHY_StartAutoNego(ETHIF_USE_PHY) != ETH_PHY_STATUS_OK)//自动协商超时失败必须手动设定寄存器
 	{
-		ETH_PHY_SetLinkState(ETH_PHY_DP83848,ETH_PHY_STATUS_100MBITS_FULLDUPLEX);
+		ETH_PHY_SetLinkState(ETHIF_USE_PHY,ETH_PHY_STATUS_100MBITS_FULLDUPLEX);
 		printf("low_level auto nego error\r\n");
 	}
 
-  PHYLinkState = ETH_PHY_GetLinkState(ETH_PHY_DP83848);
+  PHYLinkState = ETH_PHY_GetLinkState(ETHIF_USE_PHY);
 	printf("low_level phy link state %d\r\n",PHYLinkState);
 
   /* Get link state */
@@ -499,7 +502,7 @@ void ethernet_link_thread( void * argument )
 
   for(;;)
   {
-    PHYLinkState = ETH_PHY_GetLinkState(ETH_PHY_DP83848);
+    PHYLinkState = ETH_PHY_GetLinkState(ETHIF_USE_PHY);
 
     if(netif_is_link_up(netif) && (PHYLinkState <= ETH_PHY_STATUS_LINK_DOWN))
     {
@@ -548,7 +551,7 @@ void ethernet_link_thread( void * argument )
       }
     }
 
-    vTaskDelay(200);
+    vTaskDelay(300);
   }
 }
 
