@@ -18,7 +18,6 @@ static void sdio_sd_card_clk(SDCARD_EVENT enm)
 	{
 		memset(&fs,0,sizeof(FATFS));
 		f_mount(&fs,"1:",1);
-		TJpeg_Dec_Test("1:SYSTEM/APP/AUDIO/a_240164.jpg");
 		f_mount(&fs,"1:",0);
 	}
 }

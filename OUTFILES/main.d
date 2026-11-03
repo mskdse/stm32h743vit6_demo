@@ -359,3 +359,5 @@
 .\outfiles\main.o: .\LWIP2.2.1\src\include\lwip/prot/etharp.h
 .\outfiles\main.o: .\LWIP2.2.1\src\include\lwip/prot/acd.h
 .\outfiles\main.o: .\LWIP2.2.1\STM32H7_PORT_APP\lwiperf.h
+.\outfiles\main.o: .\AVILIB\avilib_app.h
+.\outfiles\main.o: .\AVILIB\avilib.h

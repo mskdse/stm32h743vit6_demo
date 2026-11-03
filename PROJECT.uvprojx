@@ -3749,6 +3749,16 @@
               <FileType>5</FileType>
               <FilePath>.\AVILIB\avilib.h</FilePath>
             </File>
+            <File>
+              <FileName>avilib_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\AVILIB\avilib_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>avilib_app.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\AVILIB\avilib_app.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

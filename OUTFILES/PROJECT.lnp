@@ -163,6 +163,7 @@
 ".\outfiles\tjpgd_1.o"
 ".\outfiles\tjpeg_test.o"
 ".\outfiles\avilib.o"
+".\outfiles\avilib_app.o"
 ".\outfiles\port_1.o"
 ".\outfiles\heap_4.o"
 ".\outfiles\croutine.o"

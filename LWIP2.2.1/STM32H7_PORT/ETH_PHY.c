@@ -156,9 +156,8 @@ void ETH_PHY_BORAD_Init(ETH_PHY_TYPE PHY)
 	  HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
 
 	  HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_RESET);
-	  vTaskDelay(100);
+	  vTaskDelay(50);
 	  HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_SET);
-	  vTaskDelay(100);
 
 	  /* Enable the Ethernet global Interrupt */
 	  HAL_NVIC_SetPriority(ETH_IRQn, 0x5, 0);

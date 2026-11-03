@@ -52,5 +52,6 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "LWIP_APP.h"
+#include "avilib_app.h"
 
 #endif
