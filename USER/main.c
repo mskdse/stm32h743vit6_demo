@@ -11,31 +11,33 @@ __attribute__((section(".RamVecTable")))static uint8_t RAM_VCTOR_TABLE[0x400];
 /* 用来标记FreeRTOS是否应该运行开启调度，这个变量千万不要放在其他地方，一定确保初始值为false */
 static volatile bool RTOS_START_SCH_FLAG=false;
 
-//__attribute__((section(".RAM_D1"), aligned(4)))static FATFS fs;
-//static void sdio_sd_card_clk(SDCARD_EVENT enm)
-//{
-//	if(enm==INSERT)
-//	{
-//		memset(&fs,0,sizeof(FATFS));
-//		f_mount(&fs,"1:",1);
-//		f_mount(&fs,"1:",0);
-//	}
-//}
+__attribute__((section(".RAM_D1"), aligned(4)))static FATFS fs;
+static void sdio_sd_card_clk(SDCARD_EVENT enm)
+{
+	if(enm==INSERT)
+	{
+		memset(&fs,0,sizeof(FATFS));
+		f_mount(&fs,"1:",1);
+		f_mount(&fs,"1:",0);
+	}
+}
 
 /* 完成所有任务的初始化工作 */
 static void FREERTOS_MAIN_TASK(void * pvParameters)
 {
-struct netif EnterNetIf;
-	
 /* 初始化LWIP协议栈 */
 #if USE_LWIP_2_2_1_RUN
+	
+    struct netif EnterNetIf;
+	
     LWIP_2_2_1_INIT(&EnterNetIf);
-#endif
 	
 /* 是否运行EtherNet/IP协议栈，该协议栈为应用层协议，必须要有LWIP这种TCP/IP协议栈做为底层支持 */
-#if (USE_ETHERNET_IP_RUN && USE_LWIP_2_2_1_RUN)
-    opener_init(&EnterNetIf);//初始化EtherNet/IP协议栈 		
-#endif		
+#if (USE_ETHERNET_IP_RUN
+	opener_init(&EnterNetIf);//初始化EtherNet/IP协议栈 
+#endif
+	
+#endif	
 	
 	usart1_my_printf("APP_TASK_RUN......\r\n");
 	SEGGER_RTT_printf(0,"APP_TASK_RUN......\r\n");
@@ -76,12 +78,12 @@ struct netif EnterNetIf;
 			#endif
 		}
 	
-//		static uint32_t sd_last_scan = 0;
-//		if (HAL_GetTick() - sd_last_scan >= 200)
-//		{
-//		  sd_last_scan = HAL_GetTick();
-//      sdio_sd_card_prc_200ms();
-//	  }
+		static uint32_t sd_last_scan = 0;
+		if (HAL_GetTick() - sd_last_scan >= 200)
+		{
+		  sd_last_scan = HAL_GetTick();
+      sdio_sd_card_prc_200ms();
+	  }
 	}
 }
 
@@ -119,7 +121,7 @@ int main(void)
 //  ltdc_lcd_init();//LTDC的LCD初始化
 //  ltdc_lcd_bl_set(2000,100);//打开背光显示,屏幕2KHZ,占空比100%
   
-  //sdio_sd_card_register_clk(sdio_sd_card_clk);
+  sdio_sd_card_register_clk(sdio_sd_card_clk);
 	
 #if USE_BORAD_RUN
 	drvp_led_init();//初始化led

@@ -14,11 +14,11 @@
 #define USE_CAN_OPEN_RUN             0
 
 /* 是否运行LWIP协议栈 */
-#define USE_LWIP_2_2_1_RUN           1
+#define USE_LWIP_2_2_1_RUN           0
 
 /* 是否运行EtherNet协议栈 */
 #if USE_LWIP_2_2_1_RUN
-#define USE_ETHERNET_IP_RUN          1
+#define USE_ETHERNET_IP_RUN          0
 #endif
 
 #include "stm32h7xx.h"
