@@ -45,17 +45,4 @@
 .\outfiles\lwip_app.o: .\FreeRTOS\Source\include\task.h
 .\outfiles\lwip_app.o: .\FreeRTOS\Source\include\list.h
 .\outfiles\lwip_app.o: .\LWIP2.2.1\src\include\lwip/dhcp.h
-.\outfiles\lwip_app.o: .\LWIP2.2.1\src\include\lwip/udp.h
-.\outfiles\lwip_app.o: .\LWIP2.2.1\src\include\lwip/ip.h
-.\outfiles\lwip_app.o: .\LWIP2.2.1\src\include\lwip/ip4.h
-.\outfiles\lwip_app.o: .\LWIP2.2.1\src\include\lwip/prot/ip4.h
-.\outfiles\lwip_app.o: .\LWIP2.2.1\src\include\lwip/ip6.h
-.\outfiles\lwip_app.o: .\LWIP2.2.1\src\include\lwip/prot/ip.h
-.\outfiles\lwip_app.o: .\LWIP2.2.1\src\include\lwip/prot/udp.h
-.\outfiles\lwip_app.o: .\LWIP2.2.1\src\include\lwip/acd.h
-.\outfiles\lwip_app.o: .\LWIP2.2.1\src\include\lwip/etharp.h
-.\outfiles\lwip_app.o: .\LWIP2.2.1\src\include\lwip/prot/ethernet.h
-.\outfiles\lwip_app.o: .\LWIP2.2.1\src\include\lwip/prot/ieee.h
-.\outfiles\lwip_app.o: .\LWIP2.2.1\src\include\lwip/prot/etharp.h
-.\outfiles\lwip_app.o: .\LWIP2.2.1\src\include\lwip/prot/acd.h
 .\outfiles\lwip_app.o: .\LWIP2.2.1\STM32H7_PORT_APP\lwiperf.h

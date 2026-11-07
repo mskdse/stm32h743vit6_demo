@@ -55,10 +55,3 @@
 .\outfiles\sockets.o: .\LWIP2.2.1\src\include\lwip/tcpip.h
 .\outfiles\sockets.o: .\LWIP2.2.1\src\include\lwip/timeouts.h
 .\outfiles\sockets.o: .\LWIP2.2.1\src\include\lwip/mld6.h
-.\outfiles\sockets.o: LWIP2.2.1\src\api\api_msg.c
-.\outfiles\sockets.o: .\LWIP2.2.1\src\include\lwip/priv/api_msg.h
-.\outfiles\sockets.o: .\LWIP2.2.1\src\include\lwip/dns.h
-.\outfiles\sockets.o: LWIP2.2.1\src\api\api_lib.c
-.\outfiles\sockets.o: .\LWIP2.2.1\src\include\lwip/priv/tcp_priv.h
-.\outfiles\sockets.o: .\LWIP2.2.1\src\include\lwip/prot/tcp.h
-.\outfiles\sockets.o: LWIP2.2.1\src\api\netbuf.c

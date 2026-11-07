@@ -43,10 +43,4 @@
 .\outfiles\udp.o: .\LWIP2.2.1\src\include\lwip/prot/icmp6.h
 .\outfiles\udp.o: .\LWIP2.2.1\src\include\lwip/snmp.h
 .\outfiles\udp.o: .\LWIP2.2.1\src\include\lwip/dhcp.h
-.\outfiles\udp.o: .\LWIP2.2.1\src\include\lwip/acd.h
-.\outfiles\udp.o: .\LWIP2.2.1\src\include\lwip/etharp.h
-.\outfiles\udp.o: .\LWIP2.2.1\src\include\lwip/prot/ethernet.h
-.\outfiles\udp.o: .\LWIP2.2.1\src\include\lwip/prot/ieee.h
-.\outfiles\udp.o: .\LWIP2.2.1\src\include\lwip/prot/etharp.h
-.\outfiles\udp.o: .\LWIP2.2.1\src\include\lwip/prot/acd.h
 .\outfiles\udp.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

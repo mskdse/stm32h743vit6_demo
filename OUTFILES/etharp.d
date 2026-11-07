@@ -37,14 +37,8 @@
 .\outfiles\etharp.o: .\LWIP2.2.1\src\include\lwip/prot/etharp.h
 .\outfiles\etharp.o: .\LWIP2.2.1\src\include\lwip/snmp.h
 .\outfiles\etharp.o: .\LWIP2.2.1\src\include\lwip/dhcp.h
-.\outfiles\etharp.o: .\LWIP2.2.1\src\include\lwip/udp.h
-.\outfiles\etharp.o: .\LWIP2.2.1\src\include\lwip/ip.h
-.\outfiles\etharp.o: .\LWIP2.2.1\src\include\lwip/ip6.h
-.\outfiles\etharp.o: .\LWIP2.2.1\src\include\lwip/prot/ip.h
-.\outfiles\etharp.o: .\LWIP2.2.1\src\include\lwip/prot/udp.h
-.\outfiles\etharp.o: .\LWIP2.2.1\src\include\lwip/acd.h
-.\outfiles\etharp.o: .\LWIP2.2.1\src\include\lwip/prot/acd.h
 .\outfiles\etharp.o: .\LWIP2.2.1\src\include\lwip/autoip.h
+.\outfiles\etharp.o: .\LWIP2.2.1\src\include\lwip/acd.h
 .\outfiles\etharp.o: .\LWIP2.2.1\src\include\lwip/prot/iana.h
 .\outfiles\etharp.o: .\LWIP2.2.1\src\include\netif/ethernet.h
 .\outfiles\etharp.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

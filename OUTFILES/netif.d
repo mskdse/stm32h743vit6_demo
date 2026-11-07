@@ -53,6 +53,3 @@
 .\outfiles\netif.o: .\LWIP2.2.1\src\include\lwip/sys.h
 .\outfiles\netif.o: .\LWIP2.2.1\STM32H7_PORT\arch/sys_arch.h
 .\outfiles\netif.o: .\LWIP2.2.1\src\include\netif/ethernet.h
-.\outfiles\netif.o: .\LWIP2.2.1\src\include\lwip/dhcp.h
-.\outfiles\netif.o: .\LWIP2.2.1\src\include\lwip/acd.h
-.\outfiles\netif.o: .\LWIP2.2.1\src\include\lwip/prot/acd.h

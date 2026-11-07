@@ -1,0 +1,9 @@
+.\outfiles\socket_timer.o: EtherNet_IP\source\src\ports\socket_timer.c
+.\outfiles\socket_timer.o: EtherNet_IP\source\src\ports\socket_timer.h
+.\outfiles\socket_timer.o: .\EtherNet_IP\source\src\typedefs.h
+.\outfiles\socket_timer.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\inttypes.h
+.\outfiles\socket_timer.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\outfiles\socket_timer.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\outfiles\socket_timer.o: C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\outfiles\socket_timer.o: .\EtherNet_IP\source\src\ports\STM32\platform_network_includes.h
+.\outfiles\socket_timer.o: .\EtherNet_IP\source\src\trace.h

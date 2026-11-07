@@ -39,13 +39,6 @@
 .\outfiles\netifapi.o: .\LWIP2.2.1\src\include\lwip/sys.h
 .\outfiles\netifapi.o: .\LWIP2.2.1\STM32H7_PORT\arch/sys_arch.h
 .\outfiles\netifapi.o: .\LWIP2.2.1\src\include\lwip/dhcp.h
-.\outfiles\netifapi.o: .\LWIP2.2.1\src\include\lwip/udp.h
-.\outfiles\netifapi.o: .\LWIP2.2.1\src\include\lwip/ip.h
-.\outfiles\netifapi.o: .\LWIP2.2.1\src\include\lwip/ip6.h
-.\outfiles\netifapi.o: .\LWIP2.2.1\src\include\lwip/prot/ip.h
-.\outfiles\netifapi.o: .\LWIP2.2.1\src\include\lwip/prot/udp.h
-.\outfiles\netifapi.o: .\LWIP2.2.1\src\include\lwip/acd.h
-.\outfiles\netifapi.o: .\LWIP2.2.1\src\include\lwip/prot/acd.h
 .\outfiles\netifapi.o: .\LWIP2.2.1\src\include\lwip/autoip.h
 .\outfiles\netifapi.o: .\LWIP2.2.1\src\include\lwip/priv/tcpip_priv.h
 .\outfiles\netifapi.o: .\LWIP2.2.1\src\include\lwip/tcpip.h

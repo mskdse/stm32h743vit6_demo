@@ -61,6 +61,8 @@
 #define ETH_MAC_ADDR4    (0x22UL)
 #define ETH_MAC_ADDR5    (0x33UL)
 
+#define LWIP_PROVIDE_ERRNO    1
+
 /**
  * NO_SYS==1: Provides VERY minimal functionality. Otherwise,
  * use lwIP facilities.
@@ -88,7 +90,7 @@ a lot of data that needs to be copied, this should be set high. */
 
 /* MEMP_NUM_TCP_PCB: the number of simultaneously active TCP
    connections. */
-#define MEMP_NUM_TCP_PCB        10
+#define MEMP_NUM_TCP_PCB        16
 
 /* MEMP_NUM_TCP_SEG: the number of simultaneously queued TCP
    segments. */
@@ -111,6 +113,8 @@ a lot of data that needs to be copied, this should be set high. */
 /* ---------- TCP options ---------- */
 #define LWIP_TCP                1
 #define TCP_TTL                 255
+#define SO_REUSE                1
+#define TCP_LISTEN_BACKLOG      1
 
 /* Controls if TCP should queue segments that arrive out of
    order. Define to 0 if your device is low on memory. */
@@ -130,13 +134,14 @@ a lot of data that needs to be copied, this should be set high. */
 
 /* ---------- IGMP options ---------- */
 #define LWIP_IGMP                      1
+#define LWIP_MULTICAST_TX_OPTIONS      1
 
 /* ---------- DNS options ---------- */
 #define LWIP_DNS                       1
 
 
 /* ---------- DHCP options ---------- */
-#define LWIP_DHCP                      1
+#define LWIP_DHCP                      0
 
 
 /* ---------- UDP options ---------- */
@@ -152,6 +157,7 @@ a lot of data that needs to be copied, this should be set high. */
  * whenever the link changes (i.e., link down)
  */
 #define LWIP_NETIF_LINK_CALLBACK        1
+#define LWIP_NETIF_STATUS_CALLBACK      1
 
 /*
    --------------------------------------
@@ -214,7 +220,7 @@ The STM32H7xx allows computing and verifying the IP, UDP, TCP and ICMP checksums
 /**
  * LWIP_NETCONN==1: Enable Netconn API (require to use api_lib.c)
  */
-#define LWIP_NETCONN                    0
+#define LWIP_NETCONN                    1
 
 /*
    ------------------------------------
@@ -225,6 +231,11 @@ The STM32H7xx allows computing and verifying the IP, UDP, TCP and ICMP checksums
  * LWIP_SOCKET==1: Enable Socket API (require to use sockets.c)
  */
 #define LWIP_SOCKET                     1
+#define LWIP_SOCKET_SELECT              1
+#define LWIP_COMPAT_SOCKETS             1
+
+#define MEMP_NUM_NETCONN                16
+#define MEMP_NUM_UDP_PCB                8
 
 /*
    ------------------------------------

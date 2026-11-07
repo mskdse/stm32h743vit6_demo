@@ -51,10 +51,7 @@
 .\outfiles\timeouts.o: .\LWIP2.2.1\src\include\lwip/prot/ieee.h
 .\outfiles\timeouts.o: .\LWIP2.2.1\src\include\lwip/prot/etharp.h
 .\outfiles\timeouts.o: .\LWIP2.2.1\src\include\lwip/dhcp.h
-.\outfiles\timeouts.o: .\LWIP2.2.1\src\include\lwip/udp.h
-.\outfiles\timeouts.o: .\LWIP2.2.1\src\include\lwip/prot/udp.h
 .\outfiles\timeouts.o: .\LWIP2.2.1\src\include\lwip/acd.h
-.\outfiles\timeouts.o: .\LWIP2.2.1\src\include\lwip/prot/acd.h
 .\outfiles\timeouts.o: .\LWIP2.2.1\src\include\lwip/igmp.h
 .\outfiles\timeouts.o: .\LWIP2.2.1\src\include\lwip/dns.h
 .\outfiles\timeouts.o: .\LWIP2.2.1\src\include\lwip/nd6.h

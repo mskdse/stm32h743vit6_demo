@@ -22,20 +22,26 @@ Dialog DLL:      TCM.DLL V1.56.6.0
  
 <h2>Project:</h2>
 C:\Users\EVC2-5\Desktop\stm32h743vit6_demo\PROJECT.uvprojx
-Project File Date:  11/02/2026
+Project File Date:  11/07/2026
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Users\EVC2-5\AppData\Local\Keil_v5\ARM\ARMCC\Bin'
 Build target 'PROJECT'
 Note: source file '.\TJpegDec\src\tjpgd.c' - object file renamed from '.\OUTFILES\tjpgd.o' to '.\OUTFILES\tjpgd_1.o'.
 Note: source file '.\FreeRTOS\Source\portable\RVDS\ARM_CM7\r0p1\port.c' - object file renamed from '.\OUTFILES\port.o' to '.\OUTFILES\port_1.o'.
+compiling LWIP_APP.c...
+compiling sampleapplication.c...
+.\LWIP2.2.1\src\include\lwip/apps/httpd_opts.h(325): warning:  #2532-D: support for trigraphs is disabled
+   * (who uses this at all??) */
+EtherNet_IP\source\src\ports\STM32\sample_application\sampleapplication.c: 1 warning, 0 errors
 compiling main.c...
+compiling app_ethernet.c...
 linking...
 .\OUTFILES\PROJECT.sct(110): warning: L6314W: No section matches pattern *(.spi_flash_ro).
-Program Size: Code=43828 RO-data=1520 RW-data=52660 ZI-data=37112  
+Program Size: Code=126080 RO-data=2592 RW-data=61172 ZI-data=102136  
 Finished: 0 information, 1 warning and 0 error messages.
 FromELF: creating hex file...
-".\OUTFILES\PROJECT.axf" - 0 Error(s), 1 Warning(s).
+".\OUTFILES\PROJECT.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -66,7 +72,7 @@ Package Vendor: Keil
 
    * Component: Keil::Compiler&ARM Compiler:I/O:STDOUT&Breakpoint@1.2.0
       Source file:   Source/retarget_io.c
-Build Time Elapsed:  00:00:40
+Build Time Elapsed:  00:00:41
 </pre>
 </body>
 </html>

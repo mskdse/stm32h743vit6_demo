@@ -345,20 +345,8 @@
 .\outfiles\app_ethernet.o: .\LWIP2.2.1\STM32H7_PORT\arch/sys_arch.h
 .\outfiles\app_ethernet.o: .\LWIP2.2.1\STM32H7_PORT_APP\app_ethernet.h
 .\outfiles\app_ethernet.o: .\LWIP2.2.1\src\include\lwip/dhcp.h
-.\outfiles\app_ethernet.o: .\LWIP2.2.1\src\include\lwip/udp.h
-.\outfiles\app_ethernet.o: .\LWIP2.2.1\src\include\lwip/ip.h
-.\outfiles\app_ethernet.o: .\LWIP2.2.1\src\include\lwip/ip4.h
-.\outfiles\app_ethernet.o: .\LWIP2.2.1\src\include\lwip/prot/ip4.h
-.\outfiles\app_ethernet.o: .\LWIP2.2.1\src\include\lwip/ip6.h
-.\outfiles\app_ethernet.o: .\LWIP2.2.1\src\include\lwip/prot/ip.h
-.\outfiles\app_ethernet.o: .\LWIP2.2.1\src\include\lwip/prot/udp.h
-.\outfiles\app_ethernet.o: .\LWIP2.2.1\src\include\lwip/acd.h
-.\outfiles\app_ethernet.o: .\LWIP2.2.1\src\include\lwip/etharp.h
-.\outfiles\app_ethernet.o: .\LWIP2.2.1\src\include\lwip/prot/ethernet.h
-.\outfiles\app_ethernet.o: .\LWIP2.2.1\src\include\lwip/prot/ieee.h
-.\outfiles\app_ethernet.o: .\LWIP2.2.1\src\include\lwip/prot/etharp.h
-.\outfiles\app_ethernet.o: .\LWIP2.2.1\src\include\lwip/prot/acd.h
 .\outfiles\app_ethernet.o: .\LWIP2.2.1\STM32H7_PORT_APP\lwiperf.h
+.\outfiles\app_ethernet.o: .\EtherNet_IP\source\src\ports\STM32\opener.h
 .\outfiles\app_ethernet.o: .\AVILIB\avilib_app.h
 .\outfiles\app_ethernet.o: .\AVILIB\avilib.h
 .\outfiles\app_ethernet.o: .\LWIP2.2.1\src\include\lwip/netifapi.h
@@ -368,3 +356,5 @@
 .\outfiles\app_ethernet.o: .\LWIP2.2.1\src\include\lwip/igmp.h
 .\outfiles\app_ethernet.o: .\LWIP2.2.1\src\include\lwip/api.h
 .\outfiles\app_ethernet.o: .\LWIP2.2.1\src\include\lwip/netbuf.h
+.\outfiles\app_ethernet.o: .\LWIP2.2.1\src\include\lwip/prot/ethernet.h
+.\outfiles\app_ethernet.o: .\LWIP2.2.1\src\include\lwip/prot/ieee.h

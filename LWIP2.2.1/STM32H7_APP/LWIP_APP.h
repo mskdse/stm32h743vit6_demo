@@ -10,11 +10,10 @@
 #include "lwip/dhcp.h"
 #include "lwiperf.h"
 
-
-void LWIP_2_2_1_INIT(void);
+void LWIP_2_2_1_INIT(struct netif* EnterNetIf);
 
 #if LWIP_DHCP
-void LWIP_2_2_1_PERFORM_TEST(void);
+void LWIP_2_2_1_PERFORM_TEST(struct netif* EnterNetIf);
 #endif
 
 #endif 
