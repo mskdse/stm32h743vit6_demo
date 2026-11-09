@@ -35,10 +35,10 @@ static OD_size_t countWritten;//实际写入字节
 static OD_size_t countRead;//实际读取字节
 static uint8_t   tpdo0_indx0 = 11;// 写 0x2000:01
 static uint16_t  tpdo0_indx1 = 22;// 写 0x2000:02
-static uint8_t   tpdo0_indx3 = 0; // 读 0x2000:03
-static uint16_t  tpdo0_indx4 = 0; // 读 0x2000:04
-static uint8_t   tpdo0_indx3_last = 0; // 0x2000:03的上一次的值，用于比较然后打印 
-static uint16_t  tpdo0_indx4_last = 0; // 0x2000:04的上一次的值，用于比较然后打印 
+static uint8_t   rpdo0_indx0 = 0; // 读 0x2000:03
+static uint16_t  rpdo0_indx1 = 0; // 读 0x2000:04
+static uint8_t   rpdo0_indx0_last = 0; // 0x2000:03的上一次的值，用于比较然后打印 
+static uint16_t  rpdo0_indx1_last = 0; // 0x2000:04的上一次的值，用于比较然后打印 
 
 /* 定义存储条目（哪些变量需要保存）*/
 #define EEPROM_STORAGE_ASIZE     3
@@ -207,18 +207,18 @@ void bx_can12_open_app_prc(void)
 			
 			/* 每100ms读取一次RPDO映射的0x2000的索引3和4，获取对应的值，由于是对象字典里面设定是异步发送所以立即生效，有变化时打印方便观察 */
 			OD_getSub(OD_ENTRY_H2000_TPDO_MY_DATA, 3, &io, true);
-			io.read(&io.stream,&tpdo0_indx3,sizeof(tpdo0_indx3),&countRead);
-			if(tpdo0_indx3!=tpdo0_indx3_last)
+			io.read(&io.stream,&rpdo0_indx0,sizeof(rpdo0_indx0),&countRead);
+			if(rpdo0_indx0!=rpdo0_indx0_last)
 			{
-				tpdo0_indx3_last=tpdo0_indx3;
-				usart1_my_printf("RPDO0 id=0x%x 0x2000:03->%d rlen=%d\r\n",0x200+activeNodeId,tpdo0_indx3,countRead);
+				rpdo0_indx0_last=rpdo0_indx0;
+				usart1_my_printf("RPDO0 id=0x%x 0x2000:03->%d rlen=%d\r\n",0x200+activeNodeId,rpdo0_indx0,countRead);
 			}
 			OD_getSub(OD_ENTRY_H2000_TPDO_MY_DATA, 4, &io, true);
-			io.read(&io.stream,&tpdo0_indx4,sizeof(tpdo0_indx4),&countRead);
-			if(tpdo0_indx4!=tpdo0_indx4_last)
+			io.read(&io.stream,&rpdo0_indx1,sizeof(rpdo0_indx1),&countRead);
+			if(rpdo0_indx1!=rpdo0_indx1_last)
 			{
-				tpdo0_indx4_last=tpdo0_indx4;
-				usart1_my_printf("RPDO0 id=0x%x 0x2000:04->%d rlen=%d\r\n",0x200+activeNodeId,tpdo0_indx4,countRead);
+				rpdo0_indx1_last=rpdo0_indx1;
+				usart1_my_printf("RPDO0 id=0x%x 0x2000:04->%d rlen=%d\r\n",0x200+activeNodeId,rpdo0_indx1,countRead);
 			}
 		}
 		
