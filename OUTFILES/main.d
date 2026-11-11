@@ -349,3 +349,5 @@
 .\outfiles\main.o: .\EtherNet_IP\source\src\ports\STM32\opener.h
 .\outfiles\main.o: .\AVILIB\avilib_app.h
 .\outfiles\main.o: .\AVILIB\avilib.h
+.\outfiles\main.o: .\DRIVER\WM8978\wm8978.h
+.\outfiles\main.o: .\DRIVER\WM8978\audio_wave.h

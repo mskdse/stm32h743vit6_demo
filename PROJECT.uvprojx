@@ -1424,6 +1424,11 @@
               <FileType>1</FileType>
               <FilePath>.\DRIVER\WM8978\wm8978.c</FilePath>
             </File>
+            <File>
+              <FileName>audio_wave.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\DRIVER\WM8978\audio_wave.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

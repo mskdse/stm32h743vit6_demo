@@ -18,7 +18,27 @@ static void sdio_sd_card_clk(SDCARD_EVENT enm)
 	{
 		memset(&fs,0,sizeof(FATFS));
 		f_mount(&fs,"1:",1);
-		f_mount(&fs,"1:",0);
+		
+		if(wm8978_init(44100,WM8978_OUTPUT_SPEAKER)!=HAL_OK)
+    {
+        printf("WM8978 init failed\r\n");
+        return;
+    }
+		
+    if(audio_wave_init("1:/Sounds/test1_wav.wav")!=AUDIO_WAVE_OK)
+    {
+        printf("WAV init failed\r\n");
+        return;
+    }
+    
+		wm8978_set_volume(40);
+		
+    if(audio_wave_start()!=AUDIO_WAVE_OK)
+    {
+        printf("WAV start failed\r\n");
+        return;
+    }
+		//f_mount(&fs,"1:",0);
 	}
 }
 
@@ -77,6 +97,12 @@ static void FREERTOS_MAIN_TASK(void * pvParameters)
 					}
 			#endif
 		}
+		
+		if(audio_wave_is_playing())
+		{
+			AUDIO_WAVE_Status ret=audio_wave_process();
+			if(ret==AUDIO_WAVE_ERROR || ret==AUDIO_WAVE_EOF) audio_wave_stop();
+		}
 	
 		static uint32_t sd_last_scan = 0;
 		if (HAL_GetTick() - sd_last_scan >= 200)
@@ -120,7 +146,7 @@ int main(void)
 	drvp_fmc_lcd_set_axis_scan(0,1,1,0,0);//设置LCD的坐标轴适配开发板以及显存扫描方向
 //  ltdc_lcd_init();//LTDC的LCD初始化
 //  ltdc_lcd_bl_set(2000,100);//打开背光显示,屏幕2KHZ,占空比100%
-  
+	
   sdio_sd_card_register_clk(sdio_sd_card_clk);
 	
 #if USE_BORAD_RUN

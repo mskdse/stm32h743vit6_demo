@@ -147,6 +147,8 @@
 ".\outfiles\ov2640.o"
 ".\outfiles\dac_ch12.o"
 ".\outfiles\adc12_conv.o"
+".\outfiles\wm8978.o"
+".\outfiles\audio_wave.o"
 ".\outfiles\port.o"
 ".\outfiles\circular_buffer.o"
 ".\outfiles\sram_d2_malloc.o"

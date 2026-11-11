@@ -59,5 +59,7 @@
 #include "LWIP_APP.h"
 #include "opener.h"
 #include "avilib_app.h"
+#include "wm8978.h"
+#include "audio_wave.h"
 
 #endif
